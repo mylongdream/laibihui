@@ -22,7 +22,7 @@
 							<li>
 								<div class="pic"><img src="{{ uploadImage($value->upimage) }}" width="60" height="60"></div>
 								<div class="name">{{ $value->name }}</div>
-								<div class="info">所需卡数：{{ $value->cardnum }}张</div>
+								<div class="info">{{ $value->cardnum }}张卡</div>
 								<div class="btn"><a href="javascript:;" class="disabled">点击兑换</a></div>
 							</li>
 						@endforeach
