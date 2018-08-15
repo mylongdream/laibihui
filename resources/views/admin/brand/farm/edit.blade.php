@@ -1,0 +1,204 @@
+@extends('layouts.admin.app')
+
+@section('content')
+	<div class="itemnav">
+		<div class="title"><h3>{{ trans('admin.brand.farm') }}</h3></div>
+		<ul class="tab">
+			<li class="current"><a href="{{ route('admin.brand.farm.index') }}"><span>{{ trans('admin.brand.farm.list') }}</span></a></li>
+			<li><a href="{{ route('admin.brand.farm.recycle') }}"><span>{{ trans('admin.recycle') }}</span></a></li>
+		</ul>
+	</div>
+	<form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('admin.brand.farm.update', $farm->id) }}">
+		{!! method_field('PUT') !!}
+		{!! csrf_field() !!}
+		<div class="tbedit">
+			<div class="tbhead cl">
+				<div class="z">
+					<ul class="tb-tab">
+						<li class="current"><span>{{ trans('admin.info_base') }}</span></li>
+						<li><span>{{ trans('admin.brand.farm.message') }}</span></li>
+						<li><span>{{ trans('admin.info_seo') }}</span></li>
+					</ul>
+				</div>
+				<div class="y"><a href="{{ route('admin.brand.farm.index') }}" class="btn">< {{ trans('admin.brand.farm.list') }}</a></div>
+			</div>
+			<table>
+				<tbody class="tb-body">
+				<tr>
+					<td width="150" align="right">{{ trans('admin.brand.farm.subweb') }}</td>
+					<td>
+						<select name="subweb_id" class="select select_subweb">
+							<option value="0">请选择</option>
+							@foreach ($subwebs as $subweb)
+								@if ($farm->subweb == $subweb)
+									<option value="{{ $subweb->subweb_id }}" selected>[{{ $subweb->firstletter }}]{{ $subweb->name }}</option>
+								@else
+									<option value="{{ $subweb->subweb_id }}">[{{ $subweb->firstletter }}]{{ $subweb->name }}</option>
+								@endif
+							@endforeach
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">{{ trans('admin.brand.farm.name') }}</td>
+					<td><input class="txt" type="text" size="50" value="{{ $farm->name }}" name="name"></td>
+				</tr>
+				<tr>
+					<td align="right">{{ trans('admin.brand.farm.upphoto') }}</td>
+					<td>
+						<a href="javascript:;" class="upbtn" id="upphoto">上传图片</a><span class="tdtip">建议尺寸为 800 X 600 像素大小</span>
+						<div class="uploadbox">
+							<ul>
+								@if ($farm->upphoto)
+									@foreach (unserialize($farm->upphoto) as $upphoto)
+										<li class="trigger-hover">
+											<img src="{{ uploadImage($upphoto) }}" width="120" height="120">
+											<input name="upphoto[]" value="{{ $upphoto }}" type="hidden">
+											<div class="handle"><span class="setup">前移</span><span class="setdown">后移</span><span class="setdel">删除</span></div>
+										</li>
+									@endforeach
+								@endif
+							</ul>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">{{ trans('admin.brand.farm.address') }}</td>
+					<td><textarea class="textarea" name="address" cols="60" rows="4">{{ $farm->address }}</textarea></td>
+				</tr>
+				<tr>
+					<td align="right">{{ trans('admin.brand.farm.group') }}</td>
+					<td>
+						@foreach (config('farm.group') as $key => $value)
+							<label class="checkbox" for="group_{{ $key }}">
+								<input id="group_{{ $key }}" type="checkbox" name="group[]" value="{{ $key }}" {{ $farm->attrs->where('type', 'group')->contains('attr_id', $key) ? 'checked' : '' }}> {{ $value }}
+							</label>
+						@endforeach
+					</td>
+				</tr>
+				<tr>
+					<td align="right">{{ trans('admin.brand.farm.play') }}</td>
+					<td>
+						@foreach (config('farm.play') as $key => $value)
+							<label class="checkbox" for="play_{{ $key }}">
+								<input id="play_{{ $key }}" type="checkbox" name="play[]" value="{{ $key }}" {{ $farm->attrs->where('type', 'play')->contains('attr_id', $key) ? 'checked' : '' }}> {{ $value }}
+							</label>
+						@endforeach
+					</td>
+				</tr>
+				<tr>
+					<td align="right">{{ trans('admin.brand.farm.service') }}</td>
+					<td>
+						@foreach (config('farm.service') as $key => $value)
+							<label class="checkbox" for="service_{{ $key }}">
+								<input id="service_{{ $key }}" type="checkbox" name="service[]" value="{{ $key }}" {{ $farm->attrs->where('type', 'service')->contains('attr_id', $key) ? 'checked' : '' }}> {{ $value }}
+							</label>
+						@endforeach
+					</td>
+				</tr>
+				<tr>
+					<td align="right">{{ trans('admin.brand.farm.support') }}</td>
+					<td>
+						@foreach (config('farm.support') as $key => $value)
+							<label class="checkbox" for="support_{{ $key }}">
+								<input id="support_{{ $key }}" type="checkbox" name="support[]" value="{{ $key }}" {{ $farm->attrs->where('type', 'support')->contains('attr_id', $key) ? 'checked' : '' }}> {{ $value }}
+							</label>
+						@endforeach
+					</td>
+				</tr>
+				<tr>
+					<td align="right">{{ trans('admin.brand.farm.mappoint') }}</td>
+					<td><input class="txt" type="text" size="15" value="{{ $farm->maplng }}" name="maplng" id="maplng"> X <input class="txt" type="text" size="15" value="{{ $farm->maplat }}" name="maplat" id="maplat"><a href="javascript:;" class="mapmark" id="mapmark">点击标注</a></td>
+				</tr>
+				<tr>
+					<td align="right">{{ trans('admin.brand.farm.phone') }}</td>
+					<td><input class="txt" type="text" size="50" value="{{ $farm->phone }}" name="phone"></td>
+				</tr>
+				<tr>
+					<td align="right">{{ trans('admin.brand.farm.mobile') }}</td>
+					<td><input class="txt" type="text" size="50" value="{{ $farm->mobile }}" name="mobile"><span class="tdtip">用于接收短信通知，前台不显示</span></td>
+				</tr>
+                <tr>
+                    <td align="right">{{ trans('admin.brand.farm.price') }}</td>
+                    <td><input class="txt" type="text" size="20" value="{{ $farm->price }}" name="price"> 元</td>
+                </tr>
+				<tr>
+					<td align="right">{{ trans('admin.brand.farm.viewnum') }}</td>
+					<td><input class="txt" type="text" size="20" value="{{ $farm->viewnum }}" name="viewnum"> 次<span class="tdtip">设置显示浏览的次数，以后在此基础上累加</span></td>
+				</tr>
+				</tbody>
+				<tbody class="tb-body hidden">
+				<tr>
+					<td width="150" align="right">{{ trans('admin.brand.farm.message') }}</td>
+					<td><textarea class="textarea" name="message" id="message" style="width:100%;height:400px">{{ $farm->message }}</textarea></td>
+				</tr>
+				<tr>
+					<td width="150" align="right">{{ trans('admin.brand.farm.environment') }}</td>
+					<td><textarea class="textarea" name="environment" id="environment" style="width:100%;height:400px">{{ $farm->environment }}</textarea></td>
+				</tr>
+				</tbody>
+				<tbody class="tb-body hidden">
+				<tr>
+					<td width="150" align="right">seo_title</td>
+					<td><input class="txt" type="text" size="50" value="{{ $farm->seo_title }}" name="seo_title"></td>
+				</tr>
+				<tr>
+					<td align="right">seo_keywords</td>
+					<td><input class="txt" type="text" size="50" value="{{ $farm->seo_keywords }}" name="seo_keywords"></td>
+				</tr>
+				<tr>
+					<td align="right">seo_description</td>
+					<td><textarea class="textarea" name="seo_description" cols="60" rows="5">{{ $farm->seo_description }}</textarea></td>
+				</tr>
+				</tbody>
+				<tr>
+					<td align="right"></td>
+					<td><input class="subtn" type="submit" value="提 交" name="submit"></td>
+				</tr>
+			</table>
+		</div>
+	</form>
+	<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.0&key=da8ac8316273d87097ab56f3cb828a3d&plugin=AMap.Autocomplete"></script>
+	<script type="text/javascript" src="{{ asset('static/js/jquery.amap.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('static/js/webuploader/webuploader.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('static/js/jquery.webuploader.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('static/js/laydate/laydate.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('static/js/kindeditor/kindeditor.js') }}"></script>
+	<script type="text/javascript">
+        $(function(){
+            $("#upphoto").powerWebUpload({
+                server: "{{ route('admin.upload.image') }}",
+                formData: {
+                    _token : $('meta[name="csrf-token"]').attr('content')
+                },
+                hiddenInputId: 'upphoto[]',
+                fileNumLimit: 10,
+                width: 120,
+                height: 120
+            });
+            $("#mapmark").amap({
+                AddressId: '#address',
+                maplngId: '#maplng',
+                maplatId: '#maplat',
+                width: 800,
+                height: 500
+            });
+        });
+		KindEditor.ready(function(K) {
+            var ItemEditor1 = K.create("#message", {
+                uploadJson : "{{ route('admin.upload.editor') }}",
+                extraFileUploadParams : {
+                    _token : $('meta[name="csrf-token"]').attr('content')
+                },
+                afterBlur: function () { this.sync(); }
+            });
+            var ItemEditor2 = K.create("#environment", {
+                uploadJson : "{{ route('admin.upload.editor') }}",
+                extraFileUploadParams : {
+                    _token : $('meta[name="csrf-token"]').attr('content')
+                },
+                afterBlur: function () { this.sync(); }
+            });
+		});
+	</script>
+@endsection
