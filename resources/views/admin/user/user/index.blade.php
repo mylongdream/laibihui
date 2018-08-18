@@ -35,7 +35,7 @@
 				<th width="24"><label><input class="checkall" type="checkbox"></label></th>
 				<th width="70">{{ trans('admin.user.user.headimgurl') }}</th>
 				<th>{{ trans('admin.user.user.username') }}</th>
-				<th width="100">{{ trans('admin.user.user.mobile') }}</th>
+				<th width="100">{{ trans('admin.user.user.group') }}</th>
 				<th width="70">{{ trans('admin.user.user.tiyan_money') }}</th>
 				<th width="70">{{ trans('admin.user.user.user_money') }}</th>
 				<th width="70">{{ trans('admin.user.user.frozen_money') }}</th>
@@ -49,7 +49,7 @@
 				<td><label><input class="ids" type="checkbox" value="{{ $value->uid }}" name="ids[]"></label></td>
 				<td><img class="block" width="48" height="48" src="{{ $value->headimgurl ? uploadImage($value->headimgurl) : asset('static/image/common/getheadimg.jpg') }}"></td>
 				<td>{{ $value->username }}</td>
-				<td>{{ $value->mobile or '/' }}</td>
+				<td>{{ $value->group ? $value->group->name : '/' }}</td>
 				<td>{{ $value->tiyan_money }} 元</td>
 				<td>{{ $value->user_money }} 元</td>
 				<td>{{ $value->frozen_money }} 元</td>
