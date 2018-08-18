@@ -42,6 +42,8 @@ return [
 
     'sellcard' => '面对面办卡',
     'sellcard.tips' => '您可以在此处对面对面办卡进行管理',
+    'sellcard.pay_type.wechat' => '微信支付',
+    'sellcard.pay_type.alipay' => '支付宝支付',
 
     'bindcard' => '在线绑卡',
     'bindcard.tips' => '您可以在此处对绑卡信息进行管理',
