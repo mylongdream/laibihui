@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CommonAppointModel;
 use App\Models\CommonCardModel;
 use App\Models\CommonCardOrderModel;
+use App\Models\CommonUserAccountModel;
 use App\Models\CommonUserCardModel;
 use Illuminate\Http\Request;
 use Toplan\PhpSms\Facades\Sms;
@@ -26,7 +27,7 @@ class BindCardController extends Controller
                 if ($request->ajax()){
                     return response()->json(['status' => 0, 'info' => '你已经绑定过卡了']);
                 }else{
-                    return view('layouts.user.message', ['status' => 0, 'info' => '你已经绑定过卡了']);
+                    return view('layouts.mobile.message', ['status' => 0, 'info' => '你已经绑定过卡了']);
                 }
             }
             if(auth()->user()->mobile){
@@ -55,50 +56,49 @@ class BindCardController extends Controller
                 if ($request->ajax()){
                     return response()->json(['status' => 0, 'info' => trans('user.card.bind.passwordwrong')]);
                 }else{
-                    return view('layouts.user.message', ['status' => 0, 'info' => trans('user.card.bind.passwordwrong')]);
+                    return view('layouts.mobile.message', ['status' => 0, 'info' => trans('user.card.bind.passwordwrong')]);
                 }
             }
             if($card->user){
                 if ($request->ajax()){
                     return response()->json(['status' => 0, 'info' => trans('user.bindcard.bound')]);
                 }else{
-                    return view('layouts.user.message', ['status' => 0, 'info' => trans('user.bindcard.bound')]);
+                    return view('layouts.mobile.message', ['status' => 0, 'info' => trans('user.bindcard.bound')]);
                 }
             }
 
-            //推荐提成到冻结余额
-            $fromuid = $fromupuid = 0;
+            //推荐提成到可用余额
+            if(auth()->user()->fromuser){
+                $user_account = new CommonUserAccountModel();
+                $user_account->uid = auth()->user()->fromuser->uid;
+                $user_account->user_money = 500;
+                $user_account->remark = '一级下线提成';
+                $user_account->postip = request()->getClientIp();
+                $user_account->save();
+                auth()->user()->fromuser->increment('user_money', 500);//提成5元到上级用户可用余额
+                if(auth()->user()->fromupuser){
+                    $user_account = new CommonUserAccountModel();
+                    $user_account->uid = auth()->user()->fromupuser->uid;
+                    $user_account->user_money = 50;
+                    $user_account->remark = '二级下线提成';
+                    $user_account->postip = request()->getClientIp();
+                    $user_account->save();
+                    auth()->user()->fromupuser->increment('user_money', 50);//提成0.5元到上上级用户可用余额
+                }
+            }
+
+            //邮寄办卡金额翻倍
             $order = CommonCardOrderModel::where('number', $request->number)->latest()->first();
-            if ($order){
-                if($order->fromuid){
-                    $fromuid = $order->fromuid;
-                }
-                if($order->uid != auth()->user()->uid){
-                    $fromuid = $order->uid;
-                }
-                if($fromuid){
-                    $fromuser = CommonUserCardModel::where('uid', $fromuid)->first();
-                    $fromuser->user->increment('frozen_money', 500);//提成5元到上级用户冻结余额
-                    if ($fromuser && $fromuser->fromuid){
-                        $fromupuid = $fromuser->fromuid;
-                        $fromupuser = CommonUserCardModel::where('uid', $fromupuid)->first();
-                        $fromupuser->user->increment('frozen_money', 50);//提成0.5元到上上级用户冻结余额
-                    }
-                }
-				//邮寄办卡金额翻倍
-                if($order->order_type == 1) {
-                    $card->money = $card->money * 2;
-                    $card->save();
-                }
+            if ($order && $order->order_type == 1) {
+                $card->money = $card->money * 2;
+                $card->save();
             }
 
+            //记录绑卡信息
             $usercard = new CommonUserCardModel();
             $usercard->uid = auth()->user()->uid;
             $usercard->number = $card->number;
             $usercard->money = $card->money * 0.9;
-            $usercard->referee = $request->referee;
-            $usercard->fromuid = $fromuid;
-            $usercard->fromupuid = $fromupuid;
             $usercard->postip = request()->getClientIp();
             $usercard->save();
 
@@ -115,7 +115,7 @@ class BindCardController extends Controller
             if ($request->ajax()){
                 return response()->json(['status' => 1, 'info' => trans('user.bindcard.updatesucceed'), 'url' => route('mobile.user.bindcard.index')]);
             }else{
-                return view('layouts.user.message', ['status' => 1, 'info' => trans('user.bindcard.updatesucceed'), 'url' => route('mobile.user.bindcard.index')]);
+                return view('layouts.mobile.message', ['status' => 1, 'info' => trans('user.bindcard.updatesucceed'), 'url' => route('mobile.user.bindcard.index')]);
             }
         }else{
             $card = auth()->user()->card;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mobile;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\CommonUserSellcardModel;
 use Illuminate\Http\Request;
 use App\Models\BrandCategoryModel;
 use App\Models\BrandShopModel;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Vinkla\Hashids\Facades\Hashids;
+use Yansongda\Pay\Pay;
 
 class IndexController extends Controller
 {
@@ -66,13 +68,40 @@ class IndexController extends Controller
             if ($fromuid) {
                 $fromuser = CommonUserModel::where('uid', $fromuid)->first();
                 if ($fromuser) {
+                    $order = new CommonUserSellcardModel();
+                    $order->uid = auth()->user()->uid;
+                    $order->order_sn = date("YmdHis") . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
+                    $order->order_amount = 10;
+                    $order->postip = request()->getClientIp();
                     //微信浏览器里
                     if (strpos(request()->userAgent(), 'MicroMessenger') !== false){
-                        echo '微信支付';
+                        $order->pay_type = 'wechat';
+                        $order->save();
+                        $config = config('pay.alipay');
+                        $config['notify_url'] = route('api.alipay.consume.notify');
+                        $order = [
+                            'out_trade_no' => $order->order_sn,
+                            'total_fee' => $order->order_amount * 100,              // 订单金额，**单位：分**
+                            'body' => '面对面办卡',                   // 订单描述
+                            'spbill_create_ip' => request()->getClientIp(),       // 调用 API 服务器的 IP
+                            'product_id' => '0',
+                        ];
+                        return Pay::wechat($config)->wap($order);
                     }
                     //支付宝浏览器里
                     if (strpos(request()->userAgent(), 'AlipayClient') !== false){
-                        echo '支付宝支付';
+                        $order->pay_type = 'alipay';
+                        $order->save();
+                        $config = config('pay.alipay');
+                        $config['notify_url'] = route('api.alipay.consume.notify');
+                        $config['return_url'] = route('api.alipay.consume.callback');
+                        $order = [
+                            'out_trade_no' => $order->order_sn,
+                            'total_amount' => $order->order_amount,
+                            'subject'      => '面对面办卡',
+                        ];
+                        $alipay = Pay::alipay($config)->wap($order);
+                        return $alipay->send();
                     }
                 }
             }

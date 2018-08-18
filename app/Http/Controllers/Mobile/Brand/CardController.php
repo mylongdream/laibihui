@@ -322,7 +322,6 @@ class CardController extends Controller
             $usercard->uid = auth()->user()->uid;
             $usercard->number = $card->number;
             $usercard->money = $card->money * 0.9;
-            $usercard->referee = $request->referee;
             $usercard->postip = request()->getClientIp();
             $usercard->save();
 
@@ -334,7 +333,7 @@ class CardController extends Controller
             $fromuid = !empty($request->cookie('promotion')) && isset($setting['promotion_register']) && $setting['promotion_register'] ? intval($request->cookie('promotion')) : 0;
             if ($fromuid && $fromuid != $user->uid){
                 $fromuser = CommonUserModel::where('uid', $fromuid)->first();
-                if ($fromuser) {
+                if ($fromuser && $setting['promotion_register']) {
                     $score = new CommonUserScoreModel();
                     $score->uid = $fromuser->uid;
                     $score->score = $setting['promotion_register'];
