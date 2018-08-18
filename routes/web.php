@@ -262,6 +262,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
         Route::any('cardreward/myreward', ['as' => 'cardreward.myreward', 'uses' => 'Mobile\User\CardRewardController@myreward']);
         Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'Mobile\User\CardRewardController@exchange']);
         Route::get('sellcard', ['as' => 'sellcard.index', 'uses' => 'Mobile\User\SellCardController@index']);
+        Route::get('sellcard/order', ['as' => 'sellcard.order', 'uses' => 'Mobile\User\SellCardController@order']);
     });
 });
 
