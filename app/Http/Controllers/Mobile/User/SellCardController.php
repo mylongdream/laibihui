@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mobile\User;
 use App\Http\Controllers\Controller;
 
 use App\Models\CommonUserModel;
+use App\Models\CommonUserSellcardModel;
 use Intervention\Image\Facades\Image;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Vinkla\Hashids\Facades\Hashids;
@@ -29,9 +30,10 @@ class SellCardController extends Controller
         }
     }
 
-    public function mysell(Request $request)
+    public function order(Request $request)
     {
-        return view('mobile.user.sellcard.mysell');
+        $orders = CommonUserSellcardModel::where('uid', auth()->user()->uid)->orderBy('created_at', 'desc')->paginate(20);
+        return view('mobile.user.sellcard.order', ['orders' => $orders]);
     }
 
 }

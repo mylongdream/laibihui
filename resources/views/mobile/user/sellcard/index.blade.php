@@ -13,6 +13,9 @@
                         <img style="width:100%" src="{{ route('mobile.user.sellcard.index', ['getcode' => 1]) }}" alt="">
                     </div>
                 </div>
+                <div class="weui-btn-area">
+                    <a href="{{ route('mobile.user.sellcard.order') }}" class="weui-btn weui-btn_primary">售卡记录</a>
+                </div>
             </div>
         </div>
     </div>
