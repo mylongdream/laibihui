@@ -28,6 +28,11 @@ class CommonUserModel extends Authenticatable
 		'password', 'remember_token',
 	];
 
+    public function group()
+    {
+        return $this->belongsTo('App\Models\CommonUserGroupModel', 'group_id');
+    }
+
     public function profile()
     {
         return $this->hasOne('App\Models\CommonUserProfileModel', 'uid');

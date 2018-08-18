@@ -21,7 +21,10 @@ class PromotionController extends Controller
 
     public function index(Request $request)
     {
-        return view('mobile.user.promotion.index');
+        $usercount = collect();
+        $usercount->first = CommonUserModel::where('fromuid', auth()->user()->uid)->count();
+        $usercount->second = CommonUserModel::where('fromupuid', auth()->user()->uid)->count();
+        return view('mobile.user.promotion.index', ['usercount' => $usercount]);
     }
 
     public function rule(Request $request)
@@ -68,8 +71,8 @@ class PromotionController extends Controller
 
     public function first(Request $request)
     {
-        $CommonUserCardModel = new CommonUserCardModel;
-        $promotions = $CommonUserCardModel->where('fromuid', auth()->user()->uid)->where(function($query) use($request) {
+        $CommonUserModel = new CommonUserModel;
+        $promotions = $CommonUserModel->where('fromuid', auth()->user()->uid)->where(function($query) use($request) {
             if($request->username){
                 $uids = CommonUserModel::where('username', 'like',"%".$request->username."%")->pluck('uid');
                 $query->whereIn('uid', $uids);
@@ -80,8 +83,8 @@ class PromotionController extends Controller
 
     public function second(Request $request)
     {
-        $CommonUserCardModel = new CommonUserCardModel;
-        $promotions = $CommonUserCardModel->where('fromupuid', auth()->user()->uid)->where(function($query) use($request) {
+        $CommonUserModel = new CommonUserModel;
+        $promotions = $CommonUserModel->where('fromupuid', auth()->user()->uid)->where(function($query) use($request) {
             if($request->username){
                 $uids = CommonUserModel::where('username', 'like',"%".$request->username."%")->pluck('uid');
                 $query->whereIn('uid', $uids);

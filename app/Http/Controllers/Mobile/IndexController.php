@@ -59,6 +59,27 @@ class IndexController extends Controller
         return view('mobile.search');
     }
 
+    public function sellcard(Request $request)
+    {
+        if ($request->fromuser) {
+            $fromuid = Hashids::connection('promotion')->decode($request->fromuser);
+            if ($fromuid) {
+                $fromuser = CommonUserModel::where('uid', $fromuid)->first();
+                if ($fromuser) {
+                    //微信浏览器里
+                    if (strpos(request()->userAgent(), 'MicroMessenger') !== false){
+                        echo '微信支付';
+                    }
+                    //支付宝浏览器里
+                    if (strpos(request()->userAgent(), 'AlipayClient') !== false){
+                        echo '支付宝支付';
+                    }
+                }
+            }
+        }
+        //return view('mobile.sellcard');
+    }
+
     public function promotion(Request $request)
     {
         if ($request->fromuser) {

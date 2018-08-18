@@ -79,6 +79,7 @@ class CardController extends Controller
                     $sheet->rows($cardData);
                 });
             })->export('xls');
+            return false;
         }else{
             return view('admin.extend.card.export');
         }
@@ -155,10 +156,16 @@ class CardController extends Controller
             }
             $card = CommonCardModel::where('number', $number)->first();
             if (!$card){
+                /*
                 $seek=mt_rand(0,9999).mt_rand(0,9999).mt_rand(0,9999); //12位
                 $start=mt_rand(0,20);
                 $password=strtoupper(substr(md5($seek),$start,$pwdlength));
                 $password=str_replace("0",chr(mt_rand(65,78)),$password);
+                */
+                $password = '';
+                for ($k=1; $k<=6; $k++) {
+                    $password .= array_rand(range(0,9));
+                }
                 $card = new CommonCardModel;
                 $card->number = $number;
                 $card->password = $password;

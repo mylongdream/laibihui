@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['domain' => 'zhihui.hztbg.com'], function () {
+Route::group(['domain' => ''], function () {
 
     Route::get('/', ['as' => 'index', 'uses' => 'Brand\IndexController@index']);
     Route::get('/promotion/{fromuser}', ['as' => 'promotion', 'uses' => 'Brand\IndexController@promotion']);
@@ -146,7 +146,7 @@ Route::group(['domain' => 'zhihui.hztbg.com'], function () {
     });
 });
 
-Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mobile.'], function () {
+Route::group(['domain' => '', 'prefix' => 'mobile', 'as' => 'mobile.'], function () {
     Route::get('/', ['as' => 'index', 'uses' => 'Mobile\IndexController@index']);
     Route::get('/search', ['as' => 'search', 'uses' => 'Mobile\IndexController@search']);
     Route::get('/promotion/{fromuser}', ['as' => 'promotion', 'uses' => 'Mobile\IndexController@promotion']);
@@ -265,7 +265,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
     });
 });
 
-Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['domain' => '', 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/', function () {
         return redirect()->route('admin.index');
     });
@@ -465,7 +465,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
     });
 });
 
-Route::group(['domain' => '{domain}.zhihui.hztbg.com','middleware' => ['subweb'], 'as' => 'subweb.'], function () {
+Route::group(['domain' => '{domain}.chenliang.com','middleware' => ['subweb'], 'as' => 'subweb.'], function () {
 
     Route::get('/', ['as' => 'index', 'uses' => 'Subweb\IndexController@index']);
     Route::get('case', ['as' => 'case.index', 'uses' => 'Subweb\CaseController@index']);
@@ -505,7 +505,7 @@ Route::group(['domain' => '{domain}.zhihui.hztbg.com','middleware' => ['subweb']
     });
 });
 
-Route::group(['domain' => 'crm.hztbg.com', 'prefix' => '', 'as' => 'crm.'], function () {
+Route::group(['domain' => '', 'prefix' => 'crm', 'as' => 'crm.'], function () {
     Route::get('/', function () {
         return redirect()->route('crm.index');
     });
@@ -568,14 +568,14 @@ Route::group(['domain' => 'crm.hztbg.com', 'prefix' => '', 'as' => 'crm.'], func
 
 });
 
-Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'wechat', 'as' => 'wechat.'], function () {
+Route::group(['domain' => '', 'prefix' => 'wechat', 'as' => 'wechat.'], function () {
     Route::get('/', function () {
         //return redirect()->route('wechat.index');
     });
     Route::any('server', ['as' => 'server', 'uses' => 'Wechat\ServerController@index']);
     Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
         Route::any('login', ['as' => 'login', 'uses' => 'Wechat\LoginController@index']);
-        //投票活动
+        //业主投票
         Route::get('ownervote', ['as' => 'ownervote.index', 'uses' => 'Wechat\OwnervoteController@index']);
         Route::any('ownervote/apply', ['as' => 'ownervote.apply', 'uses' => 'Wechat\OwnervoteController@apply']);
         Route::get('ownervote/detail/{id}', ['as' => 'ownervote.detail', 'uses' => 'Wechat\OwnervoteController@detail'])->where('id', '[0-9]+');

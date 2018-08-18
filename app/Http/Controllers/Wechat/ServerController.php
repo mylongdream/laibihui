@@ -73,12 +73,15 @@ class ServerController extends Controller
                     $user->fromuid = $fromuser->uid;
                     $user->fromupuid = $fromuser->fromuid;
                     $user->save();
-                    $score = new CommonUserScoreModel();
-                    $score->uid = $fromuser->uid;
-                    $score->score = $setting['promotion_register'];
-                    $score->remark = '推广注册得积分';
-                    $score->save();
-                    $fromuser->increment('score', $setting['promotion_register']);
+                    //推广注册得积分
+                    if($setting['promotion_register']){
+                        $score = new CommonUserScoreModel();
+                        $score->uid = $fromuser->uid;
+                        $score->score = $setting['promotion_register'];
+                        $score->remark = '推广注册得积分';
+                        $score->save();
+                        $fromuser->increment('score', $setting['promotion_register']);
+                    }
                 }
             }
             $wxuser->user_id = $user->uid;
@@ -89,6 +92,7 @@ class ServerController extends Controller
             $wxuser->has_subscribe = 1;
             $wxuser->save();
         }
+        //更新用户信息
         $getuser = $app->user->get($wxuser->openid);
         if($getuser){
             $wxuser->subscribe = $getuser['subscribe'];

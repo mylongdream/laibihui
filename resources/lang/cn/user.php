@@ -34,9 +34,14 @@ return [
     'promotion.tips' => '您可以在此处对推荐注册进行管理',
     'promotion.rule' => '推荐规则',
     'promotion.card' => '推荐办卡记录',
+    'promotion.first' => '一级下线',
+    'promotion.second' => '二级下线',
     'promotion.username' => '用户名',
     'promotion.consume_money' => '消费金额',
     'promotion.created_at' => '开卡时间',
+
+    'sellcard' => '面对面办卡',
+    'sellcard.tips' => '您可以在此处对面对面办卡进行管理',
 
     'bindcard' => '在线绑卡',
     'bindcard.tips' => '您可以在此处对绑卡信息进行管理',

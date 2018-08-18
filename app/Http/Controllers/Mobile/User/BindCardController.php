@@ -22,6 +22,13 @@ class BindCardController extends Controller
     public function index(Request $request)
     {
         if($request->isMethod('POST')){
+            if(auth()->user()->card){
+                if ($request->ajax()){
+                    return response()->json(['status' => 0, 'info' => '你已经绑定过卡了']);
+                }else{
+                    return view('layouts.user.message', ['status' => 0, 'info' => '你已经绑定过卡了']);
+                }
+            }
             if(auth()->user()->mobile){
                 $rules = array(
                     'number' => 'required|exists:common_card',
