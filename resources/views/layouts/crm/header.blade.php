@@ -11,7 +11,7 @@
         @auth('crm')
         <div class="y">
             <div class="user">
-                <strong>{{config('crm.group.'.auth('crm')->user()->group.'.name')}}：{{auth('crm')->user()->realname}}</strong>
+                <strong>{{config('crm.group.'.auth('crm')->user()->group->module.'.name')}}：{{auth('crm')->user()->username}}</strong>
             </div>
             <div class="logout">
                 <a href="{{ route('crm.logout') }}">退出</a>

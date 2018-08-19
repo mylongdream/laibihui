@@ -70,7 +70,7 @@ class CommonUserModel extends Authenticatable
 
     public function shop()
     {
-        return $this->hasMany('App\Models\BrandShopModel', 'username', 'username');
+        return $this->hasOne('App\Models\BrandShopModel', 'username', 'username');
     }
 
 }

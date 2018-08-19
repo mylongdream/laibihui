@@ -61,13 +61,13 @@ class LoginController extends Controller
     {
         $user->lastip = request()->getClientIp();
         $user->lastlogin = Carbon::now();
-        $user->logincount += 1;
         $user->save();
 
         if ($request->ajax()){
             return response()->json(['status' => '1', 'info' => trans('auth.succeed'), 'url' => $this->redirectTo()]);
+        }else{
+            return redirect()->intended($this->redirectTo());
         }
-        return false;
     }
 
     public function showLoginForm()

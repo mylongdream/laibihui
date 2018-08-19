@@ -262,6 +262,7 @@ Route::group(['domain' => '', 'prefix' => 'mobile', 'as' => 'mobile.'], function
         Route::any('cardreward/myreward', ['as' => 'cardreward.myreward', 'uses' => 'Mobile\User\CardRewardController@myreward']);
         Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'Mobile\User\CardRewardController@exchange']);
         Route::get('sellcard', ['as' => 'sellcard.index', 'uses' => 'Mobile\User\SellCardController@index']);
+        Route::get('sellcard/order', ['as' => 'sellcard.order', 'uses' => 'Mobile\User\SellCardController@order']);
     });
 });
 
@@ -465,7 +466,7 @@ Route::group(['domain' => '', 'prefix' => 'admin', 'as' => 'admin.'], function (
     });
 });
 
-Route::group(['domain' => '{domain}.chenliang.com','middleware' => ['subweb'], 'as' => 'subweb.'], function () {
+Route::group(['domain' => '{domain}.zhihui.hztbg.com','middleware' => ['subweb'], 'as' => 'subweb.'], function () {
 
     Route::get('/', ['as' => 'index', 'uses' => 'Subweb\IndexController@index']);
     Route::get('case', ['as' => 'case.index', 'uses' => 'Subweb\CaseController@index']);
@@ -575,7 +576,7 @@ Route::group(['domain' => '', 'prefix' => 'wechat', 'as' => 'wechat.'], function
     Route::any('server', ['as' => 'server', 'uses' => 'Wechat\ServerController@index']);
     Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
         Route::any('login', ['as' => 'login', 'uses' => 'Wechat\LoginController@index']);
-        //业主投票
+        //投票活动
         Route::get('ownervote', ['as' => 'ownervote.index', 'uses' => 'Wechat\OwnervoteController@index']);
         Route::any('ownervote/apply', ['as' => 'ownervote.apply', 'uses' => 'Wechat\OwnervoteController@apply']);
         Route::get('ownervote/detail/{id}', ['as' => 'ownervote.detail', 'uses' => 'Wechat\OwnervoteController@detail'])->where('id', '[0-9]+');
