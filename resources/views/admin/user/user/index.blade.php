@@ -41,7 +41,7 @@
 				<th width="70">{{ trans('admin.user.user.score') }}</th>
 				<th width="120">{{ trans('admin.user.user.lastlogin') }}</th>
 				<th width="120">{{ trans('admin.created_at') }}</th>
-				<th width="80">{{ trans('admin.operation') }}</th>
+				<th width="120">{{ trans('admin.operation') }}</th>
 			</tr>
 			@foreach ($userlist as $value)
 			<tr>

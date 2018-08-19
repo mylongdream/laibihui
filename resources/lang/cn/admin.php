@@ -507,7 +507,7 @@ return [
     'user.user.create' => '添加用户',
     'user.user.edit' => '编辑用户',
     'user.user.destroy' => '删除用户',
-    'user.user.group' => '用户分组',
+    'user.user.group' => '用户组',
     'user.user.headimgurl' => '用户头像',
     'user.user.username' => '用户名',
     'user.user.realname' => '真实姓名',
