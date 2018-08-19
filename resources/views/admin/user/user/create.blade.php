@@ -13,17 +13,6 @@
 			</div>
 			<table>
 				<tr>
-					<td width="150" align="right">{{ trans('admin.user.user.group') }}</td>
-					<td>
-						<select name="group_id" class="select">
-							<option value="0">请选择</option>
-							@foreach ($grouplist as $group)
-								<option value="{{ $group->id }}">{{ $group->name }}</option>
-							@endforeach
-						</select>
-					</td>
-				</tr>
-				<tr>
 					<td width="150" align="right">{{ trans('admin.user.user.username') }}</td>
 					<td><input class="txt" type="text" size="50" value="" name="username"></td>
 				</tr>

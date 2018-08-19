@@ -68,7 +68,6 @@ class UserController extends Controller
         $this->validate($request, $rules, $messages);
 
         $user = new CommonUserModel;
-        $user->group_id = $request->group_id;
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
         $user->realname = $request->realname;
@@ -128,7 +127,6 @@ class UserController extends Controller
         );
         $this->validate($request, $rules, $messages);
 
-        $user->group_id = $request->group_id;
         $user->username = $request->username;
         if($request->password){
             $user->password = bcrypt($request->password);
@@ -159,6 +157,31 @@ class UserController extends Controller
             return response()->json(['status' => '1', 'info' => trans('admin.user.user.deletesucceed'), 'url' => back()->getTargetUrl()]);
         }else{
             return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.user.user.deletesucceed'), 'url' => back()->getTargetUrl()]);
+        }
+    }
+
+    public function group(Request $request, $id)
+    {
+        $user = CommonUserModel::findOrFail($id);
+        if ($request->isMethod('POST')) {
+            $rules = array(
+                'group_id' => 'required',
+            );
+            $messages = array(
+                'group_id.required' => '用户组不允许为空！',
+            );
+            $this->validate($request, $rules, $messages);
+            $user->group_id = $request->group_id;
+            $user->save();
+
+            if ($request->ajax()){
+                return response()->json(['status' => '1', 'info' => trans('admin.user.user.editsucceed'), 'url' => route('admin.user.user.index')]);
+            }else{
+                return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.user.user.editsucceed'), 'url' => route('admin.user.user.index')]);
+            }
+        }else{
+            $grouplist = CommonUserGroupModel::orderBy('displayorder', 'asc')->get();
+            return view('admin.user.user.group', ['user' => $user, 'grouplist' => $grouplist]);
         }
     }
 

@@ -14,17 +14,6 @@
 			</div>
 			<table>
 				<tr>
-					<td width="150" align="right">{{ trans('admin.user.user.group') }}</td>
-					<td>
-						<select name="group_id" class="select">
-							<option value="0">请选择</option>
-							@foreach ($grouplist as $group)
-								<option value="{{ $group->id }}" {!! $user->group_id == $group->id ? 'selected="selected"' : '' !!}>{{ $group->name }}</option>
-							@endforeach
-						</select>
-					</td>
-				</tr>
-				<tr>
 					<td width="150" align="right">{{ trans('admin.user.user.username') }}</td>
 					<td><input class="txt" type="text" size="50" value="{{ $user->username }}" name="username"></td>
 				</tr>

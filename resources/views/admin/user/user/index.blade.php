@@ -56,7 +56,7 @@
 				<td>{{ $value->created_at->format('Y-m-d H:i') }}</td>
 				<td>
 					<a href="{{ route('admin.user.user.edit',$value->uid) }}" class="openwindow" title="{{ trans('admin.user.user.edit') }}">{{ trans('admin.edit') }}</a>
-					<a href="{{ route('admin.user.user.destroy',$value->uid) }}" class="mlm delbtn" title="{{ trans('admin.user.user.destroy') }}">{{ trans('admin.destroy') }}</a>
+					<a href="{{ route('admin.user.user.group',$value->uid) }}" class="mlm openwindow" title="{{ trans('admin.user.user.group') }}">{{ trans('admin.user.user.group') }}</a>
 				</td>
 			</tr>
 			@endforeach
