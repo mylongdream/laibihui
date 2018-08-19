@@ -48,7 +48,7 @@ return [
 
         'crm' => [
             'driver' => 'session',
-            'provider' => 'crm',
+            'provider' => 'users',
         ],
 
         'wechat' => [
@@ -88,11 +88,6 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\CommonAdminUserModel::class,
-        ],
-
-        'crm' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\CrmUserModel::class,
         ],
 
         'wechat' => [

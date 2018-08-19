@@ -51,6 +51,10 @@
 					<td><input class="txt" type="text" size="50" value="" name="name"></td>
 				</tr>
 				<tr>
+					<td align="right">{{ trans('admin.brand.shop.username') }}</td>
+					<td><input class="txt" type="text" size="50" value="" name="username"></td>
+				</tr>
+				<tr>
 					<td align="right">{{ trans('admin.brand.shop.upphoto') }}</td>
 					<td>
 						<a href="javascript:;" class="clickbtn" id="upphoto">上传图片</a><span class="tdtip">建议尺寸为 800 X 800 像素大小</span>

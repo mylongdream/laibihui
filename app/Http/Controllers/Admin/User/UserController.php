@@ -71,7 +71,9 @@ class UserController extends Controller
         $user->group_id = $request->group_id;
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
+        $user->realname = $request->realname;
         $user->mobile = $request->mobile;
+        $user->qq = $request->qq;
         $user->save();
 
         if ($request->ajax()){
@@ -131,7 +133,9 @@ class UserController extends Controller
         if($request->password){
             $user->password = bcrypt($request->password);
         }
+        $user->realname = $request->realname;
         $user->mobile = $request->mobile;
+        $user->qq = $request->qq;
         $user->save();
 
         if ($request->ajax()){

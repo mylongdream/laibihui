@@ -23,7 +23,7 @@ class CRMAuth
                 return redirect()->route('crm.login');
             }
         }
-        if (Auth::guard($guard)->user()->group == 'shangjia' && !Auth::guard($guard)->user()->shop) {
+        if (Auth::guard($guard)->user()->group->module == 'shangjia' && !Auth::guard($guard)->user()->shop) {
             if ($request->ajax()){
                 return response()->json(['status' => 0, 'info' => '管理店铺不存在']);
             }else{
@@ -33,7 +33,7 @@ class CRMAuth
         $actions = $request->route()->getAction();
         if (isset($actions['allow']) && $actions['allow']) {
             foreach ($actions['allow'] as $allow) {
-                if (Auth::guard($guard)->user()->group == $allow) {
+                if (Auth::guard($guard)->user()->group->module == $allow) {
                     return $next($request);
                 }
             }

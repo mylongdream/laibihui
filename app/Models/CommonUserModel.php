@@ -68,4 +68,9 @@ class CommonUserModel extends Authenticatable
         return $this->hasMany('App\Models\CommonUserAddressModel', 'uid');
     }
 
+    public function shop()
+    {
+        return $this->hasMany('App\Models\BrandShopModel', 'username', 'username');
+    }
+
 }

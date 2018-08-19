@@ -33,8 +33,16 @@
 					<td><input class="txt" type="password" size="50" value="" name="password"><span class="tdtip">不填则不修改原密码</span></td>
 				</tr>
 				<tr>
+					<td width="150" align="right">{{ trans('admin.user.user.realname') }}</td>
+					<td><input class="txt" type="text" size="50" value="{{ $user->realname }}" name="realname"></td>
+				</tr>
+				<tr>
 					<td width="150" align="right">{{ trans('admin.user.user.mobile') }}</td>
 					<td><input class="txt" type="text" size="50" value="{{ $user->mobile }}" name="mobile"></td>
+				</tr>
+				<tr>
+					<td width="150" align="right">{{ trans('admin.user.user.qq') }}</td>
+					<td><input class="txt" type="text" size="50" value="{{ $user->qq }}" name="qq"></td>
 				</tr>
 				<tr>
 					<td align="right"></td>

@@ -36,8 +36,16 @@
 					<td><input class="txt" type="password" size="50" value="" name="password_confirmation"></td>
 				</tr>
 				<tr>
+					<td width="150" align="right">{{ trans('admin.user.user.realname') }}</td>
+					<td><input class="txt" type="text" size="50" value="" name="realname"></td>
+				</tr>
+				<tr>
 					<td width="150" align="right">{{ trans('admin.user.user.mobile') }}</td>
 					<td><input class="txt" type="text" size="50" value="" name="mobile"></td>
+				</tr>
+				<tr>
+					<td width="150" align="right">{{ trans('admin.user.user.qq') }}</td>
+					<td><input class="txt" type="text" size="50" value="" name="qq"></td>
 				</tr>
 				<tr>
 					<td align="right"></td>

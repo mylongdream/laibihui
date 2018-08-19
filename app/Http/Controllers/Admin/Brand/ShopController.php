@@ -84,6 +84,7 @@ class ShopController extends Controller
         $shop = new BrandShopModel;
         $shop->subweb_id = $request->subweb_id;
         $shop->catid = $request->catid;
+        $shop->username = $request->username;
         $shop->name = $request->name;
         $shop->upimage = array_first($request->upphoto);
         $shop->upphoto = serialize($request->upphoto);
@@ -175,6 +176,7 @@ class ShopController extends Controller
 
         $shop->subweb_id = $request->subweb_id;
         $shop->catid = $request->catid;
+        $shop->username = $request->username;
         $shop->name = $request->name;
         $shop->upimage = array_first($request->upphoto);
         $shop->upphoto = serialize($request->upphoto);
