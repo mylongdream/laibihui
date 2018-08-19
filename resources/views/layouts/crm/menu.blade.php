@@ -4,7 +4,7 @@
             <a title="" href="{{ route('crm.index') }}"><span class="menu_index">系统首页</span></a>
         </li>
 
-        @if (auth('crm')->user()->group == 'zhaoshang')
+        @if (auth('crm')->user()->group->module == 'zhaoshang')
             <li class="{{ isset($curmenu) && $curmenu == 'addcustomer' ? 'on' : '' }}">
                 <a title="" href="{{ route('crm.customer.create') }}"><span class="menu_index">新增客户</span></a>
             </li>
@@ -25,13 +25,13 @@
             </li>
         @endif
 
-        @if (auth('crm')->user()->group == 'kefu')
+        @if (auth('crm')->user()->group->module == 'kefu')
             <li class="{{ isset($curmenu) && $curmenu == 'checkcustomer' ? 'on' : '' }}">
                 <a title="" href="{{ route('crm.checkcustomer.index') }}"><span class="menu_index">客户审查</span></a>
             </li>
         @endif
 
-        @if (auth('crm')->user()->group == 'shangjia')
+        @if (auth('crm')->user()->group->module == 'shangjia')
             <li class="{{ isset($curmenu) && $curmenu == 'consume' ? 'on' : '' }}">
                 <a title="" href="{{ route('crm.consume.index') }}"><span class="menu_index">店铺消费</span></a>
             </li>

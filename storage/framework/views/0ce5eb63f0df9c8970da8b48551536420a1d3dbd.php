@@ -4,7 +4,7 @@
             <a title="" href="<?php echo e(route('crm.index')); ?>"><span class="menu_index">系统首页</span></a>
         </li>
 
-        <?php if(auth('crm')->user()->group == 'zhaoshang'): ?>
+        <?php if(auth('crm')->user()->group->module == 'zhaoshang'): ?>
             <li class="<?php echo e(isset($curmenu) && $curmenu == 'addcustomer' ? 'on' : ''); ?>">
                 <a title="" href="<?php echo e(route('crm.customer.create')); ?>"><span class="menu_index">新增客户</span></a>
             </li>
@@ -25,13 +25,13 @@
             </li>
         <?php endif; ?>
 
-        <?php if(auth('crm')->user()->group == 'kefu'): ?>
+        <?php if(auth('crm')->user()->group->module == 'kefu'): ?>
             <li class="<?php echo e(isset($curmenu) && $curmenu == 'checkcustomer' ? 'on' : ''); ?>">
                 <a title="" href="<?php echo e(route('crm.checkcustomer.index')); ?>"><span class="menu_index">客户审查</span></a>
             </li>
         <?php endif; ?>
 
-        <?php if(auth('crm')->user()->group == 'shangjia'): ?>
+        <?php if(auth('crm')->user()->group->module == 'shangjia'): ?>
             <li class="<?php echo e(isset($curmenu) && $curmenu == 'consume' ? 'on' : ''); ?>">
                 <a title="" href="<?php echo e(route('crm.consume.index')); ?>"><span class="menu_index">店铺消费</span></a>
             </li>

@@ -41,7 +41,7 @@
 				<th width="70">{{ trans('admin.user.user.score') }}</th>
 				<th width="120">{{ trans('admin.user.user.lastlogin') }}</th>
 				<th width="120">{{ trans('admin.created_at') }}</th>
-				<th width="120">{{ trans('admin.operation') }}</th>
+				<th width="90">{{ trans('admin.operation') }}</th>
 			</tr>
 			@foreach ($userlist as $value)
 			<tr>
@@ -55,8 +55,8 @@
 				<td>{{ $value->lastlogin ? $value->lastlogin->format('Y-m-d H:i') : '/' }}</td>
 				<td>{{ $value->created_at->format('Y-m-d H:i') }}</td>
 				<td>
-					<a href="{{ route('admin.user.user.edit',$value->uid) }}" class="openwindow" title="{{ trans('admin.user.user.edit') }}">{{ trans('admin.edit') }}</a>
-					<a href="{{ route('admin.user.user.group',$value->uid) }}" class="mlm openwindow" title="{{ trans('admin.user.user.group') }}">{{ trans('admin.user.user.group') }}</a>
+					<a href="{{ route('admin.user.user.group',$value->uid) }}" class="openwindow" title="{{ trans('admin.user.user.group') }}">{{ trans('admin.user.user.group') }}</a>
+					<a href="{{ route('admin.user.user.edit',$value->uid) }}" class="mlm openwindow" title="{{ trans('admin.user.user.edit') }}">{{ trans('admin.edit') }}</a>
 				</td>
 			</tr>
 			@endforeach

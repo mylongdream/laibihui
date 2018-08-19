@@ -21,7 +21,9 @@ class ShopController extends Controller
     public function index(Request $request)
     {
         $BrandShopModel = new BrandShopModel;
-        $shops = $BrandShopModel->where('uid', auth('crm')->user()->uid)->where(function($query) use($request) {
+        $shops = $BrandShopModel->whereHas('moderator', function ($query) {
+            $query->where('uid', auth('crm')->user()->uid);
+        })->where(function($query) use($request) {
             if($request->name){
                 $query->where('name', 'like',"%".$request->name."%");
             }
@@ -37,7 +39,9 @@ class ShopController extends Controller
 
     public function edit(Request $request, $id)
     {
-        $shop = BrandShopModel::where('uid', auth('crm')->user()->uid)->findOrFail($id);
+        $shop = BrandShopModel::whereHas('moderator', function ($query) {
+            $query->where('uid', auth('crm')->user()->uid);
+        })->findOrFail($id);
         $archive = BrandShopArchiveModel::where('uid', auth('crm')->user()->uid)->where('shop_id', $shop->id)->where('status', 0)->first();
         if ($archive){
             if ($request->ajax()){
@@ -51,7 +55,9 @@ class ShopController extends Controller
 
     public function update(Request $request, $id)
     {
-        $shop = BrandShopModel::where('uid', auth('crm')->user()->uid)->findOrFail($id);
+        $shop = BrandShopModel::whereHas('moderator', function ($query) {
+            $query->where('uid', auth('crm')->user()->uid);
+        })->findOrFail($id);
         $archive = BrandShopArchiveModel::where('uid', auth('crm')->user()->uid)->where('shop_id', $shop->id)->where('status', 0)->first();
         if ($archive){
             if ($request->ajax()){
@@ -98,14 +104,18 @@ class ShopController extends Controller
 
     public function allot(Request $request, $id)
     {
-        $shop = BrandShopModel::where('uid', auth('crm')->user()->uid)->findOrFail($id);
+        $shop = BrandShopModel::whereHas('moderator', function ($query) {
+            $query->where('uid', auth('crm')->user()->uid);
+        })->findOrFail($id);
         $allots = BrandShopCardAllotModel::where('shop_id', $shop->id)->latest()->paginate(20);
         return view('crm.shop.allot', ['shop' => $shop, 'allots' => $allots]);
     }
 
     public function card(Request $request, $id)
     {
-        $shop = BrandShopModel::where('uid', auth('crm')->user()->uid)->findOrFail($id);
+        $shop = BrandShopModel::whereHas('moderator', function ($query) {
+            $query->where('uid', auth('crm')->user()->uid);
+        })->findOrFail($id);
         $BrandShopCardModel = new BrandShopCardModel;
         $cards = $BrandShopCardModel->where('shop_id', $shop->id)->where(function($query) use($request) {
             if($request->number){
@@ -117,7 +127,9 @@ class ShopController extends Controller
 
     public function addcard(Request $request, $id)
     {
-        $shop = BrandShopModel::where('uid', auth('crm')->user()->uid)->findOrFail($id);
+        $shop = BrandShopModel::whereHas('moderator', function ($query) {
+            $query->where('uid', auth('crm')->user()->uid);
+        })->findOrFail($id);
         $allot = BrandShopCardAllotModel::where('shop_id', $shop->id)->findOrFail($request->allotid);
         if($allot->quantity <= $allot->cardlist->count()) {
             if ($request->ajax()){
@@ -209,21 +221,21 @@ class ShopController extends Controller
     {
         $rules = array(
             'catid' => 'required|numeric|min:1',
-            'maplat' => 'required|numeric|min:0|max:180',
-            'maplng' => 'required|numeric|min:-90|max:90',
+            'maplng' => 'required|numeric|min:0|max:180',
+            'maplat' => 'required|numeric|min:-90|max:90',
         );
         $messages = array(
             'catid.required' => '商家分类不能为空！',
             'catid.numeric' => '商家分类格式错误！',
             'catid.min' => '商家分类格式错误！',
-            'maplat.required' => '地图坐标经度不能为空！',
-            'maplat.numeric' => '地图坐标经度格式错误！',
-            'maplat.min' => '地图坐标经度格式错误！',
-            'maplat.max' => '地图坐标经度格式错误！',
-            'maplng.required' => '地图坐标纬度不能为空！',
-            'maplng.numeric' => '地图坐标纬度格式错误！',
-            'maplng.min' => '地图坐标纬度格式错误！',
-            'maplng.max' => '地图坐标纬度格式错误！',
+            'maplng.required' => '地图坐标经度不能为空！',
+            'maplng.numeric' => '地图坐标经度格式错误！',
+            'maplng.min' => '地图坐标经度格式错误！',
+            'maplng.max' => '地图坐标经度格式错误！',
+            'maplat.required' => '地图坐标纬度不能为空！',
+            'maplat.numeric' => '地图坐标纬度格式错误！',
+            'maplat.min' => '地图坐标纬度格式错误！',
+            'maplat.max' => '地图坐标纬度格式错误！',
         );
         $this->validate($request, $rules, $messages);
         $maplat = $request->maplat;

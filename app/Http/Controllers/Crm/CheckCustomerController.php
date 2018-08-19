@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Crm;
 
 use App\Http\Controllers\Controller;
 use App\Models\BrandShopModel;
+use App\Models\BrandShopModeratorModel;
 use App\Models\CrmCustomerModel;
 use Illuminate\Http\Request;
 
@@ -64,9 +65,14 @@ class CheckCustomerController extends Controller
 
             if($request->status == 'passed'){
                 $shop = BrandShopModel::where('id', $request->shop_id)->firstOrFail();
-                $shop->uid = $customer->uid;
                 $shop->pic_zizhi = $customer->pic_zizhi;
                 $shop->save();
+
+                $moderator = new BrandShopModeratorModel();
+                $moderator->uid = $customer->uid;
+                $moderator->shop_id = $shop->id;
+                $moderator->postip = request()->getClientIp();
+                $moderator->save();
 
                 $customer->shop_id = $shop->id;
             }else{

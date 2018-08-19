@@ -80,6 +80,7 @@ class CustomerController extends Controller
         $customer->pic_caidan = $request->pic_caidan ? serialize($request->pic_caidan) : $request->pic_caidan;
         $customer->pic_caipin = $request->pic_caipin ? serialize($request->pic_caipin) : $request->pic_caipin;
         $customer->remark = $request->remark;
+        $customer->postip = request()->getClientIp();
         $customer->save();
 
         if ($request->ajax()){
@@ -141,6 +142,7 @@ class CustomerController extends Controller
         $customer->pic_caidan = $request->pic_caidan ? serialize($request->pic_caidan) : $request->pic_caidan;
         $customer->pic_caipin = $request->pic_caipin ? serialize($request->pic_caipin) : $request->pic_caipin;
         $customer->remark = $request->remark;
+        $customer->postip = request()->getClientIp();
         $customer->save();
 
         if ($request->ajax()){

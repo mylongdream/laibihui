@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Crm;
+namespace App\Http\Controllers\Mobile\Crm;
 
 use App\Http\Controllers\Controller;
 use App\Models\BrandConsumeModel;
@@ -41,7 +41,7 @@ class IndexController extends Controller
             $count->shopmoney += (10 - $value->indiscount) * 100;
         }
         $count->cardmoney = $count->sellcards * 0.5;
-        return view('crm.index.zhaoshang', ['count' => $count]);
+        return view('mobile.crm.index.zhaoshang', ['count' => $count]);
     }
 
     public function kefu(Request $request)
@@ -50,13 +50,13 @@ class IndexController extends Controller
         $count->auditingcustomer = CrmCustomerModel::whereNotNull('refer_at')->where('check_status', 'auditing')->count();
         $count->passedcustomer = CrmCustomerModel::whereNotNull('refer_at')->where('check_status', 'passed')->count();
         $count->rejectedcustomer = CrmCustomerModel::whereNotNull('refer_at')->where('check_status', 'rejected')->count();
-        return view('crm.index.kefu', ['count' => $count]);
+        return view('mobile.crm.index.kefu', ['count' => $count]);
     }
 
     public function tuiguang(Request $request)
     {
         $count = collect();
-        return view('crm.index.tuiguang', ['count' => $count]);
+        return view('mobile.crm.index.tuiguang', ['count' => $count]);
     }
 
     public function shangjia(Request $request)
@@ -81,7 +81,7 @@ class IndexController extends Controller
         $count->ordercard_account = $count->ordercard_sellcard * 5;
 
         $rewards = CrmRewardModel::where('onsale', 1)->get();
-        return view('crm.index.shangjia', ['count' => $count, 'rewards' => $rewards]);
+        return view('mobile.crm.index.shangjia', ['count' => $count, 'rewards' => $rewards]);
     }
 
 }

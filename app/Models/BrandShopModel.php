@@ -33,4 +33,9 @@ class BrandShopModel extends Model
         return $this->hasMany('App\Models\BrandShopCardModel', 'shop_id', 'id');
     }
 
+    public function moderator()
+    {
+        return $this->hasOne('App\Models\BrandShopModeratorModel', 'shop_id', 'id');
+    }
+
 }

@@ -349,6 +349,7 @@ Route::group(['domain' => '', 'prefix' => 'admin', 'as' => 'admin.'], function (
         });
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
             Route::post('user/batch', ['as' => 'user.batch', 'uses' => 'Admin\User\UserController@batch']);
+            Route::any('user/{id}/group', ['as' => 'user.group', 'uses' => 'Admin\User\UserController@group']);
             Route::resource('user', 'Admin\User\UserController');
             Route::post('group/batch', ['as' => 'group.batch', 'uses' => 'Admin\User\GroupController@batch']);
             Route::resource('group', 'Admin\User\GroupController');
