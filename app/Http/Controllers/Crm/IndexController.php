@@ -21,7 +21,7 @@ class IndexController extends Controller
 
     public function index(Request $request)
     {
-		$module = auth('crm')->user()->group;
+		$module = auth('crm')->user()->group->module;
         return $this->$module($request);
     }
 
