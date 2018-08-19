@@ -507,7 +507,7 @@ Route::group(['domain' => '{domain}.zhihui.hztbg.com','middleware' => ['subweb']
     });
 });
 
-Route::group(['domain' => 'crm.hztbg.com', 'prefix' => 'crm', 'as' => 'crm.'], function () {
+Route::group(['domain' => 'crm.hztbg.com', 'prefix' => '', 'as' => 'crm.'], function () {
     Route::get('/', function () {
         return redirect()->route('crm.index');
     });
