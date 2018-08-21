@@ -102,8 +102,8 @@ class BindCardController extends Controller
             $usercard->postip = request()->getClientIp();
             $usercard->save();
 
-            auth()->user()->tiyan_money += $card->money * 0.1;
-            auth()->user()->frozen_money += $card->money * 0.9;
+            auth()->user()->tiyan_money = $card->money * 0.1;
+            auth()->user()->frozen_money = $card->money * 0.9;
             if(!auth()->user()->mobile){
                 auth()->user()->mobile = $request->mobile;
             }
