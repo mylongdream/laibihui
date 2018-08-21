@@ -14,6 +14,16 @@
 			</div>
 			<table>
 				<tr>
+					<td width="150" align="right">{{ trans('admin.extend.reward.type') }}</td>
+					<td>
+						<select name="type" class="select select_type">
+							<option value="0">请选择</option>
+							<option value="1" {{ $reward->type == 1 ? 'selected' : '' }}>会员兑换</option>
+							<option value="2" {{ $reward->type == 2 ? 'selected' : '' }}>商家兑换</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
 					<td width="150" align="right">{{ trans('admin.extend.reward.name') }}</td>
 					<td><input class="txt" type="text" size="50" value="{{ $reward->name }}" name="name"></td>
 				</tr>

@@ -16,7 +16,8 @@ class RewardController extends Controller
      */
     public function index(Request $request)
     {
-        $rewardlist = CommonCardRewardModel::orderBy('created_at', 'desc')->get();
+        $type = $request->type && in_array($request->type, array(1, 2)) ? $request->type : 1;
+        $rewardlist = CommonCardRewardModel::where('type', $type)->orderBy('created_at', 'desc')->get();
         return view('admin.extend.reward.index', ['rewardlist' => $rewardlist]);
     }
 
@@ -39,11 +40,16 @@ class RewardController extends Controller
     public function store(Request $request)
     {
         $rules = array(
+            'type' => 'required|numeric|min:1|max:2',
             'name' => 'required|min:2|max:50',
             'upimage' => 'required',
             'cardnum' => 'required|numeric|min:1',
         );
         $messages = array(
+            'type.required' => '兑奖人群不允许为空！',
+            'type.numeric' => '兑奖人群填写不正确。',
+            'type.min' => '兑奖人群填写不正确。',
+            'type.max' => '兑奖人群填写不正确。',
             'name.required' => '奖品名称不允许为空！',
             'name.min' => '奖品名称必须大于 :min 个字符。',
             'name.max' => '奖品名称必须小于 :max 个字符。',
@@ -55,6 +61,7 @@ class RewardController extends Controller
         $this->validate($request, $rules, $messages);
 
         $reward = new CommonCardRewardModel;
+        $reward->type = $request->type;
         $reward->name = $request->name;
         $reward->upimage = $request->upimage;
         $reward->cardnum = intval($request->cardnum);
@@ -62,9 +69,9 @@ class RewardController extends Controller
         $reward->save();
 
         if ($request->ajax()){
-            return response()->json(['status' => '1', 'info' => trans('admin.extend.reward.addsucceed'), 'url' => route('admin.extend.reward.index')]);
+            return response()->json(['status' => '1', 'info' => trans('admin.extend.reward.addsucceed'), 'url' => route('admin.extend.reward.index', ['type' => $reward->type])]);
         }else{
-            return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.extend.reward.addsucceed'), 'url' => route('admin.extend.reward.index')]);
+            return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.extend.reward.addsucceed'), 'url' => route('admin.extend.reward.index', ['type' => $reward->type])]);
         }
     }
 
@@ -103,11 +110,16 @@ class RewardController extends Controller
     {
         $reward = CommonCardRewardModel::findOrFail($id);
         $rules = array(
+            'type' => 'required|numeric|min:1|max:2',
             'name' => 'required|min:2|max:50',
             'upimage' => 'required',
             'cardnum' => 'required|numeric|min:1',
         );
         $messages = array(
+            'type.required' => '兑奖人群不允许为空！',
+            'type.numeric' => '兑奖人群填写不正确。',
+            'type.min' => '兑奖人群填写不正确。',
+            'type.max' => '兑奖人群填写不正确。',
             'name.required' => '奖品名称不允许为空！',
             'name.min' => '奖品名称必须大于 :min 个字符。',
             'name.max' => '奖品名称必须小于 :max 个字符。',
@@ -118,6 +130,7 @@ class RewardController extends Controller
         );
         $this->validate($request, $rules, $messages);
 
+        $reward->type = $request->type;
         $reward->name = $request->name;
         $reward->upimage = $request->upimage;
         $reward->cardnum = intval($request->cardnum);
@@ -125,9 +138,9 @@ class RewardController extends Controller
         $reward->save();
 
         if ($request->ajax()){
-            return response()->json(['status' => '1', 'info' => trans('admin.extend.reward.editsucceed'), 'url' => route('admin.extend.reward.index')]);
+            return response()->json(['status' => '1', 'info' => trans('admin.extend.reward.editsucceed'), 'url' => route('admin.extend.reward.index', ['type' => $reward->type])]);
         }else{
-            return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.extend.reward.editsucceed'), 'url' => route('admin.extend.reward.index')]);
+            return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.extend.reward.editsucceed'), 'url' => route('admin.extend.reward.index', ['type' => $reward->type])]);
         }
     }
 

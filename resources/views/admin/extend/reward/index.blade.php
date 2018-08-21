@@ -3,6 +3,10 @@
 @section('content')
 	<div class="itemnav">
 		<div class="title"><h3>{{ trans('admin.extend.reward') }}</h3></div>
+		<ul class="tab">
+			<li class="current"><a href="{{ route('admin.extend.reward.index', ['type' => 1]) }}"><span>会员兑换</span></a></li>
+			<li><a href="{{ route('admin.extend.reward.index', ['type' => 2]) }}"><span>商家兑换</span></a></li>
+		</ul>
 	</div>
 	<form id="cpform" name="cpform" class="ajaxform" method="post" action="{{ route('admin.extend.reward.batch') }}">
 	{!! csrf_field() !!}
@@ -10,7 +14,7 @@
 	<div class="tblist">
 		<div class="tbhead cl">
 			<div class="z"><h3>{{ trans('admin.extend.reward.list') }}</h3></div>
-			<div class="y"><a href="{{ route('admin.extend.reward.create') }}" class="btn openwindow" title="{{ trans('admin.extend.reward.create') }}">+ {{ trans('admin.extend.reward.create') }}</a></div>
+			<div class="y"><a href="{{ route('admin.extend.reward.create', ['type' => request('type')]) }}" class="btn openwindow" title="{{ trans('admin.extend.reward.create') }}">+ {{ trans('admin.extend.reward.create') }}</a></div>
 		</div>
 		<table>
 			<tr>

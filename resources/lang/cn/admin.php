@@ -459,6 +459,7 @@ return [
     'extend.reward.edit' => '编辑奖励',
     'extend.reward.destroy' => '删除奖励',
     'extend.reward.show' => '查看奖励',
+    'extend.reward.type' => '兑换人群',
     'extend.reward.name' => '奖品名称',
     'extend.reward.upimage' => '奖品图片',
     'extend.reward.cardnum' => '所需卡数',
