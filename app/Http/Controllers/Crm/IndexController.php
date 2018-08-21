@@ -7,7 +7,7 @@ use App\Models\BrandConsumeModel;
 use App\Models\BrandShopCardModel;
 use App\Models\BrandShopModel;
 use App\Models\CrmCustomerModel;
-use App\Models\CrmRewardModel;
+use App\Models\CommonCardRewardModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -80,7 +80,7 @@ class IndexController extends Controller
         $count->ordercard_remaincard = BrandShopCardModel::where('shop_id', auth('crm')->user()->shop->id)->doesntHave('card')->count();
         $count->ordercard_account = $count->ordercard_sellcard * 5;
 
-        $rewards = CrmRewardModel::where('onsale', 1)->get();
+        $rewards = CommonCardRewardModel::where('type', 2)->where('onsale', 1)->get();
         return view('crm.index.shangjia', ['count' => $count, 'rewards' => $rewards]);
     }
 
