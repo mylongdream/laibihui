@@ -20,6 +20,7 @@
                 <div class="reg-body">
                     <form class="ajaxform registerform" name="registerform" method="post" action="{{ route('register.fast') }}">
                         {!! csrf_field() !!}
+                        <input name="register_type" id="register_type" value="fast" type="hidden" />
                         <div class="ipt">
                             <dl class="cl">
                                 <dt>手机号码：</dt>

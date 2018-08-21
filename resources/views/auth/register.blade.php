@@ -22,6 +22,7 @@
                 <div class="reg-body">
                     <form class="ajaxform registerform" name="registerform" method="post" action="{{ route('register') }}">
                         {!! csrf_field() !!}
+                        <input name="register_type" id="register_type" value="normal" type="hidden" />
                         <div class="ipt">
                             <dl class="cl">
                                 <dt>用户名：</dt>

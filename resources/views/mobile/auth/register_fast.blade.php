@@ -24,6 +24,7 @@
                     <div class="weui-tab__panel">
                         <form class="ajaxform" name="myform" method="post" action="{{ route('mobile.register.fast') }}">
                             {!! csrf_field() !!}
+                            <input name="register_type" id="register_type" value="fast" type="hidden" />
                             <div class="weui-cells weui-cells_form">
                                 <div class="weui-cell">
                                     <div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
