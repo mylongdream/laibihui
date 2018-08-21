@@ -33,12 +33,12 @@ class BindCardController extends Controller
             if(auth()->user()->mobile){
                 $rules = array(
                     'number' => 'required|exists:common_card',
-                    'password' => 'required|exists:common_card,number,'.$request->number,
+                    'password' => 'required',
                 );
             }else{
                 $rules = array(
                     'number' => 'required|exists:common_card',
-                    'password' => 'required|exists:common_card,number,'.$request->number,
+                    'password' => 'required',
                     'mobile' => 'bail|required|zh_mobile|unique:common_user|confirm_mobile_not_change',
                     'smscode' => 'required|verify_code',
                 );

@@ -27,17 +27,24 @@
                 <form class="ajaxform" name="myform" method="post" action="{{ route('mobile.user.bindcard.index') }}">
                     {!! csrf_field() !!}
                     <div class="weui-cells weui-cells_form">
+                        @if (strpos(request()->userAgent(), 'MicroMessenger') !== false)
                         <div class="weui-cell weui-cell_vcode">
                             <div class="weui-cell__hd"><label class="weui-label">卡  号</label></div>
                             <div class="weui-cell__bd">
                                 <input class="weui-input" name="number" placeholder="请输入卡号" type="text">
                             </div>
-                            @if (strpos(request()->userAgent(), 'MicroMessenger') !== false)
                                 <div class="weui-cell__ft">
                                     <button id="getcardnum" class="weui-vcode-btn" type="button">扫一扫</button>
                                 </div>
-                            @endif
                         </div>
+                        @else
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd"><label class="weui-label">卡  号</label></div>
+                                <div class="weui-cell__bd">
+                                    <input class="weui-input" name="number" placeholder="请输入卡号" type="text">
+                                </div>
+                            </div>
+                        @endif
                         <div class="weui-cell">
                             <div class="weui-cell__hd"><label class="weui-label">卡  密</label></div>
                             <div class="weui-cell__bd">
