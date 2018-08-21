@@ -4,8 +4,8 @@
 	<div class="itemnav">
 		<div class="title"><h3>{{ trans('admin.extend.reward') }}</h3></div>
 		<ul class="tab">
-			<li class="current"><a href="{{ route('admin.extend.reward.index', ['type' => 1]) }}"><span>会员兑换</span></a></li>
-			<li><a href="{{ route('admin.extend.reward.index', ['type' => 2]) }}"><span>商家兑换</span></a></li>
+			<li{!! request('type') == 1 ? ' class="current"' : '' !!}><a href="{{ route('admin.extend.reward.index', ['type' => 1]) }}"><span>会员兑换</span></a></li>
+			<li{!! request('type') == 2 ? ' class="current"' : '' !!}><a href="{{ route('admin.extend.reward.index', ['type' => 2]) }}"><span>商家兑换</span></a></li>
 		</ul>
 	</div>
 	<form id="cpform" name="cpform" class="ajaxform" method="post" action="{{ route('admin.extend.reward.batch') }}">

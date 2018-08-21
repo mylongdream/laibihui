@@ -3,6 +3,10 @@
 @section('content')
 	<div class="itemnav">
 		<div class="title"><h3>{{ trans('admin.extend.reward') }}</h3></div>
+		<ul class="tab">
+			<li{!! request('type') == 1 ? ' class="current"' : '' !!}><a href="{{ route('admin.extend.reward.index', ['type' => 1]) }}"><span>会员兑换</span></a></li>
+			<li{!! request('type') == 2 ? ' class="current"' : '' !!}><a href="{{ route('admin.extend.reward.index', ['type' => 2]) }}"><span>商家兑换</span></a></li>
+		</ul>
 	</div>
 	<form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('admin.extend.reward.store') }}">
 		{!! csrf_field() !!}
