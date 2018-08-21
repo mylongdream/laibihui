@@ -108,11 +108,11 @@ class CheckController extends Controller
     public function smscode(Request $request)
     {
         $rules = array(
-            'smscode' => ['required', 'captcha_check']
+            'smscode' => ['required', 'verify_code']
         );
         $messages = array(
             'smscode.required' => '验证码不能为空',
-            'smscode.captcha_check' => '验证码错误',
+            'smscode.verify_code' => '验证码错误',
         );
         $this->validate($request, $rules, $messages);
 
