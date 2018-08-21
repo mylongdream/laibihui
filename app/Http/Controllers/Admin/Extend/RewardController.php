@@ -16,8 +16,14 @@ class RewardController extends Controller
      */
     public function index(Request $request)
     {
-        $type = $request->type && in_array($request->type, array(1, 2)) ? $request->type : 1;
-        $rewardlist = CommonCardRewardModel::where('type', $type)->orderBy('created_at', 'desc')->get();
+        if(!($request->type && in_array($request->type, array(1, 2)))){
+            return response()->redirectToRoute('admin.extend.reward.index', ['type' => 1]);
+        }
+        $rewardlist = CommonCardRewardModel::where(function($query) use($request) {
+            if($request->type){
+                $query->where('type', $request->type);
+            }
+        })->orderBy('created_at', 'desc')->get();
         return view('admin.extend.reward.index', ['rewardlist' => $rewardlist]);
     }
 
