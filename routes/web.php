@@ -312,6 +312,8 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::resource('bindcard', 'Admin\Extend\BindCardController');
             Route::post('reward/batch', ['as' => 'reward.batch', 'uses' => 'Admin\Extend\RewardController@batch']);
             Route::resource('reward', 'Admin\Extend\RewardController');
+            Route::post('sellcard/batch', ['as' => 'sellcard.batch', 'uses' => 'Admin\Extend\SellCardController@batch']);
+            Route::resource('sellcard', 'Admin\Extend\SellCardController');
         });
         Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::post('menu/batch', ['as' => 'menu.batch', 'uses' => 'Admin\Admin\MenuController@batch']);
@@ -463,6 +465,8 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::resource('archive', 'Admin\CRM\ArchiveController');
             Route::post('reward/batch', ['as' => 'reward.batch', 'uses' => 'Admin\CRM\RewardController@batch']);
             Route::resource('reward', 'Admin\CRM\RewardController');
+            Route::post('personnel/batch', ['as' => 'personnel.batch', 'uses' => 'Admin\CRM\PersonnelController@batch']);
+            Route::resource('personnel', 'Admin\CRM\PersonnelController');
         });
     });
 });
