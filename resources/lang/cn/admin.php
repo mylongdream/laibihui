@@ -462,6 +462,7 @@ return [
     'extend.sellcard.user' => '卖卡人员',
     'extend.sellcard.order_sn' => '订单编号',
     'extend.sellcard.number' => '卡号',
+    'extend.sellcard.order_amount' => '支付金额',
     'extend.sellcard.pay_type' => '支付方式',
     'extend.sellcard.pay_type_wechat' => '微信支付',
     'extend.sellcard.pay_type_alipay' => '支付宝支付',
