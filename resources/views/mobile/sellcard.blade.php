@@ -10,6 +10,7 @@
                 </div>
                 <div class="sellcard_box">
                     <form method="post" action="{{ route('mobile.sellcard', ['fromuser' => request('fromuser')]) }}">
+                        {!! csrf_field() !!}
                         <div class="sellcard_bd">
                             <input name="number" class="weui-input" placeholder="请输入卡号" type="text">
                         </div>
