@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use HaoLi\LaravelAmount\Traits\AmountTrait;
 
 class CommonUserSellcardModel extends Model
 {
+
+    use AmountTrait;
 
 	protected $table = 'common_user_sellcard';
 	protected $primaryKey = 'id';

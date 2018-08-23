@@ -15,20 +15,19 @@
 		<table>
 			<tr>
 				<th width="24"><input class="checkall" type="checkbox"></th>
-				<th width="120">{{ trans('admin.crm.personnel.realname') }}</th>
-				<th width="150">{{ trans('admin.crm.personnel.mobile') }}</th>
-				<th width="150">{{ trans('admin.crm.personnel.lastlogin') }}</th>
+				<th width="120">{{ trans('admin.crm.personnel.topuser') }}</th>
+				<th width="150">{{ trans('admin.crm.personnel.subuser') }}</th>
+				<th width="150">{{ trans('admin.crm.personnel.created_at') }}</th>
 				<th width="100">{{ trans('admin.operation') }}</th>
 			</tr>
-			@foreach ($userlist as $user)
+			@foreach ($userlist as $value)
 			<tr>
-				<td><input class="ids" type="checkbox" value="{{ $user->uid }}" name="ids[]"></td>
-				<td>{{ $user->realname }}</td>
-				<td>{{ $user->mobile }}</td>
-				<td>{{ $user->lastlogin ? $user->lastlogin->format('Y-m-d H:i') : '/' }}</td>
+				<td><input class="ids" type="checkbox" value="{{ $value->id }}" name="ids[]"></td>
+				<td>{{ $value->topuser ? $value->topuser->username : '/' }}</td>
+				<td>{{ $value->subuser ? $value->subuser->username : '/' }}</td>
+				<td>{{ $user->created_at ? $user->created_at->format('Y-m-d H:i') : '/' }}</td>
 				<td>
-					<a href="{{ route('admin.crm.personnel.edit',$user->uid) }}" class="openwindow" title="{{ trans('admin.crm.personnel.edit') }}">{{ trans('admin.edit') }}</a>
-					<a href="{{ route('admin.crm.personnel.destroy',$user->uid) }}" class="mlm delbtn">{{ trans('admin.destroy') }}</a>
+					<a href="{{ route('admin.crm.personnel.destroy',$value->id) }}" class="delbtn">{{ trans('admin.destroy') }}</a>
 				</td>
 			</tr>
 			@endforeach

@@ -35,11 +35,9 @@
 				<th width="24"><input class="checkall" type="checkbox"></th>
 				<th width="100">{{ trans('admin.extend.sellcard.user') }}</th>
 				<th width="160">{{ trans('admin.extend.sellcard.order_sn') }}</th>
-				<th width="240">{{ trans('admin.extend.sellcard.consignee') }}</th>
-				<th>{{ trans('admin.extend.sellcard.remark') }}</th>
-				<th width="100">{{ trans('admin.extend.sellcard.fromuser') }}</th>
-				<th width="80">{{ trans('admin.extend.sellcard.order_type') }}</th>
-				<th width="60">{{ trans('admin.extend.sellcard.status') }}</th>
+				<th width="240">{{ trans('admin.extend.sellcard.number') }}</th>
+				<th width="240">{{ trans('admin.extend.sellcard.pay_type') }}</th>
+				<th width="60">{{ trans('admin.extend.sellcard.pay_status') }}</th>
 				<th width="120">{{ trans('admin.extend.sellcard.created_at') }}</th>
 				<th width="80">{{ trans('admin.operation') }}</th>
 			</tr>
@@ -48,14 +46,9 @@
 				<td><input class="ids" type="checkbox" value="{{ $value->id }}" name="ids[]"></td>
 				<td>{{ $value->user ? $value->user->username : '/' }}</td>
 				<td>{{ $value->order_sn or '/' }}</td>
-				<td>
-                    <p>{{ $value->address->realname }} <span class="mlm">{{ $value->address->mobile }}</span></p>
-                    <p>{{ $value->address->getprovince ? $value->address->getprovince->name : '' }} {{ $value->address->getcity ? $value->address->getcity->name : '' }} {{ $value->address->getarea ? $value->address->getarea->name : '' }} {{ $value->address->getstreet ? $value->address->getstreet->name : '' }} {{ $value->address->address }}</p>
-				</td>
-				<td>{{ $value->remark or '/' }}</td>
-				<td>{{ $value->fromuser ? $value->fromuser->username : '/' }}</td>
-				<td>{{ trans('admin.extend.sellcard.order_type_'.$value->order_type) }}</td>
-				<td>{{ trans('admin.extend.sellcard.status_'.$value->order_status.$value->shipping_status.$value->pay_status) }}</td>
+				<td>{{ $value->number or '/' }}</td>
+				<td>{{ trans('admin.extend.sellcard.pay_type_'.$value->pay_type) }}</td>
+				<td>{{ trans('admin.extend.sellcard.pay_status_'.$value->pay_status) }}</td>
 				<td>{{ $value->created_at->format('Y-m-d H:i') }}</td>
 				<td>
 					<a href="{{ route('admin.extend.sellcard.show',$value->id) }}" class="" title="{{ trans('admin.view') }}">{{ trans('admin.view') }}</a>
