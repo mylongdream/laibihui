@@ -49,7 +49,6 @@
 				<th width="160">{{ trans('admin.extend.ordercard.order_sn') }}</th>
 				<th width="240">{{ trans('admin.extend.ordercard.consignee') }}</th>
 				<th>{{ trans('admin.extend.ordercard.remark') }}</th>
-				<th width="100">{{ trans('admin.extend.ordercard.fromuser') }}</th>
 				<th width="80">{{ trans('admin.extend.ordercard.order_type') }}</th>
 				<th width="60">{{ trans('admin.extend.ordercard.status') }}</th>
 				<th width="120">{{ trans('admin.extend.ordercard.created_at') }}</th>
@@ -65,7 +64,6 @@
                     <p>{{ $value->address->getprovince ? $value->address->getprovince->name : '' }} {{ $value->address->getcity ? $value->address->getcity->name : '' }} {{ $value->address->getarea ? $value->address->getarea->name : '' }} {{ $value->address->getstreet ? $value->address->getstreet->name : '' }} {{ $value->address->address }}</p>
 				</td>
 				<td>{{ $value->remark or '/' }}</td>
-				<td>{{ $value->fromuser ? $value->fromuser->username : '/' }}</td>
 				<td>{{ trans('admin.extend.ordercard.order_type_'.$value->order_type) }}</td>
 				<td>{{ trans('admin.extend.ordercard.status_'.$value->order_status.$value->shipping_status.$value->pay_status) }}</td>
 				<td>{{ $value->created_at->format('Y-m-d H:i') }}</td>

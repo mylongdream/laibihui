@@ -7,7 +7,7 @@
 	<form id="schform" name="schform" class="formsearch" method="get" action="{{ route('admin.extend.sellcard.index') }}">
 	<div class="tbsearch">
 		<dl>
-			<dt>{{ trans('admin.extend.sellcard.order_type') }}</dt>
+			<dt>{{ trans('admin.extend.sellcard.pay_status') }}</dt>
 			<dd>
 				<select class="schselect" name="pay_status" onchange='this.form.submit()'>
 					<option value="0">{{ trans('admin.all') }}</option>
@@ -36,7 +36,8 @@
 				<th width="100">{{ trans('admin.extend.sellcard.user') }}</th>
 				<th width="160">{{ trans('admin.extend.sellcard.order_sn') }}</th>
 				<th width="240">{{ trans('admin.extend.sellcard.number') }}</th>
-				<th width="240">{{ trans('admin.extend.sellcard.pay_type') }}</th>
+				<th width="80">{{ trans('admin.extend.sellcard.order_amount') }}</th>
+				<th width="100">{{ trans('admin.extend.sellcard.pay_type') }}</th>
 				<th width="60">{{ trans('admin.extend.sellcard.pay_status') }}</th>
 				<th width="120">{{ trans('admin.extend.sellcard.created_at') }}</th>
 				<th width="80">{{ trans('admin.operation') }}</th>
@@ -47,11 +48,12 @@
 				<td>{{ $value->user ? $value->user->username : '/' }}</td>
 				<td>{{ $value->order_sn or '/' }}</td>
 				<td>{{ $value->number or '/' }}</td>
+				<td>{{ $value->order_amount or '0' }} 元</td>
 				<td>{{ trans('admin.extend.sellcard.pay_type_'.$value->pay_type) }}</td>
 				<td>{{ trans('admin.extend.sellcard.pay_status_'.$value->pay_status) }}</td>
 				<td>{{ $value->created_at->format('Y-m-d H:i') }}</td>
 				<td>
-					<a href="{{ route('admin.extend.sellcard.show',$value->id) }}" class="" title="{{ trans('admin.view') }}">{{ trans('admin.view') }}</a>
+					<a href="{{ route('admin.extend.sellcard.show',$value->id) }}" class="openwindow" title="{{ trans('admin.view') }}">{{ trans('admin.view') }}</a>
 					<a href="{{ route('admin.extend.sellcard.destroy',$value->id) }}" class="mlm delbtn">{{ trans('admin.destroy') }}</a>
 				</td>
 			</tr>
