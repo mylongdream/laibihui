@@ -114,7 +114,7 @@ class IndexController extends Controller
                     }
                     return false;
                 }else{
-                    return view('mobile.sellcard');
+                    return view('mobile.sellcard', ['fromuser' => $fromuser]);
                 }
             }else{
                 return view('layouts.mobile.message', ['status' => 0, 'info' => '地址错误']);
