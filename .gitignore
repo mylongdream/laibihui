@@ -11,6 +11,7 @@ app/storage/
 public/phpMyAdmin
 public/storage
 public/hot
+storage/framework
 storage/*.key
 .env.*.php
 .env.php
