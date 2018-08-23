@@ -27,16 +27,16 @@
                 <form class="ajaxform" name="myform" method="post" action="{{ route('mobile.user.bindcard.index') }}">
                     {!! csrf_field() !!}
                     <div class="weui-cells weui-cells_form">
-                        @if (strpos(request()->userAgent(), 'MicroMessenger') !== false)
-                        <div class="weui-cell weui-cell_vcode">
-                            <div class="weui-cell__hd"><label class="weui-label">卡  号</label></div>
-                            <div class="weui-cell__bd">
-                                <input class="weui-input" name="number" placeholder="请输入卡号" type="text">
-                            </div>
+                        @if (strpos(request()->userAgent(), 'MicroMessenger') !== false || strpos(request()->userAgent(), 'AlipayClient') !== false)
+                            <div class="weui-cell weui-cell_vcode">
+                                <div class="weui-cell__hd"><label class="weui-label">卡  号</label></div>
+                                <div class="weui-cell__bd">
+                                    <input class="weui-input" name="number" placeholder="请输入卡号" type="text">
+                                </div>
                                 <div class="weui-cell__ft">
                                     <button id="getcardnum" class="weui-vcode-btn" type="button">扫一扫</button>
                                 </div>
-                        </div>
+                            </div>
                         @else
                             <div class="weui-cell">
                                 <div class="weui-cell__hd"><label class="weui-label">卡  号</label></div>
@@ -90,8 +90,6 @@
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript">
         wx.config({!! app('wechat.official_account')->jssdk->buildConfig(array('scanQRCode'), false) !!});
-    </script>
-    <script type="text/javascript">
         $(function(){
             $(document).on("click", "#getcardnum", function(){
                 wx.scanQRCode({
@@ -107,6 +105,20 @@
             });
         });
     </script>
+    @endif
+    @if (strpos(request()->userAgent(), 'AlipayClient') !== false)
+        <script src="https://gw.alipayobjects.com/as/g/h5-lib/alipayjsapi/3.1.1/alipayjsapi.inc.min.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $(document).on("click", "#getcardnum", function(){
+                    ap.scan({
+                        type: 'bar'
+                    }, function(res){
+                        $("input[name='number']").val(res.code);
+                    });
+                });
+            });
+        </script>
     @endif
     @if (!auth()->user()->mobile)
     <script type="text/javascript" src="{{ asset('static/js/jquery.smscode.js') }}"></script>

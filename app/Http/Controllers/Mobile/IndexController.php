@@ -112,7 +112,7 @@ class IndexController extends Controller
                         $alipay = Pay::alipay($config)->wap($order);
                         return $alipay->send();
                     }
-                    return false;
+                    return view('layouts.mobile.message', ['status' => 0, 'info' => '请用微信或支付宝支付']);
                 }else{
                     return view('mobile.sellcard', ['fromuser' => $fromuser]);
                 }
