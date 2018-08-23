@@ -63,14 +63,23 @@ class IndexController extends Controller
 
     public function sellcard(Request $request)
     {
-        if ($request->fromuser) {
-            $fromuid = Hashids::connection('promotion')->decode($request->fromuser);
-            if ($fromuid) {
-                $fromuser = CommonUserModel::where('uid', $fromuid)->first();
-                if ($fromuser) {
+        if ($request->fromuser && $fromuid = Hashids::connection('promotion')->decode($request->fromuser)){
+            $fromuser = CommonUserModel::where('uid', $fromuid)->first();
+            if ($fromuser) {
+                if ($request->isMethod('POST')) {
+                    $rules = array(
+                        'number' => 'required|numeric|exists:common_card,number',
+                    );
+                    $messages = array(
+                        'number.required' => '卡号不允许为空！',
+                        'number.numeric' => '卡号填写错误！',
+                        'number.exists' => '卡号不存在！',
+                    );
+                    $this->validate($request, $rules, $messages);
                     $order = new CommonUserSellcardModel();
-                    $order->uid = auth()->user()->uid;
+                    $order->uid = $fromuser->uid;
                     $order->order_sn = date("YmdHis") . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
+                    $order->number = $request->number;
                     $order->order_amount = 10;
                     $order->postip = request()->getClientIp();
                     //微信浏览器里
@@ -103,10 +112,16 @@ class IndexController extends Controller
                         $alipay = Pay::alipay($config)->wap($order);
                         return $alipay->send();
                     }
+                    return false;
+                }else{
+                    return view('mobile.sellcard');
                 }
+            }else{
+                return view('layouts.mobile.message', ['status' => 0, 'info' => '地址错误']);
             }
+        }else{
+            return view('layouts.mobile.message', ['status' => 0, 'info' => '地址错误']);
         }
-        //return view('mobile.sellcard');
     }
 
     public function promotion(Request $request)

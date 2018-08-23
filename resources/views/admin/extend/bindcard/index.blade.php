@@ -26,8 +26,6 @@
 				<th width="140">{{ trans('admin.extend.bindcard.user') }}</th>
 				<th>{{ trans('admin.extend.bindcard.number') }}</th>
 				<th width="80">{{ trans('admin.extend.bindcard.money') }}</th>
-				<th width="140">{{ trans('admin.extend.bindcard.fromuser') }}</th>
-				<th width="140">{{ trans('admin.extend.bindcard.fromupuser') }}</th>
 				<th width="120">{{ trans('admin.extend.bindcard.postip') }}</th>
 				<th width="120">{{ trans('admin.created_at') }}</th>
 				<th width="70">{{ trans('admin.operation') }}</th>
@@ -38,8 +36,6 @@
 				<td>{{ $bindcard->user ? $bindcard->user->username : '/' }}</td>
 				<td>{{ $bindcard->number or '/' }}</td>
 				<td>{{ $bindcard->money }} 元</td>
-				<td>{{ $bindcard->fromuser ? $bindcard->fromuser->username : '/' }}</td>
-				<td>{{ $bindcard->fromupuser ? $bindcard->fromupuser->username : '/' }}</td>
 				<td>{{ $bindcard->postip }}</td>
 				<td>{{ $bindcard->created_at->format('Y-m-d H:i') }}</td>
 				<td>
