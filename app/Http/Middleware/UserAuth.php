@@ -20,7 +20,7 @@ class UserAuth
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->route('auth.login', ['ReturnUrl' => $request->getUri()]);
+                return redirect()->route('login', ['ReturnUrl' => $request->getUri()]);
             }
         }
         $actions = $request->route()->getAction();
