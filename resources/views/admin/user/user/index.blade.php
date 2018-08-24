@@ -47,7 +47,7 @@
 			<tr>
 				<td><label><input class="ids" type="checkbox" value="{{ $value->uid }}" name="ids[]"></label></td>
 				<td><img class="block" width="48" height="48" src="{{ $value->headimgurl ? uploadImage($value->headimgurl) : asset('static/image/common/getheadimg.jpg') }}"></td>
-				<td>{{ $value->username }}</td>
+				<td><p>{{ $value->username }}</p><p style="color: #999">{{ $value->group ? $value->group->name : '' }}</p></td>
 				<td>{{ $value->tiyan_money }} 元</td>
 				<td>{{ $value->user_money }} 元</td>
 				<td>{{ $value->frozen_money }} 元</td>
