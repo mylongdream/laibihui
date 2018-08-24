@@ -60,7 +60,7 @@
 						<td>{{ $value->subscribe ? '是' : '否' }}</td>
 						<td>{{ $value->created_at->format('Y-m-d H:i') }}</td>
 						<td>
-							<a href="{{ route('admin.wechat.user.update',$value->uid) }}" class="ajaxbtn" title="{{ trans('admin.wechat.user.edit') }}">{{ trans('admin.edit') }}</a>
+							<a href="{{ route('admin.wechat.user.update',$value->uid) }}" class="ajaxbtn" title="{{ trans('admin.update') }}">{{ trans('admin.update') }}</a>
 						</td>
 					</tr>
 				@endforeach

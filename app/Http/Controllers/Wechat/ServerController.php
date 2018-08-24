@@ -66,7 +66,7 @@ class ServerController extends Controller
                 ],
             ]);
             //推广注册
-            $fromuid = $message['EventKey'];
+            $fromuid = str_replace("qrscene_","",$message['EventKey']);
             if ($fromuid && $fromuid != $user->uid){
                 $fromuser = CommonUserModel::where('uid', $fromuid)->first();
                 if ($fromuser) {
