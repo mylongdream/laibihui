@@ -68,10 +68,11 @@
         <div class="tblist order-list">
             <table>
                 <tr>
-                    <th align="left">{{ trans('user.consume.shop') }}</th>
-                    <th align="center">{{ trans('user.consume.money') }}</th>
-                    <th align="center">{{ trans('user.consume.status') }}</th>
-                    <th align="center" width="120">{{ trans('user.operation') }}</th>
+                    <th width="66%" align="center">{{ trans('user.consume.shop') }}</th>
+                    <th width="10%" align="center">{{ trans('user.consume.consume_money') }}</th>
+                    <th width="10%" align="center">{{ trans('user.consume.order_amount') }}</th>
+                    <th width="12%" align="center">{{ trans('user.consume.status') }}</th>
+                    <th width="12%" align="center">{{ trans('user.operation') }}</th>
                 </tr>
                 @if (count($index->consumes))
                     @foreach ($index->consumes as $value)

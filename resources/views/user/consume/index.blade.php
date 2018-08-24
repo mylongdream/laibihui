@@ -10,8 +10,8 @@
 				<table width="100%">
 					<tr>
 						<th width="66%" align="center">{{ trans('user.consume.shop') }}</th>
-						<th width="10%" align="center">消费金额</th>
-						<th width="10%" align="center">应付金额</th>
+						<th width="10%" align="center">{{ trans('user.consume.consume_money') }}</th>
+						<th width="10%" align="center">{{ trans('user.consume.order_amount') }}</th>
 						<th width="12%" align="center">{{ trans('user.consume.status') }}</th>
 						<th width="12%" align="center">{{ trans('user.operation') }}</th>
 					</tr>
