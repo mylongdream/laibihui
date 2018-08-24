@@ -9,7 +9,7 @@
 			<div class="hd">
 				<table width="100%">
 					<tr>
-						<th width="66%" align="center">{{ trans('user.consume.shop') }}</th>
+						<th width="56%" align="center">{{ trans('user.consume.shop') }}</th>
 						<th width="10%" align="center">{{ trans('user.consume.consume_money') }}</th>
 						<th width="10%" align="center">{{ trans('user.consume.order_amount') }}</th>
 						<th width="12%" align="center">{{ trans('user.consume.status') }}</th>
@@ -27,7 +27,7 @@
 							</td>
 						</tr>
 						<tr class="tr-bd">
-							<td width="66%" valign="top">
+							<td width="56%" valign="top">
 								@if ($value->shop)
 									<div class="s-item">
 										<div class="s-pic">
