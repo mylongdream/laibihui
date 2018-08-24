@@ -13,4 +13,14 @@ class CrmPersonnelModel extends Model
 	protected $primaryKey = 'id';
 	public $timestamps = true;
 
+    public function topuser()
+    {
+        return $this->belongsTo('App\Models\CommonUserModel', 'topuid', 'uid');
+    }
+
+    public function subuser()
+    {
+        return $this->belongsTo('App\Models\CommonUserModel', 'subuid', 'uid');
+    }
+
 }
