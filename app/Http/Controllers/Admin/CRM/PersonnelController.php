@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\CRM;
 
 use App\Http\Controllers\Controller;
+use App\Models\CommonUserModel;
 use App\Models\CrmPersonnelModel;
 use Illuminate\Http\Request;
 
@@ -27,8 +28,7 @@ class PersonnelController extends Controller
      */
     public function create()
     {
-        $grouplist = config('crm.group');
-        return view('admin.crm.personnel.create', ['grouplist' => $grouplist]);
+        return view('admin.crm.personnel.create');
     }
 
     /**
@@ -40,18 +40,22 @@ class PersonnelController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'topuid' => 'required|numeric|min:1',
-            'subusername' => 'nullable|min:6|max:30',
+            'topusername' => 'required|exists:username',
+            'subusername' => 'required|exists:username',
         );
         $messages = array(
-            'topuid.required_if' => '业务员不允许为空！',
-            'topuid.numeric' => '业务员填写错误！',
+            'topusername.required' => '业务员用户名不允许为空！',
+            'topusername.exists' => '业务员用户名不存在！',
+            'subusername.required' => '卖卡会员用户名不允许为空！',
+            'subusername.exists' => '业务员用户名不存在！',
         );
         $this->validate($request, $rules, $messages);
 
+        $topuser = CommonUserModel::where('username', $request->topusername)->first();
+        $subuser = CommonUserModel::where('username', $request->subusername)->first();
         $user = new CrmPersonnelModel;
-        $user->topuid = $request->topuid;
-        $user->subuid = $request->subuid;
+        $user->topuid = $topuser->uid;
+        $user->subuid = $subuser->uid;
         $user->postip = $request->getClientIp();
         $user->save();
 
@@ -59,64 +63,6 @@ class PersonnelController extends Controller
             return response()->json(['status' => '1', 'info' => trans('admin.crm.personnel.addsucceed'), 'url' => route('admin.crm.personnel.index')]);
         }else{
             return view('layouts.admin.message', ['status' => '1', 'info' => trans('admin.crm.personnel.addsucceed'), 'url' => route('admin.crm.personnel.index')]);
-        }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $user = CrmPersonnelModel::findOrFail($id);
-        return view('admin.crm.personnel.show', ['user' => $user]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $user = CrmPersonnelModel::findOrFail($id);
-        $grouplist = config('crm.group');
-        return view('admin.crm.personnel.edit', ['user' => $user, 'grouplist' => $grouplist]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $user = CrmPersonnelModel::findOrFail($id);
-        $rules = array(
-            'group' => 'required',
-            'realname' => 'required|min:1|max:5',
-        );
-        $messages = array(
-            'group.required' => '部门不允许为空！',
-            'shop_id.required_if' => '店铺ID不允许为空！',
-            'shop_id.numeric' => '店铺ID填写错误！',
-        );
-        $this->validate($request, $rules, $messages);
-
-        $user->topuid = $request->topuid;
-        $user->subuid = $request->subuid;
-        $user->postip = $request->getClientIp();
-        $user->save();
-
-        if ($request->ajax()){
-            return response()->json(['status' => '1', 'info' => trans('admin.crm.personnel.editsucceed'), 'url' => route('admin.crm.personnel.index')]);
-        }else{
-            return view('layouts.admin.message', ['status' => '1', 'info' => trans('admin.crm.personnel.editsucceed'), 'url' => route('admin.crm.personnel.index')]);
         }
     }
 
