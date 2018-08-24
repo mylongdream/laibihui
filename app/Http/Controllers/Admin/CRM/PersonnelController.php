@@ -40,8 +40,8 @@ class PersonnelController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'topusername' => 'required|exists:username',
-            'subusername' => 'required|exists:username',
+            'topusername' => 'required|exists:common_user,username',
+            'subusername' => 'required|exists:common_user,username',
         );
         $messages = array(
             'topusername.required' => '业务员用户名不允许为空！',
