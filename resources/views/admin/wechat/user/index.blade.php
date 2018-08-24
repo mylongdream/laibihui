@@ -26,7 +26,7 @@
 			<div class="schbtn"><button name="" type="submit">{{ trans('admin.search') }}</button></div>
 		</div>
 	</form>
-	<form id="cpform" name="cpform" class="ajaxform" method="post" action="{{ route('admin.wechat.user.index') }}">
+	<form id="cpform" name="cpform" class="ajaxform" method="post" action="{{ route('admin.wechat.user.batch') }}">
 		{!! csrf_field() !!}
 		<input type="hidden" id="operate" name="operate" value="" />
 		<div class="tblist">
