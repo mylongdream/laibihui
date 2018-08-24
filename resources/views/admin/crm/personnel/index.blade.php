@@ -29,7 +29,7 @@
 				<td>{{ $value->subuser ? $value->subuser->username : '/' }}</td>
 				<td>0</td>
 				<td>0</td>
-				<td>{{ $user->created_at ? $user->created_at->format('Y-m-d H:i') : '/' }}</td>
+				<td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
 				<td>
 					<a href="{{ route('admin.crm.personnel.destroy',$value->id) }}" class="delbtn">{{ trans('admin.destroy') }}</a>
 				</td>
