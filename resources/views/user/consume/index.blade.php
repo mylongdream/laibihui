@@ -9,7 +9,7 @@
 			<div class="hd">
 				<table width="100%">
 					<tr>
-						<th width="56%" align="center">{{ trans('user.consume.shop') }}</th>
+						<th width="66%" align="center">{{ trans('user.consume.shop') }}</th>
 						<th width="10%" align="center">消费金额</th>
 						<th width="10%" align="center">应付金额</th>
 						<th width="12%" align="center">{{ trans('user.consume.status') }}</th>

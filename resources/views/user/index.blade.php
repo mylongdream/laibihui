@@ -100,13 +100,18 @@
                                     /
                                 @endif
                             </td>
-                            <td width="10%" align="center">{{ $value->money }} 元</td>
+                            <td width="10%" align="center">
+                                <p><strong>￥{{ sprintf("%.2f",$value->consume_money) }}</strong></p>
+                            </td>
+                            <td width="10%" align="center">
+                                <p><strong>￥{{ sprintf("%.2f",$value->order_amount) }}</strong></p>
+                            </td>
                             <td width="12%" align="center">
-                                <p class="order-status">{{ trans('user.consume.status_'.$value->ifpay) }}</p>
+                                <p class="order-status">{{ trans('user.consume.status_'.$value->pay_status) }}</p>
                                 <p><a href="{{ route('user.consume.show', $value->id) }}" title="订单详情" class="openwindow">订单详情</a></p>
                             </td>
                             <td width="12%" align="center">
-                                @if ($value->ifpay == 0)
+                                @if ($value->pay_status == 0)
                                     <a href="{{ route('user.consume.pay', $value->id) }}" target="_blank" title="立即付款" class="btn-pay">立即付款</a>
                                 @else
                                     @if ($value->shop)
