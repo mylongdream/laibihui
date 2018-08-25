@@ -96,45 +96,46 @@ class ServerController extends Controller
             $wxuser->user_id = $user->uid;
             $wxuser->save();
             auth()->login($user, true);
+            //更新用户信息
+            $getuser = $app->user->get($wxuser->openid);
+            if($getuser){
+                $wxuser->subscribe = $getuser['subscribe'];
+                $wxuser->openid = $getuser['openid'];
+                if($getuser['subscribe']){
+                    $wxuser->nickname = $getuser['nickname'];
+                    $wxuser->sex = $getuser['sex'];
+                    $wxuser->city = $getuser['city'];
+                    $wxuser->province = $getuser['province'];
+                    $wxuser->headimgurl = $getuser['headimgurl'];
+                    //头像保存到本地并作为用户头像
+                    if($wxuser->headimgurl){
+                        try {
+                            $client = new Client();
+                            $fileName = 'wxlogo';
+                            $filePath = 'image/'.date('Ym').'/'.date('d').'/'.date('His').strtolower(Str::random(16)).'.jpg';
+                            $data = $client->request('get', $wxuser->headimgurl)->getBody()->getContents();
+                            Storage::disk('public')->put($filePath, $data);
+                            $uploadimage = new CommonUploadImageModel();
+                            $uploadimage->filename = $fileName;
+                            $uploadimage->description = $wxuser->headimgurl;
+                            $uploadimage->filepath = str_replace('image/', '', $filePath);
+                            $uploadimage->filesize = Storage::disk('public')->size($filePath);
+                            $uploadimage->save();
+                            //更新用户头像
+                            $user->headimgurl = str_replace('image/', '', $filePath);
+                            $user->save();
+                        } catch (RequestException $e) {
+                            //echo 'fetch fail';
+                        }
+                    }
+                    $wxuser->subscribe_time = $getuser['subscribe_time'];
+                    $wxuser->unionid = isset($getuser['unionid']) ? $getuser['unionid'] : '';
+                }
+                $wxuser->save();
+            }
         }
         if(!$wxuser->has_subscribe){
             $wxuser->has_subscribe = 1;
-            $wxuser->save();
-        }
-        //更新用户信息
-        $getuser = $app->user->get($wxuser->openid);
-        if($getuser){
-            $wxuser->subscribe = $getuser['subscribe'];
-            $wxuser->openid = $getuser['openid'];
-            if($getuser['subscribe']){
-                $wxuser->nickname = $getuser['nickname'];
-                $wxuser->sex = $getuser['sex'];
-                $wxuser->city = $getuser['city'];
-                $wxuser->province = $getuser['province'];
-                $wxuser->headimgurl = $getuser['headimgurl'];
-                //头像保存到本地并作为用户头像
-                if($wxuser->headimgurl){
-                    try {
-                        $client = new Client();
-                        $fileName = 'wxlogo';
-                        $filePath = 'image/'.date('Ym').'/'.date('d').'/'.date('His').strtolower(Str::random(16)).'.jpg';
-                        $data = $client->request('get', $wxuser->headimgurl)->getBody()->getContents();
-                        Storage::disk('public')->put($filePath, $data);
-                        $uploadimage = new CommonUploadImageModel();
-                        $uploadimage->filename = $fileName;
-                        $uploadimage->description = $wxuser->headimgurl;
-                        $uploadimage->filepath = str_replace('image/', '', $filePath);
-                        $uploadimage->filesize = Storage::disk('public')->size($filePath);
-                        $uploadimage->save();
-                        $wxuser->user->headimgurl = str_replace('image/', '', $filePath);
-                        $wxuser->user->save();
-                    } catch (RequestException $e) {
-                        //echo 'fetch fail';
-                    }
-                }
-                $wxuser->subscribe_time = $getuser['subscribe_time'];
-                $wxuser->unionid = isset($getuser['unionid']) ? $getuser['unionid'] : '';
-            }
             $wxuser->save();
         }
         $text = new Text('您好！欢迎关注我们。');

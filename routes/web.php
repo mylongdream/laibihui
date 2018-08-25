@@ -359,6 +359,8 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::resource('address', 'Admin\User\AddressController');
             Route::post('score/batch', ['as' => 'score.batch', 'uses' => 'Admin\User\ScoreController@batch']);
             Route::resource('score', 'Admin\User\ScoreController');
+            Route::post('account/batch', ['as' => 'account.batch', 'uses' => 'Admin\User\AccountController@batch']);
+            Route::resource('account', 'Admin\User\AccountController');
             Route::post('sign/batch', ['as' => 'sign.batch', 'uses' => 'Admin\User\SignController@batch']);
             Route::get('sign', ['as' => 'sign.index', 'uses' => 'Admin\User\SignController@index']);
         });

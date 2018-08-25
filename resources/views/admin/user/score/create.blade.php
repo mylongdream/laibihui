@@ -9,7 +9,7 @@
 		<div class="tbedit">
 			<div class="tbhead cl">
 				<div class="z"><h3>{{ trans('admin.user.score.create') }}</h3></div>
-				<div class="y"><a href="{{ route('admin.admin.user.index') }}" class="btn">< {{ trans('admin.user.score.list') }}</a></div>
+				<div class="y"><a href="{{ route('admin.user.score.index') }}" class="btn">< {{ trans('admin.user.score.list') }}</a></div>
 			</div>
 			<table>
 				<tr>
