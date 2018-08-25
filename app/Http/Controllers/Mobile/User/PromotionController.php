@@ -38,14 +38,16 @@ class PromotionController extends Controller
         if($request->getcode){
             $imgurl = 'qrcode/user/qrcode_'.(strpos(request()->userAgent(), 'MicroMessenger') !== false ? 'wx_' : '').auth()->user()->uid.'.png';
             if(!Storage::disk('public')->exists($imgurl)) {
-                $image = QrCode::format('png')->size(400)->generate($promotion);
-                $qrcode = Image::make($image);
+                //获取二维码
                 if (strpos(request()->userAgent(), 'MicroMessenger') !== false){
                     $app = app('wechat.official_account');
                     $qrcode = $app->qrcode->forever(auth()->user()->uid);
                     $qrcode = $app->qrcode->url($qrcode['ticket']);
                     $qrcode = file_get_contents($qrcode);
                     $qrcode = Image::make($qrcode)->resize(400, 400);
+                }else{
+                    $image = QrCode::format('png')->size(400)->generate($promotion);
+                    $qrcode = Image::make($image);
                 }
 
                 $img = Image::make(public_path('static/image/mobile/qrcode_bg.jpg'));

@@ -99,7 +99,7 @@ class UserController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function edit(Request $request, $id)
     {
         $userinfo = WechatUserModel::findOrFail($id);
         $app = app('wechat.official_account');

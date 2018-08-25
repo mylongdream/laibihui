@@ -128,38 +128,35 @@ class IndexController extends Controller
     {
         if ($request->fromuser) {
             $fromuid = Hashids::connection('promotion')->decode($request->fromuser);
-            if ($fromuid) {
-                $fromuser = CommonUserModel::where('uid', $fromuid)->first();
-                if ($fromuser) {
-                    if (strpos(request()->userAgent(), 'MicroMessenger') !== false){
-                        $imgurl = 'qrcode/user/qrcode_'.(strpos(request()->userAgent(), 'MicroMessenger') !== false ? 'wx_' : '').$fromuser->uid.'.png';
-                        if(!Storage::disk('public')->exists($imgurl)) {
-                            $app = app('wechat.official_account');
-                            $qrcode = $app->qrcode->forever($fromuser->uid);
-                            $qrcode = $app->qrcode->url($qrcode['ticket']);
-                            $qrcode = file_get_contents($qrcode);
-                            $qrcode = Image::make($qrcode)->resize(400, 400);
+            if ($fromuid && $fromuser = CommonUserModel::where('uid', $fromuid)->first()) {
+                if (strpos(request()->userAgent(), 'MicroMessenger') !== false){
+                    $imgurl = 'qrcode/user/qrcode_wx_'.$fromuser->uid.'.png';
+                    if(!Storage::disk('public')->exists($imgurl)) {
+                        $app = app('wechat.official_account');
+                        $qrcode = $app->qrcode->forever($fromuser->uid);
+                        $qrcode = $app->qrcode->url($qrcode['ticket']);
+                        $qrcode = file_get_contents($qrcode);
+                        $qrcode = Image::make($qrcode)->resize(400, 400);
 
-                            $img = Image::make(public_path('static/image/mobile/qrcode_bg.jpg'));
-                            $headimgurl = $fromuser->headimgurl && Storage::disk('public')->exists('image/'.$fromuser->headimgurl) ? storage_path('app/public/image/'.$fromuser->headimgurl) : public_path('static/image/common/getheadimg.jpg');
-                            $headimgurl = Image::make($headimgurl)->resize(50, 50);
+                        $img = Image::make(public_path('static/image/mobile/qrcode_bg.jpg'));
+                        $headimgurl = $fromuser->headimgurl && Storage::disk('public')->exists('image/'.$fromuser->headimgurl) ? storage_path('app/public/image/'.$fromuser->headimgurl) : public_path('static/image/common/getheadimg.jpg');
+                        $headimgurl = Image::make($headimgurl)->resize(50, 50);
 
-                            $img->insert($headimgurl, 'top-left', 15, 15);
-                            $img->text($fromuser->username, 80, 50, function($font) {
-                                $font->file(public_path('/static/font/ch/yahei.ttf'));
-                                $font->size(28);
-                                $font->color('#fff');
-                            });
-                            $img->insert($qrcode, 'bottom', 0, 0);
-                            $img->save(storage_path('app/public/'.$imgurl));
-                        }
-                        $img = Image::make(Storage::disk('public')->get($imgurl));
-
-                        return $img->response('png', 90);
-                    }else{
-                        $cookie = cookie('promotion', $fromuser->uid, 1800);
-                        return response()->redirectToRoute('mobile.index')->cookie($cookie);
+                        $img->insert($headimgurl, 'top-left', 15, 15);
+                        $img->text($fromuser->username, 80, 50, function($font) {
+                            $font->file(public_path('/static/font/ch/yahei.ttf'));
+                            $font->size(28);
+                            $font->color('#fff');
+                        });
+                        $img->insert($qrcode, 'bottom', 0, 0);
+                        $img->save(storage_path('app/public/'.$imgurl));
                     }
+                    $img = Image::make(Storage::disk('public')->get($imgurl));
+
+                    return $img->response('png', 90);
+                }else{
+                    $cookie = cookie('promotion', $fromuser->uid, 1800);
+                    return response()->redirectToRoute('mobile.index')->cookie($cookie);
                 }
             }
         }
