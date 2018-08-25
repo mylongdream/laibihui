@@ -3,10 +3,6 @@
 @section('content')
     <div class="weui-tab">
         <div class="wp">
-            <div class="topheader">
-                <div class="back"><a href="javascript:history.go(-1);"><span></span></a></div>
-                <div class="nav">{{ trans('user.promotion') }}</div>
-            </div>
             <div class="weui-panel">
                 <div class="weui-panel__bd">
                     <img style="width:100%" src="{{ route('mobile.user.promotion.qrcode', ['getcode' => 1]) }}" alt="">
