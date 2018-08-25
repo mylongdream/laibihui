@@ -38,6 +38,7 @@ class PromotionController extends Controller
         if($request->getcode){
             $imgurl = 'qrcode/user/qrcode_'.(strpos(request()->userAgent(), 'MicroMessenger') !== false ? 'wx_' : '').auth()->user()->uid.'.png';
             if(!Storage::disk('public')->exists($imgurl)) {
+                logger('生成图片1'.time());
                 //获取二维码
                 if (strpos(request()->userAgent(), 'MicroMessenger') !== false){
                     $app = app('wechat.official_account');
@@ -50,10 +51,13 @@ class PromotionController extends Controller
                     $qrcode = Image::make($image);
                 }
 
+                logger('生成图片2'.time());
                 $img = Image::make(public_path('static/image/mobile/qrcode_bg.jpg'));
+                logger('生成图片3'.time());
                 $headimgurl = auth()->user()->headimgurl && Storage::disk('public')->exists('image/'.auth()->user()->headimgurl) ? storage_path('app/public/image/'.auth()->user()->headimgurl) : public_path('static/image/common/getheadimg.jpg');
                 $headimgurl = Image::make($headimgurl)->resize(50, 50);
 
+                logger('生成图片4'.time());
                 $img->insert($headimgurl, 'top-left', 15, 15);
                 $img->text(auth()->user()->username, 80, 50, function($font) {
                     $font->file(public_path('/static/font/ch/yahei.ttf'));
@@ -61,6 +65,7 @@ class PromotionController extends Controller
                     $font->color('#fff');
                 });
                 $img->insert($qrcode, 'bottom', 0, 0);
+                logger('生成图片5'.time());
                 $img->save(storage_path('app/public/'.$imgurl));
             }
             $img = Image::make(Storage::disk('public')->get($imgurl));
