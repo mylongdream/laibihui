@@ -163,4 +163,16 @@ class ServerController extends Controller
 
 
     }
+
+    private function receiveEventview($message) {
+
+
+
+    }
+
+    private function receiveEventtemplatesendjobfinish($message) {
+
+
+
+    }
 }
