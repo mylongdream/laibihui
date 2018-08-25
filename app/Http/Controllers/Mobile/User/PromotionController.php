@@ -43,21 +43,22 @@ class PromotionController extends Controller
                 if (strpos(request()->userAgent(), 'MicroMessenger') !== false){
                     $app = app('wechat.official_account');
                     $qrcode = $app->qrcode->forever(auth()->user()->uid);
+                    logger('生成图片2'.time());
                     $qrcode = $app->qrcode->url($qrcode['ticket']);
+                    logger('生成图片3'.time());
                     $qrcode = file_get_contents($qrcode);
+                    logger('生成图片4'.time());
                     $qrcode = Image::make($qrcode)->resize(400, 400);
+                    logger('生成图片5'.time());
                 }else{
                     $image = QrCode::format('png')->size(400)->generate($promotion);
                     $qrcode = Image::make($image);
                 }
 
-                logger('生成图片2'.time());
                 $img = Image::make(public_path('static/image/mobile/qrcode_bg.jpg'));
-                logger('生成图片3'.time());
                 $headimgurl = auth()->user()->headimgurl && Storage::disk('public')->exists('image/'.auth()->user()->headimgurl) ? storage_path('app/public/image/'.auth()->user()->headimgurl) : public_path('static/image/common/getheadimg.jpg');
                 $headimgurl = Image::make($headimgurl)->resize(50, 50);
 
-                logger('生成图片4'.time());
                 $img->insert($headimgurl, 'top-left', 15, 15);
                 $img->text(auth()->user()->username, 80, 50, function($font) {
                     $font->file(public_path('/static/font/ch/yahei.ttf'));
@@ -65,7 +66,6 @@ class PromotionController extends Controller
                     $font->color('#fff');
                 });
                 $img->insert($qrcode, 'bottom', 0, 0);
-                logger('生成图片5'.time());
                 $img->save(storage_path('app/public/'.$imgurl));
             }
             $img = Image::make(Storage::disk('public')->get($imgurl));
