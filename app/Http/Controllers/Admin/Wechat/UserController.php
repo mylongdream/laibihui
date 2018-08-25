@@ -103,17 +103,19 @@ class UserController extends Controller
     {
         $userinfo = WechatUserModel::findOrFail($id);
         $app = app('wechat.official_account');
-        $user = $app->user->get($userinfo->openid);
-        if($user){
-            $userinfo->subscribe = $user['subscribe'];
-            $userinfo->openid = $user['openid'];
-            $userinfo->nickname = $user['nickname'];
-            $userinfo->sex = $user['sex'];
-            $userinfo->city = $user['city'];
-            $userinfo->province = $user['province'];
-            $userinfo->headimgurl = $user['headimgurl'];
-            $userinfo->subscribe_time = $user['subscribe_time'];
-            $userinfo->unionid = isset($user['unionid']) ? $user['unionid'] : '';
+        $getuser = $app->user->get($userinfo->openid);
+        if($getuser){
+            $userinfo->subscribe = $getuser['subscribe'];
+            $userinfo->openid = $getuser['openid'];
+            if($getuser['subscribe']){
+                $userinfo->nickname = $getuser['nickname'];
+                $userinfo->sex = $getuser['sex'];
+                $userinfo->city = $getuser['city'];
+                $userinfo->province = $getuser['province'];
+                $userinfo->headimgurl = $getuser['headimgurl'];
+                $userinfo->subscribe_time = $getuser['subscribe_time'];
+                $userinfo->unionid = isset($getuser['unionid']) ? $getuser['unionid'] : '';
+            }
             $userinfo->save();
         }
         if ($request->ajax()){
