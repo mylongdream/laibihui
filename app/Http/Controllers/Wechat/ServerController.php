@@ -10,6 +10,7 @@ use App\Models\CommonUserScoreModel;
 use App\Models\WechatUserModel;
 use EasyWeChat\Kernel\Messages\Text;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -113,23 +114,22 @@ class ServerController extends Controller
                 $wxuser->headimgurl = $getuser['headimgurl'];
                 //头像保存到本地并作为用户头像
                 if($wxuser->headimgurl){
-                    logger('生成头像1'.time());
-                    $client = new Client(['verify' => false]);
-                    $fileName = 'wxlogo';
-                    $filePath = 'image/'.date('Ym').'/'.date('d').'/'.date('His').strtolower(Str::random(16)).'.jpg';
-                    $response = $client->get($wxuser->headimgurl, ['save_to' => storage_path('app/public/'.$filePath)]);
-                    logger('生成头像2'.time());
-                    if ($response->getStatusCode() == 200) {
-                        logger('生成头像3'.time());
+                    try {
+                        $client = new Client();
+                        $fileName = 'wxlogo';
+                        $filePath = 'image/'.date('Ym').'/'.date('d').'/'.date('His').strtolower(Str::random(16)).'.jpg';
+                        $data = $client->request('get', $wxuser->headimgurl)->getBody()->getContents();
+                        Storage::disk('public')->put($filePath, $data);
                         $uploadimage = new CommonUploadImageModel();
                         $uploadimage->filename = $fileName;
                         $uploadimage->description = $wxuser->headimgurl;
                         $uploadimage->filepath = str_replace('image/', '', $filePath);
                         $uploadimage->filesize = Storage::disk('public')->size($filePath);
                         $uploadimage->save();
-                        logger('生成头像4'.time());
                         $wxuser->user->headimgurl = str_replace('image/', '', $filePath);
                         $wxuser->user->save();
+                    } catch (RequestException $e) {
+                        //echo 'fetch fail';
                     }
                 }
                 $wxuser->subscribe_time = $getuser['subscribe_time'];

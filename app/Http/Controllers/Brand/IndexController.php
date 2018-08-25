@@ -9,7 +9,6 @@ use App\Models\BrandShopModel;
 use App\Models\CommonFriendlinkModel;
 use App\Models\CommonUserModel;
 use Illuminate\Http\Request;
-use Toplan\PhpSms\Facades\Sms;
 use Vinkla\Hashids\Facades\Hashids;
 
 class IndexController extends Controller

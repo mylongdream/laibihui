@@ -10,12 +10,12 @@
                 </div>
                 <div class="weui-tab" id="tab">
                     <div class="weui-navbar tab_box">
-                        <div class="weui-navbar__item weui-bar__item_on">
+                        <div class="weui-navbar__item {!! request('bindcard') == 1 ? 'weui-bar__item_on' : '' !!}">
                             <a href="{{ route('mobile.user.promotion.first', ['bindcard' => 1]) }}" class="">
                                 <div class="title">未开卡<span class="weui-badge" style="margin-left: 5px;">{{ $usercount->doesntHaveCard }}</span></div>
                             </a>
                         </div>
-                        <div class="weui-navbar__item">
+                        <div class="weui-navbar__item {!! request('bindcard') == 2 ? 'weui-bar__item_on' : '' !!}">
                             <a href="{{ route('mobile.user.promotion.first', ['bindcard' => 2]) }}" class="">
                                 <div class="title">已开卡<span class="weui-badge" style="margin-left: 5px;">{{ $usercount->hasCard }}</span></div>
                             </a>

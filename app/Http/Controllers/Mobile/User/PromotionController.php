@@ -43,13 +43,9 @@ class PromotionController extends Controller
                     $app = app('wechat.official_account');
                     $qrcode = $app->qrcode->forever(auth()->user()->uid);
                     logger('生成图片2'.time());
-                    $client = new \GuzzleHttp\Client();
-                    $qrcode = $client->request('get',$qrcode['url'])->getBody()->getContents();
-                    /*
                     $qrcode = $app->qrcode->url($qrcode['ticket']);
                     logger('生成图片3'.time());
                     $qrcode = file_get_contents($qrcode);
-                    */
                     logger('生成图片4'.time());
                     $qrcode = Image::make($qrcode)->resize(400, 400);
                     logger('生成图片5'.time());
