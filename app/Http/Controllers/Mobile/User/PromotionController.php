@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Mobile\User;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\CommonUserCardModel;
 use App\Models\CommonUserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -44,9 +43,13 @@ class PromotionController extends Controller
                     $app = app('wechat.official_account');
                     $qrcode = $app->qrcode->forever(auth()->user()->uid);
                     logger('生成图片2'.time());
+                    $client = new \GuzzleHttp\Client();
+                    $qrcode = $client->request('get',$qrcode['url'])->getBody()->getContents();
+                    /*
                     $qrcode = $app->qrcode->url($qrcode['ticket']);
                     logger('生成图片3'.time());
                     $qrcode = file_get_contents($qrcode);
+                    */
                     logger('生成图片4'.time());
                     $qrcode = Image::make($qrcode)->resize(400, 400);
                     logger('生成图片5'.time());
@@ -78,26 +81,38 @@ class PromotionController extends Controller
 
     public function first(Request $request)
     {
-        $CommonUserModel = new CommonUserModel;
-        $promotions = $CommonUserModel->where('fromuid', auth()->user()->uid)->where(function($query) use($request) {
-            if($request->username){
-                $uids = CommonUserModel::where('username', 'like',"%".$request->username."%")->pluck('uid');
-                $query->whereIn('uid', $uids);
+        if(!($request->bindcard && in_array($request->bindcard, array(1, 2)))){
+            return response()->redirectToRoute('mobile.user.promotion.first', ['bindcard' => 1]);
+        }
+        $usercount = collect();
+        $usercount->hasCard = CommonUserModel::where('fromuid', auth()->user()->uid)->has('card')->count();
+        $usercount->doesntHaveCard = CommonUserModel::where('fromuid', auth()->user()->uid)->doesntHave('card')->count();
+        $promotions = CommonUserModel::where('fromuid', auth()->user()->uid)->where('username', 'like',"%".$request->username."%")->where(function($query) use($request) {
+            if($request->bindcard == 1){
+                $query->doesntHave('card');
+            }elseif($request->bindcard == 2){
+                $query->has('card');
             }
         })->latest()->paginate(20);
-        return view('mobile.user.promotion.first', ['promotions' => $promotions]);
+        return view('mobile.user.promotion.first', ['usercount' => $usercount, 'promotions' => $promotions]);
     }
 
     public function second(Request $request)
     {
-        $CommonUserModel = new CommonUserModel;
-        $promotions = $CommonUserModel->where('fromupuid', auth()->user()->uid)->where(function($query) use($request) {
-            if($request->username){
-                $uids = CommonUserModel::where('username', 'like',"%".$request->username."%")->pluck('uid');
-                $query->whereIn('uid', $uids);
+        if(!($request->bindcard && in_array($request->bindcard, array(1, 2)))){
+            return response()->redirectToRoute('mobile.user.promotion.second', ['bindcard' => 1]);
+        }
+        $usercount = collect();
+        $usercount->hasCard = CommonUserModel::where('fromupuid', auth()->user()->uid)->has('card')->count();
+        $usercount->doesntHaveCard = CommonUserModel::where('fromupuid', auth()->user()->uid)->doesntHave('card')->count();
+        $promotions = CommonUserModel::where('fromupuid', auth()->user()->uid)->where('username', 'like',"%".$request->username."%")->where(function($query) use($request) {
+            if($request->bindcard == 1){
+                $query->doesntHave('card');
+            }elseif($request->bindcard == 2){
+                $query->has('card');
             }
         })->latest()->paginate(20);
-        return view('mobile.user.promotion.second', ['promotions' => $promotions]);
+        return view('mobile.user.promotion.second', ['usercount' => $usercount, 'promotions' => $promotions]);
     }
 
 }
