@@ -40,12 +40,12 @@ class CommonUserModel extends Authenticatable
 
     public function fromuser()
     {
-        return $this->hasOne('App\Models\CommonUserModel', 'fromuid', 'uid');
+        return $this->belongsTo('App\Models\CommonUserModel', 'fromuid', 'uid');
     }
 
     public function fromupuser()
     {
-        return $this->hasOne('App\Models\CommonUserModel', 'fromupuid', 'uid');
+        return $this->belongsTo('App\Models\CommonUserModel', 'fromupuid', 'uid');
     }
 
     public function card()
