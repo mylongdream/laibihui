@@ -28,7 +28,7 @@
 				<td>{{ $value->subuser ? $value->subuser->username : '/' }}</td>
 				<td>{{ $value->topuser ? $value->topuser->username : '/' }}</td>
 				<td>{{ $value->allocation ? $value->allocation->sum('cardnum') : '0' }}</td>
-				<td>{{ $value->sellcard ? $value->sellcard->count() : '0' }}</td>
+				<td>{{ $value->sellcard ? $value->sellcard->where('pay_status', 1)->count() : '0' }}</td>
 				<td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
 				<td>
 					<a href="{{ route('admin.crm.personnel.destroy',$value->id) }}" class="delbtn">{{ trans('admin.destroy') }}</a>

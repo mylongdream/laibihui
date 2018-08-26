@@ -59,11 +59,20 @@ class BindCardController extends Controller
                     return view('layouts.user.message', ['status' => 0, 'info' => trans('user.bindcard.passwordwrong')]);
                 }
             }
+            //卡号已被绑定
             if($card->user){
                 if ($request->ajax()){
                     return response()->json(['status' => 0, 'info' => trans('user.bindcard.bound')]);
                 }else{
                     return view('layouts.user.message', ['status' => 0, 'info' => trans('user.bindcard.bound')]);
+                }
+            }
+            //未下单过或下单过未付款的不能绑定
+            if((!$card->order || $card->order->pay_status != 1) && (!$card->sellcard || $card->sellcard->pay_status != 1)){
+                if ($request->ajax()){
+                    return response()->json(['status' => 0, 'info' => '卡号尚未付款无法绑定']);
+                }else{
+                    return view('layouts.user.message', ['status' => 0, 'info' => '卡号尚未付款无法绑定']);
                 }
             }
 

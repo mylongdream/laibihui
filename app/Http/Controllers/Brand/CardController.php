@@ -309,18 +309,20 @@ class CardController extends Controller
                     return view('layouts.common.message', ['status' => 0, 'info' => trans('user.card.passwordwrong')]);
                 }
             }
+            //卡号已被绑定
             if($card->user){
                 if ($request->ajax()){
-                    return response()->json(['status' => 0, 'info' => trans('user.card.bound')]);
+                    return response()->json(['status' => 0, 'info' => trans('user.bindcard.bound')]);
                 }else{
-                    return view('layouts.common.message', ['status' => 0, 'info' => trans('user.card.bound')]);
+                    return view('layouts.common.message', ['status' => 0, 'info' => trans('user.bindcard.bound')]);
                 }
             }
-            if($card->appoint){
+            //未下单过或下单过未付款的不能绑定
+            if((!$card->order || $card->order->pay_status != 1) && (!$card->sellcard || $card->sellcard->pay_status != 1)){
                 if ($request->ajax()){
-                    return response()->json(['status' => 0, 'info' => trans('user.card.bound')]);
+                    return response()->json(['status' => 0, 'info' => '卡号尚未付款无法绑定']);
                 }else{
-                    return view('layouts.common.message', ['status' => 0, 'info' => trans('user.card.bound')]);
+                    return view('layouts.common.message', ['status' => 0, 'info' => '卡号尚未付款无法绑定']);
                 }
             }
 
