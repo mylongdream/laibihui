@@ -16,8 +16,8 @@ class ArchiveController extends Controller
      */
     public function index(Request $request)
     {
-        $archivelist = BrandShopArchiveModel::orderBy('created_at', 'desc')->get();
-        return view('admin.crm.archive.index', ['archivelist' => $archivelist]);
+        $list = BrandShopArchiveModel::orderBy('created_at', 'desc')->get();
+        return view('admin.crm.archive.index', ['list' => $list]);
     }
 
     /**

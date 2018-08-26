@@ -20,7 +20,7 @@
 				<th width="150">{{ trans('admin.crm.customer.status') }}</th>
 				<th width="100">{{ trans('admin.operation') }}</th>
 			</tr>
-			@foreach ($customerlist as $value)
+			@foreach ($list as $value)
 			<tr>
 				<td><input class="ids" type="checkbox" value="{{ $value->id }}" name="ids[]"></td>
 				<td>{{ $value->name }}</td>
@@ -34,10 +34,13 @@
 			@endforeach
 		</table>
 	</div>
-	@if (count($customerlist) > 0)
+	@if (count($list) > 0)
 	<div class="pgs cl">
 		<div class="fixsel z">
 			<button class="submitbtn" name="delsubmit" value="yes" type="submit">{{ trans('admin.destroy') }}</button>
+		</div>
+		<div class="page y">
+			{!! $list->links() !!}
 		</div>
     </div>
 	@endif

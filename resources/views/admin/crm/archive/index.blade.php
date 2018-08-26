@@ -20,7 +20,7 @@
 				<th width="150">{{ trans('admin.crm.archive.status') }}</th>
 				<th width="100">{{ trans('admin.operation') }}</th>
 			</tr>
-			@foreach ($archivelist as $value)
+			@foreach ($list as $value)
 			<tr>
 				<td><input class="ids" type="checkbox" value="{{ $value->id }}" name="ids[]"></td>
 				<td>{{ $value->user ? $value->user->realname : '/' }}</td>
@@ -41,10 +41,13 @@
 			@endforeach
 		</table>
 	</div>
-	@if (count($archivelist) > 0)
+	@if (count($list) > 0)
 	<div class="pgs cl">
 		<div class="fixsel z">
 			<button class="submitbtn" name="delsubmit" value="yes" type="submit">{{ trans('admin.destroy') }}</button>
+		</div>
+		<div class="page y">
+			{!! $list->links() !!}
 		</div>
     </div>
 	@endif

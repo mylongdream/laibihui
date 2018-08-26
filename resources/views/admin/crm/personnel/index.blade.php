@@ -22,7 +22,7 @@
 				<th width="150">{{ trans('admin.crm.personnel.created_at') }}</th>
 				<th width="100">{{ trans('admin.operation') }}</th>
 			</tr>
-			@foreach ($userlist as $value)
+			@foreach ($list as $value)
 			<tr>
 				<td><input class="ids" type="checkbox" value="{{ $value->id }}" name="ids[]"></td>
 				<td>{{ $value->subuser ? $value->subuser->username : '/' }}</td>
@@ -37,10 +37,13 @@
 			@endforeach
 		</table>
 	</div>
-	@if (count($userlist) > 0)
+	@if (count($list) > 0)
 	<div class="pgs cl">
 		<div class="fixsel z">
 			<button class="submitbtn" name="delsubmit" value="yes" type="submit">{{ trans('admin.destroy') }}</button>
+		</div>
+		<div class="page y">
+			{!! $list->links() !!}
 		</div>
     </div>
 	@endif

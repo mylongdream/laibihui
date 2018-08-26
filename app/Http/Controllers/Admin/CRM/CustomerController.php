@@ -16,8 +16,8 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-        $customerlist = CrmCustomerModel::orderBy('created_at', 'desc')->get();
-        return view('admin.crm.customer.index', ['customerlist' => $customerlist]);
+        $list = CrmCustomerModel::orderBy('created_at', 'desc')->get();
+        return view('admin.crm.customer.index', ['list' => $list]);
     }
 
     /**
