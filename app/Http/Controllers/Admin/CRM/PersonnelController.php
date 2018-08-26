@@ -18,8 +18,7 @@ class PersonnelController extends Controller
     public function index(Request $request)
     {
         $list = CrmPersonnelModel::orderBy('created_at', 'desc')->paginate(20);
-        $topusers = CrmPersonnelModel::where('topuid', 0)->orderBy('created_at', 'desc')->get();
-        return view('admin.crm.personnel.index', ['list' => $list, 'topusers' => $topusers]);
+        return view('admin.crm.personnel.index', ['list' => $list]);
     }
 
     /**
@@ -29,7 +28,8 @@ class PersonnelController extends Controller
      */
     public function create()
     {
-        return view('admin.crm.personnel.create');
+        $topusers = CrmPersonnelModel::where('topuid', 0)->orderBy('created_at', 'desc')->get();
+        return view('admin.crm.personnel.create', ['topusers' => $topusers]);
     }
 
     /**
