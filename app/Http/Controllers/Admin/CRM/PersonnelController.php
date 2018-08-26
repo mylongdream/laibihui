@@ -17,7 +17,7 @@ class PersonnelController extends Controller
      */
     public function index(Request $request)
     {
-        $list = CrmPersonnelModel::orderBy('created_at', 'desc')->get();
+        $list = CrmPersonnelModel::orderBy('created_at', 'desc')->paginate(20);
         return view('admin.crm.personnel.index', ['list' => $list]);
     }
 

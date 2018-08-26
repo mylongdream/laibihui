@@ -16,7 +16,7 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-        $list = CrmCustomerModel::orderBy('created_at', 'desc')->get();
+        $list = CrmCustomerModel::orderBy('created_at', 'desc')->paginate(20);
         return view('admin.crm.customer.index', ['list' => $list]);
     }
 
