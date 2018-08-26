@@ -71,6 +71,16 @@
                                 <span class="weui-cell__ft"></span>
                             </a>
                         </div>
+                            @else
+                            <div class="weui-panel">
+                                <a class="weui-cell weui-cell_access" href="{{ route('mobile.user.promotion.index') }}">
+                                    <div class="weui-cell__bd weui-cell_primary">
+                                        <p class="user-menu-txt">特大喜讯:推荐亲朋好友注册，最高享五元佣金返还，点击了解详情
+                                        </p>
+                                    </div>
+                                    <span class="weui-cell__ft"></span>
+                                </a>
+                            </div>
                         @endif
                         <div class="weui-panel">
                             <div class="weui-panel__bd">

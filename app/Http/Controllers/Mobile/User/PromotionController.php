@@ -20,10 +20,15 @@ class PromotionController extends Controller
 
     public function index(Request $request)
     {
+        $cardcount = collect();
+        $cardcount->firstnum = CommonUserModel::where('fromuid', auth()->user()->uid)->has('card')->count();
+        $cardcount->firstmoney = $cardcount->firstnum * 5;
+        $cardcount->secondnum = CommonUserModel::where('fromupuid', auth()->user()->uid)->has('card')->count();
+        $cardcount->secondmoney = $cardcount->secondnum * 0.5;
         $usercount = collect();
         $usercount->first = CommonUserModel::where('fromuid', auth()->user()->uid)->count();
         $usercount->second = CommonUserModel::where('fromupuid', auth()->user()->uid)->count();
-        return view('mobile.user.promotion.index', ['usercount' => $usercount]);
+        return view('mobile.user.promotion.index', ['cardcount' => $cardcount, 'usercount' => $usercount]);
     }
 
     public function rule(Request $request)

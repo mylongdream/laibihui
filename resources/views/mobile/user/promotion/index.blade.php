@@ -8,6 +8,10 @@
                     <div class="back"><a href="javascript:history.go(-1);"><span></span></a></div>
                     <div class="nav">{{ trans('user.promotion') }}</div>
                 </div>
+                <div class="weui-panel" style="padding:20px;text-align: center">
+                    <p class="weui-msg__desc">你已成功推荐办卡 {{ $cardcount->firstnum }} 人，共获佣金 {{ $cardcount->firstmoney }} 元</p>
+                    <p class="weui-msg__desc" style="margin-top:15px;">你朋友成功推荐办卡 {{ $cardcount->secondnum }} 人，共获佣金 {{ $cardcount->secondmoney }} 元</p>
+                </div>
                 <div class="weui-panel">
                     <div class="weui-panel__bd">
                         <div class="weui-media-box weui-media-box_small-appmsg">
