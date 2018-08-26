@@ -469,6 +469,8 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::resource('reward', 'Admin\CRM\RewardController');
             Route::post('personnel/batch', ['as' => 'personnel.batch', 'uses' => 'Admin\CRM\PersonnelController@batch']);
             Route::resource('personnel', 'Admin\CRM\PersonnelController');
+            Route::post('allocation/batch', ['as' => 'allocation.batch', 'uses' => 'Admin\CRM\AllocationController@batch']);
+            Route::resource('allocation', 'Admin\CRM\AllocationController');
         });
     });
 });

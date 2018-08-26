@@ -83,7 +83,7 @@ class ServerController extends Controller
                     $user->fromupuid = $fromuser->fromuid;
                     $user->save();
                     //推广注册得积分
-                    if($setting['promotion_register']){
+                    if(isset($setting['promotion_register']) && $setting['promotion_register']){
                         $score = new CommonUserScoreModel();
                         $score->uid = $fromuser->uid;
                         $score->score = $setting['promotion_register'];

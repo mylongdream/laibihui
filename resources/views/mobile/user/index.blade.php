@@ -139,7 +139,7 @@
                                         </div>
                                         <p class="weui-grid__label">售卡兑奖</p>
                                     </a>
-                                    @if (auth()->user()->group && auth()->user()->group->sellcard)
+                                    @if (auth()->user()->personnel)
                                     <a href="{{ route('mobile.user.sellcard.index') }}" class="weui-grid">
                                         <div class="weui-grid__icon">
                                             <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-sellcard.png') }}" alt="">

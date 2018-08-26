@@ -20,6 +20,13 @@ class SellCardController extends Controller
 
     public function index(Request $request)
     {
+        if(!auth()->user()->personnel){
+            if ($request->ajax()){
+                return response()->json(['status' => 0, 'info' => '您无权卖卡']);
+            }else{
+                return view('layouts.mobile.message', ['status' => 0, 'info' => '您无权卖卡']);
+            }
+        }
         if($request->getcode){
             $promotion = route('mobile.sellcard', ['fromuser' => Hashids::connection('promotion')->encode(auth()->user()->uid)]);
             $image = QrCode::format('png')->size(400)->generate($promotion);

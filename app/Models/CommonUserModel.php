@@ -48,29 +48,40 @@ class CommonUserModel extends Authenticatable
         return $this->belongsTo('App\Models\CommonUserModel', 'fromupuid', 'uid');
     }
 
+    //用户绑卡
     public function card()
     {
         return $this->hasOne('App\Models\CommonUserCardModel', 'uid');
     }
 
+    //用户调查
     public function survey()
     {
         return $this->hasOne('App\Models\CommonSurveyModel', 'uid');
     }
 
+    //用户收藏
     public function collections()
     {
         return $this->hasMany('App\Models\BrandCollectionModel', 'uid');
     }
 
+    //收货地址
     public function addresses()
     {
         return $this->hasMany('App\Models\CommonUserAddressModel', 'uid');
     }
 
+    //管理商家
     public function shop()
     {
         return $this->hasOne('App\Models\BrandShopModel', 'username', 'username');
+    }
+
+    //卖卡人员
+    public function personnel()
+    {
+        return $this->hasOne('App\Models\CrmPersonnelModel', 'uid', 'subuid');
     }
 
 }

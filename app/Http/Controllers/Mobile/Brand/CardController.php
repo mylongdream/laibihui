@@ -63,17 +63,6 @@ class CardController extends Controller
                 }
             }
 
-            //推广办卡
-            $fromuid = !empty($request->cookie('promotion')) ? intval($request->cookie('promotion')) : 0;
-            if ($fromuid && $fromuid != auth()->user()->uid){
-                $fromuser = CommonUserModel::where('uid', $fromuid)->first();
-                if (!$fromuser) {
-                    $fromuid = 0;
-                }
-            }else{
-                $fromuid = 0;
-            }
-
             $order = new CommonCardOrderModel();
             $order->order_sn = date("YmdHis") . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
             $order->order_type = intval($request->ordertype);
@@ -83,7 +72,6 @@ class CardController extends Controller
             $order->remark = $request->remark;
             $order->postip = request()->getClientIp();
             $order->uid = auth()->user()->uid;
-            $order->fromuid = $fromuid == auth()->user()->uid ? 0 : $fromuid;
             $order->save();
 
             $order_address = new CommonCardOrderAddressModel;
@@ -330,17 +318,22 @@ class CardController extends Controller
 
             $setting = cache('setting');
             //推广注册
-            $fromuid = !empty($request->cookie('promotion')) && isset($setting['promotion_register']) && $setting['promotion_register'] ? intval($request->cookie('promotion')) : 0;
+            $fromuid = !empty($request->cookie('promotion')) ? intval($request->cookie('promotion')) : 0;
             if ($fromuid && $fromuid != $user->uid){
                 $fromuser = CommonUserModel::where('uid', $fromuid)->first();
-                if ($fromuser && $setting['promotion_register']) {
-                    $score = new CommonUserScoreModel();
-                    $score->uid = $fromuser->uid;
-                    $score->score = $setting['promotion_register'];
-                    $score->remark = '推广注册得积分';
-                    $score->postip = $request->getClientIp();
-                    $score->save();
-                    $fromuser->increment('score', $setting['promotion_register']);
+                if ($fromuser) {
+                    $user->fromuid = $fromuser->uid;
+                    $user->fromupuid = $fromuser->fromuid;
+                    $user->save();
+                    if(isset($setting['promotion_register']) && $setting['promotion_register']){
+                        $score = new CommonUserScoreModel();
+                        $score->uid = $fromuser->uid;
+                        $score->score = $setting['promotion_register'];
+                        $score->remark = '推广注册得积分';
+                        $score->postip = $request->getClientIp();
+                        $score->save();
+                        $fromuser->increment('score', $setting['promotion_register']);
+                    }
                 }
             }
 

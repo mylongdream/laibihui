@@ -71,7 +71,7 @@ class BindCardController extends Controller
             if(auth()->user()->fromuser){
                 $user_account = new CommonUserAccountModel();
                 $user_account->uid = auth()->user()->fromuser->uid;
-                $user_account->user_money = 500;
+                $user_account->user_money = 5;
                 $user_account->remark = '一级下线提成';
                 $user_account->postip = request()->getClientIp();
                 $user_account->save();
@@ -79,7 +79,7 @@ class BindCardController extends Controller
                 if(auth()->user()->fromupuser){
                     $user_account = new CommonUserAccountModel();
                     $user_account->uid = auth()->user()->fromupuser->uid;
-                    $user_account->user_money = 50;
+                    $user_account->user_money = 0.5;
                     $user_account->remark = '二级下线提成';
                     $user_account->postip = request()->getClientIp();
                     $user_account->save();

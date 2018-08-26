@@ -9,7 +9,7 @@
 		<div class="tbedit">
 			<div class="tbhead cl">
 				<div class="z"><h3>{{ trans('admin.crm.personnel.create') }}</h3></div>
-				<div class="y"><a href="{{ route('admin.crm.user.index') }}" class="btn">< {{ trans('admin.crm.personnel.list') }}</a></div>
+				<div class="y"><a href="{{ route('admin.crm.personnel.index') }}" class="btn">< {{ trans('admin.crm.personnel.list') }}</a></div>
 			</div>
 			<table>
 				<tr>

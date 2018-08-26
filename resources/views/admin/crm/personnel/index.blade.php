@@ -15,8 +15,8 @@
 		<table>
 			<tr>
 				<th width="24"><input class="checkall" type="checkbox"></th>
-				<th width="120">{{ trans('admin.crm.personnel.topuser') }}</th>
 				<th width="150">{{ trans('admin.crm.personnel.subuser') }}</th>
+				<th width="120">{{ trans('admin.crm.personnel.topuser') }}</th>
 				<th width="150">{{ trans('admin.crm.personnel.getcardnum') }}</th>
 				<th width="150">{{ trans('admin.crm.personnel.sellcardnum') }}</th>
 				<th width="150">{{ trans('admin.crm.personnel.created_at') }}</th>
@@ -25,8 +25,8 @@
 			@foreach ($userlist as $value)
 			<tr>
 				<td><input class="ids" type="checkbox" value="{{ $value->id }}" name="ids[]"></td>
-				<td>{{ $value->topuser ? $value->topuser->username : '/' }}</td>
 				<td>{{ $value->subuser ? $value->subuser->username : '/' }}</td>
+				<td>{{ $value->topuser ? $value->topuser->username : '/' }}</td>
 				<td>0</td>
 				<td>0</td>
 				<td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>

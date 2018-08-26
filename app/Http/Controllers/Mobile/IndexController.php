@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mobile;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\CommonUserAccountModel;
 use App\Models\CommonUserSellcardModel;
 use Illuminate\Http\Request;
 use App\Models\BrandCategoryModel;
@@ -65,7 +66,7 @@ class IndexController extends Controller
     {
         if ($request->fromuser && $fromuid = Hashids::connection('promotion')->decode($request->fromuser)){
             $fromuser = CommonUserModel::where('uid', $fromuid)->first();
-            if ($fromuser) {
+            if ($fromuser && $fromuser->personnel) {
                 if ($request->isMethod('POST')) {
                     $rules = array(
                         'number' => 'required|numeric|exists:common_card,number',
@@ -76,43 +77,66 @@ class IndexController extends Controller
                         'number.exists' => '卡号不存在！',
                     );
                     $this->validate($request, $rules, $messages);
-                    $order = new CommonUserSellcardModel();
-                    $order->uid = $fromuser->uid;
-                    $order->order_sn = date("YmdHis") . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
-                    $order->number = $request->number;
-                    $order->order_amount = 10;
-                    $order->postip = request()->getClientIp();
+                    $sellorder = new CommonUserSellcardModel();
+                    $sellorder->uid = $fromuser->uid;
+                    $sellorder->order_sn = date("YmdHis") . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
+                    $sellorder->number = $request->number;
+                    $sellorder->order_amount = 10;
+                    $sellorder->postip = request()->getClientIp();
                     //微信浏览器里
                     if (strpos(request()->userAgent(), 'MicroMessenger') !== false){
-                        $order->pay_type = 'wechat';
-                        $order->save();
+                        $sellorder->pay_type = 'wechat';
+                        $sellorder->save();
                         $config = config('pay.alipay');
                         $config['notify_url'] = route('api.alipay.consume.notify');
                         $order = [
-                            'out_trade_no' => $order->order_sn,
-                            'total_fee' => $order->order_amount * 100,              // 订单金额，**单位：分**
+                            'out_trade_no' => $sellorder->order_sn,
+                            'total_fee' => $sellorder->order_amount * 100,              // 订单金额，**单位：分**
                             'body' => '面对面办卡',                   // 订单描述
                             'spbill_create_ip' => request()->getClientIp(),       // 调用 API 服务器的 IP
                             'product_id' => '0',
                         ];
-                        return Pay::wechat($config)->wap($order);
+                        //return Pay::wechat($config)->wap($order);
                     }
                     //支付宝浏览器里
                     if (strpos(request()->userAgent(), 'AlipayClient') !== false){
-                        $order->pay_type = 'alipay';
-                        $order->save();
+                        $sellorder->pay_type = 'alipay';
+                        $sellorder->save();
                         $config = config('pay.alipay');
                         $config['notify_url'] = route('api.alipay.consume.notify');
                         $config['return_url'] = route('api.alipay.consume.callback');
                         $order = [
-                            'out_trade_no' => $order->order_sn,
-                            'total_amount' => $order->order_amount,
+                            'out_trade_no' => $sellorder->order_sn,
+                            'total_amount' => $sellorder->order_amount,
                             'subject'      => '面对面办卡',
                         ];
                         $alipay = Pay::alipay($config)->wap($order);
-                        return $alipay->send();
+                        //return $alipay->send();
                     }
-                    return view('layouts.mobile.message', ['status' => 0, 'info' => '请用微信或支付宝支付']);
+                    //付款成功后回调
+                    $sellorder->pay_status = 1;
+                    $sellorder->pay_at = time();
+                    if($fromuser){
+                        $user_account = new CommonUserAccountModel();
+                        $user_account->uid = $fromuser->uid;
+                        $user_account->user_money = 5;
+                        $user_account->remark = '面对面办卡提成';
+                        $user_account->postip = request()->getClientIp();
+                        $user_account->save();
+                        auth()->user()->fromuser->increment('user_money', 500);//提成5元到卖卡人员可用余额
+                        if($fromuser->personnel->topuser){
+                            $user_account = new CommonUserAccountModel();
+                            $user_account->uid = $fromuser->personnel->topuser->uid;
+                            $user_account->user_money = 0.5;
+                            $user_account->remark = '下线面对面办卡提成';
+                            $user_account->postip = request()->getClientIp();
+                            $user_account->save();
+                            $fromuser->personnel->topuser->increment('user_money', 50);//提成0.5元到业务员可用余额
+                        }
+                    }
+                    return view('layouts.mobile.message', ['status' => 1, 'info' => '付款成功']);
+
+                    //return view('layouts.mobile.message', ['status' => 0, 'info' => '请用微信或支付宝支付']);
                 }else{
                     return view('mobile.sellcard', ['fromuser' => $fromuser]);
                 }
