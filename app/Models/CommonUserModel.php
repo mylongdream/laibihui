@@ -81,7 +81,7 @@ class CommonUserModel extends Authenticatable
     //卖卡人员
     public function personnel()
     {
-        return $this->hasOne('App\Models\CrmPersonnelModel', 'subuid', 'uid');
+        return $this->hasOne('App\Models\CrmPersonnelModel', 'uid', 'uid');
     }
 
 }

@@ -12,6 +12,7 @@ class CrmPersonnelModel extends Model
     protected $table = 'crm_personnel';
 	protected $primaryKey = 'id';
 	public $timestamps = true;
+    protected $fillable = ['uid'];
 
     public function topuser()
     {
@@ -20,17 +21,17 @@ class CrmPersonnelModel extends Model
 
     public function subuser()
     {
-        return $this->belongsTo('App\Models\CommonUserModel', 'subuid', 'uid');
+        return $this->belongsTo('App\Models\CommonUserModel', 'uid', 'uid');
     }
 
     public function allocation()
     {
-        return $this->hasMany('App\Models\CrmAllocationModel', 'uid', 'subuid');
+        return $this->hasMany('App\Models\CrmAllocationModel', 'uid', 'uid');
     }
 
     public function sellcard()
     {
-        return $this->hasMany('App\Models\CommonUserSellcardModel', 'uid', 'subuid');
+        return $this->hasMany('App\Models\CommonUserSellcardModel', 'uid', 'uid');
     }
 
 }

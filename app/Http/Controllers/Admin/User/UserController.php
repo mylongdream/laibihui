@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\User;
 use App\Http\Controllers\Controller;
 use App\Models\CommonUserModel;
 use App\Models\CommonUserGroupModel;
+use App\Models\CrmPersonnelModel;
 use Illuminate\Http\Request;
 
 
@@ -173,6 +174,11 @@ class UserController extends Controller
             $this->validate($request, $rules, $messages);
             $user->group_id = $request->group_id;
             $user->save();
+
+            //授权卖卡业务员
+            if ($user->group->grantsellcard){
+                CrmPersonnelModel::firstOrCreate(['uid' => $user->uid]);
+            }
 
             if ($request->ajax()){
                 return response()->json(['status' => '1', 'info' => trans('admin.user.user.editsucceed'), 'url' => route('admin.user.user.index')]);

@@ -13,8 +13,15 @@
 			</div>
 			<table>
 				<tr>
-					<td width="150" align="right">{{ trans('admin.crm.personnel.topusername') }}</td>
-					<td><input class="txt" type="text" size="50" value="" name="topusername"></td>
+					<td width="150" align="right">{{ trans('admin.crm.personnel.topuser') }}</td>
+					<td>
+						<select name="topuid" class="select">
+							<option value="">请选择</option>
+							@foreach ($topusers as $key => $value)
+								<option value="{{ $value->uid }}">{{ $value->user->username }}</option>
+							@endforeach
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<td width="150" align="right">{{ trans('admin.crm.personnel.subusername') }}</td>

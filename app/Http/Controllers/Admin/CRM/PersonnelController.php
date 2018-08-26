@@ -18,7 +18,8 @@ class PersonnelController extends Controller
     public function index(Request $request)
     {
         $list = CrmPersonnelModel::orderBy('created_at', 'desc')->paginate(20);
-        return view('admin.crm.personnel.index', ['list' => $list]);
+        $topusers = CrmPersonnelModel::where('topuid', 0)->orderBy('created_at', 'desc')->get();
+        return view('admin.crm.personnel.index', ['list' => $list, 'topusers' => $topusers]);
     }
 
     /**
@@ -40,22 +41,21 @@ class PersonnelController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'topusername' => 'required|exists:common_user,username',
+            'topuid' => 'required|exists:crm_personnel,uid',
             'subusername' => 'required|exists:common_user,username',
         );
         $messages = array(
-            'topusername.required' => '业务员用户名不允许为空！',
-            'topusername.exists' => '业务员用户名不存在！',
+            'topuid.required' => '业务员不允许为空！',
+            'topuid.exists' => '业务员不存在！',
             'subusername.required' => '卖卡会员用户名不允许为空！',
-            'subusername.exists' => '业务员用户名不存在！',
+            'subusername.exists' => '卖卡会员用户名不存在！',
         );
         $this->validate($request, $rules, $messages);
 
-        $topuser = CommonUserModel::where('username', $request->topusername)->first();
         $subuser = CommonUserModel::where('username', $request->subusername)->first();
         $user = new CrmPersonnelModel;
-        $user->topuid = $topuser->uid;
-        $user->subuid = $subuser->uid;
+        $user->topuid = $request->topuid;
+        $user->uid = $subuser->uid;
         $user->postip = $request->getClientIp();
         $user->save();
 
