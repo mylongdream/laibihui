@@ -23,4 +23,14 @@ class CrmPersonnelModel extends Model
         return $this->belongsTo('App\Models\CommonUserModel', 'subuid', 'uid');
     }
 
+    public function allocation()
+    {
+        return $this->hasMany('App\Models\CrmAllocationModel', 'subuid', 'uid');
+    }
+
+    public function sellcard()
+    {
+        return $this->hasMany('App\Models\CommonUserSellcardModel', 'subuid', 'uid');
+    }
+
 }

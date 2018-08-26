@@ -27,8 +27,8 @@
 				<td><input class="ids" type="checkbox" value="{{ $value->id }}" name="ids[]"></td>
 				<td>{{ $value->subuser ? $value->subuser->username : '/' }}</td>
 				<td>{{ $value->topuser ? $value->topuser->username : '/' }}</td>
-				<td>0</td>
-				<td>0</td>
+				<td>{{ $value->allocation ? $value->allocation->sum('cardnum') : '0' }}</td>
+				<td>{{ $value->sellcard ? $value->sellcard->count() : '0' }}</td>
 				<td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
 				<td>
 					<a href="{{ route('admin.crm.personnel.destroy',$value->id) }}" class="delbtn">{{ trans('admin.destroy') }}</a>
