@@ -25,7 +25,7 @@
 			@foreach ($list as $value)
 			<tr>
 				<td><input class="ids" type="checkbox" value="{{ $value->id }}" name="ids[]"></td>
-				<td>{{ $value->subuser ? $value->subuser->username : '/' }}</td>
+				<td>{{ $value->user ? $value->user->username : '/' }}</td>
 				<td>{{ $value->topuser ? $value->topuser->username : '/' }}</td>
 				<td>{{ $value->allocation ? $value->allocation->sum('cardnum') : '0' }}</td>
 				<td>{{ $value->sellcard ? $value->sellcard->where('pay_status', 1)->count() : '0' }}</td>

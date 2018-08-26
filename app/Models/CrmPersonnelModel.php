@@ -19,7 +19,7 @@ class CrmPersonnelModel extends Model
         return $this->belongsTo('App\Models\CommonUserModel', 'topuid', 'uid');
     }
 
-    public function subuser()
+    public function user()
     {
         return $this->belongsTo('App\Models\CommonUserModel', 'uid', 'uid');
     }
