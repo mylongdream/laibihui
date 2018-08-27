@@ -12,6 +12,7 @@
                     </div>
                 @else
                     <form method="post" action="{{ route('mobile.grantsell', ['fromuser' => request('fromuser')]) }}">
+                        {!! csrf_field() !!}
                         <div class="weui-msg__icon-area"><i class="weui-icon-waiting weui-icon_msg"></i></div>
                         <div class="weui-msg__text-area">
                             <h2 class="weui-msg__title">开通卖卡</h2>
