@@ -1180,6 +1180,7 @@ return [
     'crm.personnel.subusername' => '卖卡会员用户名',
     'crm.personnel.getcardnum' => '共分配卡数',
     'crm.personnel.sellcardnum' => '共售出卡数',
+    'crm.personnel.cardnum' => '分配卡数',
     'crm.personnel.postip' => 'IP',
     'crm.personnel.created_at' => '提交时间',
     'crm.personnel.addsucceed' => '卖卡会员信息添加成功',
