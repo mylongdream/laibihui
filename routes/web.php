@@ -265,7 +265,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
         Route::get('sellcard/order', ['as' => 'sellcard.order', 'uses' => 'Mobile\User\SellCardController@order']);
     });
     Route::group(['prefix' => 'crm', 'middleware' => ['auth.mcrm'], 'as' => 'crm.'], function () {
-        Route::get('index', ['as' => 'index', 'uses' => 'Mobile\CRM\IndexController@index']);
+        Route::get('/', ['as' => 'index', 'uses' => 'Mobile\CRM\IndexController@index']);
         Route::get('shop/nearby', ['as' => 'shop.nearby', 'uses' => 'Mobile\CRM\ShopController@nearby']);
 
         Route::get('customer', ['as' => 'customer.index', 'uses' => 'Mobile\CRM\CustomerController@index', 'allow' => ['zhaoshang']]);

@@ -14,7 +14,7 @@
                                 <div class="weui-media-box__bd">
                                     <h4 class="weui-media-box__title">{{ auth()->user()->username }}</h4>
                                     <p class="weui-media-box__desc">手机号码：{{ auth()->user()->mobile ? auth()->user()->mobile : '暂无' }}</p>
-                                    <p class="weui-media-box__desc">用户分组：{{ auth()->user()->group->name }} 个</p>
+                                    <p class="weui-media-box__desc">用户分组：{{ auth()->user()->group->name }}</p>
                                 </div>
                                 <div class="weui-media-box__ft">
                                 </div>
