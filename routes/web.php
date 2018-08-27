@@ -151,6 +151,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
     Route::get('/search', ['as' => 'search', 'uses' => 'Mobile\IndexController@search']);
     Route::get('/promotion/{fromuser}', ['as' => 'promotion', 'uses' => 'Mobile\IndexController@promotion']);
     Route::any('/sellcard/{fromuser}', ['as' => 'sellcard', 'uses' => 'Mobile\IndexController@sellcard']);
+    Route::any('/grantsell/{fromuser}', ['as' => 'grantsell', 'uses' => 'Mobile\IndexController@grantsell'])->middleware('auth.mobile');
     Route::get('faq', ['as' => 'brand.faq.index', 'uses' => 'Mobile\Brand\FaqController@index']);
     Route::get('faq/{id}.html', ['as' => 'brand.faq.show', 'uses' => 'Mobile\Brand\FaqController@show'])->where('id', '[0-9]+');
     Route::get('card', ['as' => 'brand.card.index', 'uses' => 'Mobile\Brand\CardController@index']);
@@ -267,6 +268,9 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
     Route::group(['prefix' => 'crm', 'middleware' => ['auth.mcrm'], 'as' => 'crm.'], function () {
         Route::get('/', ['as' => 'index', 'uses' => 'Mobile\CRM\IndexController@index']);
         Route::get('shop/nearby', ['as' => 'shop.nearby', 'uses' => 'Mobile\CRM\ShopController@nearby']);
+
+        Route::get('sellcard', ['as' => 'sellcard.index', 'uses' => 'Mobile\CRM\SellcardController@index', 'allow' => ['tuiguang','zhaoshang']]);
+        Route::get('sellcard/users', ['as' => 'sellcard.users', 'uses' => 'Mobile\CRM\SellcardController@users', 'allow' => ['tuiguang','zhaoshang']]);
 
         Route::get('customer', ['as' => 'customer.index', 'uses' => 'Mobile\CRM\CustomerController@index', 'allow' => ['zhaoshang']]);
         Route::get('customer/referlist', ['as' => 'customer.referlist', 'uses' => 'Mobile\CRM\CustomerController@referlist', 'allow' => ['zhaoshang']]);

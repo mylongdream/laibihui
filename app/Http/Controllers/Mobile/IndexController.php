@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\CommonUserAccountModel;
 use App\Models\CommonUserSellcardModel;
+use App\Models\CrmPersonnelModel;
 use Illuminate\Http\Request;
 use App\Models\BrandCategoryModel;
 use App\Models\BrandShopModel;
@@ -60,6 +61,32 @@ class IndexController extends Controller
     public function search()
     {
         return view('mobile.search');
+    }
+
+    public function grantsell(Request $request)
+    {
+        if ($request->fromuser && $fromuid = Hashids::connection('promotion')->decode($request->fromuser)){
+            $fromuser = CommonUserModel::where('uid', $fromuid)->first();
+            if ($fromuser && $fromuser->personnel) {
+                if ($request->isMethod('POST')) {
+                    if(auth()->user()->personnel){
+                        return view('layouts.mobile.message', ['status' => 0, 'info' => '业务员'.$fromuser->username.'已为您开通卖卡']);
+                    }
+                    $user = new CrmPersonnelModel;
+                    $user->topuid = $fromuser->uid;
+                    $user->uid = auth()->user()->uid;
+                    $user->postip = $request->getClientIp();
+                    $user->save();
+                    return view('layouts.mobile.message', ['status' => 1, 'info' => '开通卖卡成功']);
+                }else{
+                    return view('mobile.grantsell', ['fromuser' => $fromuser]);
+                }
+            }else{
+                return view('layouts.mobile.message', ['status' => 0, 'info' => '地址错误']);
+            }
+        }else{
+            return view('layouts.mobile.message', ['status' => 0, 'info' => '地址错误']);
+        }
     }
 
     public function sellcard(Request $request)
