@@ -15,12 +15,12 @@
 		<table>
 			<tr>
 				<th width="24"><input class="checkall" type="checkbox"></th>
-				<th width="150">{{ trans('admin.crm.personnel.subuser') }}</th>
+				<th width="">{{ trans('admin.crm.personnel.subuser') }}</th>
 				<th width="120">{{ trans('admin.crm.personnel.topuser') }}</th>
 				<th width="150">{{ trans('admin.crm.personnel.getcardnum') }}</th>
 				<th width="150">{{ trans('admin.crm.personnel.sellcardnum') }}</th>
 				<th width="150">{{ trans('admin.crm.personnel.created_at') }}</th>
-				<th width="100">{{ trans('admin.operation') }}</th>
+				<th width="150">{{ trans('admin.operation') }}</th>
 			</tr>
 			@foreach ($list as $value)
 			<tr>
@@ -31,7 +31,8 @@
 				<td>{{ $value->sellcard ? $value->sellcard->where('pay_status', 1)->count() : '0' }}</td>
 				<td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
 				<td>
-					<a href="{{ route('admin.crm.personnel.destroy',$value->id) }}" class="delbtn">{{ trans('admin.destroy') }}</a>
+					<a href="{{ route('admin.crm.personnel.allocate',$value->id) }}" class="openwindow" title="{{ trans('admin.crm.personnel.allocate') }}">{{ trans('admin.crm.personnel.allocate') }}</a>
+					<a href="{{ route('admin.crm.personnel.destroy',$value->id) }}" class="mlm delbtn">{{ trans('admin.destroy') }}</a>
 				</td>
 			</tr>
 			@endforeach

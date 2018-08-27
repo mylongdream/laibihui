@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\CRM;
 
 use App\Http\Controllers\Controller;
 use App\Models\CommonUserModel;
+use App\Models\CrmAllocationModel;
 use App\Models\CrmPersonnelModel;
 use Illuminate\Http\Request;
 
@@ -101,6 +102,33 @@ class PersonnelController extends Controller
             }
         }else{
             return view('layouts.admin.message', ['status' => '0', 'info' => trans('admin.undefined.operation')]);
+        }
+    }
+
+    public function allocate(Request $request, $id)
+    {
+        $personnel = CrmPersonnelModel::findOrFail($id);
+        if ($request->isMethod('POST')) {
+            $rules = array(
+                'cardnum' => 'required',
+            );
+            $messages = array(
+                'cardnum.required' => '分配卡数不允许为空！',
+            );
+            $this->validate($request, $rules, $messages);
+
+            $allocation = new CrmAllocationModel;
+            $allocation->uid = $personnel->uid;
+            $allocation->cardnum = $request->cardnum;
+            $allocation->postip = $request->getClientIp();
+            $allocation->save();
+            if ($request->ajax()) {
+                return response()->json(['status' => '1', 'info' => trans('admin.crm.personnel.allocatesucceed'), 'url' => back()->getTargetUrl()]);
+            }else{
+                return view('layouts.admin.message', ['status' => '1', 'info' => trans('admin.crm.personnel.allocatesucceed'), 'url' => back()->getTargetUrl()]);
+            }
+        }else{
+            return view('admin.crm.personnel.allocate', ['personnel' => $personnel]);
         }
     }
 

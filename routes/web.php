@@ -523,6 +523,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::post('reward/batch', ['as' => 'reward.batch', 'uses' => 'Admin\CRM\RewardController@batch']);
             Route::resource('reward', 'Admin\CRM\RewardController');
             Route::post('personnel/batch', ['as' => 'personnel.batch', 'uses' => 'Admin\CRM\PersonnelController@batch']);
+            Route::any('personnel/{id}/allocate', ['as' => 'personnel.allocate', 'uses' => 'Admin\CRM\PersonnelController@allocate']);
             Route::resource('personnel', 'Admin\CRM\PersonnelController');
             Route::post('allocation/batch', ['as' => 'allocation.batch', 'uses' => 'Admin\CRM\AllocationController@batch']);
             Route::resource('allocation', 'Admin\CRM\AllocationController');

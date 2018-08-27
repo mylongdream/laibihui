@@ -1171,6 +1171,7 @@ return [
     'crm.personnel.edit' => '编辑卖卡会员',
     'crm.personnel.destroy' => '删除卖卡会员',
     'crm.personnel.show' => '查看卖卡会员',
+    'crm.personnel.allocate' => '分配卡数',
     'crm.personnel.topuid' => '所属业务员ID',
     'crm.personnel.topuser' => '所属业务员',
     'crm.personnel.topusername' => '所属业务员用户名',
@@ -1184,6 +1185,7 @@ return [
     'crm.personnel.addsucceed' => '卖卡会员信息添加成功',
     'crm.personnel.editsucceed' => '卖卡会员信息修改成功',
     'crm.personnel.deletesucceed' => '卖卡会员信息删除成功',
+    'crm.personnel.allocatesucceed' => '卖卡会员分配卡数成功',
 
     'crm.allocation' => '分配卡数',
     'crm.allocation.tips' => '您可以在此处对分配卡数信息进行管理',
