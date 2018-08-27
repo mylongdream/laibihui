@@ -1,7 +1,54 @@
 @extends('layouts.mobile.app')
 
 @section('content')
-    <div class="crm-main">
-
+    <div class="weui-tab">
+        <div class="weui-tab__panel">
+            <div class="main-body">
+                <div class="wp">
+                    <div class="pbw">
+                        <div class="weui-panel weui-panel_access">
+                            <div class="weui-media-box weui-media-box_appmsg">
+                                <div class="weui-media-box__hd">
+                                    <img class="weui-media-box__thumb" src="{{ auth()->user()->headimgurl ? uploadImage(auth()->user()->headimgurl) : asset('static/image/common/getheadimg.jpg') }}">
+                                </div>
+                                <div class="weui-media-box__bd">
+                                    <h4 class="weui-media-box__title">{{ auth()->user()->username }}</h4>
+                                    <p class="weui-media-box__desc">手机号码：{{ auth()->user()->mobile ? auth()->user()->mobile : '暂无' }}</p>
+                                    <p class="weui-media-box__desc">账户积分：{{ auth()->user()->score }} 个</p>
+                                </div>
+                                <div class="weui-media-box__ft">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weui-panel">
+                            <div class="weui-panel__bd">
+                                <div class="weui-media-box weui-media-box_small-appmsg">
+                                    <div class="weui-cells">
+                                        <a class="weui-cell weui-cell_access" href="">
+                                            <div class="weui-cell__hd">
+                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
+                                            </div>
+                                            <div class="weui-cell__bd weui-cell_primary">
+                                                <p class="user-menu-txt">授权卖卡</p>
+                                            </div>
+                                            <span class="weui-cell__ft"></span>
+                                        </a>
+                                        <a class="weui-cell weui-cell_access" href="">
+                                            <div class="weui-cell__hd">
+                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
+                                            </div>
+                                            <div class="weui-cell__bd weui-cell_primary">
+                                                <p class="user-menu-txt">卖卡会员</p>
+                                            </div>
+                                            <span class="weui-cell__ft"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

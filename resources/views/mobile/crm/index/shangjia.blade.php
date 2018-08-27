@@ -1,71 +1,81 @@
 @extends('layouts.mobile.app')
 
 @section('content')
-    <div class="crm-main">
-        <div class="shop-info">
-            <div class="pic">
-                <img src="{{ uploadImage(auth('crm')->user()->shop->upimage) }}" width="100" height="100">
-            </div>
-            <div class="info">
-                <div class="shop-stuff">
-                    <span><strong>{{ auth('crm')->user()->shop->name }}</strong></span>
-                </div>
-                <div class="shop-assets">
-                    <span>账户余额：</span>{{ sprintf("%.2f",auth('crm')->user()->shop->account) }}元
-                </div>
-                <div class="shop-function">
-                    本店支持：
-                    @if (auth('crm')->user()->shop->offline)
-                        <span>线下付款</span>
-                    @endif
-                    @if (auth('crm')->user()->shop->appoint)
-                        <span>预约订座</span>
-                    @endif
-                    @if (auth('crm')->user()->shop->ordermeal)
-                        <span>在线点餐</span>
-                    @endif
-                    @if (auth('crm')->user()->shop->ordercard)
-                        <span>店内办卡</span>
-                    @endif
+    <div class="weui-tab">
+        <div class="weui-tab__panel">
+            <div class="main-body">
+                <div class="wp">
+                    <div class="pbw">
+                        <div class="weui-panel weui-panel_access">
+                            <div class="weui-media-box weui-media-box_appmsg">
+                                <div class="weui-media-box__hd">
+                                    <img class="weui-media-box__thumb" src="{{ auth()->user()->headimgurl ? uploadImage(auth()->user()->headimgurl) : asset('static/image/common/getheadimg.jpg') }}">
+                                </div>
+                                <div class="weui-media-box__bd">
+                                    <h4 class="weui-media-box__title">{{ auth()->user()->username }}</h4>
+                                    <p class="weui-media-box__desc">手机号码：{{ auth()->user()->mobile ? auth()->user()->mobile : '暂无' }}</p>
+                                    <p class="weui-media-box__desc">账户积分：{{ auth()->user()->score }} 个</p>
+                                </div>
+                                <div class="weui-media-box__ft">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weui-panel">
+                            <div class="weui-panel__bd">
+                                <div class="weui-media-box weui-media-box_small-appmsg">
+                                    <div class="weui-cells">
+                                        <a class="weui-cell weui-cell_access" href="">
+                                            <div class="weui-cell__hd">
+                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
+                                            </div>
+                                            <div class="weui-cell__bd weui-cell_primary">
+                                                <p class="user-menu-txt">店铺消费</p>
+                                            </div>
+                                            <span class="weui-cell__ft"></span>
+                                        </a>
+                                        <a class="weui-cell weui-cell_access" href="">
+                                            <div class="weui-cell__hd">
+                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
+                                            </div>
+                                            <div class="weui-cell__bd weui-cell_primary">
+                                                <p class="user-menu-txt">预约订座</p>
+                                            </div>
+                                            <span class="weui-cell__ft"></span>
+                                        </a>
+                                        <a class="weui-cell weui-cell_access" href="">
+                                            <div class="weui-cell__hd">
+                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
+                                            </div>
+                                            <div class="weui-cell__bd weui-cell_primary">
+                                                <p class="user-menu-txt">点餐管理</p>
+                                            </div>
+                                            <span class="weui-cell__ft"></span>
+                                        </a>
+                                        <a class="weui-cell weui-cell_access" href="">
+                                            <div class="weui-cell__hd">
+                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
+                                            </div>
+                                            <div class="weui-cell__bd weui-cell_primary">
+                                                <p class="user-menu-txt">提现记录</p>
+                                            </div>
+                                            <span class="weui-cell__ft"></span>
+                                        </a>
+                                        <a class="weui-cell weui-cell_access" href="">
+                                            <div class="weui-cell__hd">
+                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
+                                            </div>
+                                            <div class="weui-cell__bd weui-cell_primary">
+                                                <p class="user-menu-txt">收银结账</p>
+                                            </div>
+                                            <span class="weui-cell__ft"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="mtw" style="font-size: 18px">昨日收入</div>
-        <div class="crm-count mtw">
-            <table>
-                <tr>
-                    <td width="40%" align="center" class="sub1"><strong>昨日收入</strong><span>￥<em>{{ sprintf("%.2f",$count->consume_account) }}</em></span></td>
-                    <td width="30%" align="center" class="sub2"><strong>昨日线上支付</strong><span>￥<em>{{ sprintf("%.2f",$count->consume_online) }}</em></span></td>
-                    <td width="30%" align="center" class="sub3"><strong>昨日线下支付</strong><span>￥<em>{{ sprintf("%.2f",$count->consume_offline) }}</em></span></td>
-                </tr>
-            </table>
-        </div>
-        @if (auth('crm')->user()->shop->ordercard)
-            <div class="mtw" style="font-size: 18px">店内办卡</div>
-            <div class="crm-count mtw">
-                <table>
-                    <tr>
-                        <td width="40%" align="center" class="sub1"><strong>发卡提成</strong><span>￥<em>{{ sprintf("%.2f",$count->ordercard_account) }}</em></span></td>
-                        <td width="30%" align="center" class="sub2"><strong>未发行卡数</strong><span><em>{{ $count->ordercard_remaincard }}</em></span></td>
-                        <td width="30%" align="center" class="sub3"><strong>已发行卡数</strong><span><em>{{ $count->ordercard_sellcard }}</em></span></td>
-                    </tr>
-                </table>
-            </div>
-            @if ($rewards)
-            <div class="mtw" style="font-size: 18px">奖励兑换</div>
-            <div class="crm-exchange mtw">
-                <ul>
-                    @foreach ($rewards as $value)
-                    <li>
-                        <div class="pic"><img src="{{ uploadImage($value->upimage) }}" width="60" height="60"></div>
-                        <div class="name">{{ $value->name }}</div>
-                        <div class="info">所需卡数：{{ $value->cardnum }}张</div>
-                        <div class="btn"><a href="javascript:;" class="disabled">点击兑换</a></div>
-                    </li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-        @endif
     </div>
 @endsection

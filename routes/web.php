@@ -578,6 +578,69 @@ Route::group(['domain' => 'crm.hztbg.com', 'prefix' => '', 'as' => 'crm.'], func
 
 });
 
+Route::group(['domain' => 'crm.hztbg.com', 'prefix' => 'm', 'as' => 'mcrm.'], function () {
+    Route::get('/', function () {
+        return redirect()->route('mcrm.index');
+    });
+    Route::get('login', ['as' => 'login', 'uses' => 'Mobile\CRM\LoginController@showLoginForm']);
+    Route::post('login', ['as' => 'login', 'uses' => 'Mobile\CRM\LoginController@login']);
+    Route::get('logout', ['as' => 'logout', 'uses' => 'Mobile\CRM\LoginController@logout']);
+    Route::group(['middleware' => ['auth.mcrm']], function () {
+        Route::get('index', ['as' => 'index', 'uses' => 'Mobile\CRM\IndexController@index']);
+        Route::get('shop/nearby', ['as' => 'shop.nearby', 'uses' => 'Mobile\CRM\ShopController@nearby']);
+
+        Route::get('customer', ['as' => 'customer.index', 'uses' => 'Mobile\CRM\CustomerController@index', 'allow' => ['zhaoshang']]);
+        Route::get('customer/referlist', ['as' => 'customer.referlist', 'uses' => 'Mobile\CRM\CustomerController@referlist', 'allow' => ['zhaoshang']]);
+        Route::get('customer/create', ['as' => 'customer.create', 'uses' => 'Mobile\CRM\CustomerController@create', 'allow' => ['zhaoshang']]);
+        Route::post('customer', ['as' => 'customer.store', 'uses' => 'Mobile\CRM\CustomerController@store', 'allow' => ['zhaoshang']]);
+        Route::get('customer/{id}', ['as' => 'customer.show', 'uses' => 'Mobile\CRM\CustomerController@show', 'allow' => ['zhaoshang']]);
+        Route::get('customer/{id}/edit', ['as' => 'customer.edit', 'uses' => 'Mobile\CRM\CustomerController@edit', 'allow' => ['zhaoshang']]);
+        Route::put('customer/{id}', ['as' => 'customer.update', 'uses' => 'Mobile\CRM\CustomerController@update', 'allow' => ['zhaoshang']]);
+        Route::delete('customer/{id}', ['as' => 'customer.destroy', 'uses' => 'Mobile\CRM\CustomerController@destroy', 'allow' => ['zhaoshang']]);
+        Route::any('customer/{id}/refer', ['as' => 'customer.refer', 'uses' => 'Mobile\CRM\CustomerController@refer', 'allow' => ['zhaoshang']]);
+        Route::get('shop', ['as' => 'shop.index', 'uses' => 'Mobile\CRM\ShopController@index', 'allow' => ['zhaoshang']]);
+        Route::get('shop/checkcard', ['as' => 'shop.checkcard', 'uses' => 'Mobile\CRM\ShopController@checkcard', 'allow' => ['zhaoshang']]);
+        Route::get('shop/{id}/edit', ['as' => 'shop.edit', 'uses' => 'Mobile\CRM\ShopController@edit', 'allow' => ['zhaoshang']]);
+        Route::put('shop/{id}', ['as' => 'shop.update', 'uses' => 'Mobile\CRM\ShopController@update', 'allow' => ['zhaoshang']]);
+        Route::get('shop/{id}/allot', ['as' => 'shop.allot', 'uses' => 'Mobile\CRM\ShopController@allot', 'allow' => ['zhaoshang']]);
+        Route::get('shop/{id}/card', ['as' => 'shop.card', 'uses' => 'Mobile\CRM\ShopController@card', 'allow' => ['zhaoshang']]);
+        Route::any('shop/{id}/addcard', ['as' => 'shop.addcard', 'uses' => 'Mobile\CRM\ShopController@addcard', 'allow' => ['zhaoshang']]);
+        Route::get('archive', ['as' => 'archive.index', 'uses' => 'Mobile\CRM\ArchiveController@index', 'allow' => ['zhaoshang']]);
+        Route::get('archive/{id}', ['as' => 'archive.show', 'uses' => 'Mobile\CRM\ArchiveController@show', 'allow' => ['zhaoshang']]);
+
+        Route::get('checkcustomer', ['as' => 'checkcustomer.index', 'uses' => 'Mobile\CRM\CheckCustomerController@index', 'allow' => ['kefu']]);
+        Route::get('checkcustomer/{id}', ['as' => 'checkcustomer.show', 'uses' => 'Mobile\CRM\CheckCustomerController@show', 'allow' => ['kefu']]);
+        Route::any('checkcustomer/{id}/check', ['as' => 'checkcustomer.check', 'uses' => 'Mobile\CRM\CheckCustomerController@check', 'allow' => ['kefu']]);
+
+        Route::get('consume', ['as' => 'consume.index', 'uses' => 'Mobile\CRM\ConsumeController@index', 'allow' => ['shangjia']]);
+        Route::get('consume/balance', ['as' => 'consume.balance', 'uses' => 'Mobile\CRM\ConsumeController@balance', 'allow' => ['shangjia']]);
+        Route::get('consume/{id}', ['as' => 'consume.show', 'uses' => 'Mobile\CRM\ConsumeController@show', 'allow' => ['shangjia']]);
+        Route::get('ordercard', ['as' => 'ordercard.index', 'uses' => 'Mobile\CRM\OrderCardController@index', 'allow' => ['shangjia']]);
+        Route::get('ordercard/remain', ['as' => 'ordercard.remain', 'uses' => 'Mobile\CRM\OrderCardController@remain', 'allow' => ['shangjia']]);
+        Route::get('appoint', ['as' => 'appoint.index', 'uses' => 'Mobile\CRM\AppointController@index', 'allow' => ['shangjia']]);
+        Route::get('appoint/{id}', ['as' => 'appoint.show', 'uses' => 'Mobile\CRM\AppointController@show', 'allow' => ['shangjia']]);
+        Route::get('appoint/{id}/edit', ['as' => 'appoint.edit', 'uses' => 'Mobile\CRM\AppointController@edit', 'allow' => ['shangjia']]);
+        Route::put('appoint/{id}', ['as' => 'appoint.update', 'uses' => 'Mobile\CRM\AppointController@update', 'allow' => ['shangjia']]);
+        Route::get('ordermeal', ['as' => 'ordermeal.index', 'uses' => 'Mobile\CRM\OrderMealController@index', 'allow' => ['shangjia']]);
+        Route::get('ordermeal/create', ['as' => 'ordermeal.create', 'uses' => 'Mobile\CRM\OrderMealController@create', 'allow' => ['shangjia']]);
+        Route::post('ordermeal', ['as' => 'ordermeal.store', 'uses' => 'Mobile\CRM\OrderMealController@store', 'allow' => ['shangjia']]);
+        Route::get('ordermeal/{id}', ['as' => 'ordermeal.show', 'uses' => 'Mobile\CRM\OrderMealController@show', 'allow' => ['shangjia']]);
+        Route::get('ordermeal/{id}/edit', ['as' => 'ordermeal.edit', 'uses' => 'Mobile\CRM\OrderMealController@edit', 'allow' => ['shangjia']]);
+        Route::put('ordermeal/{id}', ['as' => 'ordermeal.update', 'uses' => 'Mobile\CRM\OrderMealController@update', 'allow' => ['shangjia']]);
+        Route::get('withdraw', ['as' => 'withdraw.index', 'uses' => 'Mobile\CRM\WithdrawController@index', 'allow' => ['shangjia']]);
+        Route::get('checkout', ['as' => 'checkout.index', 'uses' => 'Mobile\CRM\CheckoutController@index', 'allow' => ['shangjia']]);
+        Route::post('checkout/check', ['as' => 'checkout.check', 'uses' => 'Mobile\CRM\CheckoutController@check', 'allow' => ['shangjia']]);
+        Route::post('checkout/pay', ['as' => 'checkout.pay', 'uses' => 'Mobile\CRM\CheckoutController@pay', 'allow' => ['shangjia']]);
+        Route::post('checkout/userinfo', ['as' => 'checkout.userinfo', 'uses' => 'Mobile\CRM\CheckoutController@userinfo', 'allow' => ['shangjia']]);
+
+        Route::get('account', ['as' => 'account.index', 'uses' => 'Mobile\CRM\AccountController@index']);
+        Route::any('account/password', ['as' => 'account.password', 'uses' => 'Mobile\CRM\AccountController@password']);
+    });
+    Route::post('upload/image', ['as' => 'upload.image', 'uses' => 'Mobile\CRM\UploadController@image']);
+    Route::post('upload/video', ['as' => 'upload.video', 'uses' => 'Mobile\CRM\UploadController@video']);
+
+});
+
 Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'wechat', 'as' => 'wechat.'], function () {
     Route::get('/', function () {
         //return redirect()->route('wechat.index');
