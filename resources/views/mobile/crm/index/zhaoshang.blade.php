@@ -24,6 +24,24 @@
                             <div class="weui-panel__bd">
                                 <div class="weui-media-box weui-media-box_small-appmsg">
                                     <div class="weui-cells">
+                                        <a class="weui-cell weui-cell_access" href="{{ route('mobile.crm.sellcard.index') }}">
+                                            <div class="weui-cell__hd">
+                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
+                                            </div>
+                                            <div class="weui-cell__bd weui-cell_primary">
+                                                <p class="user-menu-txt">授权卖卡</p>
+                                            </div>
+                                            <span class="weui-cell__ft"></span>
+                                        </a>
+                                        <a class="weui-cell weui-cell_access" href="{{ route('mobile.crm.sellcard.users') }}">
+                                            <div class="weui-cell__hd">
+                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
+                                            </div>
+                                            <div class="weui-cell__bd weui-cell_primary">
+                                                <p class="user-menu-txt">卖卡会员</p>
+                                            </div>
+                                            <span class="weui-cell__ft"></span>
+                                        </a>
                                         <a class="weui-cell weui-cell_access" href="">
                                             <div class="weui-cell__hd">
                                                 <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">

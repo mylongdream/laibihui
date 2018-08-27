@@ -67,7 +67,7 @@ class IndexController extends Controller
     {
         if ($request->fromuser && $fromuid = Hashids::connection('promotion')->decode($request->fromuser)){
             $fromuser = CommonUserModel::where('uid', $fromuid)->first();
-            if ($fromuser && $fromuser->personnel) {
+            if ($fromuser && $fromuser->group && $fromuser->group->grantsellcard) {
                 if ($request->isMethod('POST')) {
                     if(auth()->user()->personnel){
                         return view('layouts.mobile.message', ['status' => 0, 'info' => '业务员'.$fromuser->username.'已为您开通卖卡']);
