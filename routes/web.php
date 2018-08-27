@@ -578,7 +578,7 @@ Route::group(['domain' => 'crm.hztbg.com', 'prefix' => '', 'as' => 'crm.'], func
 
 });
 
-Route::group(['domain' => 'crm.hztbg.com', 'prefix' => 'm', 'as' => 'mcrm.'], function () {
+Route::group(['domain' => 'crm.hztbg.com', 'prefix' => 'mobile', 'as' => 'mcrm.'], function () {
     Route::get('/', function () {
         return redirect()->route('mcrm.index');
     });
