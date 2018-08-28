@@ -12,7 +12,7 @@
                         {!! csrf_field() !!}
                         <input name="ReturnUrl" value="{{ request('ReturnUrl') }}" type="hidden" />
                         <input name="login_type" id="login_type" value="normal" type="hidden" />
-                        <div class="weui-cells weui-cells_form">
+                        <div class="weui-cells weui-cells_form" style="text-align: left">
                             <div class="weui-cell">
                                 <div class="weui-cell__hd"><label class="weui-label">账号</label></div>
                                 <div class="weui-cell__bd">

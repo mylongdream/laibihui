@@ -9,12 +9,12 @@
                         <div class="weui-panel weui-panel_access">
                             <div class="weui-media-box weui-media-box_appmsg">
                                 <div class="weui-media-box__hd">
-                                    <img class="weui-media-box__thumb" src="{{ auth()->user()->headimgurl ? uploadImage(auth()->user()->headimgurl) : asset('static/image/common/getheadimg.jpg') }}">
+                                    <img class="weui-media-box__thumb" src="{{ auth('crm')->user()->headimgurl ? uploadImage(auth('crm')->user()->headimgurl) : asset('static/image/common/getheadimg.jpg') }}">
                                 </div>
                                 <div class="weui-media-box__bd">
-                                    <h4 class="weui-media-box__title">{{ auth()->user()->username }}</h4>
-                                    <p class="weui-media-box__desc">手机号码：{{ auth()->user()->mobile ? auth()->user()->mobile : '暂无' }}</p>
-                                    <p class="weui-media-box__desc">用户分组：{{ auth()->user()->group->name }}</p>
+                                    <h4 class="weui-media-box__title">{{ auth('crm')->user()->username }}</h4>
+                                    <p class="weui-media-box__desc">手机号码：{{ auth('crm')->user()->mobile ? auth('crm')->user()->mobile : '暂无' }}</p>
+                                    <p class="weui-media-box__desc">用户分组：{{ auth('crm')->user()->group->name }}</p>
                                 </div>
                                 <div class="weui-media-box__ft">
                                 </div>
