@@ -43,6 +43,17 @@
                                             <span class="weui-cell__ft"></span>
                                         </a>
                                     </div>
+                                    <div class="weui-cells">
+                                        <a class="weui-cell weui-cell_access" href="{{ route('mobile.crm.logout') }}">
+                                            <div class="weui-cell__hd">
+                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
+                                            </div>
+                                            <div class="weui-cell__bd weui-cell_primary">
+                                                <p class="user-menu-txt">退出登录</p>
+                                            </div>
+                                            <span class="weui-cell__ft"></span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

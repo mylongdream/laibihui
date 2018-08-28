@@ -52,11 +52,11 @@ class LoginController extends Controller
         if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false){
             $userinfo = session('wechat.oauth_user.default');
             if(!$userinfo){
-                return response()->redirectToRoute('wechat.login', ['ReturnUrl' => $request->ReturnUrl]);
+                return response()->redirectToRoute('wechat.login.crm', ['ReturnUrl' => $request->ReturnUrl]);
             }else{
                 $wxuser = WechatUserModel::firstOrCreate(['openid' => $userinfo['id']]);
-                if($wxuser->user_id){
-                    return response()->redirectToRoute('wechat.login', ['ReturnUrl' => $request->ReturnUrl]);
+                if($wxuser->user && $wxuser->user->group->type == 'crm'){
+                    return response()->redirectToRoute('wechat.login.crm', ['ReturnUrl' => $request->ReturnUrl]);
                 }
             }
         }

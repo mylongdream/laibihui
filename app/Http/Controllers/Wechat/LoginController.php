@@ -35,9 +35,6 @@ class LoginController extends Controller
                 $ReturnUrl = $request->ReturnUrl;
                 if ($request->type == 'login') {
                     auth()->login($wxuser->user, true);
-                    if ($wxuser->user->group->type == 'crm') {
-                        auth('crm')->login($wxuser->user, true);
-                    }
                     $ReturnUrl = $ReturnUrl ? $ReturnUrl : route('mobile.user.index');
                 } else {
                     $wxuser->user_id = 0;
@@ -55,5 +52,45 @@ class LoginController extends Controller
         }
         return redirect()->route('mobile.login', ['ReturnUrl' => $request->ReturnUrl]);
     }
+
+    public function crm(Request $request)
+    {
+        if(auth('crm')->check()){
+            if($request->ReturnUrl){
+                return redirect()->to($request->ReturnUrl);
+            }else{
+                return redirect()->route('mobile.crm.index');
+            }
+        }
+        $userinfo = session('wechat.oauth_user.default');
+        $wxuser = WechatUserModel::firstOrCreate(['openid' => $userinfo['id']]);
+        if($wxuser->user && $wxuser->user->group->type == 'crm'){
+            if (1) {
+                auth('crm')->login($wxuser->user, true);
+                $ReturnUrl = $request->ReturnUrl ? $request->ReturnUrl : route('mobile.crm.index');
+                return redirect()->to($ReturnUrl);
+            }
+            if ($request->isMethod('POST')) {
+                $ReturnUrl = $request->ReturnUrl;
+                if ($request->type == 'login') {
+                    auth()->login($wxuser->user, true);
+                    $ReturnUrl = $ReturnUrl ? $ReturnUrl : route('mobile.user.index');
+                } else {
+                    $wxuser->user_id = 0;
+                    $wxuser->save();
+                    $ReturnUrl = route('mobile.login', ['ReturnUrl' => $ReturnUrl]);
+                }
+                if ($request->ajax()){
+                    return response()->json(['status' => 1, 'url' => $ReturnUrl]);
+                }else{
+                    return redirect()->to($ReturnUrl);
+                }
+            } else {
+                return view('wechat.login.index', ['user' => $wxuser->user]);
+            }
+        }
+        return redirect()->route('mobile.crm.login', ['ReturnUrl' => $request->ReturnUrl]);
+    }
+
 
 }

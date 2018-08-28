@@ -643,6 +643,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'wechat', 'as' => 'wec
     Route::any('server', ['as' => 'server', 'uses' => 'Wechat\ServerController@index']);
     Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
         Route::any('login', ['as' => 'login', 'uses' => 'Wechat\LoginController@index']);
+        Route::any('login/crm', ['as' => 'login.crm', 'uses' => 'Wechat\LoginController@crm']);
         //投票活动
         Route::get('ownervote', ['as' => 'ownervote.index', 'uses' => 'Wechat\OwnervoteController@index']);
         Route::any('ownervote/apply', ['as' => 'ownervote.apply', 'uses' => 'Wechat\OwnervoteController@apply']);
