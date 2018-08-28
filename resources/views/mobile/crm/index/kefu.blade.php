@@ -43,6 +43,12 @@
                                             <span class="weui-cell__ft"></span>
                                         </a>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weui-panel">
+                            <div class="weui-panel__bd">
+                                <div class="weui-media-box weui-media-box_small-appmsg">
                                     <div class="weui-cells">
                                         <a class="weui-cell weui-cell_access" href="{{ route('mobile.crm.logout') }}">
                                             <div class="weui-cell__hd">
