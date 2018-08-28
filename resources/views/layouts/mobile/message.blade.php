@@ -14,15 +14,13 @@
 						<p class="weui-msg__desc">{{ $info }}</p>
 						@endif
 					</div>
+					@if (isset($url) && $url)
 					<div class="weui-msg__opr-area">
 						<p class="weui-btn-area">
-							@if (isset($url) && $url)
 								<a class="weui-btn weui-btn_primary" href="{{ $url }}">确定</a>
-							@else
-								<a class="weui-btn weui-btn_default" href="javascript:history.back(-1);">确定</a>
-							@endif
 						</p>
 					</div>
+					@endif
 				</div>
 			</div>
 		@else

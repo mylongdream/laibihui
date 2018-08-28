@@ -35,6 +35,9 @@ class LoginController extends Controller
                 $ReturnUrl = $request->ReturnUrl;
                 if ($request->type == 'login') {
                     auth()->login($wxuser->user, true);
+                    if ($wxuser->user->group->type == 'crm') {
+                        auth('crm')->login($wxuser->user, true);
+                    }
                     $ReturnUrl = $ReturnUrl ? $ReturnUrl : route('mobile.user.index');
                 } else {
                     $wxuser->user_id = 0;

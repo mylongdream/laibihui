@@ -20,7 +20,7 @@ class SellCardController extends Controller
     public function index(Request $request)
     {
         if($request->getcode){
-            $promotion = route('mobile.grantsell', ['fromuser' => Hashids::connection('promotion')->encode(auth()->user()->uid)]);
+            $promotion = route('mobile.grantsell', ['fromuser' => Hashids::connection('promotion')->encode(auth('crm')->user()->uid)]);
             $image = QrCode::format('png')->size(400)->generate($promotion);
             $qrcode = Image::make($image);
             return $qrcode->response('png', 90);
@@ -31,7 +31,7 @@ class SellCardController extends Controller
 
     public function users(Request $request)
     {
-        $users = CrmPersonnelModel::where('topuid', auth()->user()->uid)->orderBy('created_at', 'desc')->paginate(20);
+        $users = CrmPersonnelModel::where('topuid', auth('crm')->user()->uid)->orderBy('created_at', 'desc')->paginate(20);
         return view('mobile.crm.sellcard.users', ['users' => $users]);
     }
 

@@ -23,6 +23,13 @@ class CRMAuth
                 return redirect()->route('crm.login');
             }
         }
+        if (Auth::guard($guard)->user()->group->type != 'crm') {
+            if ($request->ajax()){
+                return response()->json(['status' => 0, 'info' => '你没有权限进入']);
+            }else{
+                return response()->view('layouts.crm.message', ['status' => 0, 'info' => '你没有权限进入']);
+            }
+        }
         if (Auth::guard($guard)->user()->group->module == 'shangjia' && !Auth::guard($guard)->user()->shop) {
             if ($request->ajax()){
                 return response()->json(['status' => 0, 'info' => '管理店铺不存在']);
