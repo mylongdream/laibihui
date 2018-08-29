@@ -212,4 +212,15 @@ class UserController extends Controller
         }
     }
 
+    public function promotion(Request $request)
+    {
+        $CommonUserModel = new CommonUserModel;
+        $userlist = $CommonUserModel->where('fromuid', '>', 0)->where(function($query) use($request) {
+            if($request->username){
+                $query->where('username', 'like',"%".$request->username."%");
+            }
+        })->latest()->paginate(20);
+        return view('admin.user.user.promotion', ['userlist' => $userlist]);
+    }
+
 }

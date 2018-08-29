@@ -410,6 +410,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::resource('value', 'Admin\Attr\ValueController');
         });
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+            Route::get('user/promotion', ['as' => 'user.promotion', 'uses' => 'Admin\User\UserController@promotion']);
             Route::post('user/batch', ['as' => 'user.batch', 'uses' => 'Admin\User\UserController@batch']);
             Route::any('user/{id}/group', ['as' => 'user.group', 'uses' => 'Admin\User\UserController@group']);
             Route::resource('user', 'Admin\User\UserController');

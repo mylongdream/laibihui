@@ -3,6 +3,10 @@
 @section('content')
 	<div class="itemnav">
 		<div class="title"><h3>{{ trans('admin.user.user') }}</h3></div>
+		<ul class="tab">
+			<li class="current"><a href="{{ route('admin.user.user.index') }}"><span>{{ trans('admin.user.user.list') }}</span></a></li>
+			<li><a href="{{ route('admin.user.user.promotion') }}"><span>{{ trans('admin.user.user.promotion') }}</span></a></li>
+		</ul>
 	</div>
 	<form id="schform" name="schform" class="formsearch" method="get" action="{{ route('admin.user.user.index') }}">
 	<div class="tbsearch">

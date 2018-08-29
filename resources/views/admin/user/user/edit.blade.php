@@ -13,6 +13,18 @@
 				<div class="y"><a href="{{ route('admin.user.user.index') }}" class="btn">< {{ trans('admin.user.user.list') }}</a></div>
 			</div>
 			<table>
+                @if ($user->fromupuser)
+                    <tr>
+                        <td width="150" align="right">{{ trans('admin.user.user.fromupuser') }}</td>
+                        <td><input class="txt" type="text" size="50" value="{{ $user->fromupuser->username }}" name="username"></td>
+                    </tr>
+                @endif
+				@if ($user->fromuser)
+				<tr>
+					<td width="150" align="right">{{ trans('admin.user.user.fromuser') }}</td>
+					<td><input class="txt" type="text" size="50" value="{{ $user->fromuser->username }}" name="username"></td>
+				</tr>
+				@endif
 				<tr>
 					<td width="150" align="right">{{ trans('admin.user.user.username') }}</td>
 					<td><input class="txt" type="text" size="50" value="{{ $user->username }}" name="username"></td>
