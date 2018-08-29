@@ -25,8 +25,8 @@
 			<tr>
 				<th width="70">{{ trans('admin.user.user.headimgurl') }}</th>
 				<th>{{ trans('admin.user.user.username') }}</th>
-				<th width="70">{{ trans('admin.user.user.fromuser') }}</th>
-				<th width="70">{{ trans('admin.user.user.fromupuser') }}</th>
+				<th width="200">{{ trans('admin.user.user.fromuser') }}</th>
+				<th width="200">{{ trans('admin.user.user.fromupuser') }}</th>
 				<th width="120">{{ trans('admin.created_at') }}</th>
 			</tr>
 			@foreach ($userlist as $value)

@@ -16,15 +16,15 @@
                 @if ($user->fromupuser)
                     <tr>
                         <td width="150" align="right">{{ trans('admin.user.user.fromupuser') }}</td>
-                        <td><input class="txt" type="text" size="50" value="{{ $user->fromupuser->username }}" name="username"></td>
+                        <td>{{ $user->fromupuser->username }}</td>
                     </tr>
                 @endif
-				@if ($user->fromuser)
-				<tr>
-					<td width="150" align="right">{{ trans('admin.user.user.fromuser') }}</td>
-					<td><input class="txt" type="text" size="50" value="{{ $user->fromuser->username }}" name="username"></td>
-				</tr>
-				@endif
+                @if ($user->fromuser)
+                    <tr>
+                        <td width="150" align="right">{{ trans('admin.user.user.fromuser') }}</td>
+                        <td>{{ $user->fromuser->username }}</td>
+                    </tr>
+                @endif
 				<tr>
 					<td width="150" align="right">{{ trans('admin.user.user.username') }}</td>
 					<td><input class="txt" type="text" size="50" value="{{ $user->username }}" name="username"></td>
