@@ -12,7 +12,7 @@
                 <div class="weui-msg__opr-area">
                     <form method="post" action="{{ route('mobile.sellcard', ['fromuser' => request('fromuser')]) }}">
                         {!! csrf_field() !!}
-                        <div class="sellcard-cell">
+                        <div class="weui-cells sellcard-cell">
                             @if (strpos(request()->userAgent(), 'MicroMessenger') !== false || strpos(request()->userAgent(), 'AlipayClient') !== false)
                                 <div class="weui-cell weui-cell_vcode">
                                     <div class="weui-cell__hd"><label class="weui-label">卡  号</label></div>
