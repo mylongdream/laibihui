@@ -13,6 +13,7 @@ class CommonUserSellcardModel extends Model
 	protected $table = 'common_user_sellcard';
 	protected $primaryKey = 'id';
 	public $timestamps = true;
+    protected $dates = ['pay_at'];
     protected $amountFields = ['order_amount'];
 
     public function user()
