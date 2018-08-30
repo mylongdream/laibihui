@@ -19,6 +19,7 @@
                             <div class="weui-msg__opr-area">
                                 <p class="weui-btn-area">
                                     <a href="{{ route('mobile.brand.shop.index') }}" class="weui-btn weui-btn_primary">前去消费</a>
+                                    <a href="{{ route('mobile.user.index') }}" class="weui-btn weui-btn_default">回到个人中心</a>
                                 </p>
                             </div>
                         </div>

@@ -5,13 +5,14 @@
         <div class="wp">
             <div class="weui-msg">
                 <div class="weui-msg__text-area">
-                    <h2 class="weui-msg__title">{{ $fromuser->username }} 为您办卡</h2>
+                    <h2 class="weui-msg__title">工号：{{ $fromuser->username }} 正在为您办卡</h2>
                     <p class="weui-msg__desc">您将在线支付10元费用进行办卡</p>
+                    <p class="weui-msg__desc">开卡后可享：到店体验金10元 + 冻结余额90元</p>
                 </div>
-                <div class="sellcard_box">
+                <div class="weui-msg__opr-area">
                     <form method="post" action="{{ route('mobile.sellcard', ['fromuser' => request('fromuser')]) }}">
                         {!! csrf_field() !!}
-                        <div class="sellcard_bd">
+                        <div class="sellcard-cell">
                             @if (strpos(request()->userAgent(), 'MicroMessenger') !== false || strpos(request()->userAgent(), 'AlipayClient') !== false)
                                 <div class="weui-cell weui-cell_vcode">
                                     <div class="weui-cell__hd"><label class="weui-label">卡  号</label></div>
@@ -31,10 +32,13 @@
                                 </div>
                             @endif
                         </div>
-                        <div class="sellcard_btn">
+                        <div class="weui-btn-area">
                             <button type="submit" class="weui-btn weui-btn_primary">提 交</button>
                         </div>
                     </form>
+                </div>
+                <div class="weui-msg__text-area">
+                    <p class="weui-msg__desc">如有疑问请致电：4006-820-917</p>
                 </div>
             </div>
         </div>

@@ -104,6 +104,12 @@ class IndexController extends Controller
                         'number.exists' => '卡号不存在！',
                     );
                     $this->validate($request, $rules, $messages);
+                    $sellorder = CommonUserSellcardModel::where('number', $request->number)->where('pay_status', '>', 0)->first();
+                    if($sellorder){
+                        return view('layouts.mobile.message', ['status' => 0, 'info' => '该卡号已经付款过了']);
+                    }
+                    //删除该卡号生成的未付款订单
+                    CommonUserSellcardModel::where('number', $request->number)->where('pay_status', 0)->delete();
                     $sellorder = new CommonUserSellcardModel();
                     $sellorder->uid = $fromuser->uid;
                     $sellorder->order_sn = date("YmdHis") . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
@@ -143,6 +149,7 @@ class IndexController extends Controller
                     //付款成功后回调
                     $sellorder->pay_status = 1;
                     $sellorder->pay_at = time();
+                    $sellorder->save();
                     if($fromuser){
                         $user_account = new CommonUserAccountModel();
                         $user_account->uid = $fromuser->uid;

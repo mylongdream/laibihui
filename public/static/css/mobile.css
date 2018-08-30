@@ -453,9 +453,8 @@ pre{ white-space: pre-wrap!important;  word-wrap: break-word!important;  *white-
 .cardreward .btn a{display: block;margin:0 auto;width:100%;font-size: 16px;line-height: 32px;height: 32px;background:#44b549;color: #fff;text-align: center}
 .cardreward .btn a.disabled{background:#999;}
 
-.sellcard_box{padding:20px;}
-.sellcard_bd{padding: 10px 15px;border: 1px solid #dfdfdf;background:#fff;}
-.sellcard_btn{margin-top:30px;}
+.sellcard-cell {margin:0 15px;}
+.sellcard-cell .weui-label{width:auto;margin-right:10px;}
 
 #origin-img{ display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index: 999999; }
 #origin-img .swiper-slide img{ width:100%; vertical-align:middle;  }
