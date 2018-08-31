@@ -17,7 +17,12 @@ class AllocationController extends Controller
      */
     public function index(Request $request)
     {
-        $list = CrmAllocationModel::orderBy('created_at', 'desc')->paginate(20);
+        $list = CrmAllocationModel::where(function($query) use($request) {
+            if($request->username){
+                $user = CommonUserModel::where('username', $request->username)->first();
+                $query->where('uid', $user->uid);
+            }
+        })->orderBy('created_at', 'desc')->paginate(20);
         return view('admin.crm.allocation.index', ['list' => $list]);
     }
 

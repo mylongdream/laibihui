@@ -27,7 +27,7 @@
 				<td><input class="ids" type="checkbox" value="{{ $value->id }}" name="ids[]"></td>
 				<td>{{ $value->user ? $value->user->username : '/' }}</td>
 				<td>{{ $value->topuser ? $value->topuser->username : '/' }}</td>
-				<td>{{ $value->allocation ? $value->allocation->sum('cardnum') : '0' }}</td>
+				<td><a href="{{ route('admin.crm.allocation.index', ['username' => $value->user->username]) }}">{{ $value->allocation ? $value->allocation->sum('cardnum') : '0' }}</a></td>
 				<td>{{ $value->sellcard ? $value->sellcard->where('pay_status', 1)->count() : '0' }}</td>
 				<td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
 				<td>

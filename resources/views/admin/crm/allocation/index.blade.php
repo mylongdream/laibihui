@@ -4,6 +4,15 @@
 	<div class="itemnav">
 		<div class="title"><h3>{{ trans('admin.crm.allocation') }}</h3></div>
 	</div>
+	<form id="schform" name="schform" class="formsearch" method="get" action="{{ route('admin.crm.allocation.index') }}">
+		<div class="tbsearch">
+			<dl>
+				<dt>{{ trans('admin.crm.allocation.user') }}</dt>
+				<dd><input type="text" name="username" class="schtxt" value="{{ request('username') }}"></dd>
+			</dl>
+			<div class="schbtn"><button name="" type="submit">{{ trans('admin.search') }}</button></div>
+		</div>
+	</form>
 	<form id="cpform" name="cpform" class="ajaxform" method="post" action="{{ route('admin.crm.allocation.batch') }}">
 	{!! csrf_field() !!}
 	<input type="hidden" id="operate" name="operate" value="" />
@@ -39,7 +48,7 @@
 			<button class="submitbtn" name="delsubmit" value="yes" type="submit">{{ trans('admin.destroy') }}</button>
 		</div>
 		<div class="page y">
-			{!! $list->links() !!}
+			{!! $list->appends(['username' => request('username')])->links() !!}
 		</div>
     </div>
 	@endif
