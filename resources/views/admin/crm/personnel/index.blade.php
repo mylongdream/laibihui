@@ -28,7 +28,7 @@
 				<td>{{ $value->user ? $value->user->username : '/' }}</td>
 				<td>{{ $value->topuser ? $value->topuser->username : '/' }}</td>
 				<td><a href="{{ route('admin.crm.allocation.index', ['username' => $value->user->username]) }}">{{ $value->allocation ? $value->allocation->sum('cardnum') : '0' }}</a></td>
-				<td>{{ $value->sellcard ? $value->sellcard->where('pay_status', 1)->count() : '0' }}</td>
+				<td><a href="{{ route('admin.extend.sellcard.index', ['username' => $value->user->username, 'pay_status' => 2]) }}">{{ $value->sellcard ? $value->sellcard->where('pay_status', 1)->count() : '0' }}</a></td>
 				<td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
 				<td>
 					<a href="{{ route('admin.crm.personnel.allocate',$value->id) }}" class="openwindow" title="{{ trans('admin.crm.personnel.allocate') }}">{{ trans('admin.crm.personnel.allocate') }}</a>

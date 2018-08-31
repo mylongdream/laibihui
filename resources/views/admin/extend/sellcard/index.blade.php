@@ -17,6 +17,10 @@
 			</dd>
 		</dl>
 		<dl>
+			<dt>{{ trans('admin.extend.sellcard.user') }}</dt>
+			<dd><input type="text" name="username" class="schtxt" value="{{ request('username') }}"></dd>
+		</dl>
+		<dl>
 			<dt>{{ trans('admin.extend.sellcard.order_sn') }}</dt>
 			<dd><input type="text" name="order_sn" class="schtxt" value="{{ request('order_sn') }}"></dd>
 		</dl>
@@ -66,7 +70,7 @@
 			<button class="submitbtn" name="delsubmit" value="yes" type="submit">{{ trans('admin.destroy') }}</button>
 		</div>
 		<div class="page y">
-			{!! $orders->appends(['pay_status' => request('pay_status')])->appends(['order_sn' => request('order_sn')])->links() !!}
+			{!! $orders->appends(['pay_status' => request('pay_status')])->appends(['username' => request('username')])->appends(['order_sn' => request('order_sn')])->links() !!}
 		</div>
     </div>
 	@endif

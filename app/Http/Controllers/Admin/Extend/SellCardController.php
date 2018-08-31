@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Extend;
 
 use App\Http\Controllers\Controller;
+use App\Models\CommonUserModel;
 use App\Models\CommonUserSellcardModel;
 use Illuminate\Http\Request;
 
@@ -22,6 +23,11 @@ class SellCardController extends Controller
                 $query->where('pay_status', 0);
             }else if($request->pay_status == 2){
                 $query->where('pay_status', 1);
+            }
+        })->where(function($query) use($request) {
+            if($request->username){
+                $user = CommonUserModel::where('username', $request->username)->first();
+                $query->where('uid', $user->uid);
             }
         })->where(function($query) use($request) {
             if($request->order_sn){
