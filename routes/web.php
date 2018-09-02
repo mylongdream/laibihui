@@ -110,7 +110,8 @@ Route::group(['domain' => 'zhihui.hztbg.com'], function () {
         Route::get('orderfarm/{id}', ['as' => 'orderfarm.show', 'uses' => 'User\OrderFarmController@show']);
         Route::any('orderfarm/{id}/cancel', ['as' => 'orderfarm.cancel', 'uses' => 'User\OrderFarmController@cancel']);
         Route::get('promotion', ['as' => 'promotion.index', 'uses' => 'User\PromotionController@index']);
-        Route::get('promotion/card', ['as' => 'promotion.card', 'uses' => 'User\PromotionController@card']);
+        Route::get('promotion/first', ['as' => 'promotion.first', 'uses' => 'User\PromotionController@first']);
+        Route::get('promotion/second', ['as' => 'promotion.second', 'uses' => 'User\PromotionController@second']);
         Route::get('promotion/user', ['as' => 'promotion.user', 'uses' => 'User\PromotionController@user']);
         Route::get('appoint', ['as' => 'appoint.index', 'uses' => 'User\AppointController@index']);
         Route::get('appoint/{id}', ['as' => 'appoint.show', 'uses' => 'User\AppointController@show'])->where('id', '[0-9]+');

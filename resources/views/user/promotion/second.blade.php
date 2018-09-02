@@ -5,16 +5,18 @@
 		<div class="title"><h3>{{ trans('user.promotion') }}</h3></div>
 		<ul class="tab">
 			<li><a href="{{ route('user.promotion.index') }}"><span>{{ trans('user.promotion.rule') }}</span></a></li>
-			<li class="on"><a href="{{ route('user.promotion.card') }}"><span>{{ trans('user.promotion.card') }}</span></a></li>
+			<li><a href="{{ route('user.promotion.first') }}"><span>{{ trans('user.promotion.first') }}</span></a></li>
+			<li class="on"><a href="{{ route('user.promotion.second') }}"><span>{{ trans('user.promotion.second') }}</span></a></li>
 		</ul>
 	</div>
-	<form id="schform" name="schform" class="formsearch" method="get" action="{{ route('user.promotion.card') }}">
+	<form id="schform" name="schform" class="formsearch" method="get" action="{{ route('user.promotion.second') }}">
 		<div class="tbsearch">
 			<dl>
 				<dd>
-					<select class="schselect" name="lower" onchange='this.form.submit()'>
-						<option value="0">一级下线</option>
-						<option value="1" {!! request('lower') == 1 ? 'selected="selected"' : '' !!}>二级下线</option>
+					<select class="schselect" name="bindcard" onchange='this.form.submit()'>
+						<option value="0">全部</option>
+						<option value="1" {!! request('bindcard') == 1 ? 'selected="selected"' : '' !!}>未开卡</option>
+						<option value="2" {!! request('bindcard') == 2 ? 'selected="selected"' : '' !!}>已开卡</option>
 					</select>
 				</dd>
 			</dl>

@@ -23,22 +23,40 @@ class PromotionController extends Controller
         return view('user.promotion.index', ['promotion' => $promotion]);
     }
 
-    public function card(Request $request)
+    public function first(Request $request)
     {
-        $CommonUserCardModel = new CommonUserCardModel;
-        $promotions = $CommonUserCardModel->where(function($query) use($request) {
-            if($request->lower){
-                $query->where('fromupuid', auth()->user()->uid);
-            }else{
-                $query->where('fromuid', auth()->user()->uid);
-            }
-        })->where(function($query) use($request) {
-            if($request->username){
-                $uids = CommonUserModel::where('username', 'like',"%".$request->username."%")->pluck('uid');
-                $query->whereIn('uid', $uids);
+        if(!($request->bindcard && in_array($request->bindcard, array(1, 2)))){
+            //return response()->redirectToRoute('user.promotion.first', ['bindcard' => 1]);
+        }
+        $usercount = collect();
+        $usercount->hasCard = CommonUserModel::where('fromuid', auth()->user()->uid)->has('card')->count();
+        $usercount->doesntHaveCard = CommonUserModel::where('fromuid', auth()->user()->uid)->doesntHave('card')->count();
+        $promotions = CommonUserModel::where('fromuid', auth()->user()->uid)->where('username', 'like',"%".$request->username."%")->where(function($query) use($request) {
+            if($request->bindcard == 1){
+                $query->doesntHave('card');
+            }elseif($request->bindcard == 2){
+                $query->has('card');
             }
         })->latest()->paginate(20);
-        return view('user.promotion.card', ['promotions' => $promotions]);
+        return view('user.promotion.first', ['usercount' => $usercount, 'promotions' => $promotions]);
+    }
+
+    public function second(Request $request)
+    {
+        if(!($request->bindcard && in_array($request->bindcard, array(1, 2)))){
+            //return response()->redirectToRoute('user.promotion.second', ['bindcard' => 1]);
+        }
+        $usercount = collect();
+        $usercount->hasCard = CommonUserModel::where('fromupuid', auth()->user()->uid)->has('card')->count();
+        $usercount->doesntHaveCard = CommonUserModel::where('fromupuid', auth()->user()->uid)->doesntHave('card')->count();
+        $promotions = CommonUserModel::where('fromupuid', auth()->user()->uid)->where('username', 'like',"%".$request->username."%")->where(function($query) use($request) {
+            if($request->bindcard == 1){
+                $query->doesntHave('card');
+            }elseif($request->bindcard == 2){
+                $query->has('card');
+            }
+        })->latest()->paginate(20);
+        return view('user.promotion.second', ['usercount' => $usercount, 'promotions' => $promotions]);
     }
 
 }

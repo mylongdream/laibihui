@@ -5,7 +5,8 @@
 		<div class="title"><h3>{{ trans('user.promotion') }}</h3></div>
 		<ul class="tab">
 			<li class="on"><a href="{{ route('user.promotion.index') }}"><span>{{ trans('user.promotion.rule') }}</span></a></li>
-			<li><a href="{{ route('user.promotion.card') }}"><span>{{ trans('user.promotion.card') }}</span></a></li>
+			<li><a href="{{ route('user.promotion.first') }}"><span>{{ trans('user.promotion.first') }}</span></a></li>
+			<li><a href="{{ route('user.promotion.second') }}"><span>{{ trans('user.promotion.second') }}</span></a></li>
 		</ul>
 	</div>
 	<div class="promotion-tip mtw">
