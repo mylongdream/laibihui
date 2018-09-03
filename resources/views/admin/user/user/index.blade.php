@@ -37,12 +37,13 @@
 		<table>
 			<tr>
 				<th width="24"><label><input class="checkall" type="checkbox"></label></th>
-				<th width="70">{{ trans('admin.user.user.headimgurl') }}</th>
+				<th width="60">{{ trans('admin.user.user.headimgurl') }}</th>
 				<th>{{ trans('admin.user.user.username') }}</th>
+				<th width="120">{{ trans('admin.user.user.mobile') }}</th>
 				<th width="70">{{ trans('admin.user.user.tiyan_money') }}</th>
-				<th width="70">{{ trans('admin.user.user.user_money') }}</th>
-				<th width="70">{{ trans('admin.user.user.frozen_money') }}</th>
-				<th width="70">{{ trans('admin.user.user.score') }}</th>
+				<th width="60">{{ trans('admin.user.user.user_money') }}</th>
+				<th width="60">{{ trans('admin.user.user.frozen_money') }}</th>
+				<th width="60">{{ trans('admin.user.user.score') }}</th>
 				<th width="120">{{ trans('admin.user.user.lastlogin') }}</th>
 				<th width="120">{{ trans('admin.created_at') }}</th>
 				<th width="90">{{ trans('admin.operation') }}</th>
@@ -52,11 +53,12 @@
 				<td><label><input class="ids" type="checkbox" value="{{ $value->uid }}" name="ids[]"></label></td>
 				<td><img class="block" width="48" height="48" src="{{ $value->headimgurl ? uploadImage($value->headimgurl) : asset('static/image/common/getheadimg.jpg') }}"></td>
 				<td><p>{{ $value->username }}</p><p style="color: #999">{{ $value->group ? $value->group->name : '' }}</p></td>
+				<td>{{ $value->mobile ? $value->mobile : '/' }}</td>
 				<td>{{ $value->tiyan_money }} 元</td>
 				<td>{{ $value->user_money }} 元</td>
 				<td>{{ $value->frozen_money }} 元</td>
 				<td>{{ $value->score }}</td>
-				<td>{{ $value->lastlogin ? $value->lastlogin->format('Y-m-d H:i') : '/' }}</td>
+				<td>{{ $value->lastlogin ? $value->lastlogin->format('Y-m-d H:i') : $value->created_at->format('Y-m-d H:i') }}</td>
 				<td>{{ $value->created_at->format('Y-m-d H:i') }}</td>
 				<td>
 					<a href="{{ route('admin.user.user.group',$value->uid) }}" class="openwindow" title="{{ trans('admin.user.user.group') }}">{{ trans('admin.user.user.group') }}</a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Wechat;
 use App\Http\Controllers\Controller;
 use App\Models\CommonUserModel;
 use App\Models\WechatUserModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -27,6 +28,8 @@ class LoginController extends Controller
         $wxuser = WechatUserModel::firstOrCreate(['openid' => $userinfo['id']]);
         if($wxuser->user){
             if (1) {
+                $wxuser->user->lastlogin = Carbon::now();
+                $wxuser->user->save();
                 auth()->login($wxuser->user, true);
                 $ReturnUrl = $request->ReturnUrl ? $request->ReturnUrl : route('mobile.user.index');
                 return redirect()->to($ReturnUrl);
@@ -66,6 +69,8 @@ class LoginController extends Controller
         $wxuser = WechatUserModel::firstOrCreate(['openid' => $userinfo['id']]);
         if($wxuser->user && $wxuser->user->group->type == 'crm'){
             if (1) {
+                $wxuser->user->lastlogin = Carbon::now();
+                $wxuser->user->save();
                 auth('crm')->login($wxuser->user, true);
                 $ReturnUrl = $request->ReturnUrl ? $request->ReturnUrl : route('mobile.crm.index');
                 return redirect()->to($ReturnUrl);
