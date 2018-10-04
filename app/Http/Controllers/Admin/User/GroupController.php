@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\CommonUserGroupModel;
+use App\Models\WechatTagModel;
 use Illuminate\Http\Request;
 
 
@@ -27,7 +28,8 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('admin.user.group.create');
+        $taglist = WechatTagModel::orderBy('id', 'asc')->get();
+        return view('admin.user.group.create', ['taglist' => $taglist]);
     }
 
     /**
@@ -51,6 +53,7 @@ class GroupController extends Controller
         $group->name = $request->name;
         $group->description = $request->description;
         $group->displayorder = intval($request->displayorder);
+        $group->tag_id = intval($request->tag_id);
         $group->save();
 
         if ($request->ajax()){
@@ -105,6 +108,7 @@ class GroupController extends Controller
         $group->name = $request->name;
         $group->description = $request->description;
         $group->displayorder = intval($request->displayorder);
+        $group->tag_id = intval($request->tag_id);
         $group->save();
 
         if ($request->ajax()){

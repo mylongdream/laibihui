@@ -4,12 +4,12 @@
 	<div class="itemnav">
 		<div class="title"><h3>{{ trans('admin.wechat.menu') }}</h3></div>
 	</div>
-	<form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('admin.wechat.menu.store') }}">
+	<form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('admin.wechat.menu.store', ['tag_id' => request('tag_id')]) }}">
 		{!! csrf_field() !!}
 		<div class="tbedit">
 			<div class="tbhead cl">
 				<div class="z"><h3>{{ trans('admin.wechat.menu.create') }}</h3></div>
-				<div class="y"><a href="{{ route('admin.wechat.menu.index') }}" class="btn">< {{ trans('admin.wechat.menu.list') }}</a></div>
+				<div class="y"><a href="{{ route('admin.wechat.menu.index', ['tag_id' => request('tag_id')]) }}" class="btn">< {{ trans('admin.wechat.menu.list') }}</a></div>
 			</div>
 			<table>
 				<tr>

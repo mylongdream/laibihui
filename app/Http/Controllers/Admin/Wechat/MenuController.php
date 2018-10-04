@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Wechat;
 
 use App\Http\Controllers\Controller;
 use App\Models\WechatMenuModel;
+use App\Models\WechatTagModel;
 use Illuminate\Http\Request;
 
 
@@ -33,8 +34,12 @@ class MenuController extends Controller
      */
     public function index(Request $request)
     {
-        $menulist = WechatMenuModel::orderBy('displayorder', 'asc')->get();
-        return view('admin.wechat.menu.index', ['menulist' => category_tree($menulist)]);
+        $taglist = WechatTagModel::orderBy('id', 'asc')->get();
+        $menulist = WechatMenuModel::where(function($query) use($request) {
+            $tag_id = intval($request->tag_id) ? intval($request->tag_id) : 0;
+            $query->where('tag_id', $tag_id);
+        })->orderBy('displayorder', 'asc')->get();
+        return view('admin.wechat.menu.index', ['menulist' => category_tree($menulist), 'taglist' => $taglist]);
     }
 
     /**
@@ -42,9 +47,12 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $menulist = WechatMenuModel::orderBy('displayorder', 'asc')->get();
+        $menulist = WechatMenuModel::where(function($query) use($request) {
+            $tag_id = intval($request->tag_id) ? intval($request->tag_id) : 0;
+            $query->where('tag_id', $tag_id);
+        })->orderBy('displayorder', 'asc')->get();
         return view('admin.wechat.menu.create', ['menulist' => category_tree($menulist)]);
     }
 
@@ -66,6 +74,7 @@ class MenuController extends Controller
         $this->validate($request, $rules, $messages);
 
         $menu = new WechatMenuModel;
+        $menu->tag_id = intval($request->tag_id) ? intval($request->tag_id) : 0;
         $menu->parentid = intval($request->parentid);
         $menu->name = $request->name;
         $menu->type = $request->type;
@@ -75,9 +84,9 @@ class MenuController extends Controller
         $menu->save();
 
         if ($request->ajax()){
-            return response()->json(['status' => '1', 'info' => trans('admin.wechat.menu.addsucceed'), 'url' => route('admin.wechat.menu.index')]);
+            return response()->json(['status' => '1', 'info' => trans('admin.wechat.menu.addsucceed'), 'url' => back()->getTargetUrl()]);
         }else{
-            return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.wechat.menu.addsucceed'), 'url' => route('admin.wechat.menu.index')]);
+            return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.wechat.menu.addsucceed'), 'url' => back()->getTargetUrl()]);
         }
     }
 
@@ -98,11 +107,14 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $menu = WechatMenuModel::findOrFail($id);
         $menu->message = unserialize($menu->message);
-        $menulist = WechatMenuModel::orderBy('displayorder', 'asc')->get();
+        $menulist = WechatMenuModel::where(function($query) use($request) {
+            $tag_id = intval($request->tag_id) ? intval($request->tag_id) : 0;
+            $query->where('tag_id', $tag_id);
+        })->orderBy('displayorder', 'asc')->get();
         return view('admin.wechat.menu.edit', ['menu' => $menu, 'menulist' => category_tree($menulist)]);
     }
 
@@ -134,9 +146,9 @@ class MenuController extends Controller
         $menu->save();
 
         if ($request->ajax()){
-            return response()->json(['status' => '1', 'info' => trans('admin.wechat.menu.editsucceed'), 'url' => route('admin.wechat.menu.index')]);
+            return response()->json(['status' => '1', 'info' => trans('admin.wechat.menu.editsucceed'), 'url' => back()->getTargetUrl()]);
         }else{
-            return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.wechat.menu.editsucceed'), 'url' => route('admin.wechat.menu.index')]);
+            return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.wechat.menu.editsucceed'), 'url' => back()->getTargetUrl()]);
         }
     }
 
@@ -196,7 +208,8 @@ class MenuController extends Controller
 
     public function publish(Request $request)
     {
-        $menulist = WechatMenuModel::orderBy('displayorder', 'asc')->get();
+        $tag_id = intval($request->tag_id) ? intval($request->tag_id) : 0;
+        $menulist = WechatMenuModel::where('tag_id', $tag_id)->orderBy('displayorder', 'asc')->get();
         if(!$menulist) {
             if ($request->ajax()) {
                 return response()->json(['status' => 1, 'info' => '菜单数据错误，无法发布', 'url' => back()->getTargetUrl()]);
@@ -292,7 +305,11 @@ class MenuController extends Controller
             }
         }
         $app = app('wechat.official_account');
-        $app->menu->create($pubmenu);
+        if($tag_id){
+            $app->menu->create($pubmenu, ['tag_id' => $tag_id]);
+        }else{
+            $app->menu->create($pubmenu);
+        }
         if ($request->ajax()) {
             return response()->json(['status' => 1, 'info' => trans('admin.wechat.menu.publishsucceed'), 'url' => back()->getTargetUrl()]);
         }else{

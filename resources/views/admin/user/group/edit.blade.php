@@ -26,6 +26,17 @@
 					<td><input class="txt" type="text" size="50" value="{{ $group->displayorder }}" name="displayorder"></td>
 				</tr>
 				<tr>
+					<td width="150" align="right">{{ trans('admin.user.group.tag_id') }}</td>
+					<td>
+						<select class="select" name="tag_id">
+							<option value="0">默认</option>
+							@foreach ($taglist as $value)
+								<option value="{{ $value->id }}" {!! $group->tag_id == $value->id ? 'selected="selected"' : '' !!}>{{ $value->name }}</option>
+							@endforeach
+						</select>
+					</td>
+				</tr>
+				<tr>
 					<td align="right"></td>
 					<td><input class="subtn" type="submit" value="提 交" name="submit"></td>
 				</tr>

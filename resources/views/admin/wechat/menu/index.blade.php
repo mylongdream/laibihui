@@ -4,6 +4,22 @@
 	<div class="itemnav">
 		<div class="title"><h3>{{ trans('admin.wechat.menu') }}</h3></div>
 	</div>
+	<form id="schform" name="schform" class="formsearch" method="get" action="{{ route('admin.wechat.menu.index') }}">
+		<div class="tbsearch">
+			<dl>
+				<dt>用户分组菜单</dt>
+				<dd>
+					<select class="schselect" name="tag_id" onchange='this.form.submit()'>
+						<option value="0">默认</option>
+						@foreach ($taglist as $value)
+							<option value="{{ $value->id }}" {!! request('tag_id') == $value->id ? 'selected="selected"' : '' !!}>{{ $value->name }}</option>
+						@endforeach
+					</select>
+				</dd>
+			</dl>
+			<div class="schbtn"><button name="" type="submit">{{ trans('admin.search') }}</button></div>
+		</div>
+	</form>
 	<form id="cpform" name="cpform" class="ajaxform" method="post" action="{{ route('admin.wechat.menu.batch') }}">
 	{!! csrf_field() !!}
 	<input type="hidden" id="operate" name="operate" value="" />
@@ -11,8 +27,8 @@
 		<div class="tbhead cl">
 			<div class="z"><h3>{{ trans('admin.wechat.menu.list') }}</h3></div>
 			<div class="y">
-				<a href="{{ route('admin.wechat.menu.create') }}" class="btn openwindow" title="{{ trans('admin.wechat.menu.create') }}">+ {{ trans('admin.wechat.menu.create') }}</a>
-				<a href="{{ route('admin.wechat.menu.publish') }}" class="btn ajaxbtn" title="{{ trans('admin.wechat.menu.publish') }}">{{ trans('admin.wechat.menu.publish') }}</a>
+				<a href="{{ route('admin.wechat.menu.create', ['tag_id' => request('tag_id')]) }}" class="btn openwindow" title="{{ trans('admin.wechat.menu.create') }}">+ {{ trans('admin.wechat.menu.create') }}</a>
+				<a href="{{ route('admin.wechat.menu.publish', ['tag_id' => request('tag_id')]) }}" class="btn ajaxbtn" title="{{ trans('admin.wechat.menu.publish') }}">{{ trans('admin.wechat.menu.publish') }}</a>
 			</div>
 		</div>
 		<table>

@@ -10,7 +10,7 @@
 		<div class="tbedit">
 			<div class="tbhead cl">
 				<div class="z"><h3>{{ trans('admin.wechat.menu.edit') }}</h3></div>
-				<div class="y"><a href="{{ route('admin.wechat.menu.index') }}" class="btn">< {{ trans('admin.wechat.menu.list') }}</a></div>
+				<div class="y"><a href="{{ route('admin.wechat.menu.index', ['tag_id' => request('tag_id')]) }}" class="btn">< {{ trans('admin.wechat.menu.list') }}</a></div>
 			</div>
 			<table>
 				<tr>
