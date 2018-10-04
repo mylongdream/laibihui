@@ -59,11 +59,12 @@ class TagController extends Controller
         $this->validate($request, $rules, $messages);
 
         $app = app('wechat.official_account');
-		$tag_id = $app->user_tag->create($request->name);
+		$return = $app->user_tag->create($request->name);
+        $wechat_tag = $return['tag'];
 
         $tag = new WechatTagModel;
-        $tag->id = $tag_id;
-        $tag->name = $request->name;
+        $tag->id = $wechat_tag['id'];
+        $tag->name = $wechat_tag['name'];
         $tag->save();
 
         if ($request->ajax()){
