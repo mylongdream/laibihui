@@ -104,7 +104,7 @@
                     if(settings.hiddenInputId){
                         uploadli += '<input name="' + settings.hiddenInputId + '" value="' + data.value + '" type="hidden">';
                     }
-                    uploadli += '<div class="handle"><span class="setup">前移</span><span class="setdown">后移</span><span class="setdel">删除</span></div>';
+                    uploadli += '<div class="handle"><span class="setdel">删除</span></div>';
                     $( '#'+file.id ).html(uploadli);
                 }else{
                     box_obj.parent().find(".tdtip").html('上传成功');
@@ -145,22 +145,6 @@
                 return false;
             });
         };
-        $(uploadbox).on("click", ".setup", function(){
-            var onthis = $(this).parent().parent("li");
-            var getup = $(this).parent().parent("li").prev();
-            if(getup.length) {
-                $(getup).before(onthis);
-                onthis.trigger("mouseleave");
-            }
-        });
-        $(uploadbox).on("click", ".setdown", function(){
-            var onthis = $(this).parent().parent("li");
-            var getdown = $(this).parent().parent("li").next();
-            if(getdown.length) {
-                $(getdown).after(onthis);
-                onthis.trigger("mouseleave");
-            }
-        });
         $(uploadbox).on("click", ".setdel", function(){
             if(settings.deleteServer){
                 var value = box_obj.parent().find("input").val();

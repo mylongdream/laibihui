@@ -46,8 +46,8 @@
 				<tr>
 					<td align="right">{{ trans('admin.farm.farm.upphoto') }}</td>
 					<td>
-						<a href="javascript:;" class="clickbtn" id="upphoto">上传图片</a><span class="tdtip">建议尺寸为 800 X 600 像素大小</span>
-						<div class="uploadbox">
+						<a href="javascript:;" class="clickbtn" id="upphoto">上传图片</a><span class="tdtip">建议尺寸为 800 X 800 像素大小，大小2M以下（可拖拽图片调整显示顺序）</span>
+						<div class="uploadbox uploader-list">
 							<ul>
 								@if ($farm->upphoto)
 									@foreach (unserialize($farm->upphoto) as $upphoto)
@@ -164,10 +164,13 @@
 	<script type="text/javascript" src="{{ asset('static/js/jquery.amap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('static/js/webuploader/webuploader.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('static/js/jquery.webuploader.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('static/js/jquery.ddsort.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('static/js/laydate/laydate.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('static/js/kindeditor/kindeditor.js') }}"></script>
 	<script type="text/javascript">
         $(function(){
+            // 图片列表拖动
+            $('.uploader-list').DDSort();
             $("#upphoto").powerWebUpload({
                 server: "{{ route('admin.upload.image') }}",
                 formData: {

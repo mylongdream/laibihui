@@ -62,15 +62,15 @@
 				<tr>
 					<td align="right">{{ trans('admin.brand.shop.upphoto') }}</td>
 					<td>
-						<a href="javascript:;" class="clickbtn" id="upphoto">上传图片</a><span class="tdtip">建议尺寸为 800 X 800 像素大小</span>
-						<div class="uploadbox">
+						<a href="javascript:;" class="clickbtn" id="upphoto">上传图片</a><span class="tdtip">建议尺寸为 800 X 800 像素大小，大小2M以下（可拖拽图片调整显示顺序）</span>
+						<div class="uploadbox uploader-list">
 							<ul>
 								@if ($shop->upphoto)
 									@foreach (unserialize($shop->upphoto) as $upphoto)
 										<li class="trigger-hover">
 											<img src="{{ uploadImage($upphoto) }}" width="120" height="120">
 											<input name="upphoto[]" value="{{ $upphoto }}" type="hidden">
-											<div class="handle"><span class="setup">前移</span><span class="setdown">后移</span><span class="setdel">删除</span></div>
+											<div class="handle"><span class="setdel">删除</span></div>
 										</li>
 									@endforeach
 								@endif
@@ -212,10 +212,13 @@
 	<script type="text/javascript" src="{{ asset('static/js/jquery.amap.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('static/js/webuploader/webuploader.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('static/js/jquery.webuploader.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('static/js/jquery.ddsort.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('static/js/laydate/laydate.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('static/js/kindeditor/kindeditor.js') }}"></script>
 	<script type="text/javascript">
         $(function(){
+            // 图片列表拖动
+            $('.uploader-list').DDSort();
             $("#upphoto").powerWebUpload({
                 server: "{{ route('admin.upload.image') }}",
                 formData: {
