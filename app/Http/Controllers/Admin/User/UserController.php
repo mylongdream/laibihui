@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CommonUserModel;
 use App\Models\CommonUserGroupModel;
 use App\Models\CrmPersonnelModel;
+use App\Models\WechatUserModel;
 use Illuminate\Http\Request;
 
 
@@ -178,6 +179,14 @@ class UserController extends Controller
             //授权卖卡业务员
             if ($user->group->grantsellcard){
                 CrmPersonnelModel::firstOrCreate(['uid' => $user->uid]);
+            }
+
+            // 授权微信账号给微信分组
+            $group = CommonUserGroupModel::find($request->group_id);
+            $wx_info = WechatUserModel::where('user_id', $user->uid)->first();
+            if ($wx_info && $group->tag_id){
+                $app = app('wechat.official_account');
+                $app->user_tag->tagUsers([$wx_info->openid], $group->tag_id);
             }
 
             if ($request->ajax()){
