@@ -33,7 +33,7 @@
                             @endif
                         </div>
                         <div class="weui-btn-area">
-                            <button type="submit" class="weui-btn weui-btn_primary">提 交</button>
+                            <button type="submit" class="weui-btn weui-btn_primary" onclick="weui.loading('loading')">提 交</button>
                         </div>
                     </form>
                 </div>

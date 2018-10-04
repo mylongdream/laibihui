@@ -1028,11 +1028,13 @@ return [
     'wechat.tag.tips' => '您可以在此处对标签信息进行管理查看。',
     'wechat.tag.list' => '标签列表',
     'wechat.tag.create' => '添加标签',
+    'wechat.tag.edit' => '编辑标签',
     'wechat.tag.destroy' => '删除标签',
     'wechat.tag.id' => '标签ID',
     'wechat.tag.name' => '标签名称',
     'wechat.tag.count' => '粉丝人数',
     'wechat.tag.addsucceed' => '微信标签添加成功',
+    'wechat.tag.editsucceed' => '微信标签编辑成功',
     'wechat.tag.deletesucceed' => '微信标签删除成功',
 
     'wechat.menu' => '自定义菜单',
