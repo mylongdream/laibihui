@@ -82,8 +82,9 @@ class GroupController extends Controller
      */
     public function edit($id)
     {
+        $taglist = WechatTagModel::orderBy('id', 'asc')->get();
         $group = CommonUserGroupModel::findOrFail($id);
-        return view('admin.user.group.edit', ['group' => $group]);
+        return view('admin.user.group.edit', ['group' => $group, 'taglist' => $taglist]);
     }
 
     /**
