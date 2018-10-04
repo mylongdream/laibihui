@@ -17,7 +17,17 @@ class TagController extends Controller
     {
         $app = app('wechat.official_account');
         $tags = $app->user_tag->list();
-		$taglist = json_decode($tags['tags']);
+        foreach ($tags['tags'] as $value){
+            $tag = WechatTagModel::find($value['id']);
+            if(!$tag){
+                $tag = new WechatTagModel;
+                $tag->id = $value['id'];
+                $tag->name = $value['name'];
+                $tag->count = $value['count'];
+                $tag->save();
+            }
+        }
+        $taglist = WechatTagModel::orderBy('id', 'asc')->get();
         return view('admin.wechat.tag.index', ['taglist' => $taglist]);
     }
 
