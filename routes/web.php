@@ -510,6 +510,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::get('user/upall', ['as' => 'user.upall', 'uses' => 'Admin\Wechat\UserController@upall']);
             Route::post('user/batch', ['as' => 'user.batch', 'uses' => 'Admin\Wechat\UserController@batch']);
             Route::resource('user', 'Admin\Wechat\UserController', ['only' =>['index', 'edit', 'destroy']]);
+            Route::resource('tag', 'Admin\Wechat\TagController', ['only' => ['index', 'create', 'destroy']]);
             Route::post('redpack/batch', ['as' => 'redpack.batch', 'uses' => 'Admin\Wechat\RedpackController@batch']);
             Route::resource('redpack', 'Admin\Wechat\RedpackController');
 
