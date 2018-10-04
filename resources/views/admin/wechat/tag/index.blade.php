@@ -24,7 +24,8 @@
 				<td>{{ $value->name }}</td>
 				<td>{{ $value->count }}</td>
 				<td>
-					<a href="{{ route('admin.wechat.tag.destroy',$value->id) }}" class="delbtn">{{ trans('admin.destroy') }}</a>
+					<a href="{{ route('admin.wechat.tag.edit',$value->id) }}" class="openwindow" title="{{ trans('admin.wechat.tag.edit') }}">{{ trans('admin.edit') }}</a>
+					<a href="{{ route('admin.wechat.tag.destroy',$value->id) }}" class="mlm delbtn">{{ trans('admin.destroy') }}</a>
 				</td>
 			</tr>
 			@endforeach

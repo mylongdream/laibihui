@@ -74,6 +74,50 @@ class TagController extends Controller
         }
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $tag = WechatTagModel::findOrFail($id);
+        return view('admin.wechat.tag.edit', ['tag' => $tag]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $tag = WechatTagModel::findOrFail($id);
+        $rules = array(
+            'name' => 'required|max:50',
+        );
+        $messages = array(
+            'name.required' => '标签名不允许为空！',
+            'name.max' => '标签名必须小于 :max 个字符。',
+        );
+        $this->validate($request, $rules, $messages);
+
+        $app = app('wechat.official_account');
+        $app->user_tag->update($tag->id, $request->name);
+
+        $tag->name = $request->name;
+        $tag->save();
+
+        if ($request->ajax()){
+            return response()->json(['status' => '1', 'info' => trans('admin.wechat.tag.editsucceed'), 'url' => back()->getTargetUrl()]);
+        }else{
+            return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.wechat.tag.editsucceed'), 'url' => back()->getTargetUrl()]);
+        }
+    }
+
     public function destroy(Request $request, $id)
     {
         $tag = WechatTagModel::findOrFail($id);
