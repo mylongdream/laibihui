@@ -29,7 +29,7 @@ class WechatUserModel extends Authenticatable
             'ADD_SCENE_PAID' => '支付后关注',
             'ADD_SCENE_OTHERS' => '其他',
         );
-        return $subscribe_scene[$value];
+        return $value ? $subscribe_scene[$value] : '';
     }
 
     public function user()
