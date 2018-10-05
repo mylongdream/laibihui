@@ -7,9 +7,9 @@
 	<form id="schform" name="schform" class="formsearch" method="get" action="{{ route('admin.wechat.menu.index') }}">
 		<div class="tbsearch">
 			<dl>
-				<dt>用户分组菜单</dt>
+				<dt>分组菜单</dt>
 				<dd>
-					<select class="schselect" name="tag_id" onchange='this.form.submit()'>
+					<select class="schselect" name="tag_id" onchange="this.form.submit()" style="width:160px">
 						<option value="0">默认</option>
 						@foreach ($taglist as $value)
 							<option value="{{ $value->id }}" {!! request('tag_id') == $value->id ? 'selected="selected"' : '' !!}>{{ $value->name }}</option>

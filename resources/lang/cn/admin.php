@@ -1007,7 +1007,7 @@ return [
     'wechat.user' => '用户管理',
     'wechat.user.tips' => '您可以在此处对用户信息进行管理查看。',
     'wechat.user.list' => '用户列表',
-    'wechat.user.view' => '查看用户',
+    'wechat.user.show' => '查看用户',
     'wechat.user.create' => '添加用户',
     'wechat.user.edit' => '编辑用户',
     'wechat.user.destroy' => '删除用户',

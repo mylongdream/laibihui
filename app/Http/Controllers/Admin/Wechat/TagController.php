@@ -25,6 +25,11 @@ class TagController extends Controller
                 $tag->name = $value['name'];
                 $tag->count = $value['count'];
                 $tag->save();
+            }else{
+                $tag->id = $value['id'];
+                $tag->name = $value['name'];
+                $tag->count = $value['count'];
+                $tag->save();
             }
         }
         $taglist = WechatTagModel::orderBy('id', 'asc')->get();

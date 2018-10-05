@@ -41,11 +41,11 @@
 				<tr>
 					<th width="24"><label><input class="checkall" type="checkbox"></label></th>
 					<th width="60">{{ trans('admin.wechat.user.headimgurl') }}</th>
-					<th width="180">{{ trans('admin.wechat.user.nickname') }}</th>
-					<th>{{ trans('admin.wechat.user.openid') }}</th>
+					<th>{{ trans('admin.wechat.user.nickname') }}/{{ trans('admin.wechat.user.openid') }}</th>
 					<th width="70">{{ trans('admin.wechat.user.city') }}</th>
 					<th width="70">{{ trans('admin.wechat.user.sex') }}</th>
 					<th width="70">{{ trans('admin.wechat.user.subscribe') }}</th>
+					<th width="120">{{ trans('admin.wechat.user.subscribe_scene') }}</th>
 					<th width="120">{{ trans('admin.created_at') }}</th>
 					<th width="80">{{ trans('admin.operation') }}</th>
 				</tr>
@@ -53,11 +53,11 @@
 					<tr>
 						<td><label><input class="ids" type="checkbox" value="{{ $value->uid }}" name="ids[]"></label></td>
 						<td><img class="block" width="48" height="48" src="{{ $value->headimgurl ? $value->headimgurl : asset('static/image/common/getheadimg.jpg') }}"></td>
-						<td>{{ $value->nickname }}</td>
-						<td>{{ $value->openid }}</td>
+						<td><p>{{ $value->nickname }}</p><p>{{ $value->openid }}</p></td>
 						<td>{{ $value->city ? $value->city : '/' }}</td>
 						<td>{{ $value->sex ? $value->sex == 1 ? '男' : '女' : '保密' }}</td>
 						<td>{{ $value->subscribe ? '是' : '否' }}</td>
+						<td>{{ $value->subscribe_scene ? $value->subscribe_scene : '/' }}</td>
 						<td>{{ $value->created_at->format('Y-m-d H:i') }}</td>
 						<td>
 							<a href="{{ route('admin.wechat.user.show',$value->uid) }}" class="" title="{{ trans('admin.view') }}">{{ trans('admin.view') }}</a>
