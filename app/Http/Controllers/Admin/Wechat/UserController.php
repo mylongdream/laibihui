@@ -33,6 +33,15 @@ class UserController extends Controller
         return view('admin.wechat.user.index', ['userlist' => $userlist]);
     }
 
+    public function show($id)
+    {
+        $user = WechatUserModel::findOrFail($id);
+        $app = app('wechat.official_account');
+        $user = $app->user->get($user->openid);
+        dd($user);
+        return view('admin.wechat.user.show', ['user' => $user]);
+    }
+
     public function import(Request $request)
     {
         $app = app('wechat.official_account');

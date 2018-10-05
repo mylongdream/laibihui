@@ -47,7 +47,7 @@
 					<th width="70">{{ trans('admin.wechat.user.sex') }}</th>
 					<th width="70">{{ trans('admin.wechat.user.subscribe') }}</th>
 					<th width="120">{{ trans('admin.created_at') }}</th>
-					<th width="60">{{ trans('admin.operation') }}</th>
+					<th width="80">{{ trans('admin.operation') }}</th>
 				</tr>
 				@foreach ($userlist as $value)
 					<tr>
@@ -60,7 +60,8 @@
 						<td>{{ $value->subscribe ? '是' : '否' }}</td>
 						<td>{{ $value->created_at->format('Y-m-d H:i') }}</td>
 						<td>
-							<a href="{{ route('admin.wechat.user.edit',$value->uid) }}" class="ajaxbtn" title="{{ trans('admin.update') }}">{{ trans('admin.update') }}</a>
+							<a href="{{ route('admin.wechat.user.show',$value->uid) }}" class="" title="{{ trans('admin.view') }}">{{ trans('admin.view') }}</a>
+							<a href="{{ route('admin.wechat.user.edit',$value->uid) }}" class="mlm ajaxbtn" title="{{ trans('admin.update') }}">{{ trans('admin.update') }}</a>
 						</td>
 					</tr>
 				@endforeach
