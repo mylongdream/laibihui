@@ -18,6 +18,7 @@
 				<th width="80">{{ trans('admin.displayorder') }}</th>
 				<th width="200">{{ trans('admin.user.group.name') }}</th>
 				<th>{{ trans('admin.user.group.description') }}</th>
+				<th width="120">{{ trans('admin.user.group.tag_id') }}</th>
 				<th width="100">{{ trans('admin.operation') }}</th>
 			</tr>
 			@foreach ($grouplist as $group)
@@ -26,6 +27,7 @@
 				<td><input type="text" class="txt" name="displayorder[{{ $group->id }}]" value="{{ $group->displayorder }}" size="2"></td>
 				<td>{{ $group->name }}</td>
 				<td>{{ $group->description }}</td>
+				<td>{{ $group->wechat_tag ? $group->wechat_tag->name : '/' }}</td>
 				<td>
 					<a href="{{ route('admin.user.group.edit',$group->id) }}" class="openwindow" title="{{ trans('admin.user.group.edit') }}">{{ trans('admin.edit') }}</a>
 					<a href="{{ route('admin.user.group.destroy',$group->id) }}" class="mlm delbtn">{{ trans('admin.destroy') }}</a>

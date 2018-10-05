@@ -104,9 +104,19 @@ class ServerController extends Controller
                 if($getuser['subscribe']){
                     $wxuser->nickname = $getuser['nickname'];
                     $wxuser->sex = $getuser['sex'];
+                    $wxuser->language = $getuser['language'];
                     $wxuser->city = $getuser['city'];
                     $wxuser->province = $getuser['province'];
+                    $wxuser->country = $getuser['country'];
                     $wxuser->headimgurl = $getuser['headimgurl'];
+                    $wxuser->subscribe_time = $getuser['subscribe_time'];
+                    $wxuser->remark = $getuser['remark'];
+                    $wxuser->groupid = isset($getuser['groupid']) ? $getuser['groupid'] : '';
+                    $wxuser->unionid = isset($getuser['unionid']) ? $getuser['unionid'] : '';
+                    $wxuser->tagid_list = serialize($getuser['tagid_list']);
+                    $wxuser->subscribe_scene = $getuser['subscribe_scene'];
+                    $wxuser->qr_scene = $getuser['qr_scene'];
+                    $wxuser->qr_scene_str = $getuser['qr_scene_str'];
                     //头像保存到本地并作为用户头像
                     if($wxuser->headimgurl){
                         try {

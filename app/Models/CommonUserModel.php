@@ -83,5 +83,4 @@ class CommonUserModel extends Authenticatable
     {
         return $this->hasOne('App\Models\CrmPersonnelModel', 'uid', 'uid');
     }
-
 }

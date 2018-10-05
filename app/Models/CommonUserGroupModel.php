@@ -10,4 +10,10 @@ class CommonUserGroupModel extends Model
 	protected $primaryKey = 'id';
 	public $timestamps = false;
 
+    //微信标签
+    public function wechat_tag()
+    {
+        return $this->hasOne('App\Models\WechatTagModel', 'tag_id');
+    }
+
 }

@@ -36,9 +36,6 @@ class UserController extends Controller
     public function show($id)
     {
         $user = WechatUserModel::findOrFail($id);
-        $app = app('wechat.official_account');
-        $user = $app->user->get($user->openid);
-        dd($user);
         return view('admin.wechat.user.show', ['user' => $user]);
     }
 
@@ -84,11 +81,19 @@ class UserController extends Controller
                 if($user['subscribe']){
                     $value->nickname = $user['nickname'];
                     $value->sex = $user['sex'];
+                    $value->language = $user['language'];
                     $value->city = $user['city'];
                     $value->province = $user['province'];
+                    $value->country = $user['country'];
                     $value->headimgurl = $user['headimgurl'];
                     $value->subscribe_time = $user['subscribe_time'];
+                    $value->remark = $user['remark'];
+                    $value->groupid = isset($user['groupid']) ? $user['groupid'] : '';
                     $value->unionid = isset($user['unionid']) ? $user['unionid'] : '';
+                    $value->tagid_list = serialize($user['tagid_list']);
+                    $value->subscribe_scene = $user['subscribe_scene'];
+                    $value->qr_scene = $user['qr_scene'];
+                    $value->qr_scene_str = $user['qr_scene_str'];
                 }
                 $value->save();
             }
@@ -119,11 +124,19 @@ class UserController extends Controller
             if($getuser['subscribe']){
                 $userinfo->nickname = $getuser['nickname'];
                 $userinfo->sex = $getuser['sex'];
+                $userinfo->language = $getuser['language'];
                 $userinfo->city = $getuser['city'];
                 $userinfo->province = $getuser['province'];
+                $userinfo->country = $getuser['country'];
                 $userinfo->headimgurl = $getuser['headimgurl'];
                 $userinfo->subscribe_time = $getuser['subscribe_time'];
+                $userinfo->remark = $getuser['remark'];
+                $userinfo->groupid = isset($getuser['groupid']) ? $getuser['groupid'] : '';
                 $userinfo->unionid = isset($getuser['unionid']) ? $getuser['unionid'] : '';
+                $userinfo->tagid_list = serialize($getuser['tagid_list']);
+                $userinfo->subscribe_scene = $getuser['subscribe_scene'];
+                $userinfo->qr_scene = $getuser['qr_scene'];
+                $userinfo->qr_scene_str = $getuser['qr_scene_str'];
             }
             $userinfo->save();
         }
