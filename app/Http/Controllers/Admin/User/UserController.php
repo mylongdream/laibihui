@@ -187,10 +187,15 @@ class UserController extends Controller
             $wx_info = WechatUserModel::where('user_id', $user->uid)->first();
             if ($wx_info){
                 $app = app('wechat.official_account');
+                if ($wx_info->tagid_list){
+                    foreach (unserialize($wx_info->tagid_list) as $value) {
+                        $app->user_tag->untagUsers([$wx_info->openid], $value);
+                    }
+                }
                 if ($group->tag_id){
                     $app->user_tag->tagUsers([$wx_info->openid], $group->tag_id);
-                }else{
-                    $app->user_tag->untagUsers([$wx_info->openid]);
+                    $wx_info->tagid_list = serialize($group->tag_id);
+                    $wx_info->save();
                 }
                 $WechatMenuModel = new WechatMenuModel;
                 $result = $WechatMenuModel->publish($group->tag_id);
