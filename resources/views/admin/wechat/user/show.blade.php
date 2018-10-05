@@ -52,7 +52,13 @@
 				</tr>
 				<tr>
 					<td width="150" align="right">{{ trans('admin.wechat.user.tagid_list') }}</td>
-					<td>{{ $user->tagid_list }}</td>
+					<td>
+                        @if ($user->tagid_list)
+                            @foreach (unserialize($user->tagid_list) as $value)
+                                <span class="mrm">{{ $value }}</span>
+                            @endforeach
+                        @endif
+					</td>
 				</tr>
 				<tr>
 					<td width="150" align="right">{{ trans('admin.wechat.user.subscribe_scene') }}</td>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CommonUserModel;
 use App\Models\CommonUserGroupModel;
 use App\Models\CrmPersonnelModel;
+use App\Models\WechatMenuModel;
 use App\Models\WechatUserModel;
 use Illuminate\Http\Request;
 
@@ -187,6 +188,8 @@ class UserController extends Controller
             if ($wx_info && $group->tag_id){
                 $app = app('wechat.official_account');
                 $app->user_tag->tagUsers([$wx_info->openid], $group->tag_id);
+                $WechatMenuModel = new WechatMenuModel;
+                $result = $WechatMenuModel->publish($group->tag_id);
             }
 
             if ($request->ajax()){

@@ -113,7 +113,7 @@ class ServerController extends Controller
                     $wxuser->remark = $getuser['remark'];
                     $wxuser->groupid = isset($getuser['groupid']) ? $getuser['groupid'] : '';
                     $wxuser->unionid = isset($getuser['unionid']) ? $getuser['unionid'] : '';
-                    $wxuser->tagid_list = serialize($getuser['tagid_list']);
+                    $wxuser->tagid_list = $getuser['tagid_list'] ? serialize($getuser['tagid_list']) : '';
                     $wxuser->subscribe_scene = $getuser['subscribe_scene'];
                     $wxuser->qr_scene = $getuser['qr_scene'];
                     $wxuser->qr_scene_str = $getuser['qr_scene_str'];

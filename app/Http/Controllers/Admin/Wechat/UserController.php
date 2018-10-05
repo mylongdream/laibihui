@@ -90,7 +90,7 @@ class UserController extends Controller
                     $value->remark = $user['remark'];
                     $value->groupid = isset($user['groupid']) ? $user['groupid'] : '';
                     $value->unionid = isset($user['unionid']) ? $user['unionid'] : '';
-                    $value->tagid_list = serialize($user['tagid_list']);
+                    $value->tagid_list = $user['tagid_list'] ? serialize($user['tagid_list']) : '';
                     $value->subscribe_scene = $user['subscribe_scene'];
                     $value->qr_scene = $user['qr_scene'];
                     $value->qr_scene_str = $user['qr_scene_str'];
@@ -133,7 +133,7 @@ class UserController extends Controller
                 $userinfo->remark = $getuser['remark'];
                 $userinfo->groupid = isset($getuser['groupid']) ? $getuser['groupid'] : '';
                 $userinfo->unionid = isset($getuser['unionid']) ? $getuser['unionid'] : '';
-                $userinfo->tagid_list = serialize($getuser['tagid_list']);
+                $userinfo->tagid_list = $getuser['tagid_list'] ? serialize($getuser['tagid_list']) : '';
                 $userinfo->subscribe_scene = $getuser['subscribe_scene'];
                 $userinfo->qr_scene = $getuser['qr_scene'];
                 $userinfo->qr_scene_str = $getuser['qr_scene_str'];
