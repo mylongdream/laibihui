@@ -12,7 +12,7 @@
 			<table>
 				<tr>
 					<td width="150" align="right">{{ trans('admin.wechat.user.subscribe') }}</td>
-					<td>{{ $user->subscribe }}</td>
+					<td>{{ $user->subscribe ? '是' : '否' }}</td>
 				</tr>
 				<tr>
 					<td width="150" align="right">{{ trans('admin.wechat.user.openid') }}</td>
@@ -24,7 +24,7 @@
 				</tr>
 				<tr>
 					<td width="150" align="right">{{ trans('admin.wechat.user.sex') }}</td>
-					<td>{{ $user->sex }}</td>
+					<td>{{ $user->sex ? $user->sex == 1 ? '男' : '女' : '保密' }}</td>
 				</tr>
 				<tr>
 					<td width="150" align="right">{{ trans('admin.wechat.user.language') }}</td>
@@ -44,7 +44,7 @@
 				</tr>
 				<tr>
 					<td width="150" align="right">{{ trans('admin.wechat.user.subscribe_time') }}</td>
-					<td>{{ $user->subscribe_time }}</td>
+					<td>{{ date("Y-m-d H:i",$user->subscribe_time) }}</td>
 				</tr>
 				<tr>
 					<td width="150" align="right">{{ trans('admin.wechat.user.remark') }}</td>
