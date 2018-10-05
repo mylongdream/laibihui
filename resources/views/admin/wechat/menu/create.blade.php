@@ -42,7 +42,7 @@
 				<tr>
 					<td align="right">关键字</td>
 					<td>
-						<input class="txt" type="text" size="50" value="" name="message[click][key]">
+						<input class="txt" type="text" size="50" value="" name="click[keyword]">
 					</td>
 				</tr>
 				</tbody>
@@ -50,7 +50,7 @@
 				<tr>
 					<td align="right">链接网址</td>
 					<td>
-						<input class="txt" type="text" size="50" value="" name="message[view][url]">
+						<input class="txt" type="text" size="50" value="" name="view[url]">
 					</td>
 				</tr>
 				</tbody>
@@ -58,19 +58,35 @@
 				<tr>
 					<td align="right">链接网址</td>
 					<td>
-						<input class="txt" type="text" size="50" value="" name="message[miniprogram][url]"><span class="tdtip">老版本客户端将打开本url</span>
+						<input class="txt" type="text" size="50" value="" name="miniprogram[url]"><span class="tdtip">老版本客户端将打开本url</span>
 					</td>
 				</tr>
 				<tr>
 					<td align="right">小程序appid</td>
 					<td>
-						<input class="txt" type="text" size="50" value="" name="message[miniprogram][appid]">
+						<input class="txt" type="text" size="50" value="" name="miniprogram[appid]">
 					</td>
 				</tr>
 				<tr>
 					<td align="right">小程序页面路径</td>
 					<td>
-						<input class="txt" type="text" size="50" value="" name="message[miniprogram][pagepath]"><span class="tdtip">如：pages/index/index</span>
+						<input class="txt" type="text" size="50" value="" name="miniprogram[pagepath]"><span class="tdtip">如：pages/index/index</span>
+					</td>
+				</tr>
+				</tbody>
+				<tbody class="typesub" id="type_media_id" style="display:none">
+				<tr>
+					<td align="right">合法media_id</td>
+					<td>
+						<input class="txt" type="text" size="50" value="" name="media_id[media_id]">
+					</td>
+				</tr>
+				</tbody>
+				<tbody class="typesub" id="type_view_limited" style="display:none">
+				<tr>
+					<td align="right">合法media_id</td>
+					<td>
+						<input class="txt" type="text" size="50" value="" name="view_limited[media_id]">
 					</td>
 				</tr>
 				</tbody>

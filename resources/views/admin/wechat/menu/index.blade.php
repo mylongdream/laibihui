@@ -47,13 +47,24 @@
 				<td>{!! str_repeat('<div class="childnode">',$value->count-1) !!}<input type="text" class="txt" name="name[{{ $value->id }}]" value="{{ $value->name }}">{!! str_repeat('</div>',$value->count-1) !!}</td>
 				<td>{{ $value->type ? $menutype[$value->type] : '/' }}</td>
 				<td>
-					@if ($value->message)
-					@foreach (unserialize($value->message) as $k => $val)
-						<p><strong>{{ $k }}：</strong>{{ $val }}</p>
-					@endforeach
-					@else
-						/
-					@endif
+					@switch($value->type)
+					@case('click')
+					<p>{{ $value->keyword ? $value->keyword : '/' }}</p>
+					@break
+					@case('view')
+					<p>{{ $value->url ? $value->url : '/' }}</p>
+					@break
+					@case('miniprogram')
+					<p>{{ $value->url ? $value->url : '/' }}</p>
+					<p>{{ $value->appid ? $value->appid : '/' }}</p>
+					<p>{{ $value->pagepath ? $value->pagepath : '/' }}</p>
+					@break
+					@case('media_id')
+					@case('view_limited')
+					<p>{{ $value->media_id ? $value->media_id : '/' }}</p>
+					@break
+					@default
+					@endswitch
 				</td>
 				<td>
 					<a href="{{ route('admin.wechat.menu.edit',$value->id) }}" class="openwindow" title="{{ trans('admin.wechat.menu.edit') }}">{{ trans('admin.edit') }}</a>

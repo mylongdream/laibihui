@@ -79,8 +79,19 @@ class MenuController extends Controller
         $menu->name = $request->name;
         $menu->type = $request->type;
         $menu->displayorder = intval($request->displayorder);
-        $message = isset($request->message[$request->type]) ? $request->message[$request->type] : '';
-        $menu->message = $message ? serialize($message) : '';
+        if($menu->type == 'click'){
+            $menu->keyword = $request->click['keyword'];
+        }elseif ($menu->type == 'view'){
+            $menu->url = $request->view['url'];
+        }elseif ($menu->type == 'miniprogram'){
+            $menu->url = $request->miniprogram['url'];
+            $menu->appid = $request->miniprogram['appid'];
+            $menu->pagepath = $request->miniprogram['pagepath'];
+        }elseif ($menu->type == 'media_id'){
+            $menu->media_id = $request->media_id['media_id'];
+        }elseif ($menu->type == 'view_limited'){
+            $menu->media_id = $request->view_limited['media_id'];
+        }
         $menu->save();
 
         if ($request->ajax()){
@@ -99,6 +110,7 @@ class MenuController extends Controller
     public function show($id)
     {
         $menu = WechatMenuModel::findOrFail($id);
+        return view('admin.wechat.menu.show', ['menu' => $menu]);
     }
 
     /**
@@ -110,7 +122,6 @@ class MenuController extends Controller
     public function edit(Request $request, $id)
     {
         $menu = WechatMenuModel::findOrFail($id);
-        $menu->message = unserialize($menu->message);
         $menulist = WechatMenuModel::where(function($query) use($request) {
             $tag_id = intval($request->tag_id) ? intval($request->tag_id) : 0;
             $query->where('tag_id', $tag_id);
@@ -141,8 +152,19 @@ class MenuController extends Controller
         $menu->name = $request->name;
         $menu->type = $request->type;
         $menu->displayorder = intval($request->displayorder);
-        $message = isset($request->message[$request->type]) ? $request->message[$request->type] : '';
-        $menu->message = $message ? serialize($message) : '';
+        if($menu->type == 'click'){
+            $menu->keyword = $request->click['keyword'];
+        }elseif ($menu->type == 'view'){
+            $menu->url = $request->view['url'];
+        }elseif ($menu->type == 'miniprogram'){
+            $menu->url = $request->miniprogram['url'];
+            $menu->appid = $request->miniprogram['appid'];
+            $menu->pagepath = $request->miniprogram['pagepath'];
+        }elseif ($menu->type == 'media_id'){
+            $menu->media_id = $request->media_id['media_id'];
+        }elseif ($menu->type == 'view_limited'){
+            $menu->media_id = $request->view_limited['media_id'];
+        }
         $menu->save();
 
         if ($request->ajax()){
@@ -212,98 +234,58 @@ class MenuController extends Controller
         $menulist = WechatMenuModel::where('tag_id', $tag_id)->orderBy('displayorder', 'asc')->get();
         if(!$menulist) {
             if ($request->ajax()) {
-                return response()->json(['status' => 1, 'info' => '菜单数据错误，无法发布', 'url' => back()->getTargetUrl()]);
+                return response()->json(['status' => 0, 'info' => '菜单数据错误，无法发布', 'url' => back()->getTargetUrl()]);
             }else{
-                return view('layouts.admin.message', ['status' => 1, 'info' => '菜单数据错误，无法发布', 'url' => back()->getTargetUrl()]);
+                return view('layouts.admin.message', ['status' => 0, 'info' => '菜单数据错误，无法发布', 'url' => back()->getTargetUrl()]);
             }
         }
+        $pubmenu = [];
         foreach($menulist as $key => $value) {
             if(!$value->parentid) {
                 $sub_button = [];
                 foreach($menulist as $k => $val) {
                     if($val->parentid == $value->id) {
-                        $val->message = $val->message ? unserialize($val->message) : '';
-                        $sub_button[] = $val;
+                        $item = [
+                            'type' => $val->type,
+                            'name' => $val->name
+                        ];
+                        if($val->type == 'view') {
+                            $item['url'] = $val->url;
+                        }elseif($val->type == 'miniprogram') {
+                            $item['url'] = $val->url;
+                            $item['appid'] = $val->appid;
+                            $item['pagepath'] = $val->pagepath;
+                        }else{
+                            $item['key'] = $val->type.$val->id;
+                        }
+                        $sub_button[] = $item;
                         unset($menulist[$k]);
                     }
                 }
-                $value->sub_button = $sub_button;
-                $value->message = $value->message ? unserialize($value->message) : '';
-            }
-        }
-        $pubmenu = [];
-        foreach($menulist as $button) {
-            if(!$button['sub_button']) {
-                if(!$button['name']) {
-                    //$this->error('菜单中存在“菜单标题”为空的项目，无法发布');
-                }
-                if($button['type'] == 'view' && !$button['message']['url']) {
-                    //$this->error('菜单中存在“网页链接”为空的项目，无法发布');
-                }
-                if($button['type'] == 'click' && !$button['message']['key']) {
-                    //$this->error('菜单中存在“关键词”为空的项目，无法发布');
-                }
-                if($button['type'] == 'miniprogram') {
-                    //!$button['message']['url'] && $this->error('菜单中存在“网页链接”为空的项目，无法发布');
-                    //!$button['message']['appid'] && $this->error('菜单中存在“小程序appid”为空的项目，无法发布');
-                    //!$button['message']['pagepath'] && $this->error('菜单中存在“小程序页面路径”为空的项目，无法发布');
-                }
-                $item = [
-                    'type' => $button['type'],
-                    'name' => $button['name']
-                ];
-                if($button['type'] == 'view') {
-                    $item['url'] = $button['message']['url'];
-                }elseif($button['type'] == 'miniprogram') {
-                    $item['url'] = $button['message']['url'];
-                    $item['appid'] = $button['message']['appid'];
-                    $item['pagepath'] = $button['message']['pagepath'];
-                }else{
-                    $item['key'] = $button['type'].$button['id'];
-                }
-                $pubmenu[] = $item;
-            } else {
-                if(!$button['name']) {
-                    //$this->error('菜单中存在“菜单标题”为空的项目，无法发布');
-                }
-                $sub_buttons = [];
-                foreach($button['sub_button'] as $sub_button) {
-                    if(!$sub_button['name']) {
-                        //$this->error('菜单中存在“菜单标题”为空的项目，无法发布');
-                    }
-                    if($sub_button['type'] == 'view' && !$sub_button['message']['url']) {
-                        //$this->error('菜单中存在“网页链接”为空的项目，无法发布');
-                    }
-                    if($sub_button['type'] == 'click' && !$sub_button['message']['key']) {
-                        //$this->error('菜单中存在“关键词”为空的项目，无法发布');
-                    }
-                    if($sub_button['type'] == 'miniprogram') {
-                        //!$sub_button['message']['url'] && $this->error('菜单中存在“网页链接”为空的项目，无法发布');
-                        //!$sub_button['message']['appid'] && $this->error('菜单中存在“小程序appid”为空的项目，无法发布');
-                        //!$sub_button['message']['pagepath'] && $this->error('菜单中存在“小程序页面路径”为空的项目，无法发布');
-                    }
+                if($sub_button){
                     $item = [
-                        'type' => $sub_button['type'],
-                        'name' => $sub_button['name']
+                        'name' => $value->name,
+                        'sub_button' => $sub_button
                     ];
-                    if($sub_button['type'] == 'view') {
-                        $item['url'] = $sub_button['message']['url'];
-                    }elseif($sub_button['type'] == 'miniprogram') {
-                        $item['url'] = $sub_button['message']['url'];
-                        $item['appid'] = $sub_button['message']['appid'];
-                        $item['pagepath'] = $sub_button['message']['pagepath'];
+                }else{
+                    $item = [
+                        'type' => $value->type,
+                        'name' => $value->name
+                    ];
+                    if($value->type == 'view') {
+                        $item['url'] = $value->url;
+                    }elseif($value->type == 'miniprogram') {
+                        $item['url'] = $value->url;
+                        $item['appid'] = $value->appid;
+                        $item['pagepath'] = $value->pagepath;
                     }else{
-                        $item['key'] = $sub_button['type'].$sub_button['id'];
+                        $item['key'] = $value->type.$value->id;
                     }
-                    $sub_buttons[] = $item;
                 }
-                $item = [
-                    'name' => $button['name'],
-                    'sub_button' => $sub_buttons
-                ];
                 $pubmenu[] = $item;
             }
         }
+        dd($pubmenu);
         $app = app('wechat.official_account');
         if($tag_id){
             $app->menu->create($pubmenu, ['tag_id' => $tag_id]);
