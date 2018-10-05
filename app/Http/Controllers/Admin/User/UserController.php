@@ -185,9 +185,13 @@ class UserController extends Controller
             // 授权微信账号给微信分组
             $group = CommonUserGroupModel::find($request->group_id);
             $wx_info = WechatUserModel::where('user_id', $user->uid)->first();
-            if ($wx_info && $group->tag_id){
+            if ($wx_info){
                 $app = app('wechat.official_account');
-                $app->user_tag->tagUsers([$wx_info->openid], $group->tag_id);
+                if ($group->tag_id){
+                    $app->user_tag->tagUsers([$wx_info->openid], $group->tag_id);
+                }else{
+                    $app->user_tag->untagUsers([$wx_info->openid]);
+                }
                 $WechatMenuModel = new WechatMenuModel;
                 $result = $WechatMenuModel->publish($group->tag_id);
             }
