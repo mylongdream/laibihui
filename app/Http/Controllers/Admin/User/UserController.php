@@ -194,7 +194,7 @@ class UserController extends Controller
                 }
                 if ($group->tag_id){
                     $app->user_tag->tagUsers([$wx_info->openid], $group->tag_id);
-                    $wx_info->tagid_list = serialize($group->tag_id);
+                    $wx_info->tagid_list = serialize([$group->tag_id]);
                     $wx_info->save();
                 }
                 $WechatMenuModel = new WechatMenuModel;
