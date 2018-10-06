@@ -157,7 +157,7 @@ class IndexController extends Controller
                         $user_account->remark = '面对面办卡提成';
                         $user_account->postip = request()->getClientIp();
                         $user_account->save();
-                        auth()->user()->fromuser->increment('user_money', 500);//提成5元到卖卡人员可用余额
+                        auth()->user()->fromuser && auth()->user()->fromuser->increment('user_money', 500);//提成5元到卖卡人员可用余额
                         if($fromuser->personnel->topuser){
                             $user_account = new CommonUserAccountModel();
                             $user_account->uid = $fromuser->personnel->topuser->uid;
