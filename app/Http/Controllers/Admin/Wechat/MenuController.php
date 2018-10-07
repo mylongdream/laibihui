@@ -49,7 +49,7 @@ class MenuController extends Controller
      */
     public function create(Request $request)
     {
-        $taglist = WechatTagModel::orderBy('id', 'asc')->pluck('id', 'name');
+        $taglist = WechatTagModel::orderBy('id', 'asc')->pluck('name', 'id');
         $menulist = WechatMenuModel::where(function($query) use($request) {
             $tag_id = intval($request->tag_id) ? intval($request->tag_id) : 0;
             $query->where('tag_id', $tag_id);
@@ -123,7 +123,7 @@ class MenuController extends Controller
     public function edit(Request $request, $id)
     {
         $menu = WechatMenuModel::findOrFail($id);
-        $taglist = WechatTagModel::orderBy('id', 'asc')->pluck('id', 'name');
+        $taglist = WechatTagModel::orderBy('id', 'asc')->pluck('name', 'id');
         $menulist = WechatMenuModel::where('tag_id', $menu->tag_id)->orderBy('displayorder', 'asc')->get();
         return view('admin.wechat.menu.edit', ['menu' => $menu, 'menulist' => category_tree($menulist), 'taglist' => $taglist]);
     }
