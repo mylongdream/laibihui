@@ -24,8 +24,8 @@
 		<table>
 			<tr>
 				<th width="24"><input class="checkall" type="checkbox"></th>
-				<th width="150">{{ trans('admin.crm.allocation.user') }}</th>
-				<th width="150">{{ trans('admin.crm.allocation.cardnum') }}</th>
+				<th>{{ trans('admin.crm.allocation.user') }}</th>
+				<th>{{ trans('admin.crm.allocation.cardnum') }}</th>
 				<th width="150">{{ trans('admin.crm.allocation.created_at') }}</th>
 				<th width="100">{{ trans('admin.operation') }}</th>
 			</tr>
