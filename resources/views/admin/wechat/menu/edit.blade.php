@@ -10,9 +10,13 @@
 		<div class="tbedit">
 			<div class="tbhead cl">
 				<div class="z"><h3>{{ trans('admin.wechat.menu.edit') }}</h3></div>
-				<div class="y"><a href="{{ route('admin.wechat.menu.index', ['tag_id' => request('tag_id')]) }}" class="btn">< {{ trans('admin.wechat.menu.list') }}</a></div>
+				<div class="y"><a href="{{ route('admin.wechat.menu.index', ['tag_id' => $menu->tag_id]) }}" class="btn">< {{ trans('admin.wechat.menu.list') }}</a></div>
 			</div>
 			<table>
+				<tr>
+					<td width="150" align="right">{{ trans('admin.wechat.menu.tag_id') }}</td>
+					<td>{{ $menu->tag_id ? $taglist[$menu->tag_id] : '默认' }}<input type="hidden" value="{{ $menu->tag_id }}" name="tag_id"></td>
+				</tr>
 				<tr>
 					<td width="150" align="right">{{ trans('admin.wechat.menu.parentid') }}</td>
 					<td>

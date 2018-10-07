@@ -1054,6 +1054,7 @@ return [
     'wechat.menu.edit' => '编辑菜单',
     'wechat.menu.destroy' => '删除菜单',
     'wechat.menu.publish' => '发布菜单',
+    'wechat.menu.tag_id' => '微信标签',
     'wechat.menu.parentid' => '上级菜单',
     'wechat.menu.name' => '菜单名称',
     'wechat.menu.type' => '响应动作类型',

@@ -4,7 +4,7 @@
 	<div class="itemnav">
 		<div class="title"><h3>{{ trans('admin.wechat.menu') }}</h3></div>
 	</div>
-	<form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('admin.wechat.menu.store', ['tag_id' => request('tag_id')]) }}">
+	<form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('admin.wechat.menu.store') }}">
 		{!! csrf_field() !!}
 		<div class="tbedit">
 			<div class="tbhead cl">
@@ -12,6 +12,10 @@
 				<div class="y"><a href="{{ route('admin.wechat.menu.index', ['tag_id' => request('tag_id')]) }}" class="btn">< {{ trans('admin.wechat.menu.list') }}</a></div>
 			</div>
 			<table>
+				<tr>
+					<td width="150" align="right">{{ trans('admin.wechat.menu.tag_id') }}</td>
+					<td>{{ request('tag_id') ? $taglist[request('tag_id')] : '默认' }}<input type="hidden" value="{{ request('tag_id') }}" name="tag_id"></td>
+				</tr>
 				<tr>
 					<td width="150" align="right">{{ trans('admin.wechat.menu.parentid') }}</td>
 					<td>

@@ -49,11 +49,12 @@ class MenuController extends Controller
      */
     public function create(Request $request)
     {
+        $taglist = WechatTagModel::orderBy('id', 'asc')->pluck('id', 'name');
         $menulist = WechatMenuModel::where(function($query) use($request) {
             $tag_id = intval($request->tag_id) ? intval($request->tag_id) : 0;
             $query->where('tag_id', $tag_id);
         })->orderBy('displayorder', 'asc')->get();
-        return view('admin.wechat.menu.create', ['menulist' => category_tree($menulist)]);
+        return view('admin.wechat.menu.create', ['menulist' => category_tree($menulist), 'taglist' => $taglist]);
     }
 
     /**
@@ -122,11 +123,9 @@ class MenuController extends Controller
     public function edit(Request $request, $id)
     {
         $menu = WechatMenuModel::findOrFail($id);
-        $menulist = WechatMenuModel::where(function($query) use($request) {
-            $tag_id = intval($request->tag_id) ? intval($request->tag_id) : 0;
-            $query->where('tag_id', $tag_id);
-        })->orderBy('displayorder', 'asc')->get();
-        return view('admin.wechat.menu.edit', ['menu' => $menu, 'menulist' => category_tree($menulist)]);
+        $taglist = WechatTagModel::orderBy('id', 'asc')->pluck('id', 'name');
+        $menulist = WechatMenuModel::where('tag_id', $menu->tag_id)->orderBy('displayorder', 'asc')->get();
+        return view('admin.wechat.menu.edit', ['menu' => $menu, 'menulist' => category_tree($menulist), 'taglist' => $taglist]);
     }
 
     /**
