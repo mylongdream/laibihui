@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Crm;
+namespace App\Http\Controllers\Crm\Shop;
 
 use App\Http\Controllers\Controller;
 
@@ -8,10 +8,11 @@ use App\Models\BrandAppointModel;
 use App\Models\BrandShopModel;
 use Illuminate\Http\Request;
 
-class AppointController extends Controller
+class AppointController extends CommonController
 {
     public function __construct()
     {
+        parent::__construct();
         view()->share('curmenu', 'appoint');
     }
 
@@ -29,13 +30,13 @@ class AppointController extends Controller
                 $query->where('order_sn', 'like',"%".$request->order_sn."%");
             }
         })->latest()->paginate(10);
-        return view('crm.appoint.index', ['appoints' => $appoints]);
+        return view('crm.shop.appoint.index', ['appoints' => $appoints]);
     }
 
     public function show(Request $request, $id)
     {
         $appoint = BrandAppointModel::where('shop_id', auth('crm')->user()->shop->id)->where('order_sn', $id)->firstOrFail();
-        return view('crm.appoint.show', ['appoint' => $appoint]);
+        return view('crm.shop.appoint.show', ['appoint' => $appoint]);
     }
 
     public function edit(Request $request, $id)
@@ -48,7 +49,7 @@ class AppointController extends Controller
                 return view('layouts.crm.message', ['status' => 0, 'info' => '预约订单已经处理', 'url' => back()->getTargetUrl()]);
             }
         }
-        return view('crm.appoint.edit', ['appoint' => $appoint]);
+        return view('crm.shop.appoint.edit', ['appoint' => $appoint]);
     }
 
     public function update(Request $request, $id)

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Crm;
+namespace App\Http\Controllers\Crm\Shop;
 
 use App\Http\Controllers\Controller;
 
@@ -10,16 +10,17 @@ use App\Models\CommonUserModel;
 use Illuminate\Http\Request;
 use Yansongda\LaravelPay\Facades\Pay;
 
-class CheckoutController extends Controller
+class CheckoutController extends CommonController
 {
     public function __construct()
     {
+        parent::__construct();
         view()->share('curmenu', 'checkout');
     }
 
     public function index(Request $request)
     {
-        return view('crm.checkout.index');
+        return view('crm.shop.checkout.index');
     }
 
     public function check(Request $request)
@@ -37,7 +38,7 @@ class CheckoutController extends Controller
         );
         $request->validate($rules, $messages);
         $userinfo = CommonUserModel::where('uid', $request->user_id)->first();
-        return view('crm.checkout.check', ['userinfo' => $userinfo]);
+        return view('crm.shop.checkout.check', ['userinfo' => $userinfo]);
     }
 
     public function pay(Request $request)
@@ -113,7 +114,7 @@ class CheckoutController extends Controller
         );
         $request->validate($rules, $messages);
         $userinfo = CommonUserModel::where('mobile', $request->mobile)->first();
-        return view('crm.checkout.userinfo', ['userinfo' => $userinfo]);
+        return view('crm.shop.checkout.userinfo', ['userinfo' => $userinfo]);
     }
 
 }

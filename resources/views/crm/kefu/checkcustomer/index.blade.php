@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="crm-main">
-        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.checkcustomer.index') }}">
+        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.kefu.checkcustomer.index') }}">
             <div class="crm-search">
                 <dl>
                     <dd>
@@ -32,7 +32,7 @@
                     </tr>
                     @foreach ($customers as $value)
                         <tr>
-                            <td><a href="{{ route('crm.checkcustomer.show',$value->id) }}" class="openwindow" title="商户详情">{{ $value->name }}</a></td>
+                            <td><a href="{{ route('crm.kefu.checkcustomer.show',$value->id) }}" class="openwindow" title="商户详情">{{ $value->name }}</a></td>
                             <td>{{ $value->address }}</td>
                             <td>{{ $value->phone }}</td>
                             <td>{{ $value->user ? $value->user->realname : '/' }}</td>
@@ -52,12 +52,12 @@
                     </tr>
                     @foreach ($customers as $value)
                         <tr>
-                            <td><a href="{{ route('crm.checkcustomer.show',$value->id) }}" class="openwindow" title="商户详情">{{ $value->name }}</a></td>
+                            <td><a href="{{ route('crm.kefu.checkcustomer.show',$value->id) }}" class="openwindow" title="商户详情">{{ $value->name }}</a></td>
                             <td>{{ $value->address }}</td>
                             <td>{{ $value->phone }}</td>
                             <td>{{ $value->user ? $value->user->realname : '/' }}</td>
                             <td>
-                                <a href="{{ route('crm.checkcustomer.check',$value->id) }}" class="">点击审核</a>
+                                <a href="{{ route('crm.kefu.checkcustomer.check',$value->id) }}" class="">点击审核</a>
                             </td>
                         </tr>
                     @endforeach
@@ -74,7 +74,7 @@
                     </tr>
                     @foreach ($customers as $value)
                         <tr>
-                            <td><a href="{{ route('crm.checkcustomer.show',$value->id) }}" class="openwindow" title="商户详情">{{ $value->name }}</a></td>
+                            <td><a href="{{ route('crm.kefu.checkcustomer.show',$value->id) }}" class="openwindow" title="商户详情">{{ $value->name }}</a></td>
                             <td>{{ $value->address }}</td>
                             <td>{{ $value->phone }}</td>
                             <td>{{ $value->user ? $value->user->realname : '/' }}</td>

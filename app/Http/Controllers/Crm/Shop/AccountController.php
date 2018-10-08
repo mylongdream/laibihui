@@ -1,21 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Crm;
+namespace App\Http\Controllers\Crm\Shop;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AccountController extends Controller
+class AccountController extends CommonController
 {
 
     public function __construct()
     {
+        parent::__construct();
         view()->share('curmenu', 'account');
     }
 
     public function index(Request $request)
     {
-        return view('crm.account.index');
+        return view('crm.shop.account.index');
     }
 
     public function password(Request $request)
@@ -44,7 +45,7 @@ class AccountController extends Controller
                 return view('layouts.crm.message', ['status' => 1, 'info' => '密码修改成功', 'url' => route('crm.account.password')]);
             }
         }else{
-            return view('crm.account.password');
+            return view('crm.shop.account.password');
         }
     }
 

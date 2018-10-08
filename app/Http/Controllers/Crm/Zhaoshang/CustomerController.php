@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Crm;
+namespace App\Http\Controllers\Crm\Zhaoshang;
 
 use App\Http\Controllers\Controller;
 use App\Models\BrandCategoryModel;
@@ -10,11 +10,12 @@ use App\Models\CrmCustomerModel;
 use App\Models\CrmGroupModel;
 use Illuminate\Http\Request;
 
-class CustomerController extends Controller
+class CustomerController extends CommonController
 {
 
     public function __construct()
     {
+        parent::__construct();
         view()->share('curmenu', 'customer');
     }
 
@@ -30,14 +31,14 @@ class CustomerController extends Controller
                 $query->where('address', 'like',"%".$request->address."%");
             }
         })->latest()->paginate(20);
-        return view('crm.customer.index', ['customers' => $customers]);
+        return view('crm.zhaoshang.customer.index', ['customers' => $customers]);
     }
 
     public function create(Request $request)
     {
         view()->share('curmenu', 'addcustomer');
         $categorylist = BrandCategoryModel::orderBy('displayorder', 'asc')->get();
-        return view('crm.customer.create', ['categorylist' => category_tree($categorylist)]);
+        return view('crm.zhaoshang.customer.create', ['categorylist' => category_tree($categorylist)]);
     }
 
     public function store(Request $request)
@@ -84,23 +85,23 @@ class CustomerController extends Controller
         $customer->save();
 
         if ($request->ajax()){
-            return response()->json(['status' => '1', 'info' => '新增客户成功', 'url' => route('crm.customer.index')]);
+            return response()->json(['status' => '1', 'info' => '新增客户成功', 'url' => route('crm.zhaoshang.customer.index')]);
         }else{
-            return view('layouts.crm.message', ['status' => '1', 'info' => '新增客户成功', 'url' => route('crm.customer.index')]);
+            return view('layouts.crm.message', ['status' => '1', 'info' => '新增客户成功', 'url' => route('crm.zhaoshang.customer.index')]);
         }
     }
 
     public function show($id)
     {
         $customer = CrmCustomerModel::where('uid', auth('crm')->user()->uid)->findOrFail($id);
-        return view('crm.customer.show', ['customer' => $customer]);
+        return view('crm.zhaoshang.customer.show', ['customer' => $customer]);
     }
 
     public function edit($id)
     {
         $customer = CrmCustomerModel::where('uid', auth('crm')->user()->uid)->whereNull('refer_at')->findOrFail($id);
         $categorylist = BrandCategoryModel::orderBy('displayorder', 'asc')->get();
-        return view('crm.customer.edit', ['customer' => $customer, 'categorylist' => category_tree($categorylist)]);
+        return view('crm.zhaoshang.customer.edit', ['customer' => $customer, 'categorylist' => category_tree($categorylist)]);
     }
 
     public function update(Request $request, $id)
@@ -146,9 +147,9 @@ class CustomerController extends Controller
         $customer->save();
 
         if ($request->ajax()){
-            return response()->json(['status' => 1, 'info' => '修改客户成功', 'url' => route('crm.customer.index')]);
+            return response()->json(['status' => 1, 'info' => '修改客户成功', 'url' => route('crm.zhaoshang.customer.index')]);
         }else{
-            return view('layouts.crm.message', ['status' => 1, 'info' => '修改客户成功', 'url' => route('crm.customer.index')]);
+            return view('layouts.crm.message', ['status' => 1, 'info' => '修改客户成功', 'url' => route('crm.zhaoshang.customer.index')]);
         }
     }
 
@@ -179,19 +180,19 @@ class CustomerController extends Controller
             $customer->save();
 
             if ($request->ajax()){
-                return response()->json(['status' => 1, 'info' => '客户提交审核成功', 'url' => route('crm.customer.referlist')]);
+                return response()->json(['status' => 1, 'info' => '客户提交审核成功', 'url' => route('crm.zhaoshang.customer.referlist')]);
             }else{
-                return view('layouts.crm.message', ['status' => 1, 'info' => '客户提交审核成功', 'url' => route('crm.customer.referlist')]);
+                return view('layouts.crm.message', ['status' => 1, 'info' => '客户提交审核成功', 'url' => route('crm.zhaoshang.customer.referlist')]);
             }
         }else{
-            return view('crm.customer.refer', ['customer' => $customer]);
+            return view('crm.zhaoshang.customer.refer', ['customer' => $customer]);
         }
     }
 
     public function referlist(Request $request)
     {
         if(!in_array($request->type, array('passed', 'auditing', 'rejected'))){
-            return response()->redirectToRoute('crm.customer.referlist', ['type' => 'auditing']);
+            return response()->redirectToRoute('crm.zhaoshang.customer.referlist', ['type' => 'auditing']);
         }
         $CrmCustomerModel = new CrmCustomerModel;
         $customers = $CrmCustomerModel->where('uid', auth('crm')->user()->uid)->whereNotNull('refer_at')->where(function($query) use($request) {
@@ -203,7 +204,7 @@ class CustomerController extends Controller
                 $query->where('check_status', 'rejected');
             }
         })->orderBy('refer_at', 'desc')->paginate(20);
-        return view('crm.customer.referlist', ['customers' => $customers]);
+        return view('crm.zhaoshang.customer.referlist', ['customers' => $customers]);
     }
 
 }

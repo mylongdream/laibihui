@@ -1,55 +1,71 @@
 @extends('layouts.crm.app')
 
 @section('content')
-    <div class="crm-tabnav">
-        <ul>
-            <li class="on"><a href="{{ route('crm.shop.index') }}">成功客户</a></li>
-            <li><a href="{{ route('crm.archive.index') }}">客户修改审核</a></li>
-        </ul>
-    </div>
     <div class="crm-main">
-        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.shop.index') }}">
-            <div class="crm-search">
-                <dl>
-                    <dt>商户名称</dt>
-                    <dd><input type="text" name="name" class="schtxt" value="{{ request('name') }}"></dd>
-                </dl>
-                <div class="schbtn"><button name="" type="submit">搜索</button></div>
+        <div class="shop-info">
+            <div class="pic">
+                <img src="{{ uploadImage(auth('crm')->user()->shop->upimage) }}" width="100" height="100">
             </div>
-        </form>
-        <div class="crm-list mtw">
+            <div class="info">
+                <div class="shop-stuff">
+                    <span><strong>{{ auth('crm')->user()->shop->name }}</strong></span>
+                </div>
+                <div class="shop-assets">
+                    <span>账户余额：</span>{{ sprintf("%.2f",auth('crm')->user()->shop->account) }}元
+                </div>
+                <div class="shop-function">
+                    本店支持：
+                    @if (auth('crm')->user()->shop->offline)
+                        <span>线下付款</span>
+                    @endif
+                    @if (auth('crm')->user()->shop->appoint)
+                        <span>预约订座</span>
+                    @endif
+                    @if (auth('crm')->user()->shop->ordermeal)
+                        <span>在线点餐</span>
+                    @endif
+                    @if (auth('crm')->user()->shop->ordercard)
+                        <span>店内办卡</span>
+                    @endif
+                </div>
+            </div>
+        </div>
+        <div class="mtw" style="font-size: 18px">昨日收入</div>
+        <div class="crm-count mtw">
             <table>
                 <tr>
-                    <th align="left" colspan="2">商户名称</th>
-                    <th align="left" width="150">联名卡</th>
-                    <th align="left" width="160">有效期限</th>
-                    <th align="left" width="80">操作</th>
+                    <td width="40%" align="center" class="sub1"><strong>昨日收入</strong><span>￥<em>{{ sprintf("%.2f",$count->consume_account) }}</em></span></td>
+                    <td width="30%" align="center" class="sub2"><strong>昨日线上支付</strong><span>￥<em>{{ sprintf("%.2f",$count->consume_online) }}</em></span></td>
+                    <td width="30%" align="center" class="sub3"><strong>昨日线下支付</strong><span>￥<em>{{ sprintf("%.2f",$count->consume_offline) }}</em></span></td>
                 </tr>
-                @foreach ($shops as $value)
-                    <tr style="height: 90px">
-                        <td width="60">
-                            <a href="{{ route('brand.shop.show',$value->id) }}" target="_blank"><img src="{{ uploadImage($value->upimage) }}" width="60" height="60"></a>
-                        </td>
-                        <td>
-                            <p><a href="{{ route('brand.shop.show',$value->id) }}" target="_blank">{{ $value->name }}</a></p>
-                            <p style="margin-top: 10px;color: #999">地址：{{ $value->address }}</p>
-                        </td>
-                        <td>
-                            <p>已分配：{{ $value->shopcards_count }} 张</p>
-                            <p style="margin-top: 10px;">已发行：{{ $value->sellcards_count }} 张</p>
-                        </td>
-                        <td>
-                            <p>起：{{ $value->started_at ? $value->started_at->format('Y-m-d H:i') : '/' }}</p>
-                            <p style="margin-top: 10px;">止：{{ $value->ended_at ? $value->ended_at->format('Y-m-d H:i') : '/' }}</p>
-                        </td>
-                        <td>
-                            <p><a href="{{ route('crm.shop.edit', $value->id) }}" class="">修改资料</a></p>
-                            <p style="margin-top: 10px;"><a href="{{ route('crm.shop.allot', $value->id) }}">分配卡号</a></p>
-                        </td>
-                    </tr>
-                @endforeach
             </table>
         </div>
-        {!! $shops->appends(['name' => request('name')])->appends(['address' => request('address')])->links() !!}
+        @if (auth('crm')->user()->shop->ordercard)
+            <div class="mtw" style="font-size: 18px">店内办卡</div>
+            <div class="crm-count mtw">
+                <table>
+                    <tr>
+                        <td width="40%" align="center" class="sub1"><strong>发卡提成</strong><span>￥<em>{{ sprintf("%.2f",$count->ordercard_account) }}</em></span></td>
+                        <td width="30%" align="center" class="sub2"><strong>未发行卡数</strong><span><em>{{ $count->ordercard_remaincard }}</em></span></td>
+                        <td width="30%" align="center" class="sub3"><strong>已发行卡数</strong><span><em>{{ $count->ordercard_sellcard }}</em></span></td>
+                    </tr>
+                </table>
+            </div>
+            @if ($rewards)
+            <div class="mtw" style="font-size: 18px">奖励兑换</div>
+            <div class="crm-exchange mtw">
+                <ul>
+                    @foreach ($rewards as $value)
+                    <li>
+                        <div class="pic"><img src="{{ uploadImage($value->upimage) }}" width="60" height="60"></div>
+                        <div class="name">{{ $value->name }}</div>
+                        <div class="info">所需卡数：{{ $value->cardnum }}张</div>
+                        <div class="btn"><a href="javascript:;" class="disabled">点击兑换</a></div>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+        @endif
     </div>
 @endsection

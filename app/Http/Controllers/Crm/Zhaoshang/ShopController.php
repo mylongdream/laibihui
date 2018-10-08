@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Crm;
+namespace App\Http\Controllers\Crm\Zhaoshang;
 
 use App\Http\Controllers\Controller;
 use App\Models\BrandShopArchiveModel;
@@ -10,11 +10,12 @@ use App\Models\BrandShopModel;
 use App\Models\CommonCardModel;
 use Illuminate\Http\Request;
 
-class ShopController extends Controller
+class ShopController extends CommonController
 {
 
     public function __construct()
     {
+        parent::__construct();
         view()->share('curmenu', 'shop');
     }
 
@@ -34,7 +35,7 @@ class ShopController extends Controller
         })->withCount(['shopcards', 'shopcards AS sellcards_count' => function ($query) {
             $query->has('card');
         }])->latest()->paginate(20);
-        return view('crm.shop.index', ['shops' => $shops]);
+        return view('crm.zhaoshang.shop.index', ['shops' => $shops]);
     }
 
     public function edit(Request $request, $id)
@@ -45,12 +46,12 @@ class ShopController extends Controller
         $archive = BrandShopArchiveModel::where('uid', auth('crm')->user()->uid)->where('shop_id', $shop->id)->where('status', 0)->first();
         if ($archive){
             if ($request->ajax()){
-                return response()->json(['status' => 0, 'info' => '很抱歉，该商户有编辑资料正在审核，您暂时无法编辑', 'url' => route('crm.shop.index')]);
+                return response()->json(['status' => 0, 'info' => '很抱歉，该商户有编辑资料正在审核，您暂时无法编辑', 'url' => route('crm.zhaoshang.shop.index')]);
             }else{
-                return view('layouts.crm.message', ['status' => 0, 'info' => '很抱歉，该商户有编辑资料正在审核，您暂时无法编辑', 'url' => route('crm.shop.index')]);
+                return view('layouts.crm.message', ['status' => 0, 'info' => '很抱歉，该商户有编辑资料正在审核，您暂时无法编辑', 'url' => route('crm.zhaoshang.shop.index')]);
             }
         }
-        return view('crm.shop.edit')->with('shop', $shop);
+        return view('crm.zhaoshang.shop.edit')->with('shop', $shop);
     }
 
     public function update(Request $request, $id)
@@ -61,9 +62,9 @@ class ShopController extends Controller
         $archive = BrandShopArchiveModel::where('uid', auth('crm')->user()->uid)->where('shop_id', $shop->id)->where('status', 0)->first();
         if ($archive){
             if ($request->ajax()){
-                return response()->json(['status' => 0, 'info' => '很抱歉，该商户有编辑资料正在审核，您暂时无法编辑', 'url' => route('crm.shop.index')]);
+                return response()->json(['status' => 0, 'info' => '很抱歉，该商户有编辑资料正在审核，您暂时无法编辑', 'url' => route('crm.zhaoshang.shop.index')]);
             }else{
-                return view('layouts.crm.message', ['status' => 0, 'info' => '很抱歉，该商户有编辑资料正在审核，您暂时无法编辑', 'url' => route('crm.shop.index')]);
+                return view('layouts.crm.message', ['status' => 0, 'info' => '很抱歉，该商户有编辑资料正在审核，您暂时无法编辑', 'url' => route('crm.zhaoshang.shop.index')]);
             }
         }
         $rules = array(
@@ -83,9 +84,9 @@ class ShopController extends Controller
         $archive->save();
 
         if ($request->ajax()){
-            return response()->json(['status' => 1, 'info' => '客户资料成功提交审核', 'url' => route('crm.shop.index')]);
+            return response()->json(['status' => 1, 'info' => '客户资料成功提交审核', 'url' => route('crm.zhaoshang.shop.index')]);
         }else{
-            return view('layouts.crm.message', ['status' => 1, 'info' => '客户资料成功提交审核', 'url' => route('crm.shop.index')]);
+            return view('layouts.crm.message', ['status' => 1, 'info' => '客户资料成功提交审核', 'url' => route('crm.zhaoshang.shop.index')]);
         }
 
 /*
@@ -95,9 +96,9 @@ class ShopController extends Controller
         $shop->save();
 
         if ($request->ajax()){
-            return response()->json(['status' => 1, 'info' => '编辑客户资料成功', 'url' => route('crm.shop.index')]);
+            return response()->json(['status' => 1, 'info' => '编辑客户资料成功', 'url' => route('crm.zhaoshang.shop.index')]);
         }else{
-            return view('layouts.crm.message', ['status' => 1, 'info' => '编辑客户资料成功', 'url' => route('crm.shop.index')]);
+            return view('layouts.crm.message', ['status' => 1, 'info' => '编辑客户资料成功', 'url' => route('crm.zhaoshang.shop.index')]);
         }
  */
     }
@@ -108,7 +109,7 @@ class ShopController extends Controller
             $query->where('uid', auth('crm')->user()->uid);
         })->findOrFail($id);
         $allots = BrandShopCardAllotModel::where('shop_id', $shop->id)->latest()->paginate(20);
-        return view('crm.shop.allot', ['shop' => $shop, 'allots' => $allots]);
+        return view('crm.zhaoshang.shop.allot', ['shop' => $shop, 'allots' => $allots]);
     }
 
     public function card(Request $request, $id)
@@ -122,7 +123,7 @@ class ShopController extends Controller
                 $query->where('number', 'like',"%".$request->number."%");
             }
         })->latest()->paginate(20);
-        return view('crm.shop.card', ['shop' => $shop, 'cards' => $cards]);
+        return view('crm.zhaoshang.shop.card', ['shop' => $shop, 'cards' => $cards]);
     }
 
     public function addcard(Request $request, $id)
@@ -179,12 +180,12 @@ class ShopController extends Controller
             }
 
             if ($request->ajax()){
-                return response()->json(['status' => 1, 'info' => '分配卡号成功'.$succeed_num.'张，失败'.$failed_num.'张', 'url' => route('crm.shop.card', ['id' => $shop->id, 'allotid' => $allot->id])]);
+                return response()->json(['status' => 1, 'info' => '分配卡号成功'.$succeed_num.'张，失败'.$failed_num.'张', 'url' => route('crm.zhaoshang.shop.card', ['id' => $shop->id, 'allotid' => $allot->id])]);
             }else{
-                return view('layouts.crm.message', ['status' => 1, 'info' => '分配卡号成功'.$succeed_num.'张，失败'.$failed_num.'张', 'url' => route('crm.shop.card', ['id' => $shop->id, 'allotid' => $allot->id])]);
+                return view('layouts.crm.message', ['status' => 1, 'info' => '分配卡号成功'.$succeed_num.'张，失败'.$failed_num.'张', 'url' => route('crm.zhaoshang.shop.card', ['id' => $shop->id, 'allotid' => $allot->id])]);
             }
         }else{
-            return view('crm.shop.addcard', ['shop' => $shop, 'allot' => $allot]);
+            return view('crm.zhaoshang.shop.addcard', ['shop' => $shop, 'allot' => $allot]);
         }
     }
 
@@ -249,7 +250,7 @@ class ShopController extends Controller
                 $query->where('id', '<>', $request->id);
             }
         })->orderBy('distance', 'asc')->latest()->get()->take(5);
-        return view('crm.shop.nearby', ['shops' => $shops]);
+        return view('crm.zhaoshang.shop.nearby', ['shops' => $shops]);
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Crm;
+namespace App\Http\Controllers\Crm\Shop;
 
 use App\Http\Controllers\Controller;
 
@@ -12,29 +12,30 @@ use App\Models\CommonUserModel;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class OrderMealController extends Controller
+class OrderMealController extends CommonController
 {
     public function __construct()
     {
+        parent::__construct();
         view()->share('curmenu', 'ordermeal');
     }
 
     public function index(Request $request)
     {
         $orders = BrandMealOrderModel::where('shop_id', auth('crm')->user()->shop->id)->orderBy('created_at', 'desc')->paginate(10);
-        return view('crm.ordermeal.index', ['orders' => $orders]);
+        return view('crm.shop.ordermeal.index', ['orders' => $orders]);
     }
 
     public function show(Request $request, $id)
     {
         $order = BrandMealOrderModel::where('shop_id', auth('crm')->user()->shop->id)->where('order_sn', $id)->firstOrFail();
-        return view('crm.ordermeal.show', ['order' => $order]);
+        return view('crm.shop.ordermeal.show', ['order' => $order]);
     }
 
     public function create(Request $request)
     {
         $meallist = BrandMealModel::where('shop_id', auth('crm')->user()->shop->id)->where('onsale', 1)->latest()->get();
-        return view('crm.ordermeal.create', ['meallist'=>$meallist]);
+        return view('crm.shop.ordermeal.create', ['meallist'=>$meallist]);
     }
 
     public function store(Request $request)
@@ -101,7 +102,7 @@ class OrderMealController extends Controller
     public function edit(Request $request, $id)
     {
         $order = BrandMealOrderModel::where('shop_id', auth('crm')->user()->shop->id)->where('order_sn', $id)->firstOrFail();
-        return view('crm.ordermeal.edit', ['order' => $order]);
+        return view('crm.shop.ordermeal.edit', ['order' => $order]);
     }
 
     public function update(Request $request, $id)

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Crm;
+namespace App\Http\Controllers\Crm\Shop;
 
 use App\Http\Controllers\Controller;
 
@@ -9,10 +9,11 @@ use App\Models\BrandShopCardModel;
 use App\Models\BrandShopModel;
 use Illuminate\Http\Request;
 
-class OrderCardController extends Controller
+class OrderCardController extends CommonController
 {
     public function __construct()
     {
+        parent::__construct();
         view()->share('curmenu', 'ordercard');
     }
 
@@ -23,7 +24,7 @@ class OrderCardController extends Controller
                 $query->where('number', 'like',"%".$request->number."%");
             }
         })->has('card')->orderBy('created_at', 'desc')->paginate(10);
-        return view('crm.ordercard.index', ['orders' => $orders]);
+        return view('crm.shop.ordercard.index', ['orders' => $orders]);
     }
 
     public function remain(Request $request)
@@ -33,7 +34,7 @@ class OrderCardController extends Controller
                 $query->where('number', 'like',"%".$request->number."%");
             }
         })->doesntHave('card')->orderBy('created_at', 'desc')->paginate(10);
-        return view('crm.ordercard.remain', ['orders' => $orders]);
+        return view('crm.shop.ordercard.remain', ['orders' => $orders]);
     }
 
 }

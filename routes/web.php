@@ -575,58 +575,59 @@ Route::group(['domain' => 'crm.hztbg.com', 'prefix' => '', 'as' => 'crm.'], func
     Route::get('logout', ['as' => 'logout', 'uses' => 'CRM\LoginController@logout']);
     Route::group(['middleware' => ['auth.crm']], function () {
         Route::get('/', ['as' => 'index', 'uses' => 'CRM\IndexController@index']);
-        Route::get('shop/nearby', ['as' => 'shop.nearby', 'uses' => 'CRM\ShopController@nearby']);
-
-        Route::get('customer', ['as' => 'customer.index', 'uses' => 'CRM\CustomerController@index', 'allow' => ['zhaoshang']]);
-        Route::get('customer/referlist', ['as' => 'customer.referlist', 'uses' => 'CRM\CustomerController@referlist', 'allow' => ['zhaoshang']]);
-        Route::get('customer/create', ['as' => 'customer.create', 'uses' => 'CRM\CustomerController@create', 'allow' => ['zhaoshang']]);
-        Route::post('customer', ['as' => 'customer.store', 'uses' => 'CRM\CustomerController@store', 'allow' => ['zhaoshang']]);
-        Route::get('customer/{id}', ['as' => 'customer.show', 'uses' => 'CRM\CustomerController@show', 'allow' => ['zhaoshang']]);
-        Route::get('customer/{id}/edit', ['as' => 'customer.edit', 'uses' => 'CRM\CustomerController@edit', 'allow' => ['zhaoshang']]);
-        Route::put('customer/{id}', ['as' => 'customer.update', 'uses' => 'CRM\CustomerController@update', 'allow' => ['zhaoshang']]);
-        Route::delete('customer/{id}', ['as' => 'customer.destroy', 'uses' => 'CRM\CustomerController@destroy', 'allow' => ['zhaoshang']]);
-        Route::any('customer/{id}/refer', ['as' => 'customer.refer', 'uses' => 'CRM\CustomerController@refer', 'allow' => ['zhaoshang']]);
-        Route::get('shop', ['as' => 'shop.index', 'uses' => 'CRM\ShopController@index', 'allow' => ['zhaoshang']]);
-        Route::get('shop/checkcard', ['as' => 'shop.checkcard', 'uses' => 'CRM\ShopController@checkcard', 'allow' => ['zhaoshang']]);
-        Route::get('shop/{id}/edit', ['as' => 'shop.edit', 'uses' => 'CRM\ShopController@edit', 'allow' => ['zhaoshang']]);
-        Route::put('shop/{id}', ['as' => 'shop.update', 'uses' => 'CRM\ShopController@update', 'allow' => ['zhaoshang']]);
-        Route::get('shop/{id}/allot', ['as' => 'shop.allot', 'uses' => 'CRM\ShopController@allot', 'allow' => ['zhaoshang']]);
-        Route::get('shop/{id}/card', ['as' => 'shop.card', 'uses' => 'CRM\ShopController@card', 'allow' => ['zhaoshang']]);
-        Route::any('shop/{id}/addcard', ['as' => 'shop.addcard', 'uses' => 'CRM\ShopController@addcard', 'allow' => ['zhaoshang']]);
-        Route::get('archive', ['as' => 'archive.index', 'uses' => 'CRM\ArchiveController@index', 'allow' => ['zhaoshang']]);
-        Route::get('archive/{id}', ['as' => 'archive.show', 'uses' => 'CRM\ArchiveController@show', 'allow' => ['zhaoshang']]);
-
-        Route::get('checkcustomer', ['as' => 'checkcustomer.index', 'uses' => 'CRM\CheckCustomerController@index', 'allow' => ['kefu']]);
-        Route::get('checkcustomer/{id}', ['as' => 'checkcustomer.show', 'uses' => 'CRM\CheckCustomerController@show', 'allow' => ['kefu']]);
-        Route::any('checkcustomer/{id}/check', ['as' => 'checkcustomer.check', 'uses' => 'CRM\CheckCustomerController@check', 'allow' => ['kefu']]);
-
-        Route::get('consume', ['as' => 'consume.index', 'uses' => 'CRM\ConsumeController@index', 'allow' => ['shangjia']]);
-        Route::get('consume/balance', ['as' => 'consume.balance', 'uses' => 'CRM\ConsumeController@balance', 'allow' => ['shangjia']]);
-        Route::get('consume/{id}', ['as' => 'consume.show', 'uses' => 'CRM\ConsumeController@show', 'allow' => ['shangjia']]);
-        Route::get('ordercard', ['as' => 'ordercard.index', 'uses' => 'CRM\OrderCardController@index', 'allow' => ['shangjia']]);
-        Route::get('ordercard/remain', ['as' => 'ordercard.remain', 'uses' => 'CRM\OrderCardController@remain', 'allow' => ['shangjia']]);
-        Route::get('appoint', ['as' => 'appoint.index', 'uses' => 'CRM\AppointController@index', 'allow' => ['shangjia']]);
-        Route::get('appoint/{id}', ['as' => 'appoint.show', 'uses' => 'CRM\AppointController@show', 'allow' => ['shangjia']]);
-        Route::get('appoint/{id}/edit', ['as' => 'appoint.edit', 'uses' => 'CRM\AppointController@edit', 'allow' => ['shangjia']]);
-        Route::put('appoint/{id}', ['as' => 'appoint.update', 'uses' => 'CRM\AppointController@update', 'allow' => ['shangjia']]);
-        Route::get('ordermeal', ['as' => 'ordermeal.index', 'uses' => 'CRM\OrderMealController@index', 'allow' => ['shangjia']]);
-        Route::get('ordermeal/create', ['as' => 'ordermeal.create', 'uses' => 'CRM\OrderMealController@create', 'allow' => ['shangjia']]);
-        Route::post('ordermeal', ['as' => 'ordermeal.store', 'uses' => 'CRM\OrderMealController@store', 'allow' => ['shangjia']]);
-        Route::get('ordermeal/{id}', ['as' => 'ordermeal.show', 'uses' => 'CRM\OrderMealController@show', 'allow' => ['shangjia']]);
-        Route::get('ordermeal/{id}/edit', ['as' => 'ordermeal.edit', 'uses' => 'CRM\OrderMealController@edit', 'allow' => ['shangjia']]);
-        Route::put('ordermeal/{id}', ['as' => 'ordermeal.update', 'uses' => 'CRM\OrderMealController@update', 'allow' => ['shangjia']]);
-        Route::get('withdraw', ['as' => 'withdraw.index', 'uses' => 'CRM\WithdrawController@index', 'allow' => ['shangjia']]);
-        Route::get('checkout', ['as' => 'checkout.index', 'uses' => 'CRM\CheckoutController@index', 'allow' => ['shangjia']]);
-        Route::post('checkout/check', ['as' => 'checkout.check', 'uses' => 'CRM\CheckoutController@check', 'allow' => ['shangjia']]);
-        Route::post('checkout/pay', ['as' => 'checkout.pay', 'uses' => 'CRM\CheckoutController@pay', 'allow' => ['shangjia']]);
-        Route::post('checkout/userinfo', ['as' => 'checkout.userinfo', 'uses' => 'CRM\CheckoutController@userinfo', 'allow' => ['shangjia']]);
-
-        Route::get('account', ['as' => 'account.index', 'uses' => 'CRM\AccountController@index']);
-        Route::any('account/password', ['as' => 'account.password', 'uses' => 'CRM\AccountController@password']);
+        Route::group(['prefix' => 'shop', 'as' => 'shop.'], function () {
+            Route::get('consume', ['as' => 'consume.index', 'uses' => 'CRM\Shop\ConsumeController@index']);
+            Route::get('consume/balance', ['as' => 'consume.balance', 'uses' => 'CRM\Shop\ConsumeController@balance']);
+            Route::get('consume/{id}', ['as' => 'consume.show', 'uses' => 'CRM\Shop\ConsumeController@show']);
+            Route::get('ordercard', ['as' => 'ordercard.index', 'uses' => 'CRM\Shop\OrderCardController@index']);
+            Route::get('ordercard/remain', ['as' => 'ordercard.remain', 'uses' => 'CRM\Shop\OrderCardController@remain']);
+            Route::get('appoint', ['as' => 'appoint.index', 'uses' => 'CRM\Shop\AppointController@index']);
+            Route::get('appoint/{id}', ['as' => 'appoint.show', 'uses' => 'CRM\Shop\AppointController@show']);
+            Route::get('appoint/{id}/edit', ['as' => 'appoint.edit', 'uses' => 'CRM\Shop\AppointController@edit']);
+            Route::put('appoint/{id}', ['as' => 'appoint.update', 'uses' => 'CRM\Shop\AppointController@update']);
+            Route::get('ordermeal', ['as' => 'ordermeal.index', 'uses' => 'CRM\Shop\OrderMealController@index']);
+            Route::get('ordermeal/create', ['as' => 'ordermeal.create', 'uses' => 'CRM\Shop\OrderMealController@create']);
+            Route::post('ordermeal', ['as' => 'ordermeal.store', 'uses' => 'CRM\Shop\OrderMealController@store']);
+            Route::get('ordermeal/{id}', ['as' => 'ordermeal.show', 'uses' => 'CRM\Shop\OrderMealController@show']);
+            Route::get('ordermeal/{id}/edit', ['as' => 'ordermeal.edit', 'uses' => 'CRM\Shop\OrderMealController@edit']);
+            Route::put('ordermeal/{id}', ['as' => 'ordermeal.update', 'uses' => 'CRM\Shop\OrderMealController@update']);
+            Route::get('withdraw', ['as' => 'withdraw.index', 'uses' => 'CRM\Shop\WithdrawController@index']);
+            Route::get('checkout', ['as' => 'checkout.index', 'uses' => 'CRM\Shop\CheckoutController@index']);
+            Route::post('checkout/check', ['as' => 'checkout.check', 'uses' => 'CRM\Shop\CheckoutController@check']);
+            Route::post('checkout/pay', ['as' => 'checkout.pay', 'uses' => 'CRM\Shop\CheckoutController@pay']);
+            Route::post('checkout/userinfo', ['as' => 'checkout.userinfo', 'uses' => 'CRM\Shop\CheckoutController@userinfo']);
+            Route::get('account', ['as' => 'account.index', 'uses' => 'CRM\Shop\AccountController@index']);
+            Route::any('account/password', ['as' => 'account.password', 'uses' => 'CRM\Shop\AccountController@password']);
+        });
+        Route::group(['prefix' => 'zhaoshang', 'as' => 'zhaoshang.'], function () {
+            Route::get('customer', ['as' => 'customer.index', 'uses' => 'CRM\Zhaoshang\CustomerController@index']);
+            Route::get('customer/referlist', ['as' => 'customer.referlist', 'uses' => 'CRM\Zhaoshang\CustomerController@referlist']);
+            Route::get('customer/create', ['as' => 'customer.create', 'uses' => 'CRM\Zhaoshang\CustomerController@create']);
+            Route::post('customer', ['as' => 'customer.store', 'uses' => 'CRM\Zhaoshang\CustomerController@store']);
+            Route::get('customer/{id}', ['as' => 'customer.show', 'uses' => 'CRM\Zhaoshang\CustomerController@show']);
+            Route::get('customer/{id}/edit', ['as' => 'customer.edit', 'uses' => 'CRM\Zhaoshang\CustomerController@edit']);
+            Route::put('customer/{id}', ['as' => 'customer.update', 'uses' => 'CRM\Zhaoshang\CustomerController@update']);
+            Route::delete('customer/{id}', ['as' => 'customer.destroy', 'uses' => 'CRM\Zhaoshang\CustomerController@destroy']);
+            Route::any('customer/{id}/refer', ['as' => 'customer.refer', 'uses' => 'CRM\Zhaoshang\CustomerController@refer']);
+            Route::get('shop', ['as' => 'shop.index', 'uses' => 'CRM\Zhaoshang\ShopController@index']);
+            Route::get('shop/checkcard', ['as' => 'shop.checkcard', 'uses' => 'CRM\Zhaoshang\ShopController@checkcard']);
+            Route::get('shop/{id}/edit', ['as' => 'shop.edit', 'uses' => 'CRM\Zhaoshang\ShopController@edit']);
+            Route::put('shop/{id}', ['as' => 'shop.update', 'uses' => 'CRM\Zhaoshang\ShopController@update']);
+            Route::get('shop/{id}/allot', ['as' => 'shop.allot', 'uses' => 'CRM\Zhaoshang\ShopController@allot']);
+            Route::get('shop/{id}/card', ['as' => 'shop.card', 'uses' => 'CRM\Zhaoshang\ShopController@card']);
+            Route::any('shop/{id}/addcard', ['as' => 'shop.addcard', 'uses' => 'CRM\Zhaoshang\ShopController@addcard']);
+            Route::get('archive', ['as' => 'archive.index', 'uses' => 'CRM\Zhaoshang\ArchiveController@index']);
+            Route::get('archive/{id}', ['as' => 'archive.show', 'uses' => 'CRM\Zhaoshang\ArchiveController@show']);
+            Route::get('shop/nearby', ['as' => 'shop.nearby', 'uses' => 'CRM\Zhaoshang\ShopController@nearby']);
+        });
+        Route::group(['prefix' => 'kefu', 'as' => 'kefu.'], function () {
+            Route::get('checkcustomer', ['as' => 'checkcustomer.index', 'uses' => 'CRM\Kefu\CheckCustomerController@index']);
+            Route::get('checkcustomer/{id}', ['as' => 'checkcustomer.show', 'uses' => 'CRM\Kefu\CheckCustomerController@show']);
+            Route::any('checkcustomer/{id}/check', ['as' => 'checkcustomer.check', 'uses' => 'CRM\Kefu\CheckCustomerController@check']);
+        });
     });
     Route::post('upload/image', ['as' => 'upload.image', 'uses' => 'CRM\UploadController@image']);
     Route::post('upload/video', ['as' => 'upload.video', 'uses' => 'CRM\UploadController@video']);
-
 });
 
 Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'wechat', 'as' => 'wechat.'], function () {

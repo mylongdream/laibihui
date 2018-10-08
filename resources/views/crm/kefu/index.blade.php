@@ -15,13 +15,13 @@
             <table>
                 <tr>
                     <td width="40%" align="center" class="sub1">
-                        <a href="{{ route('crm.checkcustomer.index', ['type' => 'auditing']) }}"><strong>待审客户</strong><span><em>{{ $count->auditingcustomer }}</em>个</span></a>
+                        <a href="{{ route('crm.kefu.checkcustomer.index', ['type' => 'auditing']) }}"><strong>待审客户</strong><span><em>{{ $count->auditingcustomer }}</em>个</span></a>
                     </td>
                     <td width="30%" align="center" class="sub2">
-                        <a href="{{ route('crm.checkcustomer.index', ['type' => 'passed']) }}"><strong>通过客户</strong><span><em>{{ $count->passedcustomer }}</em>个</span></a>
+                        <a href="{{ route('crm.kefu.checkcustomer.index', ['type' => 'passed']) }}"><strong>通过客户</strong><span><em>{{ $count->passedcustomer }}</em>个</span></a>
                     </td>
                     <td width="30%" align="center" class="sub2">
-                        <a href="{{ route('crm.checkcustomer.index', ['type' => 'rejected']) }}"><strong>驳回客户</strong><span><em>{{ $count->rejectedcustomer }}</em>个</span></a>
+                        <a href="{{ route('crm.kefu.checkcustomer.index', ['type' => 'rejected']) }}"><strong>驳回客户</strong><span><em>{{ $count->rejectedcustomer }}</em>个</span></a>
                     </td>
                 </tr>
             </table>

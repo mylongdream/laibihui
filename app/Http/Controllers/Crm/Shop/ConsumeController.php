@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Crm;
+namespace App\Http\Controllers\Crm\Shop;
 
 use App\Http\Controllers\Controller;
 
@@ -12,10 +12,11 @@ use DatePeriod;
 use DateTime;
 use Illuminate\Http\Request;
 
-class ConsumeController extends Controller
+class ConsumeController extends CommonController
 {
     public function __construct()
     {
+        parent::__construct();
         view()->share(['curmenu' => 'consume']);
     }
 
@@ -26,13 +27,13 @@ class ConsumeController extends Controller
                 $query->where('order_sn', 'like',"%".$request->order_sn."%");
             }
         })->orderBy('created_at', 'desc')->paginate(20);
-        return view('crm.consume.index', ['consumes' => $consumes]);
+        return view('crm.shop.consume.index', ['consumes' => $consumes]);
     }
 
     public function show(Request $request, $id)
     {
         $consume = BrandConsumeModel::where('shop_id', auth('crm')->user()->shop->id)->where('order_sn', $id)->firstOrFail();
-        return view('crm.consume.show', ['consume' => $consume]);
+        return view('crm.shop.consume.show', ['consume' => $consume]);
     }
 
     public function balance(Request $request)
@@ -68,7 +69,7 @@ class ConsumeController extends Controller
             $consume->account = $online->sum('indiscount_money') - ($offline->sum('consume_money') - $offline->sum('indiscount_money'));
             $consumes->push($consume);
         }
-        return view('crm.consume.balance', ['consumes' => $consumes, 'datetime' => $datetime]);
+        return view('crm.shop.consume.balance', ['consumes' => $consumes, 'datetime' => $datetime]);
     }
 
 }

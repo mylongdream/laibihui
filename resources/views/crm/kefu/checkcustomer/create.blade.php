@@ -7,7 +7,7 @@
                 <h4>新增客户</h4>
             </div>
             <div class="bd crm-form">
-                <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.customer.store') }}">
+                <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.kefu.customer.store') }}">
                     {!! csrf_field() !!}
                     <div class="subtitle">必填信息</div>
                     <table>

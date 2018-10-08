@@ -21,7 +21,7 @@
     <div class="wp">
         <div class="crm-container cl">
             <div class="sd">
-                @include('layouts.crm.menu')
+                @include('crm.'.auth('crm')->user()->group->module.'.menu')
             </div>
             <div class="mn">
                     @endif

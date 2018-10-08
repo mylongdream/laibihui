@@ -7,7 +7,7 @@
                 <h4>提交审核</h4>
             </div>
             <div class="bd crm-form">
-                <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.checkcustomer.check',$customer->id) }}">
+                <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.kefu.checkcustomer.check',$customer->id) }}">
                     {!! csrf_field() !!}
                     <div class="subtitle">基本信息</div>
                     <table>
@@ -26,7 +26,7 @@
                         <tr>
                             <td align="right">地址坐标</td>
                             <td>{{ $customer->maplng }} X {{ $customer->maplat }}
-                                <a href="{{ route('crm.shop.nearby', ['catid' => $customer->catid, 'maplng' => $customer->maplng, 'maplat' => $customer->maplat]) }}" class="openwindow clickbtn mlm" id="nearby" title="附近店铺">附近店铺</a>
+                                <a href="{{ route('crm.kefu.shop.nearby', ['catid' => $customer->catid, 'maplng' => $customer->maplng, 'maplat' => $customer->maplat]) }}" class="openwindow clickbtn mlm" id="nearby" title="附近店铺">附近店铺</a>
                             </td>
                         </tr>
                         <tr>

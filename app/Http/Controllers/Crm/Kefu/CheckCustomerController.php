@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Crm;
+namespace App\Http\Controllers\Crm\Kefu;
 
 use App\Http\Controllers\Controller;
 use App\Models\BrandShopModel;
@@ -8,18 +8,19 @@ use App\Models\BrandShopModeratorModel;
 use App\Models\CrmCustomerModel;
 use Illuminate\Http\Request;
 
-class CheckCustomerController extends Controller
+class CheckCustomerController extends CommonController
 {
 
     public function __construct()
     {
+        parent::__construct();
         view()->share('curmenu', 'checkcustomer');
     }
 
     public function index(Request $request)
     {
         if(!in_array($request->type, array('passed', 'auditing', 'rejected'))){
-            return response()->redirectToRoute('crm.checkcustomer.index', ['type' => 'auditing']);
+            return response()->redirectToRoute('crm.kefu.checkcustomer.index', ['type' => 'auditing']);
         }
         $CrmCustomerModel = new CrmCustomerModel;
         $customers = $CrmCustomerModel->whereNotNull('refer_at')->where(function($query) use($request) {
@@ -35,13 +36,13 @@ class CheckCustomerController extends Controller
                 $query->where('name', 'like',"%".$request->name."%");
             }
         })->latest()->paginate(20);
-        return view('crm.checkcustomer.index', ['customers' => $customers]);
+        return view('crm.kefu.checkcustomer.index', ['customers' => $customers]);
     }
 
     public function show($id)
     {
         $customer = CrmCustomerModel::findOrFail($id);
-        return view('crm.checkcustomer.show', ['customer' => $customer]);
+        return view('crm.kefu.checkcustomer.show', ['customer' => $customer]);
     }
 
     public function check(Request $request, $id)
@@ -84,12 +85,12 @@ class CheckCustomerController extends Controller
             $customer->save();
 
             if ($request->ajax()){
-                return response()->json(['status' => 1, 'info' => '客户审核成功', 'url' => route('crm.checkcustomer.index')]);
+                return response()->json(['status' => 1, 'info' => '客户审核成功', 'url' => route('crm.kefu.checkcustomer.index')]);
             }else{
-                return view('layouts.crm.message', ['status' => 1, 'info' => '客户审核成功', 'url' => route('crm.checkcustomer.index')]);
+                return view('layouts.crm.message', ['status' => 1, 'info' => '客户审核成功', 'url' => route('crm.kefu.checkcustomer.index')]);
             }
         }else{
-            return view('crm.checkcustomer.check', ['customer' => $customer]);
+            return view('crm.kefu.checkcustomer.check', ['customer' => $customer]);
         }
     }
 
