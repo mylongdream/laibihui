@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="crm-main">
-        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.appoint.index') }}">
+        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.shop.appoint.index') }}">
             <div class="crm-search">
 		<dl>
 			<dd>
@@ -36,14 +36,14 @@
 				</tr>
 				@foreach ($appoints as $value)
 					<tr>
-						<td><a href="{{ route('crm.appoint.show', $value->order_sn) }}" class="openwindow" title="查看订单">{{ $value->order_sn }}</a></td>
+						<td><a href="{{ route('crm.shop.appoint.show', $value->order_sn) }}" class="openwindow" title="查看订单">{{ $value->order_sn }}</a></td>
 					<td>{{ $value->realname }}</td>
 						<td>{{ $value->appoint_at ? $value->appoint_at->format('Y-m-d H:i') : '/' }}</td>
 						<td>{{ $value->number }} 人</td>
 						<td>{{ trans('user.appoint.status_'.$value->status) }}</td>
                         <td>{{ $value->created_at->format('Y-m-d H:i:s') }}</td>
 						@if (empty(request('status')))
-						<td><a href="{{ route('crm.appoint.edit', $value->order_sn) }}" class="openwindow" title="处理订单">处理</a></td>
+						<td><a href="{{ route('crm.shop.appoint.edit', $value->order_sn) }}" class="openwindow" title="处理订单">处理</a></td>
 						@endif
 					</tr>
 				@endforeach

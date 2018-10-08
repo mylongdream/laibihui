@@ -3,12 +3,12 @@
 @section('content')
     <div class="crm-tabnav">
         <ul>
-            <li class="on"><a href="{{ route('crm.shop.index') }}">成功客户</a></li>
-            <li><a href="{{ route('crm.archive.index') }}">客户修改审核</a></li>
+            <li class="on"><a href="{{ route('crm.zhaoshang.shop.index') }}">成功客户</a></li>
+            <li><a href="{{ route('crm.zhaoshang.archive.index') }}">客户修改审核</a></li>
         </ul>
     </div>
     <div class="crm-main">
-        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.shop.index') }}">
+        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.zhaoshang.shop.index') }}">
             <div class="crm-search">
                 <dl>
                     <dt>商户名称</dt>
@@ -43,8 +43,8 @@
                             <p style="margin-top: 10px;">止：{{ $value->ended_at ? $value->ended_at->format('Y-m-d H:i') : '/' }}</p>
                         </td>
                         <td>
-                            <p><a href="{{ route('crm.shop.edit', $value->id) }}" class="">修改资料</a></p>
-                            <p style="margin-top: 10px;"><a href="{{ route('crm.shop.allot', $value->id) }}">分配卡号</a></p>
+                            <p><a href="{{ route('crm.zhaoshang.shop.edit', $value->id) }}" class="">修改资料</a></p>
+                            <p style="margin-top: 10px;"><a href="{{ route('crm.zhaoshang.shop.allot', $value->id) }}">分配卡号</a></p>
                         </td>
                     </tr>
                 @endforeach

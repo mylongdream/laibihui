@@ -4,7 +4,7 @@
     @if (!request()->ajax())
         <div class="crm-main">
             <div class="order-show mtw">
-                <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.appoint.update', $appoint->order_sn) }}">
+                <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.shop.appoint.update', $appoint->order_sn) }}">
                     <input type="hidden" name="_method" value="PUT">
                     {!! csrf_field() !!}
                     <table>
@@ -57,7 +57,7 @@
         </div>
     @else
         <div class="order-show" style="width: 500px;">
-            <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.appoint.update', $appoint->order_sn) }}">
+            <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.shop.appoint.update', $appoint->order_sn) }}">
                 <input type="hidden" name="_method" value="PUT">
                 {!! csrf_field() !!}
                 <table>

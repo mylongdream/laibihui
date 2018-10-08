@@ -3,12 +3,12 @@
 @section('content')
 	<div class="crm-tabnav">
 		<ul>
-			<li class="on"><a href="{{ route('crm.ordercard.index') }}">已发行</a></li>
-			<li><a href="{{ route('crm.ordercard.remain') }}">未发行</a></li>
+			<li class="on"><a href="{{ route('crm.shop.ordercard.index') }}">已发行</a></li>
+			<li><a href="{{ route('crm.shop.ordercard.remain') }}">未发行</a></li>
 		</ul>
 	</div>
 	<div class="crm-main">
-        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.ordercard.index') }}">
+        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.shop.ordercard.index') }}">
             <div class="crm-search">
                 <dl>
                     <dt>卡号</dt>

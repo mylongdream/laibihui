@@ -3,12 +3,12 @@
 @section('content')
     <div class="crm-tabnav">
         <ul>
-            <li class="on"><a href="{{ route('crm.customer.index') }}">客户管理</a></li>
-            <li><a href="{{ route('crm.customer.referlist') }}">客户审核</a></li>
+            <li class="on"><a href="{{ route('crm.zhaoshang.customer.index') }}">客户管理</a></li>
+            <li><a href="{{ route('crm.zhaoshang.customer.referlist') }}">客户审核</a></li>
         </ul>
     </div>
     <div class="crm-main">
-        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.customer.index') }}">
+        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.zhaoshang.customer.index') }}">
             <div class="crm-search">
                 <dl>
                     <dt>{{ trans('crm.customer.name') }}</dt>
@@ -29,20 +29,20 @@
                 </tr>
                 @foreach ($customers as $value)
                     <tr>
-                        <td><a href="{{ route('crm.customer.show',$value->id) }}" class="openwindow" title="商户详情">{{ $value->name }}</a></td>
+                        <td><a href="{{ route('crm.zhaoshang.customer.show',$value->id) }}" class="openwindow" title="商户详情">{{ $value->name }}</a></td>
                         <td>{{ $value->address }}</td>
                         <td>{{ $value->phone }}</td>
                         <td>{{ trans('crm.customer.status_'.$value->status) }}</td>
                         <td>
                             @if ($value->status == 'finish')
-                            <a href="{{ route('crm.customer.refer',$value->id) }}" class="">提交审核</a>
+                            <a href="{{ route('crm.zhaoshang.customer.refer',$value->id) }}" class="">提交审核</a>
                             @else
                                 <span>/</span>
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('crm.customer.edit',$value->id) }}" class="">{{ trans('crm.edit') }}</a>
-                            <a href="{{ route('crm.customer.destroy',$value->id) }}" class="mlm delbtn">{{ trans('crm.destroy') }}</a>
+                            <a href="{{ route('crm.zhaoshang.customer.edit',$value->id) }}" class="">{{ trans('crm.edit') }}</a>
+                            <a href="{{ route('crm.zhaoshang.customer.destroy',$value->id) }}" class="mlm delbtn">{{ trans('crm.destroy') }}</a>
                         </td>
                     </tr>
                 @endforeach

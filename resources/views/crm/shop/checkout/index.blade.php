@@ -3,11 +3,11 @@
 @section('content')
     <div class="crm-tabnav">
         <ul>
-            <li class="on"><a href="{{ route('crm.checkout.index') }}">快速收款</a></li>
+            <li class="on"><a href="{{ route('crm.shop.checkout.index') }}">快速收款</a></li>
         </ul>
     </div>
     <div class="crm-main">
-        <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.checkout.check') }}">
+        <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.shop.checkout.check') }}">
             {!! csrf_field() !!}
             <input type="hidden" name="user_id" value="0">
             <div class="crm-search">
@@ -58,7 +58,7 @@
                 var self = $(this);
                 $.ajax({
                     type: "POST",
-                    url: "{{ route('crm.checkout.userinfo') }}",
+                    url: "{{ route('crm.shop.checkout.userinfo') }}",
                     data: {'mobile': $("input[name='mobile']").val()},
                     async:false
                 }).success(function(data) {

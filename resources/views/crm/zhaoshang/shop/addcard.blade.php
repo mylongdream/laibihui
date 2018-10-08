@@ -8,7 +8,7 @@
                 <h4>新增卡号</h4>
             </div>
             <div class="bd crm-form">
-                <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.shop.addcard', ['id' => $shop->id, 'allotid' => request('allotid')]) }}">
+                <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.zhaoshang.shop.addcard', ['id' => $shop->id, 'allotid' => request('allotid')]) }}">
                     {!! csrf_field() !!}
                     <table>
                         <tr>
@@ -37,7 +37,7 @@
     </div>
     @else
         <div class="crm-form">
-            <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.shop.addcard', ['id' => $shop->id, 'allotid' => request('allotid')]) }}">
+            <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.zhaoshang.shop.addcard', ['id' => $shop->id, 'allotid' => request('allotid')]) }}">
                 {!! csrf_field() !!}
                 <table>
                     <tr>
@@ -78,7 +78,7 @@
                     var number = arry[arry.length-1];
                     $.ajax({
                         type: "GET",
-                        url: "{{ route('crm.shop.checkcard') }}",
+                        url: "{{ route('crm.zhaoshang.shop.checkcard') }}",
                         data: {number: number},
                         async:false
                     }).success(function(data) {

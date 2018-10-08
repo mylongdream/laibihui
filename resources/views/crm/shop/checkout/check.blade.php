@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="crm-checkout" style="width:640px;">
-        <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.checkout.pay') }}">
+        <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.shop.checkout.pay') }}">
             {!! csrf_field() !!}
             <input type="hidden" name="user_id" value="{{ request('user_id') }}">
             <input type="hidden" name="amount" value="{{ request('amount') }}">

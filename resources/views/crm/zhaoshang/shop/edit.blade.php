@@ -7,7 +7,7 @@
                 <h4>编辑客户资料</h4>
             </div>
             <div class="bd crm-form">
-                <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.shop.update', $shop->id) }}">
+                <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.zhaoshang.shop.update', $shop->id) }}">
                     {!! method_field('PUT') !!}
                     {!! csrf_field() !!}
                     <div class="subtitle">基本信息</div>

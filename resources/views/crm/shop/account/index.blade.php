@@ -3,8 +3,8 @@
 @section('content')
     <div class="crm-tabnav">
         <ul>
-            <li class="on"><a href="{{ route('crm.account.index') }}">个人资料</a></li>
-            <li><a href="{{ route('crm.account.password') }}">密码安全</a></li>
+            <li class="on"><a href="{{ route('crm.shop.account.index') }}">个人资料</a></li>
+            <li><a href="{{ route('crm.shop.account.password') }}">密码安全</a></li>
         </ul>
     </div>
     <div class="crm-main">

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="crm-main">
-        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.shop.card', ['id' => $shop->id, 'allotid' => request('allotid')]) }}">
+        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.zhaoshang.shop.card', ['id' => $shop->id, 'allotid' => request('allotid')]) }}">
             <div class="crm-search">
                 <dl>
                     <dt>卡号</dt>
@@ -14,7 +14,7 @@
         <div class="crm-list mtw">
             <div class="crm-bar">
                 <div class="z"><span>店铺名称：{{ $shop->name }}</span></div>
-                <div class="y"><a href="{{ route('crm.shop.addcard', ['id' => $shop->id, 'allotid' => request('allotid')]) }}" class="btn openwindow" title="导入卡号">+ 导入卡号</a></div>
+                <div class="y"><a href="{{ route('crm.zhaoshang.shop.addcard', ['id' => $shop->id, 'allotid' => request('allotid')]) }}" class="btn openwindow" title="导入卡号">+ 导入卡号</a></div>
             </div>
             <table>
                 <tr>

@@ -3,8 +3,8 @@
 @section('content')
     <div class="crm-tabnav">
         <ul>
-            <li><a href="{{ route('crm.account.index') }}">个人资料</a></li>
-            <li class="on"><a href="{{ route('crm.account.password') }}">密码安全</a></li>
+            <li><a href="{{ route('crm.shop.account.index') }}">个人资料</a></li>
+            <li class="on"><a href="{{ route('crm.shop.account.password') }}">密码安全</a></li>
         </ul>
     </div>
     <div class="crm-main">
@@ -13,7 +13,7 @@
                 <h4>修改密码</h4>
             </div>
             <div class="bd crm-form">
-                <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.account.password') }}">
+                <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.shop.account.password') }}">
                     {!! csrf_field() !!}
                     <table>
                         <tr>

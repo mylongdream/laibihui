@@ -7,7 +7,7 @@
                 <h4>新增客户</h4>
             </div>
             <div class="bd crm-form">
-                <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.customer.store') }}">
+                <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.zhaoshang.customer.store') }}">
                     {!! csrf_field() !!}
                     <div class="subtitle">必填信息</div>
                     <table>
@@ -35,7 +35,7 @@
                             <td>
                                 <input class="input" type="text" size="15" value="" name="maplng" id="maplng" style="width: 120px"> X <input class="input" type="text" size="15" value="" name="maplat" id="maplat" style="width: 120px">
                                 <a href="javascript:;" class="clickbtn mlm" id="mapmark">点击标注</a>
-                                <a href="{{ route('crm.shop.nearby') }}" class="clickbtn mlm" id="nearby" title="附近店铺">附近店铺</a>
+                                <a href="{{ route('crm.zhaoshang.shop.nearby') }}" class="clickbtn mlm" id="nearby" title="附近店铺">附近店铺</a>
                             </td>
                         </tr>
                         <tr>
@@ -179,7 +179,7 @@
                 return false;
             });
             $("#pic_hetong").powerWebUpload({
-                server: "{{ route('crm.upload.image') }}",
+                server: "{{ route('crm.zhaoshang.upload.image') }}",
                 formData: {
                     _token : $('meta[name="csrf-token"]').attr('content')
                 },
@@ -189,7 +189,7 @@
                 height: 120
             });
             $("#pic_zizhi").powerWebUpload({
-                server: "{{ route('crm.upload.image') }}",
+                server: "{{ route('crm.zhaoshang.upload.image') }}",
                 formData: {
                     _token : $('meta[name="csrf-token"]').attr('content')
                 },
@@ -199,7 +199,7 @@
                 height: 120
             });
             $("#pic_mentou").powerWebUpload({
-                server: "{{ route('crm.upload.image') }}",
+                server: "{{ route('crm.zhaoshang.upload.image') }}",
                 formData: {
                     _token : $('meta[name="csrf-token"]').attr('content')
                 },
@@ -209,7 +209,7 @@
                 height: 120
             });
             $("#pic_neijing").powerWebUpload({
-                server: "{{ route('crm.upload.image') }}",
+                server: "{{ route('crm.zhaoshang.upload.image') }}",
                 formData: {
                     _token : $('meta[name="csrf-token"]').attr('content')
                 },
@@ -219,7 +219,7 @@
                 height: 120
             });
             $("#pic_caidan").powerWebUpload({
-                server: "{{ route('crm.upload.image') }}",
+                server: "{{ route('crm.zhaoshang.upload.image') }}",
                 formData: {
                     _token : $('meta[name="csrf-token"]').attr('content')
                 },
@@ -229,7 +229,7 @@
                 height: 120
             });
             $("#pic_caipin").powerWebUpload({
-                server: "{{ route('crm.upload.image') }}",
+                server: "{{ route('crm.zhaoshang.upload.image') }}",
                 formData: {
                     _token : $('meta[name="csrf-token"]').attr('content')
                 },

@@ -4,12 +4,12 @@
     @if (!request()->ajax())
         <div class="crm-tabnav">
             <ul>
-                <li class="on"><a href="{{ route('crm.ordermeal.index') }}">自助点餐明细</a></li>
-                <li><a href="{{ route('crm.ordermeal.create') }}">我要点餐</a></li>
+                <li class="on"><a href="{{ route('crm.shop.ordermeal.index') }}">自助点餐明细</a></li>
+                <li><a href="{{ route('crm.shop.ordermeal.create') }}">我要点餐</a></li>
             </ul>
         </div>
         <div class="crm-main">
-            <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.ordermeal.update', $order->order_sn) }}">
+            <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.shop.ordermeal.update', $order->order_sn) }}">
                 {!! method_field('PUT') !!}
                 {!! csrf_field() !!}
                 <div class="order-show">
@@ -79,7 +79,7 @@
         </div>
     @else
         <div style="width: 650px;">
-            <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.ordermeal.update', $order->order_sn) }}">
+            <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('crm.shop.ordermeal.update', $order->order_sn) }}">
                 {!! method_field('PUT') !!}
                 {!! csrf_field() !!}
                 <div class="order-show">

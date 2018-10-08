@@ -3,16 +3,16 @@
 @section('content')
     <div class="crm-tabnav">
         <ul>
-            <li><a href="{{ route('crm.customer.index') }}">客户管理</a></li>
-            <li class="on"><a href="{{ route('crm.customer.referlist') }}">客户审核</a></li>
+            <li><a href="{{ route('crm.zhaoshang.customer.index') }}">客户管理</a></li>
+            <li class="on"><a href="{{ route('crm.zhaoshang.customer.referlist') }}">客户审核</a></li>
         </ul>
     </div>
     <div class="crm-main">
         <div class="crm-tabtit">
             <ul>
-                <li class="{{ request('type') == 'passed' ? 'on' : '' }}"><a href="{{ route('crm.customer.referlist', ['type' => 'passed']) }}">已通过审核</a></li>
-                <li class="{{ request('type') == 'auditing' ? 'on' : '' }}"><a href="{{ route('crm.customer.referlist', ['type' => 'auditing']) }}">待通过审核</a></li>
-                <li class="{{ request('type') == 'rejected' ? 'on' : '' }}"><a href="{{ route('crm.customer.referlist', ['type' => 'rejected']) }}">未通过审核</a></li>
+                <li class="{{ request('type') == 'passed' ? 'on' : '' }}"><a href="{{ route('crm.zhaoshang.customer.referlist', ['type' => 'passed']) }}">已通过审核</a></li>
+                <li class="{{ request('type') == 'auditing' ? 'on' : '' }}"><a href="{{ route('crm.zhaoshang.customer.referlist', ['type' => 'auditing']) }}">待通过审核</a></li>
+                <li class="{{ request('type') == 'rejected' ? 'on' : '' }}"><a href="{{ route('crm.zhaoshang.customer.referlist', ['type' => 'rejected']) }}">未通过审核</a></li>
             </ul>
         </div>
         <div class="crm-list mtw">
@@ -31,7 +31,7 @@
                                 <td>{{ $value->check_at ? $value->check_at->format('Y-m-d H:i') : '/' }}</td>
                                 <td>{{ $value->refer_at->format('Y-m-d H:i') }}</td>
                                 <td>
-                                    <a href="{{ route('crm.customer.show',$value->id) }}">{{ trans('crm.view') }}</a>
+                                    <a href="{{ route('crm.zhaoshang.customer.show',$value->id) }}">{{ trans('crm.view') }}</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -55,7 +55,7 @@
                                 <td>{{ $value->name }}</td>
                                 <td>{{ $value->refer_at->format('Y-m-d H:i') }}</td>
                                 <td>
-                                    <a href="{{ route('crm.customer.show',$value->id) }}">{{ trans('crm.view') }}</a>
+                                    <a href="{{ route('crm.zhaoshang.customer.show',$value->id) }}">{{ trans('crm.view') }}</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -83,7 +83,7 @@
                                 <td>{{ $value->check_at ? $value->check_at->format('Y-m-d H:i') : '/' }}</td>
                                 <td>{{ $value->refer_at->format('Y-m-d H:i') }}</td>
                                 <td>
-                                    <a href="{{ route('crm.customer.show',$value->id) }}">{{ trans('crm.view') }}</a>
+                                    <a href="{{ route('crm.zhaoshang.customer.show',$value->id) }}">{{ trans('crm.view') }}</a>
                                 </td>
                             </tr>
                             <tr class="extra">

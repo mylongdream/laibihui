@@ -576,6 +576,7 @@ Route::group(['domain' => 'crm.hztbg.com', 'prefix' => '', 'as' => 'crm.'], func
     Route::group(['middleware' => ['auth.crm']], function () {
         Route::get('/', ['as' => 'index', 'uses' => 'CRM\IndexController@index']);
         Route::group(['prefix' => 'shop', 'as' => 'shop.'], function () {
+            Route::get('/', ['as' => 'index', 'uses' => 'CRM\Shop\IndexController@index']);
             Route::get('consume', ['as' => 'consume.index', 'uses' => 'CRM\Shop\ConsumeController@index']);
             Route::get('consume/balance', ['as' => 'consume.balance', 'uses' => 'CRM\Shop\ConsumeController@balance']);
             Route::get('consume/{id}', ['as' => 'consume.show', 'uses' => 'CRM\Shop\ConsumeController@show']);
@@ -600,6 +601,7 @@ Route::group(['domain' => 'crm.hztbg.com', 'prefix' => '', 'as' => 'crm.'], func
             Route::any('account/password', ['as' => 'account.password', 'uses' => 'CRM\Shop\AccountController@password']);
         });
         Route::group(['prefix' => 'zhaoshang', 'as' => 'zhaoshang.'], function () {
+            Route::get('/', ['as' => 'index', 'uses' => 'CRM\Zhaoshang\IndexController@index']);
             Route::get('customer', ['as' => 'customer.index', 'uses' => 'CRM\Zhaoshang\CustomerController@index']);
             Route::get('customer/referlist', ['as' => 'customer.referlist', 'uses' => 'CRM\Zhaoshang\CustomerController@referlist']);
             Route::get('customer/create', ['as' => 'customer.create', 'uses' => 'CRM\Zhaoshang\CustomerController@create']);
@@ -621,9 +623,13 @@ Route::group(['domain' => 'crm.hztbg.com', 'prefix' => '', 'as' => 'crm.'], func
             Route::get('shop/nearby', ['as' => 'shop.nearby', 'uses' => 'CRM\Zhaoshang\ShopController@nearby']);
         });
         Route::group(['prefix' => 'kefu', 'as' => 'kefu.'], function () {
+            Route::get('/', ['as' => 'index', 'uses' => 'CRM\Kefu\IndexController@index']);
             Route::get('checkcustomer', ['as' => 'checkcustomer.index', 'uses' => 'CRM\Kefu\CheckCustomerController@index']);
             Route::get('checkcustomer/{id}', ['as' => 'checkcustomer.show', 'uses' => 'CRM\Kefu\CheckCustomerController@show']);
             Route::any('checkcustomer/{id}/check', ['as' => 'checkcustomer.check', 'uses' => 'CRM\Kefu\CheckCustomerController@check']);
+        });
+        Route::group(['prefix' => 'tuiguang', 'as' => 'tuiguang.'], function () {
+            Route::get('/', ['as' => 'index', 'uses' => 'CRM\Tuiguang\IndexController@index']);
         });
     });
     Route::post('upload/image', ['as' => 'upload.image', 'uses' => 'CRM\UploadController@image']);

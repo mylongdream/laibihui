@@ -3,12 +3,12 @@
 @section('content')
     <div class="crm-tabnav">
         <ul>
-            <li><a href="{{ route('crm.consume.index') }}">消费明细</a></li>
-            <li class="on"><a href="{{ route('crm.consume.balance') }}">每日结算</a></li>
+            <li><a href="{{ route('crm.shop.consume.index') }}">消费明细</a></li>
+            <li class="on"><a href="{{ route('crm.shop.consume.balance') }}">每日结算</a></li>
         </ul>
     </div>
 	<div class="crm-main">
-        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.consume.balance') }}">
+        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.shop.consume.balance') }}">
             <div class="crm-search">
                 <dl>
                     <dt>查询月份</dt>

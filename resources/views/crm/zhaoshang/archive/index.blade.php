@@ -3,16 +3,16 @@
 @section('content')
     <div class="crm-tabnav">
         <ul>
-            <li><a href="{{ route('crm.shop.index') }}">成功客户</a></li>
-            <li class="on"><a href="{{ route('crm.archive.index') }}">客户修改审核</a></li>
+            <li><a href="{{ route('crm.zhaoshang.shop.index') }}">成功客户</a></li>
+            <li class="on"><a href="{{ route('crm.zhaoshang.archive.index') }}">客户修改审核</a></li>
         </ul>
     </div>
     <div class="crm-main">
         <div class="crm-tabtit">
             <ul>
-                <li class="{{ request('type') == 'passed' ? 'on' : '' }}"><a href="{{ route('crm.archive.index', ['type' => 'passed']) }}">已通过修改</a></li>
-                <li class="{{ request('type') == 'auditing' ? 'on' : '' }}"><a href="{{ route('crm.archive.index', ['type' => 'auditing']) }}">待通过修改</a></li>
-                <li class="{{ request('type') == 'rejected' ? 'on' : '' }}"><a href="{{ route('crm.archive.index', ['type' => 'rejected']) }}">未通过修改</a></li>
+                <li class="{{ request('type') == 'passed' ? 'on' : '' }}"><a href="{{ route('crm.zhaoshang.archive.index', ['type' => 'passed']) }}">已通过修改</a></li>
+                <li class="{{ request('type') == 'auditing' ? 'on' : '' }}"><a href="{{ route('crm.zhaoshang.archive.index', ['type' => 'auditing']) }}">待通过修改</a></li>
+                <li class="{{ request('type') == 'rejected' ? 'on' : '' }}"><a href="{{ route('crm.zhaoshang.archive.index', ['type' => 'rejected']) }}">未通过修改</a></li>
             </ul>
         </div>
         <div class="crm-list mtw">
@@ -31,7 +31,7 @@
                                 <td>{{ $value->audited_at ? $value->audited_at->format('Y-m-d H:i') : '/' }}</td>
                                 <td>{{ $value->created_at->format('Y-m-d H:i') }}</td>
                                 <td>
-                                    <a href="{{ route('crm.archive.show',$value->id) }}">{{ trans('crm.view') }}</a>
+                                    <a href="{{ route('crm.zhaoshang.archive.show',$value->id) }}">{{ trans('crm.view') }}</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -55,7 +55,7 @@
                                 <td><a href="{{ route('brand.shop.show',$value->shop_id) }}" target="_blank">{{ $value->shop->name }}</a></td>
                                 <td>{{ $value->created_at->format('Y-m-d H:i') }}</td>
                                 <td>
-                                    <a href="{{ route('crm.archive.show',$value->id) }}">{{ trans('crm.view') }}</a>
+                                    <a href="{{ route('crm.zhaoshang.archive.show',$value->id) }}">{{ trans('crm.view') }}</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -83,7 +83,7 @@
                                 <td>{{ $value->audited_at ? $value->audited_at->format('Y-m-d H:i') : '/' }}</td>
                                 <td>{{ $value->created_at->format('Y-m-d H:i') }}</td>
                                 <td>
-                                    <a href="{{ route('crm.archive.show',$value->id) }}">{{ trans('crm.view') }}</a>
+                                    <a href="{{ route('crm.zhaoshang.archive.show',$value->id) }}">{{ trans('crm.view') }}</a>
                                 </td>
                             </tr>
                             <tr class="extra">

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="crm-main">
-        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.customer.index') }}">
+        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.zhaoshang.customer.index') }}">
             <div class="crm-search">
                 <dl>
                     <dt>{{ trans('crm.customer.name') }}</dt>

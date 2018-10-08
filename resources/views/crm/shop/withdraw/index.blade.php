@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="crm-main">
-        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.ordermeal.index') }}">
+        <form id="schform" name="schform" class="formsearch" method="get" action="{{ route('crm.shop.ordermeal.index') }}">
             <div class="crm-search">
                 <dl>
                     <dt>查询日期</dt>
