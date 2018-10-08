@@ -24,7 +24,7 @@
                             <div class="weui-panel__bd">
                                 <div class="weui-media-box weui-media-box_small-appmsg">
                                     <div class="weui-cells">
-                                        <a class="weui-cell weui-cell_access" href="{{ route('mobile.crm.sellcard.index') }}">
+                                        <a class="weui-cell weui-cell_access" href="javascript:;">
                                             <div class="weui-cell__hd">
                                                 <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
                                             </div>
@@ -33,7 +33,7 @@
                                             </div>
                                             <span class="weui-cell__ft"></span>
                                         </a>
-                                        <a class="weui-cell weui-cell_access" href="{{ route('mobile.crm.sellcard.users') }}">
+                                        <a class="weui-cell weui-cell_access" href="javascript:;">
                                             <div class="weui-cell__hd">
                                                 <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
                                             </div>
