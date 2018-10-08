@@ -179,7 +179,7 @@
                 return false;
             });
             $("#pic_hetong").powerWebUpload({
-                server: "{{ route('crm.zhaoshang.upload.image') }}",
+                server: "{{ route('crm.upload.image') }}",
                 formData: {
                     _token : $('meta[name="csrf-token"]').attr('content')
                 },
@@ -189,7 +189,7 @@
                 height: 120
             });
             $("#pic_zizhi").powerWebUpload({
-                server: "{{ route('crm.zhaoshang.upload.image') }}",
+                server: "{{ route('crm.upload.image') }}",
                 formData: {
                     _token : $('meta[name="csrf-token"]').attr('content')
                 },
@@ -199,7 +199,7 @@
                 height: 120
             });
             $("#pic_mentou").powerWebUpload({
-                server: "{{ route('crm.zhaoshang.upload.image') }}",
+                server: "{{ route('crm.upload.image') }}",
                 formData: {
                     _token : $('meta[name="csrf-token"]').attr('content')
                 },
@@ -209,7 +209,7 @@
                 height: 120
             });
             $("#pic_neijing").powerWebUpload({
-                server: "{{ route('crm.zhaoshang.upload.image') }}",
+                server: "{{ route('crm.upload.image') }}",
                 formData: {
                     _token : $('meta[name="csrf-token"]').attr('content')
                 },
@@ -219,7 +219,7 @@
                 height: 120
             });
             $("#pic_caidan").powerWebUpload({
-                server: "{{ route('crm.zhaoshang.upload.image') }}",
+                server: "{{ route('crm.upload.image') }}",
                 formData: {
                     _token : $('meta[name="csrf-token"]').attr('content')
                 },
@@ -229,7 +229,7 @@
                 height: 120
             });
             $("#pic_caipin").powerWebUpload({
-                server: "{{ route('crm.zhaoshang.upload.image') }}",
+                server: "{{ route('crm.upload.image') }}",
                 formData: {
                     _token : $('meta[name="csrf-token"]').attr('content')
                 },

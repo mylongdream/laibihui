@@ -16,7 +16,7 @@ class IndexController extends Controller
     public function index(Request $request)
     {
 		$module = auth('crm')->user()->group->module;
-        return response()->redirectToRoute("crm.".$module.".index");
+        return response()->redirectToRoute("mobile.crm.".$module.".index");
     }
 
 }
