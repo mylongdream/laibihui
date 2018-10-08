@@ -11,7 +11,7 @@ use App\Models\CrmRewardModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class IndexController extends Controller
+class IndexController extends CommonController
 {
 
     public function __construct()
