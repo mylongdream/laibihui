@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Mobile\Crm\Tuiguang;
+namespace App\Http\Controllers\Mobile\Crm\Kefu;
 
 use App\Http\Controllers\Controller;
 
@@ -11,7 +11,7 @@ class CommonController extends Controller
     {
         $this->middleware(function ($request, $next) {
             $module = auth('crm')->user()->group->module;
-            if($module != 'tuiguang'){
+            if($module != 'kefu'){
                 if ($request->ajax()){
                     return response()->json(['status' => 0, 'info' => '你没有权限进入']);
                 }else{

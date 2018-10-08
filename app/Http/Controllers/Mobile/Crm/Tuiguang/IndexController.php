@@ -16,7 +16,7 @@ class IndexController extends CommonController
 
     public function __construct()
     {
-        //view()->share('curmenu', 'index');
+        parent::__construct();
     }
 
     public function index(Request $request)

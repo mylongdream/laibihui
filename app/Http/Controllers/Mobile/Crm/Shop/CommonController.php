@@ -9,7 +9,19 @@ class CommonController extends Controller
 
     public function __construct()
     {
-        $this->shop = auth('crm')->user()->shop;
+        $this->middleware(function ($request, $next) {
+            $shop = auth('crm')->user()->shop;
+            if(!$shop){
+                if ($request->ajax()){
+                    return response()->json(['status' => 0, 'info' => '管理店铺不存在']);
+                }else{
+                    return response()->view('layouts.mobile.message', ['status' => 0, 'info' => '管理店铺不存在']);
+                }
+            }
+            view()->share('shop', $shop);
+            $this->shop = $shop;
+            return $next($request);
+        });
     }
 
 }

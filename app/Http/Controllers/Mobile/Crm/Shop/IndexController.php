@@ -16,18 +16,18 @@ class IndexController extends CommonController
 
     public function __construct()
     {
-        //view()->share('curmenu', 'index');
+        parent::__construct();
     }
 
     public function index(Request $request)
     {
         $yesterday = Carbon::yesterday();
         $today = Carbon::today();
-        $online = BrandConsumeModel::where('shop_id', auth('crm')->user()->shop->id)->where('pay_status', '1')
+        $online = BrandConsumeModel::where('shop_id', $this->shop->id)->where('pay_status', '1')
             ->whereDate('pay_at', '>=', $yesterday->format('Y-m-d'))
             ->whereDate('pay_at', '<', $today->format('Y-m-d'))
             ->where('pay_type', '<>', 'offline')->get();
-        $offline = BrandConsumeModel::where('shop_id', auth('crm')->user()->shop->id)->where('pay_status', '1')
+        $offline = BrandConsumeModel::where('shop_id', $this->shop->id)->where('pay_status', '1')
             ->whereDate('pay_at', '>=', $yesterday->format('Y-m-d'))
             ->whereDate('pay_at', '<', $today->format('Y-m-d'))
             ->where('pay_type', '=', 'offline')->get();
@@ -36,8 +36,8 @@ class IndexController extends CommonController
         $count->consume_offline = $offline->sum('consume_money');
         $count->consume_account = $online->sum('indiscount_money') - ($offline->sum('consume_money') - $offline->sum('indiscount_money'));
 
-        $count->ordercard_sellcard = BrandShopCardModel::where('shop_id', auth('crm')->user()->shop->id)->has('card')->count();
-        $count->ordercard_remaincard = BrandShopCardModel::where('shop_id', auth('crm')->user()->shop->id)->doesntHave('card')->count();
+        $count->ordercard_sellcard = BrandShopCardModel::where('shop_id', $this->shop->id)->has('card')->count();
+        $count->ordercard_remaincard = BrandShopCardModel::where('shop_id', $this->shop->id)->doesntHave('card')->count();
         $count->ordercard_account = $count->ordercard_sellcard * 5;
 
         $rewards = CrmRewardModel::where('onsale', 1)->get();
