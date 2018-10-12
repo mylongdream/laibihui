@@ -40,13 +40,13 @@
                 <div class="weui-panel">
                     <div class="weui-panel__bd">
                         <div class="weui-grids">
-                            <a href="javascript:;" class="weui-grid">
+                            <a href="{{ route('mobile.crm.shop.appoint.index') }}" class="weui-grid">
                                 <div class="weui-grid__icon">
                                     <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-hg.png') }}" alt="">
                                 </div>
                                 <p class="weui-grid__label">预约订座</p>
                             </a>
-                            <a href="javascript:;" class="weui-grid">
+                            <a href="{{ route('mobile.crm.shop.ordermeal.index') }}" class="weui-grid">
                                 <div class="weui-grid__icon">
                                     <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-tg.png') }}" alt="">
                                 </div>
@@ -58,7 +58,7 @@
                                 </div>
                                 <p class="weui-grid__label">跨界整合</p>
                             </a>
-                            <a href="javascript:;" class="weui-grid">
+                            <a href="{{ route('mobile.crm.shop.statistics.index') }}" class="weui-grid">
                                 <div class="weui-grid__icon">
                                     <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-card.png') }}" alt="">
                                 </div>

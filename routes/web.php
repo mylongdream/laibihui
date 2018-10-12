@@ -294,6 +294,9 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
                 Route::post('checkout/check', ['as' => 'checkout.check', 'uses' => 'Mobile\CRM\Shop\CheckoutController@check']);
                 Route::post('checkout/pay', ['as' => 'checkout.pay', 'uses' => 'Mobile\CRM\Shop\CheckoutController@pay']);
                 Route::post('checkout/userinfo', ['as' => 'checkout.userinfo', 'uses' => 'Mobile\CRM\Shop\CheckoutController@userinfo']);
+                Route::get('statistics', ['as' => 'statistics.index', 'uses' => 'Mobile\CRM\Shop\StatisticsController@index']);
+                Route::get('statistics/income', ['as' => 'statistics.income', 'uses' => 'Mobile\CRM\Shop\StatisticsController@income']);
+                Route::get('statistics/order', ['as' => 'statistics.order', 'uses' => 'Mobile\CRM\Shop\StatisticsController@order']);
             });
             Route::group(['prefix' => 'zhaoshang', 'as' => 'zhaoshang.'], function () {
                 Route::get('/', ['as' => 'index', 'uses' => 'Mobile\CRM\Zhaoshang\IndexController@index']);
@@ -460,6 +463,51 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::resource('withdraw', 'Admin\Brand\WithdrawController');
             Route::post('appoint/batch', ['as' => 'appoint.batch', 'uses' => 'Admin\Brand\AppointController@batch']);
             Route::resource('appoint', 'Admin\Brand\AppointController');
+        });
+        Route::group(['prefix' => 'payment', 'as' => 'payment.'], function () {
+            // Route::post('shop/batch', ['as' => 'shop.batch', 'uses' => 'Admin\Brand\ShopController@batch']);
+            // Route::get('shop/recycle', ['as' => 'shop.recycle', 'uses' => 'Admin\Brand\ShopController@recycle']);
+            // Route::get('shop/nearby', ['as' => 'shop.nearby', 'uses' => 'Admin\Brand\ShopController@nearby']);
+
+            // Route::post('shop/{shopid}/allot/batch', ['as' => 'allot.batch', 'uses' => 'Admin\Brand\AllotController@batch']);
+            // Route::get('shop/{shopid}/allot', ['as' => 'allot.index', 'uses' => 'Admin\Brand\AllotController@index']);
+            // Route::get('shop/{shopid}/allot/create', ['as' => 'allot.create', 'uses' => 'Admin\Brand\AllotController@create']);
+            // Route::post('shop/{shopid}/allot', ['as' => 'allot.store', 'uses' => 'Admin\Brand\AllotController@store']);
+            // Route::get('shop/{shopid}/allot/{id}/cardlist', ['as' => 'allot.cardlist', 'uses' => 'Admin\Brand\AllotController@cardlist']);
+            // Route::get('shop/{shopid}/allot/{id}/edit', ['as' => 'allot.edit', 'uses' => 'Admin\Brand\AllotController@edit']);
+            // Route::put('shop/{shopid}/allot/{id}', ['as' => 'allot.update', 'uses' => 'Admin\Brand\AllotController@update']);
+            // Route::delete('shop/{shopid}/allot/{id}', ['as' => 'allot.destroy', 'uses' => 'Admin\Brand\AllotController@destroy']);
+
+            // Route::get('shop/{id}/restore', ['as' => 'shop.restore', 'uses' => 'Admin\Brand\ShopController@restore']);
+            // Route::get('shop/{id}/qrcode', ['as' => 'shop.qrcode', 'uses' => 'Admin\Brand\ShopController@qrcode']);
+            // Route::get('shop/{id}/getqrcode', ['as' => 'shop.getqrcode', 'uses' => 'Admin\Brand\ShopController@getqrcode']);
+            // Route::get('shop/{id}/admin', ['as' => 'shop.admin', 'uses' => 'Admin\Brand\ShopController@admin']);
+
+            // Route::resource('shop', 'Admin\Brand\ShopController');
+            // Route::post('product/batch', ['as' => 'product.batch', 'uses' => 'Admin\Brand\ProductController@batch']);
+            // Route::get('product/recycle', ['as' => 'product.recycle', 'uses' => 'Admin\Brand\ProductController@recycle']);
+            // Route::get('product/{id}/restore', ['as' => 'product.restore', 'uses' => 'Admin\Brand\ProductController@restore']);
+            // Route::resource('product', 'Admin\Brand\ProductController');
+            // Route::any('category/{id}/move', ['as' => 'category.move', 'uses' => 'Admin\Brand\CategoryController@move']);
+            // Route::post('category/batch', ['as' => 'category.batch', 'uses' => 'Admin\Brand\CategoryController@batch']);
+            // Route::resource('category', 'Admin\Brand\CategoryController');
+            // Route::post('comment/batch', ['as' => 'comment.batch', 'uses' => 'Admin\Brand\CommentController@batch']);
+            // Route::resource('comment', 'Admin\Brand\CommentController');
+            // Route::post('collection/batch', ['as' => 'collection.batch', 'uses' => 'Admin\Brand\CollectionController@batch']);
+            // Route::resource('collection', 'Admin\Brand\CollectionController');
+            // Route::post('meal/batch', ['as' => 'meal.batch', 'uses' => 'Admin\Brand\MealController@batch']);
+            // Route::get('meal/getcate', ['as' => 'meal.getcate', 'uses' => 'Admin\Brand\MealController@getcate']);
+            // Route::resource('meal', 'Admin\Brand\MealController');
+            // Route::post('mealcate/batch', ['as' => 'mealcate.batch', 'uses' => 'Admin\Brand\MealCategoryController@batch']);
+            // Route::resource('mealcate', 'Admin\Brand\MealCategoryController');
+            // Route::post('ordermeal/batch', ['as' => 'ordermeal.batch', 'uses' => 'Admin\Brand\OrderMealController@batch']);
+            // Route::resource('ordermeal', 'Admin\Brand\OrderMealController');
+            // Route::post('consume/batch', ['as' => 'consume.batch', 'uses' => 'Admin\Brand\ConsumeController@batch']);
+            // Route::resource('consume', 'Admin\Brand\ConsumeController');
+            // Route::post('withdraw/batch', ['as' => 'withdraw.batch', 'uses' => 'Admin\Brand\WithdrawController@batch']);
+            // Route::resource('withdraw', 'Admin\Brand\WithdrawController');
+            // Route::post('payment/batch', ['as' => 'payment.batch', 'uses' => 'Admin\Payment\PaymentController@batch']);
+            Route::resource('payment', 'Admin\Payment\PaymentController');
         });
         Route::group(['prefix' => 'farm', 'as' => 'farm.'], function () {
             Route::post('farm/batch', ['as' => 'farm.batch', 'uses' => 'Admin\Farm\FarmController@batch']);

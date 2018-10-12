@@ -14,6 +14,7 @@ class SellCardController extends CommonController
 {
     public function __construct()
     {
+        parent::__construct();
         //view()->share('curmenu', 'sellcard');
     }
 
