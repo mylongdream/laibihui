@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Mobile\User;
+namespace App\Http\Controllers\Mobile\Crm\Shop;
 
 use App\Http\Controllers\Controller;
 

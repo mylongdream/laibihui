@@ -30,14 +30,7 @@
                         <div class="weui-panel__ft">
                             <div class="z status">状态：{{ trans('user.ordermeal.status_'.$value->order_status.$value->pay_status) }}</div>
                             <div class="y">
-                                @if ($value->ifpay == 0)
-                                    <a href="{{ route('mobile.brand.card.pay', $value->order_sn) }}" title="立即付款" class="btn-pay">立即付款</a>
-                                @else
-                                    @if ($value->shop)
-                                        <a href="{{ route('mobile.brand.shop.show', $value->shop->id) }}" title="再次消费" class="btn-again">再次消费</a>
-                                    @endif
-                                @endif
-                                    <a href="{{ route('mobile.user.ordermeal.show', $value->order_sn) }}" title="订单详情" class="mlm">订单详情</a>
+                                    <a href="{{ route('mobile.crm.shop.ordermeal.show', $value->order_sn) }}" title="订单详情" class="mlm">订单详情</a>
                             </div>
                         </div>
 					</div>

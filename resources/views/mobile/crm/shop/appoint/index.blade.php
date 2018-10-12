@@ -29,14 +29,7 @@
                         <div class="weui-panel__ft">
                             <div class="z status">状态：{{ trans('user.appoint.status_'.$value->status) }}</div>
                             <div class="y">
-                                @if ($value->status == 0)
-                                    <a href="{{ route('mobile.user.appoint.cancel', $value->order_sn) }}" title="取消预约" class="openwindow btn-cancel">取消预约</a>
-                                @else
-                                    @if ($value->shop)
-                                        <a href="{{ route('mobile.brand.shop.show', $value->shop->id) }}" target="_blank" title="再次预约" class="btn-again">再次预约</a>
-                                    @endif
-                                @endif
-                                <a href="{{ route('mobile.user.appoint.show', $value->order_sn) }}" title="订单详情" class="mlm">订单详情</a>
+                                <a href="{{ route('mobile.crm.shop.appoint.show', $value->order_sn) }}" title="订单详情" class="mlm">订单详情</a>
                             </div>
                         </div>
                     </div>
