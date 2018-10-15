@@ -64,7 +64,7 @@
                                 </div>
                                 <p class="weui-grid__label">经营统计</p>
                             </a>
-                            <a href="javascript:;" class="weui-grid">
+                            <a href="{{ route('mobile.crm.shop.function.index') }}" class="weui-grid">
                                 <div class="weui-grid__icon">
                                     <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-yuyue.png') }}" alt="">
                                 </div>
@@ -76,7 +76,7 @@
                                 </div>
                                 <p class="weui-grid__label">保证金管理</p>
                             </a>
-                            <a href="javascript:;" class="weui-grid">
+                            <a href="{{ route('mobile.crm.shop.sellcard.index') }}" class="weui-grid">
                                 <div class="weui-grid__icon">
                                     <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-farm.png') }}" alt="">
                                 </div>
