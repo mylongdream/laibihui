@@ -100,7 +100,7 @@ class IndexController extends Controller
                 return view('layouts.mobile.message', ['status' => 0, 'info' => '地址错误']);
             }
         }elseif($fromtype == 'shop'){
-            $fromshop = BrandShopModel::where('uid', $fromid)->first();
+            $fromshop = BrandShopModel::where('id', $fromid)->first();
             if(!$fromshop || !$fromshop->ordercard){
                 return view('layouts.mobile.message', ['status' => 0, 'info' => '地址错误']);
             }

@@ -460,6 +460,7 @@ return [
     'extend.sellcard.destroy' => '删除订单',
     'extend.sellcard.show' => '查看订单',
     'extend.sellcard.user' => '卖卡人员',
+    'extend.sellcard.from' => '来自',
     'extend.sellcard.order_sn' => '订单编号',
     'extend.sellcard.number' => '卡号',
     'extend.sellcard.order_amount' => '支付金额',
