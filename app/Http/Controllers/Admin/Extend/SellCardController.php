@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin\Extend;
 
 use App\Http\Controllers\Controller;
+use App\Models\CommonSellcardModel;
 use App\Models\CommonUserModel;
-use App\Models\CommonUserSellcardModel;
 use Illuminate\Http\Request;
 
 
@@ -17,8 +17,8 @@ class SellCardController extends Controller
      */
     public function index(Request $request)
     {
-        $CommonUserSellcardModel = new CommonUserSellcardModel;
-        $orders = $CommonUserSellcardModel->where(function($query) use($request) {
+        $CommonSellcardModel = new CommonSellcardModel;
+        $orders = $CommonSellcardModel->where(function($query) use($request) {
             if($request->pay_status == 1){
                 $query->where('pay_status', 0);
             }else if($request->pay_status == 2){
@@ -45,7 +45,7 @@ class SellCardController extends Controller
      */
     public function show($id)
     {
-        $order = CommonUserSellcardModel::findOrFail($id);
+        $order = CommonSellcardModel::findOrFail($id);
         return view('admin.extend.sellcard.show', ['order' => $order]);
     }
 
@@ -57,7 +57,7 @@ class SellCardController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $order = CommonUserSellcardModel::findOrFail($id);
+        $order = CommonSellcardModel::findOrFail($id);
         $order->delete();
         if ($request->ajax()){
             return response()->json(['status' => '1', 'info' => trans('admin.extend.sellcard.deletesucceed'), 'url' => back()->getTargetUrl()]);
@@ -76,7 +76,7 @@ class SellCardController extends Controller
                 'ids.required' => '请选择要删除的记录！',
             );
             $this->validate($request, $rules, $messages);
-            CommonUserSellcardModel::destroy($request->ids);
+            CommonSellcardModel::destroy($request->ids);
             if ($request->ajax()) {
                 return response()->json(['status' => '1', 'info' => trans('admin.extend.sellcard.deletesucceed'), 'url' => back()->getTargetUrl()]);
             }else{
@@ -90,7 +90,7 @@ class SellCardController extends Controller
 //退款
     public function refund(Request $request, $id)
     {
-        $order = CommonUserSellcardModel::findOrFail($id);
+        $order = CommonSellcardModel::findOrFail($id);
 
         if($request->isMethod('POST')){
 
@@ -107,7 +107,7 @@ class SellCardController extends Controller
 //关闭
     public function close(Request $request, $id)
     {
-        $order = CommonUserSellcardModel::findOrFail($id);
+        $order = CommonSellcardModel::findOrFail($id);
 
         if($request->isMethod('POST')){
 

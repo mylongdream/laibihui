@@ -17,10 +17,6 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>{{ trans('admin.extend.sellcard.user') }}</dt>
-			<dd><input type="text" name="username" class="schtxt" value="{{ request('username') }}"></dd>
-		</dl>
-		<dl>
 			<dt>{{ trans('admin.extend.sellcard.order_sn') }}</dt>
 			<dd><input type="text" name="order_sn" class="schtxt" value="{{ request('order_sn') }}"></dd>
 		</dl>
@@ -37,9 +33,9 @@
 		<table>
 			<tr>
 				<th width="24"><input class="checkall" type="checkbox"></th>
-				<th width="100">{{ trans('admin.extend.sellcard.user') }}</th>
 				<th width="160">{{ trans('admin.extend.sellcard.order_sn') }}</th>
 				<th width="240">{{ trans('admin.extend.sellcard.number') }}</th>
+				<th>{{ trans('admin.extend.sellcard.from') }}</th>
 				<th width="80">{{ trans('admin.extend.sellcard.order_amount') }}</th>
 				<th width="100">{{ trans('admin.extend.sellcard.pay_type') }}</th>
 				<th width="60">{{ trans('admin.extend.sellcard.pay_status') }}</th>
@@ -49,9 +45,20 @@
 			@foreach ($orders as $value)
 			<tr>
 				<td><input class="ids" type="checkbox" value="{{ $value->id }}" name="ids[]"></td>
-				<td>{{ $value->user ? $value->user->username : '/' }}</td>
 				<td>{{ $value->order_sn or '/' }}</td>
 				<td>{{ $value->number or '/' }}</td>
+				<td>
+					@switch($value->fromtype)
+					@case('user')
+					用户：{{ $value->user ? $value->user->username : '/' }}
+					@break
+					@case('shop')
+					店铺：{{ $value->shop ? $value->shop->name : '/' }}
+					@break
+					@default
+					<span>/</span>
+					@endswitch
+				</td>
 				<td>{{ $value->order_amount or '0' }} 元</td>
 				<td>{{ trans('admin.extend.sellcard.pay_type_'.$value->pay_type) }}</td>
 				<td>{{ trans('admin.extend.sellcard.pay_status_'.$value->pay_status) }}</td>

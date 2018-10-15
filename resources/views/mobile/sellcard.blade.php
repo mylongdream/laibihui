@@ -10,7 +10,7 @@
                     <p class="weui-msg__desc">开卡后可享：到店体验金10元 + 冻结余额90元</p>
                 </div>
                 <div class="weui-msg__opr-area">
-                    <form method="post" action="{{ route('mobile.sellcard', ['fromuser' => request('fromuser')]) }}">
+                    <form method="post" action="{{ route('mobile.sellcard', ['fromtype' => request('fromtype'), 'id' => request('id')]) }}">
                         {!! csrf_field() !!}
                         <div class="weui-cells sellcard-cell">
                             @if (strpos(request()->userAgent(), 'MicroMessenger') !== false || strpos(request()->userAgent(), 'AlipayClient') !== false)
