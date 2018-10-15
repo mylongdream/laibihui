@@ -5,7 +5,7 @@
         <div class="wp">
             <div class="weui-msg">
                 <div class="weui-msg__text-area">
-                    <h2 class="weui-msg__title">工号：{{ $fromuser->username }} 正在为您办卡</h2>
+                    <h2 class="weui-msg__title">正在为您办卡</h2>
                     <p class="weui-msg__desc">您将在线支付10元费用进行办卡</p>
                     <p class="weui-msg__desc">开卡后可享：到店体验金10元 + 冻结余额90元</p>
                 </div>
