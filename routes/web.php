@@ -261,7 +261,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
         Route::get('feedback', ['as' => 'feedback.index', 'uses' => 'Mobile\User\FeedbackController@index']);
         Route::post('feedback', ['as' => 'feedback.store', 'uses' => 'Mobile\User\FeedbackController@store']);
         Route::get('cardreward', ['as' => 'cardreward.index', 'uses' => 'Mobile\User\CardRewardController@index']);
-        Route::any('cardreward/myreward', ['as' => 'cardreward.myreward', 'uses' => 'Mobile\User\CardRewardController@myreward']);
+        Route::any('cardreward/record', ['as' => 'cardreward.record', 'uses' => 'Mobile\User\CardRewardController@record']);
         Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'Mobile\User\CardRewardController@exchange']);
         Route::get('sellcard', ['as' => 'sellcard.index', 'uses' => 'Mobile\User\SellCardController@index']);
         Route::get('sellcard/order', ['as' => 'sellcard.order', 'uses' => 'Mobile\User\SellCardController@order']);
@@ -300,6 +300,10 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
                 Route::get('function', ['as' => 'function.index', 'uses' => 'Mobile\CRM\Shop\FunctionController@index']);
                 Route::get('sellcard', ['as' => 'sellcard.index', 'uses' => 'Mobile\CRM\Shop\SellCardController@index']);
                 Route::get('sellcard/order', ['as' => 'sellcard.order', 'uses' => 'Mobile\CRM\Shop\SellCardController@order']);
+                Route::any('sellcard/checkin', ['as' => 'sellcard.checkin', 'uses' => 'Mobile\CRM\Shop\SellCardController@checkin']);
+                Route::get('cardreward', ['as' => 'cardreward.index', 'uses' => 'Mobile\CRM\Shop\CardRewardController@index']);
+                Route::any('cardreward/record', ['as' => 'cardreward.record', 'uses' => 'Mobile\CRM\Shop\CardRewardController@record']);
+                Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'Mobile\CRM\Shop\CardRewardController@exchange']);
             });
             Route::group(['prefix' => 'zhaoshang', 'as' => 'zhaoshang.'], function () {
                 Route::get('/', ['as' => 'index', 'uses' => 'Mobile\CRM\Zhaoshang\IndexController@index']);

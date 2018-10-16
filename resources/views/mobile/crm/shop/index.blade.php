@@ -82,19 +82,19 @@
                                 </div>
                                 <p class="weui-grid__label">面对面办卡</p>
                             </a>
-                            <a href="javascript:;" class="weui-grid">
+                            <a href="{{ route('mobile.crm.shop.sellcard.order') }}" class="weui-grid">
                                 <div class="weui-grid__icon">
                                     <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-order.png') }}" alt="">
                                 </div>
                                 <p class="weui-grid__label">我的售卡</p>
                             </a>
-                            <a href="javascript:;" class="weui-grid">
+                            <a href="{{ route('mobile.crm.shop.cardreward.index') }}" class="weui-grid">
                                 <div class="weui-grid__icon">
                                     <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-cardreward.png') }}" alt="">
                                 </div>
                                 <p class="weui-grid__label">售卡兑奖</p>
                             </a>
-                            <a href="javascript:;" class="weui-grid">
+                            <a href="{{ route('mobile.crm.shop.checkout.index') }}" class="weui-grid">
                                 <div class="weui-grid__icon">
                                     <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-cardreward.png') }}" alt="">
                                 </div>
@@ -106,7 +106,7 @@
                 <div class="weui-panel">
                     <div class="weui-panel__bd">
                         <div class="weui-grids">
-                            <a href="javascript:;" class="weui-grid">
+                            <a href="{{ route('mobile.crm.shop.sellcard.checkin') }}" class="weui-grid">
                                 <div class="weui-grid__icon">
                                     <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-hg.png') }}" alt="">
                                 </div>

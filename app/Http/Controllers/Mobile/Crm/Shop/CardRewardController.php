@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Mobile\User;
+namespace App\Http\Controllers\Mobile\Crm\Shop;
 
 use App\Http\Controllers\Controller;
 
@@ -18,13 +18,13 @@ class CardRewardController extends Controller
     public function index(Request $request)
     {
         $list = CommonCardRewardModel::where('type', 1)->where('onsale', 1)->orderBy('created_at', 'desc')->paginate(20);
-        return view('mobile.user.cardreward.index', ['list' => $list]);
+        return view('mobile.crm.shop.cardreward.index', ['list' => $list]);
     }
 
     public function record(Request $request)
     {
         $list = CommonCardRewardModel::orderBy('created_at', 'desc')->paginate(20);
-        return view('mobile.user.cardreward.record', ['list' => $list]);
+        return view('mobile.crm.shop.cardreward.record', ['list' => $list]);
     }
 
     public function exchange(Request $request)
@@ -65,7 +65,7 @@ class CardRewardController extends Controller
                 return view('layouts.mobile.message', ['status' => 1, 'info' => trans('user.score.exchangesucceed'), 'url' => back()->getTargetUrl()]);
             }
         }else{
-            return view('mobile.user.score.exchange');
+            return view('mobile.crm.shop.cardreward.exchange');
         }
     }
 

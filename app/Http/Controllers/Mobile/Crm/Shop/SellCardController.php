@@ -45,4 +45,18 @@ class SellCardController extends CommonController
         return view('mobile.crm.shop.sellcard.order', ['orders' => $orders]);
     }
 
+    public function checkin(Request $request)
+    {
+        if($request->isMethod('POST')){
+
+            if ($request->ajax()){
+                return response()->json(['status' => 1, 'info' => trans('user.score.exchangesucceed'), 'url' => back()->getTargetUrl()]);
+            }else{
+                return view('layouts.mobile.message', ['status' => 1, 'info' => trans('user.score.exchangesucceed'), 'url' => back()->getTargetUrl()]);
+            }
+        }else{
+            return view('mobile.crm.shop.sellcard.checkin');
+        }
+    }
+
 }
