@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Mobile;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\CommonCardModel;
 use App\Models\CommonSellcardModel;
-use App\Models\CommonUserAccountModel;
-use App\Models\CommonUserSellcardModel;
 use App\Models\CrmPersonnelModel;
 use Illuminate\Http\Request;
 use App\Models\BrandCategoryModel;
@@ -103,15 +102,16 @@ class IndexController extends Controller
             }
         }
         if ($request->isMethod('POST')) {
-            $rules = array(
-                'number' => 'required|numeric|exists:common_card,number',
-            );
-            $messages = array(
-                'number.required' => '卡号不允许为空！',
-                'number.numeric' => '卡号填写错误！',
-                'number.exists' => '卡号不存在！',
-            );
-            $this->validate($request, $rules, $messages);
+            if(empty($request->number)){
+                return view('layouts.mobile.message', ['status' => 0, 'info' => '卡号不允许为空']);
+            }
+            $card = CommonCardModel::where('number', $request->number)->first();
+            if(!$card){
+                return view('layouts.mobile.message', ['status' => 0, 'info' => '卡号不存在']);
+            }
+            if($card->user){
+                return view('layouts.mobile.message', ['status' => 0, 'info' => '卡号已被人绑定了']);
+            }
             $sellorder = CommonSellcardModel::where('number', $request->number)->where('pay_status', '>', 0)->first();
             if($sellorder){
                 return view('layouts.mobile.message', ['status' => 0, 'info' => '该卡号已经付款过了']);
@@ -152,8 +152,7 @@ class IndexController extends Controller
                     'total_amount' => $sellorder->order_amount,
                     'subject'      => '面对面办卡',
                 ];
-                $alipay = Pay::alipay($config)->wap($order);
-                //return $alipay->send();
+                //return Pay::alipay($config)->wap($order);
             }
             //付款成功后回调
             $sellorder->pay_status = 1;
