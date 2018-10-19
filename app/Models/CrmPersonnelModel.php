@@ -31,7 +31,7 @@ class CrmPersonnelModel extends Model
 
     public function sellcard()
     {
-        return $this->hasMany('App\Models\CommonUserSellcardModel', 'uid', 'uid');
+        return $this->hasMany('App\Models\CommonSellcardModel', 'fromuid', 'uid');
     }
 
 }
