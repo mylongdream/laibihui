@@ -16,14 +16,9 @@ class CommonSellcardModel extends Model
     protected $dates = ['pay_at'];
     protected $amountFields = ['order_amount'];
 
-    public function shop()
-    {
-        return $this->belongsTo('App\Models\BrandShopModel', 'fromid');
-    }
-
     public function user()
     {
-        return $this->belongsTo('App\Models\CommonUserModel', 'fromid');
+        return $this->belongsTo('App\Models\CommonUserModel', 'fromuid');
     }
 
 }

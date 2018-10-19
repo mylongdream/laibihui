@@ -29,7 +29,7 @@ class SellCardController extends Controller
             }
         }
         if($request->getcode){
-            $promotion = route('mobile.sellcard', ['fromtype' => 'user', 'id' => Hashids::connection('promotion')->encode(auth()->user()->uid)]);
+            $promotion = route('mobile.sellcard', ['fromuser' => Hashids::connection('promotion')->encode(auth()->user()->uid)]);
             $image = QrCode::format('png')->size(400)->generate($promotion);
             $qrcode = Image::make($image);
             return $qrcode->response('png', 90);
@@ -40,7 +40,7 @@ class SellCardController extends Controller
 
     public function order(Request $request)
     {
-        $orders = CommonSellcardModel::where('fromtype', 'user')->where('fromid', auth()->user()->uid)->orderBy('created_at', 'desc')->paginate(20);
+        $orders = CommonSellcardModel::where('fromuid', auth()->user()->uid)->orderBy('created_at', 'desc')->paginate(20);
         return view('mobile.user.sellcard.order', ['orders' => $orders]);
     }
 

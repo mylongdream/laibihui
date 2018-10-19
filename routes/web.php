@@ -151,7 +151,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
     Route::get('/', ['as' => 'index', 'uses' => 'Mobile\IndexController@index']);
     Route::get('/search', ['as' => 'search', 'uses' => 'Mobile\IndexController@search']);
     Route::get('/promotion/{fromuser}', ['as' => 'promotion', 'uses' => 'Mobile\IndexController@promotion']);
-    Route::any('/sellcard/{fromtype}/{id}', ['as' => 'sellcard', 'uses' => 'Mobile\IndexController@sellcard']);
+    Route::any('/sellcard/{fromuser}', ['as' => 'sellcard', 'uses' => 'Mobile\IndexController@sellcard']);
     Route::any('/grantsell/{fromuser}', ['as' => 'grantsell', 'uses' => 'Mobile\IndexController@grantsell'])->middleware('auth.mobile');
     Route::get('faq', ['as' => 'brand.faq.index', 'uses' => 'Mobile\Brand\FaqController@index']);
     Route::get('faq/{id}.html', ['as' => 'brand.faq.show', 'uses' => 'Mobile\Brand\FaqController@show'])->where('id', '[0-9]+');

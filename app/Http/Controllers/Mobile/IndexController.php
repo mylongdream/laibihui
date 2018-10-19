@@ -92,20 +92,15 @@ class IndexController extends Controller
 
     public function sellcard(Request $request)
     {
-        $fromtype = $request->fromtype;
-        $fromid = $request->id ? Hashids::connection('promotion')->decode($request->id) : 0;
-        if($fromtype == 'user'){
-            $fromuser = CommonUserModel::where('uid', $fromid)->first();
-            if(!$fromuser || !$fromuser->personnel){
+        $fromuid = $request->fromuser ? Hashids::connection('promotion')->decode($request->fromuser) : 0;
+        $fromuid = $fromuid ? $fromuid : 0;
+        $fromuser = CommonUserModel::where('uid', $fromuid)->first();
+        if(!$fromuser || !$fromuser->personnel){
+            if ($request->ajax()) {
+                return response()->json(['status' => 0, 'info' => '地址错误', 'url' => back()->getTargetUrl()]);
+            }else{
                 return view('layouts.mobile.message', ['status' => 0, 'info' => '地址错误']);
             }
-        }elseif($fromtype == 'shop'){
-            $fromshop = BrandShopModel::where('id', $fromid)->first();
-            if(!$fromshop || !$fromshop->ordercard){
-                return view('layouts.mobile.message', ['status' => 0, 'info' => '地址错误']);
-            }
-        }else{
-            return view('layouts.mobile.message', ['status' => 0, 'info' => '地址错误']);
         }
         if ($request->isMethod('POST')) {
             $rules = array(
@@ -124,9 +119,8 @@ class IndexController extends Controller
             //删除该卡号生成的未付款订单
             CommonSellcardModel::where('number', $request->number)->where('pay_status', 0)->delete();
             $sellorder = new CommonSellcardModel();
-            //$sellorder->uid = $fromuser->uid;
-            $sellorder->fromtype = $fromtype;
-            $sellorder->fromid = $fromid;
+            $sellorder->uid = auth()->check() ? auth()->user()->uid : 0;
+            $sellorder->fromuid = $fromuid;
             $sellorder->order_sn = date("YmdHis") . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
             $sellorder->number = $request->number;
             $sellorder->order_amount = 10;
