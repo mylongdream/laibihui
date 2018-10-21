@@ -186,7 +186,7 @@
 				</tbody>
 				<tbody class="tb-body hidden">
 				<tr>
-					<td align="right">{{ trans('admin.brand.shop.superior') }}</td>
+					<td width="150" align="right">{{ trans('admin.brand.shop.superior') }}</td>
 					<td><input class="txt" type="text" size="50" value="{{ $shop->superior }}" name="superior"></td>
 				</tr>
 				<tr>
