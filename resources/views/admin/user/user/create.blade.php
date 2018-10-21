@@ -25,6 +25,13 @@
 					<td><input class="txt" type="password" size="50" value="" name="password_confirmation"></td>
 				</tr>
 				<tr>
+					<td align="right">{{ trans('admin.user.user.headimgurl') }}</td>
+					<td>
+						<a href="javascript:;" class="clickbtn" id="headimgurl">上传图片</a><span class="tdtip">建议尺寸为 320 X 320 像素大小</span>
+						<div class="uploadbox"><ul></ul></div>
+					</td>
+				</tr>
+				<tr>
 					<td width="150" align="right">{{ trans('admin.user.user.realname') }}</td>
 					<td><input class="txt" type="text" size="50" value="" name="realname"></td>
 				</tr>
@@ -43,4 +50,19 @@
 			</table>
 		</div>
 	</form>
+	<script type="text/javascript" src="{{ asset('static/js/webuploader/webuploader.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('static/js/jquery.webuploader.js') }}"></script>
+	<script type="text/javascript">
+        $(function(){
+            $("#headimgurl").powerWebUpload({
+                server: "{{ route('admin.upload.image') }}",
+                formData: {
+                    _token : $('meta[name="csrf-token"]').attr('content')
+                },
+                InputId: 'headimgurl',
+                width: 120,
+                height: 120
+            });
+        });
+	</script>
 @endsection

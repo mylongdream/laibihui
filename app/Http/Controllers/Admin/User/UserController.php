@@ -71,6 +71,7 @@ class UserController extends Controller
         $this->validate($request, $rules, $messages);
 
         $user = new CommonUserModel;
+        $user->headimgurl = $request->headimgurl;
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
         $user->realname = $request->realname;
@@ -130,6 +131,7 @@ class UserController extends Controller
         );
         $this->validate($request, $rules, $messages);
 
+        $user->headimgurl = $request->headimgurl;
         $user->username = $request->username;
         if($request->password){
             $user->password = bcrypt($request->password);
