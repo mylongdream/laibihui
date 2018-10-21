@@ -4,14 +4,14 @@
     <div class="weui-tab">
         <div class="wp">
             <div class="pbw">
-                @if ($shop->superior)
+                @if ($shop->getsuperior)
                 <div class="weui-msg" style="background:#fff;padding:15px 10px;">
                     <div class="weui-msg__icon-area" style="margin-bottom: 10px;">
-                        <img src="{{ $shop->superior->headimgurl ? uploadImage($shop->superior->headimgurl) : asset('static/image/common/getheadimg.jpg') }}" width="92" height="92" style="display:block;margin:0 auto;">
+                        <img src="{{ $shop->getsuperior->headimgurl ? uploadImage($shop->getsuperior->headimgurl) : asset('static/image/common/getheadimg.jpg') }}" width="92" height="92" style="display:block;margin:0 auto;">
                     </div>
                     <div class="">
-                        <h2 class="weui-msg__title">{{ $shop->superior->username }}</h2>
-                        <p class="weui-msg__desc">联系电话：{{ $shop->superior->phone }}</p>
+                        <h2 class="weui-msg__title">{{ $shop->getsuperior->username }}</h2>
+                        <p class="weui-msg__desc">联系电话：{{ $shop->getsuperior->phone }}</p>
                     </div>
                 </div>
                 @else

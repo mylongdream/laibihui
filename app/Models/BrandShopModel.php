@@ -33,12 +33,12 @@ class BrandShopModel extends Model
         return $this->hasMany('App\Models\BrandShopCardModel', 'shop_id', 'id');
     }
     //客户经理
-    public function superior()
+    public function getsuperior()
     {
         return $this->belongsTo('App\Models\CommonUserModel', 'superior', 'username');
     }
     //管理员
-    public function moderator()
+    public function getmoderator()
     {
         return $this->belongsTo('App\Models\CommonUserModel', 'moderator', 'username');
     }
