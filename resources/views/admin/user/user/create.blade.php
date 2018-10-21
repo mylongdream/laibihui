@@ -59,7 +59,7 @@
                 formData: {
                     _token : $('meta[name="csrf-token"]').attr('content')
                 },
-                InputId: 'headimgurl',
+                hiddenInputId: 'headimgurl',
                 width: 120,
                 height: 120
             });

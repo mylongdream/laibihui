@@ -215,7 +215,7 @@
                 formData: {
                     _token : $('meta[name="csrf-token"]').attr('content')
                 },
-                InputId: 'banner',
+                hiddenInputId: 'banner',
                 width: 595,
                 height: 60
             });
