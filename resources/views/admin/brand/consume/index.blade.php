@@ -16,7 +16,8 @@
 				<th width="24"><input class="checkall" type="checkbox"></th>
 				<th width="150">{{ trans('admin.brand.consume.user') }}</th>
 				<th>{{ trans('admin.brand.consume.shop') }}</th>
-				<th width="140">{{ trans('admin.brand.consume.money') }}</th>
+				<th width="140">{{ trans('admin.brand.consume.consume_money') }}</th>
+				<th width="140">{{ trans('admin.brand.consume.discount_money') }}</th>
 				<th width="140">{{ trans('admin.brand.consume.ifpay') }}</th>
 				<th width="140">{{ trans('admin.brand.consume.postip') }}</th>
 				<th width="140">{{ trans('admin.created_at') }}</th>
@@ -32,7 +33,8 @@
 						/
 					@endif
 				</td>
-				<td>{{ $consume->money }} 元</td>
+				<td>{{ $consume->consume_money }} 元</td>
+				<td>{{ $consume->discount_money }} 元</td>
 				<td>{{ $consume->pay_status ? '已支付' : '未支付' }}</td>
 				<td>{{ $consume->postip }}</td>
 				<td>{{ $consume->created_at->format('Y-m-d H:i') }}</td>
