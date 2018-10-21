@@ -11,9 +11,25 @@
                     </div>
                     <div class="">
                         <h2 class="weui-msg__title">{{ $shop->getsuperior->username }}</h2>
-                        <p class="weui-msg__desc">联系电话：{{ $shop->getsuperior->phone }}</p>
                     </div>
                 </div>
+                    <div class="weui-cells">
+                        @if ($shop->getsuperior->mobile)
+                        <div class="weui-cell weui-cell_access">
+                            <div class="weui-cell__bd">
+                                <span>手机：{{ $shop->getsuperior->mobile }}</span>
+                            </div>
+                            <div class="weui-cell__ft"></div>
+                        </div>
+                        @endif
+                        @if ($shop->getsuperior->qq)
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <span>QQ：{{ $shop->getsuperior->qq }}</span>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
                 @else
                     <div class="weui-msg">
                         <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></div>
