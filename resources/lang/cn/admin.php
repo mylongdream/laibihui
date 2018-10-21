@@ -544,6 +544,7 @@ return [
     'user.user.realname' => '真实姓名',
     'user.user.mobile' => '手机号码',
     'user.user.qq' => 'qq号码',
+    'user.user.wechatid' => '微信号',
     'user.user.tiyan_money' => '到店体验金',
     'user.user.user_money' => '可用余额',
     'user.user.frozen_money' => '冻结余额',

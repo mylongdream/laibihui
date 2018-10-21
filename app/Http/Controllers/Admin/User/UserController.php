@@ -77,6 +77,7 @@ class UserController extends Controller
         $user->realname = $request->realname;
         $user->mobile = $request->mobile;
         $user->qq = $request->qq;
+        $user->wechatid = $request->wechatid;
         $user->save();
 
         if ($request->ajax()){
@@ -139,6 +140,7 @@ class UserController extends Controller
         $user->realname = $request->realname;
         $user->mobile = $request->mobile;
         $user->qq = $request->qq;
+        $user->wechatid = $request->wechatid;
         $user->save();
 
         if ($request->ajax()){

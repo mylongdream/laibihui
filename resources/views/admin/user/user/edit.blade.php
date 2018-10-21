@@ -62,6 +62,10 @@
 					<td width="150" align="right">{{ trans('admin.user.user.qq') }}</td>
 					<td><input class="txt" type="text" size="50" value="{{ $user->qq }}" name="qq"></td>
 				</tr>
+					<tr>
+						<td width="150" align="right">{{ trans('admin.user.user.wechatid') }}</td>
+						<td><input class="txt" type="text" size="50" value="{{ $user->wechatid }}" name="wechatid"></td>
+					</tr>
 				<tr>
 					<td align="right"></td>
 					<td><input class="subtn" type="submit" value="提 交" name="submit"></td>

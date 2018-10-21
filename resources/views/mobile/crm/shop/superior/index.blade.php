@@ -29,6 +29,13 @@
                             </div>
                         </div>
                         @endif
+                            @if ($shop->getsuperior->wechatid)
+                                <div class="weui-cell">
+                                    <div class="weui-cell__bd">
+                                        <span>微信号：{{ $shop->getsuperior->wechatid }}</span>
+                                    </div>
+                                </div>
+                            @endif
                     </div>
                 @else
                     <div class="weui-msg">
