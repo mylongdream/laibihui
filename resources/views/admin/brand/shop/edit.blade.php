@@ -18,6 +18,7 @@
 						<li class="current"><span>{{ trans('admin.info_base') }}</span></li>
 						<li><span>{{ trans('admin.brand.shop.message') }}</span></li>
 						<li><span>{{ trans('admin.brand.shop.function') }}</span></li>
+						<li><span>{{ trans('admin.brand.shop.manage') }}</span></li>
 						<li><span>{{ trans('admin.info_seo') }}</span></li>
 					</ul>
 				</div>
@@ -54,10 +55,6 @@
 				<tr>
 					<td align="right">{{ trans('admin.brand.shop.name') }}</td>
 					<td><input class="txt" type="text" size="50" value="{{ $shop->name }}" name="name"></td>
-				</tr>
-				<tr>
-					<td align="right">{{ trans('admin.brand.shop.username') }}</td>
-					<td><input class="txt" type="text" size="50" value="{{ $shop->username }}" name="username"></td>
 				</tr>
 				<tr>
 					<td align="right">{{ trans('admin.brand.shop.upphoto') }}</td>
@@ -185,6 +182,16 @@
 							<input id="ordercard_0" type="radio" name="ordercard" value="0" {{ $shop->ordercard ? '' : 'checked' }}> {{ trans('admin.brand.shop.ordercard_0') }}
 						</label>
 					</td>
+				</tr>
+				</tbody>
+				<tbody class="tb-body hidden">
+				<tr>
+					<td align="right">{{ trans('admin.brand.shop.superior') }}</td>
+					<td><input class="txt" type="text" size="50" value="{{ $shop->superior }}" name="superior"></td>
+				</tr>
+				<tr>
+					<td align="right">{{ trans('admin.brand.shop.moderator') }}</td>
+					<td><input class="txt" type="text" size="50" value="{{ $shop->moderator }}" name="moderator"></td>
 				</tr>
 				</tbody>
 				<tbody class="tb-body hidden">

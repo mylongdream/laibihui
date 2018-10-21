@@ -22,9 +22,7 @@ class ShopController extends CommonController
     public function index(Request $request)
     {
         $BrandShopModel = new BrandShopModel;
-        $shops = $BrandShopModel->whereHas('moderator', function ($query) {
-            $query->where('uid', auth('crm')->user()->uid);
-        })->where(function($query) use($request) {
+        $shops = $BrandShopModel->where('superior', auth('crm')->user()->username)->where(function($query) use($request) {
             if($request->name){
                 $query->where('name', 'like',"%".$request->name."%");
             }
@@ -40,9 +38,7 @@ class ShopController extends CommonController
 
     public function edit(Request $request, $id)
     {
-        $shop = BrandShopModel::whereHas('moderator', function ($query) {
-            $query->where('uid', auth('crm')->user()->uid);
-        })->findOrFail($id);
+        $shop = BrandShopModel::where('superior', auth('crm')->user()->username)->findOrFail($id);
         $archive = BrandShopArchiveModel::where('uid', auth('crm')->user()->uid)->where('shop_id', $shop->id)->where('status', 0)->first();
         if ($archive){
             if ($request->ajax()){
@@ -56,9 +52,7 @@ class ShopController extends CommonController
 
     public function update(Request $request, $id)
     {
-        $shop = BrandShopModel::whereHas('moderator', function ($query) {
-            $query->where('uid', auth('crm')->user()->uid);
-        })->findOrFail($id);
+        $shop = BrandShopModel::where('superior', auth('crm')->user()->username)->findOrFail($id);
         $archive = BrandShopArchiveModel::where('uid', auth('crm')->user()->uid)->where('shop_id', $shop->id)->where('status', 0)->first();
         if ($archive){
             if ($request->ajax()){
@@ -105,18 +99,14 @@ class ShopController extends CommonController
 
     public function allot(Request $request, $id)
     {
-        $shop = BrandShopModel::whereHas('moderator', function ($query) {
-            $query->where('uid', auth('crm')->user()->uid);
-        })->findOrFail($id);
+        $shop = BrandShopModel::where('superior', auth('crm')->user()->username)->findOrFail($id);
         $allots = BrandShopCardAllotModel::where('shop_id', $shop->id)->latest()->paginate(20);
         return view('crm.zhaoshang.shop.allot', ['shop' => $shop, 'allots' => $allots]);
     }
 
     public function card(Request $request, $id)
     {
-        $shop = BrandShopModel::whereHas('moderator', function ($query) {
-            $query->where('uid', auth('crm')->user()->uid);
-        })->findOrFail($id);
+        $shop = BrandShopModel::where('superior', auth('crm')->user()->username)->findOrFail($id);
         $BrandShopCardModel = new BrandShopCardModel;
         $cards = $BrandShopCardModel->where('shop_id', $shop->id)->where(function($query) use($request) {
             if($request->number){
@@ -128,9 +118,7 @@ class ShopController extends CommonController
 
     public function addcard(Request $request, $id)
     {
-        $shop = BrandShopModel::whereHas('moderator', function ($query) {
-            $query->where('uid', auth('crm')->user()->uid);
-        })->findOrFail($id);
+        $shop = BrandShopModel::where('superior', auth('crm')->user()->username)->findOrFail($id);
         $allot = BrandShopCardAllotModel::where('shop_id', $shop->id)->findOrFail($request->allotid);
         if($allot->quantity <= $allot->cardlist->count()) {
             if ($request->ajax()){

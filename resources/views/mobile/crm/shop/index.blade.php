@@ -112,7 +112,7 @@
                                 </div>
                                 <p class="weui-grid__label">缺卡登记</p>
                             </a>
-                            <a href="javascript:;" class="weui-grid">
+                            <a href="{{ route('mobile.crm.shop.superior.index') }}" class="weui-grid">
                                 <div class="weui-grid__icon">
                                     <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-tg.png') }}" alt="">
                                 </div>

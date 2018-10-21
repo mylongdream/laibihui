@@ -75,7 +75,7 @@ class CommonUserModel extends Authenticatable
     //管理商家
     public function shop()
     {
-        return $this->hasOne('App\Models\BrandShopModel', 'username', 'username');
+        return $this->hasOne('App\Models\BrandShopModel', 'moderator', 'username');
     }
 
     //卖卡人员

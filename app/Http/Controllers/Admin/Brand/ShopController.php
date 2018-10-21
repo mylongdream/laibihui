@@ -84,7 +84,6 @@ class ShopController extends Controller
         $shop = new BrandShopModel;
         $shop->subweb_id = $request->subweb_id;
         $shop->catid = $request->catid;
-        $shop->username = $request->username;
         $shop->name = $request->name;
         $shop->upimage = array_first($request->upphoto);
         $shop->upphoto = serialize($request->upphoto);
@@ -108,6 +107,8 @@ class ShopController extends Controller
         $shop->seo_title = $request->seo_title;
         $shop->seo_keywords = $request->seo_keywords;
         $shop->seo_description = $request->seo_description;
+        $shop->superior = $request->superior;
+        $shop->moderator = $request->moderator;
         $shop->save();
 
         if ($request->ajax()){
@@ -200,6 +201,8 @@ class ShopController extends Controller
         $shop->seo_title = $request->seo_title;
         $shop->seo_keywords = $request->seo_keywords;
         $shop->seo_description = $request->seo_description;
+        $shop->superior = $request->superior;
+        $shop->moderator = $request->moderator;
         $shop->save();
 
         if ($request->ajax()){

@@ -304,6 +304,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
                 Route::get('cardreward', ['as' => 'cardreward.index', 'uses' => 'Mobile\CRM\Shop\CardRewardController@index']);
                 Route::any('cardreward/record', ['as' => 'cardreward.record', 'uses' => 'Mobile\CRM\Shop\CardRewardController@record']);
                 Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'Mobile\CRM\Shop\CardRewardController@exchange']);
+                Route::get('superior', ['as' => 'superior.index', 'uses' => 'Mobile\CRM\Shop\SuperiorController@index']);
             });
             Route::group(['prefix' => 'zhaoshang', 'as' => 'zhaoshang.'], function () {
                 Route::get('/', ['as' => 'index', 'uses' => 'Mobile\CRM\Zhaoshang\IndexController@index']);
