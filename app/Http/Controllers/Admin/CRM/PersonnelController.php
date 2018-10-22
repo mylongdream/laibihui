@@ -122,6 +122,7 @@ class PersonnelController extends Controller
             $allocation->cardnum = $request->cardnum;
             $allocation->postip = $request->getClientIp();
             $allocation->save();
+            $personnel->increment('allotnum', $allocation->cardnum);
             if ($request->ajax()) {
                 return response()->json(['status' => '1', 'info' => trans('admin.crm.personnel.allocatesucceed'), 'url' => back()->getTargetUrl()]);
             }else{

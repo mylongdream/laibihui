@@ -17,8 +17,8 @@
 				<th width="24"><input class="checkall" type="checkbox"></th>
 				<th width="">{{ trans('admin.crm.personnel.subuser') }}</th>
 				<th width="120">{{ trans('admin.crm.personnel.topuser') }}</th>
-				<th width="150">{{ trans('admin.crm.personnel.getcardnum') }}</th>
-				<th width="150">{{ trans('admin.crm.personnel.sellcardnum') }}</th>
+				<th width="150">{{ trans('admin.crm.personnel.allotnum') }}</th>
+				<th width="150">{{ trans('admin.crm.personnel.sellnum') }}</th>
 				<th width="150">{{ trans('admin.crm.personnel.created_at') }}</th>
 				<th width="150">{{ trans('admin.operation') }}</th>
 			</tr>
@@ -29,14 +29,14 @@
 				<td>{{ $value->topuser ? $value->topuser->username : '/' }}</td>
 				<td>
 					@if ($value->user)
-					<a href="{{ route('admin.crm.allocation.index', ['username' => $value->user->username]) }}">{{ $value->allocation ? $value->allocation->sum('cardnum') : '0' }}</a>
+					<a href="{{ route('admin.crm.allocation.index', ['username' => $value->user->username]) }}">{{ $value->allotnum }}</a>
 					@else
 						<span>0</span>
 					@endif
 				</td>
 				<td>
 					@if ($value->user)
-					<a href="{{ route('admin.extend.sellcard.index', ['username' => $value->user->username, 'pay_status' => 2]) }}">{{ $value->sellcard ? $value->sellcard->where('pay_status', 1)->count() : '0' }}</a>
+					<a href="{{ route('admin.extend.sellcard.index', ['username' => $value->user->username, 'pay_status' => 2]) }}">{{ $value->sellnum }}</a>
 					@else
 						<span>0</span>
 					@endif

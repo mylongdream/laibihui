@@ -376,6 +376,8 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::resource('reward', 'Admin\Extend\RewardController');
             Route::post('sellcard/batch', ['as' => 'sellcard.batch', 'uses' => 'Admin\Extend\SellCardController@batch']);
             Route::resource('sellcard', 'Admin\Extend\SellCardController');
+            Route::post('bookingcard/batch', ['as' => 'bookingcard.batch', 'uses' => 'Admin\Extend\BookingCardController@batch']);
+            Route::resource('bookingcard', 'Admin\Extend\BookingCardController');
         });
         Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::post('menu/batch', ['as' => 'menu.batch', 'uses' => 'Admin\Admin\MenuController@batch']);

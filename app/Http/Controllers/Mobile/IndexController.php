@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\CommonCardModel;
 use App\Models\CommonSellcardModel;
+use App\Models\CommonUserAccountModel;
 use App\Models\CrmPersonnelModel;
 use Illuminate\Http\Request;
 use App\Models\BrandCategoryModel;
@@ -158,26 +159,25 @@ class IndexController extends Controller
             $sellorder->pay_status = 1;
             $sellorder->pay_at = time();
             $sellorder->save();
-            /*提成
-            if($fromuser){
+
+            $user_account = new CommonUserAccountModel();
+            $user_account->uid = $fromuser->uid;
+            $user_account->user_money = 5;
+            $user_account->remark = '面对面办卡提成';
+            $user_account->postip = request()->getClientIp();
+            $user_account->save();
+            $fromuser->increment('user_money', 500);//提成5元到卖卡人员可用余额
+            $fromuser->personnel->increment('sellnum');
+            if($fromuser->personnel->topuser){
                 $user_account = new CommonUserAccountModel();
-                $user_account->uid = $fromuser->uid;
-                $user_account->user_money = 5;
-                $user_account->remark = '面对面办卡提成';
+                $user_account->uid = $fromuser->personnel->topuser->uid;
+                $user_account->user_money = 0.5;
+                $user_account->remark = '下线面对面办卡提成';
                 $user_account->postip = request()->getClientIp();
                 $user_account->save();
-                $fromuser->increment('user_money', 500);//提成5元到卖卡人员可用余额
-                if($fromuser->personnel->topuser){
-                    $user_account = new CommonUserAccountModel();
-                    $user_account->uid = $fromuser->personnel->topuser->uid;
-                    $user_account->user_money = 0.5;
-                    $user_account->remark = '下线面对面办卡提成';
-                    $user_account->postip = request()->getClientIp();
-                    $user_account->save();
-                    $fromuser->personnel->topuser->increment('user_money', 50);//提成0.5元到业务员可用余额
-                }
+                $fromuser->personnel->topuser->increment('user_money', 50);//提成0.5元到业务员可用余额
             }
-            */
+
             return view('layouts.mobile.message', ['status' => 1, 'info' => '付款成功']);
 
             //return view('layouts.mobile.message', ['status' => 0, 'info' => '请用微信或支付宝支付']);
