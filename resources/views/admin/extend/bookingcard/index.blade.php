@@ -10,7 +10,7 @@
 			<dt>{{ trans('admin.extend.bookingcard.status') }}</dt>
 			<dd>
 				<select class="schselect" name="status" onchange='this.form.submit()'>
-					<option value="">{{ trans('admin.all') }}</option>
+					<option value="-1">{{ trans('admin.all') }}</option>
 					<option value="0" {!! request('status') == 0 ? 'selected="selected"' : '' !!}>未处理</option>
 					<option value="1" {!! request('status') == 1 ? 'selected="selected"' : '' !!}>已处理</option>
 				</select>

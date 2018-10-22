@@ -17,7 +17,7 @@
                     <div class="weui-cells">
                         <div class="weui-cell">
                             <div class="weui-cell__bd">
-                                <input class="weui-input" placeholder="请输入本次订卡数量" type="text">
+                                <input class="weui-input" placeholder="请输入本次订卡数量" type="text" name="cardnum">
                             </div>
                         </div>
                     </div>

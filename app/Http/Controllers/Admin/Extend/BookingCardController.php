@@ -19,10 +19,11 @@ class BookingCardController extends Controller
     {
         $CommonCardBookingModel = new CommonCardBookingModel;
         $orders = $CommonCardBookingModel->where(function($query) use($request) {
-            if($request->status == 0){
+            $request->status = $request->status ? $request->status : 0;
+            if($request->status > 0){
+                $query->where('status', $request->status);
+            }else if($request->status == 0){
                 $query->where('status', 0);
-            }else if($request->status == 1){
-                $query->where('status', 1);
             }
         })->where(function($query) use($request) {
             if($request->username){
