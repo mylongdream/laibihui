@@ -121,7 +121,7 @@ class IndexController extends Controller
             CommonSellcardModel::where('number', $request->number)->where('pay_status', 0)->delete();
             $sellorder = new CommonSellcardModel();
             $sellorder->uid = auth()->check() ? auth()->user()->uid : 0;
-            $sellorder->fromuid = $fromuid;
+            $sellorder->fromuid = $fromuser->uid;
             $sellorder->order_sn = date("YmdHis") . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
             $sellorder->number = $request->number;
             $sellorder->order_amount = 10;

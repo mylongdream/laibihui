@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\BrandCategoryModel;
 use App\Models\CommonSubwebModel;
 use App\Models\BrandShopModel;
+use App\Models\CommonUserModel;
+use App\Models\CrmPersonnelModel;
 use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -66,6 +68,8 @@ class ShopController extends Controller
             'catid' => 'required|numeric|exists:brand_category,id',
             'name' => 'required|max:50|unique:brand_shop,name',
             'upphoto' => 'required',
+            'superior' => 'nullable|exists:common_user,username',
+            'moderator' => 'nullable|exists:common_user,username',
         );
         $messages = array(
             'subweb_id.required' => '所属分站不允许为空！',
@@ -78,6 +82,8 @@ class ShopController extends Controller
             'name.max' => '店铺名称必须小于 :max 个字符。',
             'name.unique' => '店铺名称已经存在。',
             'upphoto.required' => '展示图片不允许为空！',
+            'superior.exists' => '客户经理用户名填写错误！',
+            'moderator.exists' => '管理员用户名填写错误！',
         );
         $request->validate($rules, $messages);
 
@@ -110,7 +116,14 @@ class ShopController extends Controller
         $shop->superior = $request->superior;
         $shop->moderator = $request->moderator;
         $shop->save();
-
+        //开通面对面办卡
+        if($shop->ordercard && $shop->moderator && !$shop->getmoderator->personnel){
+            $user = new CrmPersonnelModel;
+            $user->topuid = $shop->getsuperior ? $shop->getsuperior->uid : 0;
+            $user->uid = $shop->getmoderator->uid;
+            $user->postip = $request->getClientIp();
+            $user->save();
+        }
         if ($request->ajax()){
             return response()->json(['status' => '1', 'info' => trans('admin.brand.shop.addsucceed'), 'url' => route('admin.brand.shop.index')]);
         }else{
@@ -160,6 +173,8 @@ class ShopController extends Controller
             'catid' => 'required|numeric|exists:brand_category,id',
             'name' => 'required|max:50|unique:brand_shop,name,'.$shop->id.',id',
             'upphoto' => 'required',
+            'superior' => 'nullable|exists:common_user,username',
+            'moderator' => 'nullable|exists:common_user,username',
         );
         $messages = array(
             'subweb_id.required' => '所属分站不允许为空！',
@@ -172,6 +187,8 @@ class ShopController extends Controller
             'name.max' => '店铺名称必须小于 :max 个字符。',
             'name.unique' => '店铺名称已经存在。',
             'upphoto.required' => '展示图片不允许为空！',
+            'superior.exists' => '客户经理用户名填写错误！',
+            'moderator.exists' => '管理员用户名填写错误！',
         );
         $request->validate($rules, $messages);
 
@@ -203,7 +220,14 @@ class ShopController extends Controller
         $shop->superior = $request->superior;
         $shop->moderator = $request->moderator;
         $shop->save();
-
+        //开通面对面办卡
+        if($shop->ordercard && $shop->moderator && !$shop->getmoderator->personnel){
+            $user = new CrmPersonnelModel;
+            $user->topuid = $shop->getsuperior ? $shop->getsuperior->uid : 0;
+            $user->uid = $shop->getmoderator->uid;
+            $user->postip = $request->getClientIp();
+            $user->save();
+        }
         if ($request->ajax()){
             return response()->json(['status' => '1', 'info' => trans('admin.brand.shop.editsucceed'), 'url' => route('admin.brand.shop.index')]);
         }else{

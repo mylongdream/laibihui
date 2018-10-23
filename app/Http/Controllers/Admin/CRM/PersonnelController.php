@@ -118,6 +118,7 @@ class PersonnelController extends Controller
             $this->validate($request, $rules, $messages);
 
             $allocation = new CrmAllocationModel;
+            $allocation->personnel_id = $personnel->id;
             $allocation->uid = $personnel->uid;
             $allocation->cardnum = $request->cardnum;
             $allocation->postip = $request->getClientIp();
@@ -131,6 +132,13 @@ class PersonnelController extends Controller
         }else{
             return view('admin.crm.personnel.allocate', ['personnel' => $personnel]);
         }
+    }
+
+    public function allocation(Request $request, $id)
+    {
+        $personnel = CrmPersonnelModel::findOrFail($id);
+        $list = CrmAllocationModel::where('personnel_id', $personnel->id)->orderBy('created_at', 'desc')->paginate(20);
+        return view('admin.crm.personnel.allocation', ['list' => $list]);
     }
 
 }

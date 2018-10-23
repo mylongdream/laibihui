@@ -23,7 +23,7 @@ class SellCardController extends CommonController
 
     public function index(Request $request)
     {
-        if(!$this->shop->ordercard && !auth('crm')->user()->personnel){
+        if(!$this->shop->ordercard || !auth('crm')->user()->personnel){
             if ($request->ajax()){
                 return response()->json(['status' => 0, 'info' => '您无权卖卡']);
             }else{

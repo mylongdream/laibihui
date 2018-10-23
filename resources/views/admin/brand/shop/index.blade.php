@@ -41,7 +41,6 @@
 				<th width="24"><input class="checkall" type="checkbox"></th>
 				<th width="70">ID/{{ trans('admin.brand.shop.searchcode') }}</th>
 				<th>{{ trans('admin.brand.shop.name') }}</th>
-				<th width="80">{{ trans('admin.brand.allot') }}</th>
 				<th width="80">{{ trans('admin.brand.shop.category') }}</th>
 				<th width="60">{{ trans('admin.brand.shop.discount') }}</th>
 				<th width="90">{{ trans('admin.brand.shop.subweb') }}</th>
@@ -54,13 +53,6 @@
 				<td><input class="ids" type="checkbox" value="{{ $shop->id }}" name="ids[]"></td>
 				<td>{{ $shop->id }}</td>
 				<td><a href="{{ route('brand.shop.show',$shop->id) }}" target="_blank">{{ $shop->name }}</a></td>
-				<td>
-                    @if ($shop->ordercard)
-					<a href="{{ route('admin.brand.allot.index',['shopid' => $shop->id]) }}">{{ trans('admin.brand.allot') }}</a>
-                    @else
-                        暂未开通
-                    @endif
-				</td>
 				<td>{{ $shop->category ? $shop->category->name : '/' }}</td>
 				<td>{{ $shop->discount }} 折</td>
 				<td>{{ $shop->subweb->name or '/' }}</td>

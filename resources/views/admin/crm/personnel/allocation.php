@@ -4,22 +4,13 @@
 	<div class="itemnav">
 		<div class="title"><h3>{{ trans('admin.crm.allocation') }}</h3></div>
 	</div>
-	<form id="schform" name="schform" class="formsearch" method="get" action="{{ route('admin.crm.allocation.index') }}">
-		<div class="tbsearch">
-			<dl>
-				<dt>{{ trans('admin.crm.allocation.user') }}</dt>
-				<dd><input type="text" name="username" class="schtxt" value="{{ request('username') }}"></dd>
-			</dl>
-			<div class="schbtn"><button name="" type="submit">{{ trans('admin.search') }}</button></div>
-		</div>
-	</form>
-	<form id="cpform" name="cpform" class="ajaxform" method="post" action="{{ route('admin.crm.allocation.batch') }}">
+	<form id="cpform" name="cpform" class="ajaxform" method="post" action="{{ route('admin.crm.personnel.allocation', ['id'=>request('id')]) }}">
 	{!! csrf_field() !!}
 	<input type="hidden" id="operate" name="operate" value="" />
 	<div class="tblist">
 		<div class="tbhead cl">
 			<div class="z"><h3>{{ trans('admin.crm.allocation.list') }}</h3></div>
-			<div class="y"><a href="{{ route('admin.crm.allocation.create') }}" class="btn openwindow" title="{{ trans('admin.crm.allocation.create') }}">+ {{ trans('admin.crm.allocation.create') }}</a></div>
+				<div class="y"><a href="{{ route('admin.crm.personnel.index') }}" class="btn">< {{ trans('admin.crm.personnel.list') }}</a></div>
 		</div>
 		<table>
 			<tr>
@@ -27,7 +18,6 @@
 				<th>{{ trans('admin.crm.allocation.user') }}</th>
 				<th>{{ trans('admin.crm.allocation.cardnum') }}</th>
 				<th width="150">{{ trans('admin.crm.allocation.created_at') }}</th>
-				<th width="100">{{ trans('admin.operation') }}</th>
 			</tr>
 			@foreach ($list as $value)
 			<tr>
@@ -35,9 +25,6 @@
 				<td>{{ $value->user ? $value->user->username : '/' }}</td>
 				<td>{{ $value->cardnum }}</td>
 				<td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
-				<td>
-					<a href="{{ route('admin.crm.allocation.destroy',$value->id) }}" class="delbtn">{{ trans('admin.destroy') }}</a>
-				</td>
 			</tr>
 			@endforeach
 		</table>

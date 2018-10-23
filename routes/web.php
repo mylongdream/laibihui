@@ -433,16 +433,6 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::post('shop/batch', ['as' => 'shop.batch', 'uses' => 'Admin\Brand\ShopController@batch']);
             Route::get('shop/recycle', ['as' => 'shop.recycle', 'uses' => 'Admin\Brand\ShopController@recycle']);
             Route::get('shop/nearby', ['as' => 'shop.nearby', 'uses' => 'Admin\Brand\ShopController@nearby']);
-
-            Route::post('shop/{shopid}/allot/batch', ['as' => 'allot.batch', 'uses' => 'Admin\Brand\AllotController@batch']);
-            Route::get('shop/{shopid}/allot', ['as' => 'allot.index', 'uses' => 'Admin\Brand\AllotController@index']);
-            Route::get('shop/{shopid}/allot/create', ['as' => 'allot.create', 'uses' => 'Admin\Brand\AllotController@create']);
-            Route::post('shop/{shopid}/allot', ['as' => 'allot.store', 'uses' => 'Admin\Brand\AllotController@store']);
-            Route::get('shop/{shopid}/allot/{id}/cardlist', ['as' => 'allot.cardlist', 'uses' => 'Admin\Brand\AllotController@cardlist']);
-            Route::get('shop/{shopid}/allot/{id}/edit', ['as' => 'allot.edit', 'uses' => 'Admin\Brand\AllotController@edit']);
-            Route::put('shop/{shopid}/allot/{id}', ['as' => 'allot.update', 'uses' => 'Admin\Brand\AllotController@update']);
-            Route::delete('shop/{shopid}/allot/{id}', ['as' => 'allot.destroy', 'uses' => 'Admin\Brand\AllotController@destroy']);
-
             Route::get('shop/{id}/restore', ['as' => 'shop.restore', 'uses' => 'Admin\Brand\ShopController@restore']);
             Route::get('shop/{id}/qrcode', ['as' => 'shop.qrcode', 'uses' => 'Admin\Brand\ShopController@qrcode']);
             Route::get('shop/{id}/getqrcode', ['as' => 'shop.getqrcode', 'uses' => 'Admin\Brand\ShopController@getqrcode']);
@@ -580,9 +570,8 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::resource('reward', 'Admin\CRM\RewardController');
             Route::post('personnel/batch', ['as' => 'personnel.batch', 'uses' => 'Admin\CRM\PersonnelController@batch']);
             Route::any('personnel/{id}/allocate', ['as' => 'personnel.allocate', 'uses' => 'Admin\CRM\PersonnelController@allocate']);
+            Route::any('personnel/{id}/allocation', ['as' => 'personnel.allocation', 'uses' => 'Admin\CRM\PersonnelController@allocation']);
             Route::resource('personnel', 'Admin\CRM\PersonnelController');
-            Route::post('allocation/batch', ['as' => 'allocation.batch', 'uses' => 'Admin\CRM\AllocationController@batch']);
-            Route::resource('allocation', 'Admin\CRM\AllocationController');
         });
     });
 });

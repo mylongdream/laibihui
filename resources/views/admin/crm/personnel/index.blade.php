@@ -29,7 +29,7 @@
 				<td>{{ $value->topuser ? $value->topuser->username : '/' }}</td>
 				<td>
 					@if ($value->user)
-					<a href="{{ route('admin.crm.allocation.index', ['username' => $value->user->username]) }}">{{ $value->allotnum }}</a>
+					<a href="{{ route('admin.crm.personnel.allocation', $value->id) }}">{{ $value->allotnum }}</a>
 					@else
 						<span>0</span>
 					@endif
