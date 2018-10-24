@@ -8,6 +8,8 @@ use App\Models\BrandConsumeModel;
 use App\Models\BrandShopModel;
 use App\Models\CommonUserModel;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+use QRcode;
 use Yansongda\LaravelPay\Facades\Pay;
 
 class CheckoutController extends CommonController
