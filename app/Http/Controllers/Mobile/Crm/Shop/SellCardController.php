@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Mobile\Crm\Shop;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\BrandSellcardModel;
 use App\Models\CommonCardBookingModel;
 use App\Models\CommonSellcardModel;
-use App\Models\CrmPersonnelModel;
 use Intervention\Image\Facades\Image;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Vinkla\Hashids\Facades\Hashids;

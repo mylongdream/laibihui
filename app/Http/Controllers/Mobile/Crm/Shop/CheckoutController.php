@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Mobile\Crm\Shop;
 use App\Http\Controllers\Controller;
 
 use App\Models\BrandConsumeModel;
-use App\Models\BrandShopModel;
 use App\Models\CommonUserModel;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
-use QRcode;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Yansongda\LaravelPay\Facades\Pay;
 
 class CheckoutController extends CommonController
