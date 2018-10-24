@@ -117,4 +117,12 @@ class CheckoutController extends CommonController
         return view('mobile.crm.shop.checkout.userinfo', ['userinfo' => $userinfo]);
     }
 
+    public function qrcode(Request $request)
+    {
+        $promotion = route('mobile.brand.shop.pay', ['id' => $this->shop->id]);
+        $image = QrCode::format('png')->size(400)->generate($promotion);
+        $qrcode = Image::make($image);
+        return $qrcode->response('png', 90);
+    }
+
 }

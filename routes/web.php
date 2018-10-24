@@ -294,6 +294,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
                 Route::post('checkout/check', ['as' => 'checkout.check', 'uses' => 'Mobile\CRM\Shop\CheckoutController@check']);
                 Route::post('checkout/pay', ['as' => 'checkout.pay', 'uses' => 'Mobile\CRM\Shop\CheckoutController@pay']);
                 Route::post('checkout/userinfo', ['as' => 'checkout.userinfo', 'uses' => 'Mobile\CRM\Shop\CheckoutController@userinfo']);
+                Route::post('checkout/qrcode', ['as' => 'checkout.qrcode', 'uses' => 'Mobile\CRM\Shop\CheckoutController@qrcode']);
                 Route::get('statistics', ['as' => 'statistics.index', 'uses' => 'Mobile\CRM\Shop\StatisticsController@index']);
                 Route::get('statistics/income', ['as' => 'statistics.income', 'uses' => 'Mobile\CRM\Shop\StatisticsController@income']);
                 Route::get('statistics/order', ['as' => 'statistics.order', 'uses' => 'Mobile\CRM\Shop\StatisticsController@order']);
