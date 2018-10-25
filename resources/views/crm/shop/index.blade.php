@@ -24,7 +24,7 @@
                     @if (auth('crm')->user()->shop->ordermeal)
                         <span>在线点餐</span>
                     @endif
-                    @if (auth('crm')->user()->shop->ordercard)
+                    @if (auth('crm')->user()->shop->sellcard)
                         <span>店内办卡</span>
                     @endif
                 </div>
@@ -40,7 +40,7 @@
                 </tr>
             </table>
         </div>
-        @if (auth('crm')->user()->shop->ordercard)
+        @if (auth('crm')->user()->shop->sellcard)
             <div class="mtw" style="font-size: 18px">店内办卡</div>
             <div class="crm-count mtw">
                 <table>

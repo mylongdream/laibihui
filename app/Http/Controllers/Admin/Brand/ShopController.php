@@ -105,7 +105,7 @@ class ShopController extends Controller
         $shop->offline = intval($request->offline) ? 1 : 0;
         $shop->ordermeal = intval($request->ordermeal) ? 1 : 0;
         $shop->appoint = intval($request->appoint) ? 1 : 0;
-        $shop->ordercard = intval($request->ordercard) ? 1 : 0;
+        $shop->sellcard = intval($request->sellcard) ? 1 : 0;
         $shop->started_at = $request->started_at ? strtotime($request->started_at) : $request->started_at;
         $shop->ended_at = $request->ended_at ? strtotime($request->ended_at) : $request->ended_at;
         $shop->viewnum = $request->viewnum;
@@ -117,7 +117,7 @@ class ShopController extends Controller
         $shop->moderator = $request->moderator;
         $shop->save();
         //开通面对面办卡
-        if($shop->ordercard && $shop->moderator && !$shop->getmoderator->personnel){
+        if($shop->sellcard && $shop->moderator && !$shop->getmoderator->personnel){
             $user = new CrmPersonnelModel;
             $user->topuid = $shop->getsuperior ? $shop->getsuperior->uid : 0;
             $user->uid = $shop->getmoderator->uid;
@@ -209,7 +209,7 @@ class ShopController extends Controller
         $shop->offline = intval($request->offline) ? 1 : 0;
         $shop->ordermeal = intval($request->ordermeal) ? 1 : 0;
         $shop->appoint = intval($request->appoint) ? 1 : 0;
-        $shop->ordercard = intval($request->ordercard) ? 1 : 0;
+        $shop->sellcard = intval($request->sellcard) ? 1 : 0;
         $shop->started_at = $request->started_at ? strtotime($request->started_at) : $request->started_at;
         $shop->ended_at = $request->ended_at ? strtotime($request->ended_at) : $request->ended_at;
         $shop->viewnum = $request->viewnum;
@@ -221,7 +221,7 @@ class ShopController extends Controller
         $shop->moderator = $request->moderator;
         $shop->save();
         //开通面对面办卡
-        if($shop->ordercard && $shop->moderator && !$shop->getmoderator->personnel){
+        if($shop->sellcard && $shop->moderator && !$shop->getmoderator->personnel){
             $user = new CrmPersonnelModel;
             $user->topuid = $shop->getsuperior ? $shop->getsuperior->uid : 0;
             $user->uid = $shop->getmoderator->uid;

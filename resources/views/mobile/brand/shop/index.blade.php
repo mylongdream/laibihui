@@ -65,7 +65,7 @@
                                                                 @if ($value->ordermeal)
                                                                     <span>在线点餐</span>
                                                                 @endif
-                                                                @if ($value->ordercard)
+                                                                @if ($value->sellcard)
                                                                     <span>店内办卡</span>
                                                                 @endif
                                                             </div>

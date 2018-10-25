@@ -147,13 +147,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td align="right">{{ trans('admin.brand.shop.ordercard') }}</td>
+					<td align="right">{{ trans('admin.brand.shop.sellcard') }}</td>
 					<td>
-						<label class="radio" for="ordercard_1">
-							<input id="ordercard_1" type="radio" name="ordercard" value="1"> {{ trans('admin.brand.shop.ordercard_1') }}
+						<label class="radio" for="sellcard_1">
+							<input id="sellcard_1" type="radio" name="sellcard" value="1"> {{ trans('admin.brand.shop.sellcard_1') }}
 						</label>
-						<label class="radio" for="ordercard_0">
-							<input id="ordercard_0" type="radio" name="ordercard" value="0" checked> {{ trans('admin.brand.shop.ordercard_0') }}
+						<label class="radio" for="sellcard_0">
+							<input id="sellcard_0" type="radio" name="sellcard" value="0" checked> {{ trans('admin.brand.shop.sellcard_0') }}
 						</label>
 					</td>
 				</tr>

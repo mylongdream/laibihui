@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Mobile\Crm\Shop;
+namespace App\Http\Controllers\Crm\Shop;
 
 use App\Http\Controllers\Controller;
 
@@ -16,7 +16,7 @@ class SellCardController extends CommonController
     public function __construct()
     {
         parent::__construct();
-        //view()->share('curmenu', 'sellcard');
+        view()->share('curmenu', 'sellcard');
     }
 
     public function index(Request $request)
@@ -34,23 +34,24 @@ class SellCardController extends CommonController
             $qrcode = Image::make($image);
             return $qrcode->response('png', 90);
         }else{
-            return view('mobile.crm.shop.sellcard.index');
+            return view('crm.shop.sellcard.index');
         }
     }
 
     public function order(Request $request)
     {
         $orders = CommonSellcardModel::where('fromuid', auth('crm')->user()->uid)->orderBy('created_at', 'desc')->paginate(20);
-        return view('mobile.crm.shop.sellcard.order', ['orders' => $orders]);
+        return view('crm.shop.sellcard.order', ['orders' => $orders]);
     }
 
     public function checkin(Request $request)
     {
+        view()->share('curmenu', 'checkin');
         if(!$this->shop->sellcard || !auth('crm')->user()->personnel){
             if ($request->ajax()){
                 return response()->json(['status' => 0, 'info' => '您无权卖卡']);
             }else{
-                return view('layouts.mobile.message', ['status' => 0, 'info' => '您无权卖卡']);
+                return view('layouts.crm.message', ['status' => 0, 'info' => '您无权卖卡']);
             }
         }
         $leftcardnum = auth('crm')->user()->personnel->allotnum - auth('crm')->user()->personnel->sellnum;
@@ -76,7 +77,7 @@ class SellCardController extends CommonController
                 return view('layouts.mobile.message', ['status' => 1, 'info' => '缺卡登记信息提交成功', 'url' => back()->getTargetUrl()]);
             }
         }else{
-            return view('mobile.crm.shop.sellcard.checkin', ['leftcardnum' => $leftcardnum]);
+            return view('crm.shop.sellcard.checkin', ['leftcardnum' => $leftcardnum]);
         }
     }
 

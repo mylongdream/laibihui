@@ -277,8 +277,6 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
                 Route::get('consume', ['as' => 'consume.index', 'uses' => 'Mobile\CRM\Shop\ConsumeController@index']);
                 Route::get('consume/balance', ['as' => 'consume.balance', 'uses' => 'Mobile\CRM\Shop\ConsumeController@balance']);
                 Route::get('consume/{id}', ['as' => 'consume.show', 'uses' => 'Mobile\CRM\Shop\ConsumeController@show']);
-                Route::get('ordercard', ['as' => 'ordercard.index', 'uses' => 'Mobile\CRM\Shop\OrderCardController@index']);
-                Route::get('ordercard/remain', ['as' => 'ordercard.remain', 'uses' => 'Mobile\CRM\Shop\OrderCardController@remain']);
                 Route::get('appoint', ['as' => 'appoint.index', 'uses' => 'Mobile\CRM\Shop\AppointController@index']);
                 Route::get('appoint/{id}', ['as' => 'appoint.show', 'uses' => 'Mobile\CRM\Shop\AppointController@show']);
                 Route::get('appoint/{id}/edit', ['as' => 'appoint.edit', 'uses' => 'Mobile\CRM\Shop\AppointController@edit']);
@@ -628,8 +626,6 @@ Route::group(['domain' => 'crm.hztbg.com', 'prefix' => '', 'as' => 'crm.'], func
             Route::get('consume', ['as' => 'consume.index', 'uses' => 'CRM\Shop\ConsumeController@index']);
             Route::get('consume/balance', ['as' => 'consume.balance', 'uses' => 'CRM\Shop\ConsumeController@balance']);
             Route::get('consume/{id}', ['as' => 'consume.show', 'uses' => 'CRM\Shop\ConsumeController@show']);
-            Route::get('ordercard', ['as' => 'ordercard.index', 'uses' => 'CRM\Shop\OrderCardController@index']);
-            Route::get('ordercard/remain', ['as' => 'ordercard.remain', 'uses' => 'CRM\Shop\OrderCardController@remain']);
             Route::get('appoint', ['as' => 'appoint.index', 'uses' => 'CRM\Shop\AppointController@index']);
             Route::get('appoint/{id}', ['as' => 'appoint.show', 'uses' => 'CRM\Shop\AppointController@show']);
             Route::get('appoint/{id}/edit', ['as' => 'appoint.edit', 'uses' => 'CRM\Shop\AppointController@edit']);
@@ -647,6 +643,9 @@ Route::group(['domain' => 'crm.hztbg.com', 'prefix' => '', 'as' => 'crm.'], func
             Route::post('checkout/userinfo', ['as' => 'checkout.userinfo', 'uses' => 'CRM\Shop\CheckoutController@userinfo']);
             Route::get('account', ['as' => 'account.index', 'uses' => 'CRM\Shop\AccountController@index']);
             Route::any('account/password', ['as' => 'account.password', 'uses' => 'CRM\Shop\AccountController@password']);
+            Route::get('sellcard', ['as' => 'sellcard.index', 'uses' => 'CRM\Shop\SellCardController@index']);
+            Route::get('sellcard/order', ['as' => 'sellcard.order', 'uses' => 'CRM\Shop\SellCardController@order']);
+            Route::any('sellcard/checkin', ['as' => 'sellcard.checkin', 'uses' => 'CRM\Shop\SellCardController@checkin']);
         });
         Route::group(['prefix' => 'zhaoshang', 'as' => 'zhaoshang.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'CRM\Zhaoshang\IndexController@index']);
