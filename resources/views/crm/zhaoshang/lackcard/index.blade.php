@@ -16,7 +16,7 @@
                         <td>{{ $value->cardnum }} 张</td>
                         <td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
                         <td>
-                            @if ($shop->status)
+                            @if ($value->status)
                                 <span>已经处理</span>
                             @else
                                 <a href="{{ route('crm.zhaoshang.lackcard.handle', $value->id) }}" class="ajaxget confirmbtn" title="处理">点击处理</a>
