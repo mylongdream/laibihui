@@ -18,7 +18,7 @@ class LackcardController extends CommonController
 
     public function index(Request $request)
     {
-        $list = CommonCardBookingModel::latest()->paginate(20);
+        $list = CommonCardBookingModel::where('uid', auth('crm')->user()->uid)->latest()->paginate(20);
         return view('crm.shop.lackcard.index', ['list' => $list]);
     }
 
