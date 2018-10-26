@@ -11,8 +11,8 @@
             <li class="{{ isset($curmenu) && $curmenu == 'sellcard' ? 'on' : '' }}">
                 <a title="" href="{{ route('crm.shop.sellcard.index') }}"><span class="menu_index">店内办卡</span></a>
             </li>
-            <li class="{{ isset($curmenu) && $curmenu == 'checkin' ? 'on' : '' }}">
-                <a title="" href="{{ route('crm.shop.sellcard.checkin') }}"><span class="menu_index">缺卡登记</span></a>
+            <li class="{{ isset($curmenu) && $curmenu == 'lackcard' ? 'on' : '' }}">
+                <a title="" href="{{ route('crm.shop.lackcard.checkin') }}"><span class="menu_index">缺卡登记</span></a>
             </li>
             @endif
             @if (auth('crm')->user()->shop->appoint)
