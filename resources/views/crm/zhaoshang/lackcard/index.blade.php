@@ -5,7 +5,7 @@
         <div class="crm-list mtw">
             <table>
                 <tr>
-                    <th align="left" colspan="2">订卡用户</th>
+                    <th align="left">订卡用户</th>
                     <th align="left" width="150">预定卡数</th>
                     <th align="left" width="160">预定时间</th>
                     <th align="left" width="80">操作</th>
