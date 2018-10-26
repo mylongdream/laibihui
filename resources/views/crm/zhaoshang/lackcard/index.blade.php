@@ -14,7 +14,7 @@
                     <tr style="height: 90px">
                         <td width="60">{{ $value->user->username }}</td>
                         <td>{{ $value->cardnum }} 张</td>
-                        <td>{{ $value->created_at ? $value->created_at>format('Y-m-d H:i') : '/' }}</td>
+                        <td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
                         <td>
                             @if ($shop->status)
                                 <span>已经处理</span>
