@@ -11,8 +11,8 @@
                     <th align="left" width="80">操作</th>
                 </tr>
                 @foreach ($list as $value)
-                    <tr style="height: 90px">
-                        <td width="60">{{ $value->user->username }}</td>
+                    <tr>
+                        <td>{{ $value->user->username }}</td>
                         <td>{{ $value->cardnum }} 张</td>
                         <td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
                         <td>

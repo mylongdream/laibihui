@@ -312,7 +312,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
                 Route::get('sellcard/users', ['as' => 'sellcard.users', 'uses' => 'Mobile\CRM\Zhaoshang\SellcardController@users']);
                 Route::get('shop/nearby', ['as' => 'shop.nearby', 'uses' => 'Mobile\CRM\Zhaoshang\ShopController@nearby']);
                 Route::get('lackcard', ['as' => 'lackcard.index', 'uses' => 'Mobile\CRM\Zhaoshang\LackCardController@index']);
-                Route::any('lackcard/handle', ['as' => 'lackcard.handle', 'uses' => 'Mobile\CRM\Zhaoshang\LackCardController@handle']);
+                Route::any('lackcard/{id}/handle', ['as' => 'lackcard.handle', 'uses' => 'Mobile\CRM\Zhaoshang\LackCardController@handle']);
             });
             Route::group(['prefix' => 'tuiguang', 'as' => 'tuiguang.'], function () {
                 Route::get('/', ['as' => 'index', 'uses' => 'Mobile\CRM\Tuiguang\IndexController@index']);
@@ -673,7 +673,7 @@ Route::group(['domain' => 'crm.hztbg.com', 'prefix' => '', 'as' => 'crm.'], func
             Route::get('archive/{id}', ['as' => 'archive.show', 'uses' => 'CRM\Zhaoshang\ArchiveController@show']);
             Route::get('shop/nearby', ['as' => 'shop.nearby', 'uses' => 'CRM\Zhaoshang\ShopController@nearby']);
             Route::get('lackcard', ['as' => 'lackcard.index', 'uses' => 'CRM\Zhaoshang\LackCardController@index']);
-            Route::any('lackcard/handle', ['as' => 'lackcard.handle', 'uses' => 'CRM\Zhaoshang\LackCardController@handle']);
+            Route::any('lackcard/{id}/handle', ['as' => 'lackcard.handle', 'uses' => 'CRM\Zhaoshang\LackCardController@handle']);
         });
         Route::group(['prefix' => 'kefu', 'as' => 'kefu.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'CRM\Kefu\IndexController@index']);
