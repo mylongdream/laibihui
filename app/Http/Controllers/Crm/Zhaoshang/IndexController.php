@@ -21,9 +21,7 @@ class IndexController extends CommonController
 
     public function index(Request $request)
     {
-        $shops = BrandShopModel::whereHas('moderator', function ($query) {
-            $query->where('uid', auth('crm')->user()->uid);
-        })->withCount(['shopcards', 'shopcards AS sellcards_count' => function ($query) {
+        $shops = BrandShopModel::where('superior', auth('crm')->user()->username)->withCount(['shopcards', 'shopcards AS sellcards_count' => function ($query) {
             $query->has('card');
         }])->get();
         $count = collect();

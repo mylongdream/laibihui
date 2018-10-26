@@ -12,7 +12,7 @@
 					<table>
 						<tr>
 							<td width="150" align="right">预订卡数</td>
-							<td><input class="input" type="password" size="50" value="" name="cardnum" placeholder="请输入预订卡数"></td>
+							<td><input class="input" type="text" size="30" value="" name="cardnum" placeholder="请输入预订卡数"> 张</td>
 						</tr>
 						<tr>
 							<td align="right"></td>

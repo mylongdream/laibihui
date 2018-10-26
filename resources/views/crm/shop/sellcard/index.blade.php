@@ -13,7 +13,7 @@
 				<h4>办卡二维码</h4>
 			</div>
 			<div class="bd" style="text-align: center;">
-				<img style="width:150px;" src="{{ route('crm.shop.sellcard.index', ['getcode' => 1]) }}" alt="">
+				<img style="width:350px;" src="{{ route('crm.shop.sellcard.index', ['getcode' => 1]) }}" alt="">
 			</div>
 		</div>
 	</div>
