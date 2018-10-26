@@ -106,7 +106,7 @@
                 <div class="weui-panel">
                     <div class="weui-panel__bd">
                         <div class="weui-grids">
-                            <a href="{{ route('mobile.crm.shop.sellcard.checkin') }}" class="weui-grid">
+                            <a href="{{ route('mobile.crm.shop.lackcard.checkin') }}" class="weui-grid">
                                 <div class="weui-grid__icon">
                                     <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-hg.png') }}" alt="">
                                 </div>

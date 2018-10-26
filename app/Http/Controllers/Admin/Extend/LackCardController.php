@@ -8,7 +8,7 @@ use App\Models\CommonUserModel;
 use Illuminate\Http\Request;
 
 
-class BookingCardController extends Controller
+class LackCardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,7 +31,7 @@ class BookingCardController extends Controller
                 $query->where('uid', $user->uid);
             }
         })->latest()->paginate(20);
-        return view('admin.extend.bookingcard.index', ['orders' => $orders]);
+        return view('admin.extend.lackcard.index', ['orders' => $orders]);
     }
 
     /**
@@ -43,13 +43,13 @@ class BookingCardController extends Controller
     public function show($id)
     {
         $order = CommonCardBookingModel::findOrFail($id);
-        return view('admin.extend.bookingcard.show', ['order' => $order]);
+        return view('admin.extend.lackcard.show', ['order' => $order]);
     }
 
     public function edit($id)
     {
         $order = CommonCardBookingModel::findOrFail($id);
-        return view('admin.extend.bookingcard.edit', ['order' => $order]);
+        return view('admin.extend.lackcard.edit', ['order' => $order]);
     }
 
     public function update(Request $request, $id)
@@ -69,9 +69,9 @@ class BookingCardController extends Controller
         $order->save();
 
         if ($request->ajax()){
-            return response()->json(['status' => '1', 'info' => trans('admin.extend.bookingcard.editsucceed'), 'url' => back()->getTargetUrl()]);
+            return response()->json(['status' => '1', 'info' => trans('admin.extend.lackcard.editsucceed'), 'url' => back()->getTargetUrl()]);
         }else{
-            return view('layouts.admin.message', ['status' => '1', 'info' => trans('admin.extend.bookingcard.editsucceed'), 'url' => back()->getTargetUrl()]);
+            return view('layouts.admin.message', ['status' => '1', 'info' => trans('admin.extend.lackcard.editsucceed'), 'url' => back()->getTargetUrl()]);
         }
     }
 
@@ -86,9 +86,9 @@ class BookingCardController extends Controller
         $order = CommonCardBookingModel::findOrFail($id);
         $order->delete();
         if ($request->ajax()){
-            return response()->json(['status' => '1', 'info' => trans('admin.extend.bookingcard.deletesucceed'), 'url' => back()->getTargetUrl()]);
+            return response()->json(['status' => '1', 'info' => trans('admin.extend.lackcard.deletesucceed'), 'url' => back()->getTargetUrl()]);
         }else{
-            return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.extend.bookingcard.deletesucceed'), 'url' => back()->getTargetUrl()]);
+            return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.extend.lackcard.deletesucceed'), 'url' => back()->getTargetUrl()]);
         }
     }
 
@@ -104,9 +104,9 @@ class BookingCardController extends Controller
             $this->validate($request, $rules, $messages);
             CommonCardBookingModel::destroy($request->ids);
             if ($request->ajax()) {
-                return response()->json(['status' => '1', 'info' => trans('admin.extend.bookingcard.deletesucceed'), 'url' => back()->getTargetUrl()]);
+                return response()->json(['status' => '1', 'info' => trans('admin.extend.lackcard.deletesucceed'), 'url' => back()->getTargetUrl()]);
             }else{
-                return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.extend.bookingcard.deletesucceed'), 'url' => back()->getTargetUrl()]);
+                return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.extend.lackcard.deletesucceed'), 'url' => back()->getTargetUrl()]);
             }
         }else{
             return view('admin.layouts.message', ['status' => '0', 'info' => trans('admin.undefined.operation')]);

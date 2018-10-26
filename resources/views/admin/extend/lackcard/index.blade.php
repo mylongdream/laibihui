@@ -2,12 +2,12 @@
 
 @section('content')
 	<div class="itemnav">
-		<div class="title"><h3>{{ trans('admin.extend.bookingcard') }}</h3></div>
+		<div class="title"><h3>{{ trans('admin.extend.lackcard') }}</h3></div>
 	</div>
-	<form id="schform" name="schform" class="formsearch" method="get" action="{{ route('admin.extend.bookingcard.index') }}">
+	<form id="schform" name="schform" class="formsearch" method="get" action="{{ route('admin.extend.lackcard.index') }}">
 	<div class="tbsearch">
 		<dl>
-			<dt>{{ trans('admin.extend.bookingcard.status') }}</dt>
+			<dt>{{ trans('admin.extend.lackcard.status') }}</dt>
 			<dd>
 				<select class="schselect" name="status" onchange='this.form.submit()'>
 					<option value="-1">{{ trans('admin.all') }}</option>
@@ -19,19 +19,19 @@
 		<div class="schbtn"><button name="" type="submit">{{ trans('admin.search') }}</button></div>
 	</div>
 	</form>
-	<form id="cpform" name="cpform" class="ajaxform" method="post" action="{{ route('admin.extend.bookingcard.batch') }}">
+	<form id="cpform" name="cpform" class="ajaxform" method="post" action="{{ route('admin.extend.lackcard.batch') }}">
 	{!! csrf_field() !!}
 	<input type="hidden" id="operate" name="operate" value="" />
 	<div class="tblist">
 		<div class="tbhead cl">
-			<div class="z"><h3>{{ trans('admin.extend.bookingcard.list') }}</h3></div>
+			<div class="z"><h3>{{ trans('admin.extend.lackcard.list') }}</h3></div>
 		</div>
 		<table>
 			<tr>
 				<th width="24"><input class="checkall" type="checkbox"></th>
-				<th>{{ trans('admin.extend.bookingcard.user') }}</th>
-				<th width="100">{{ trans('admin.extend.bookingcard.cardnum') }}</th>
-				<th width="60">{{ trans('admin.extend.bookingcard.status') }}</th>
+				<th>{{ trans('admin.extend.lackcard.user') }}</th>
+				<th width="100">{{ trans('admin.extend.lackcard.cardnum') }}</th>
+				<th width="60">{{ trans('admin.extend.lackcard.status') }}</th>
 				<th width="120">{{ trans('admin.created_at') }}</th>
 				<th width="80">{{ trans('admin.operation') }}</th>
 			</tr>
@@ -40,11 +40,11 @@
 				<td><input class="ids" type="checkbox" value="{{ $order->id }}" name="ids[]"></td>
 				<td>{{ $order->user ? $order->user->username : '/' }}</td>
 				<td>{{ $order->cardnum }}</td>
-				<td>{{ trans('admin.extend.bookingcard.status_'.$order->status) }}</td>
+				<td>{{ trans('admin.extend.lackcard.status_'.$order->status) }}</td>
 				<td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
 				<td>
-					<a href="{{ route('admin.extend.bookingcard.edit',$order->id) }}" class="openwindow" title="{{ trans('admin.handle') }}">{{ trans('admin.handle') }}</a>
-					<a href="{{ route('admin.extend.bookingcard.destroy',$order->id) }}" class="mlm delbtn">{{ trans('admin.destroy') }}</a>
+					<a href="{{ route('admin.extend.lackcard.edit',$order->id) }}" class="openwindow" title="{{ trans('admin.handle') }}">{{ trans('admin.handle') }}</a>
+					<a href="{{ route('admin.extend.lackcard.destroy',$order->id) }}" class="mlm delbtn">{{ trans('admin.destroy') }}</a>
 				</td>
 			</tr>
 			@endforeach
