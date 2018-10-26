@@ -51,10 +51,10 @@ class LackcardController extends CommonController
             if ($request->ajax()){
                 return response()->json(['status' => 1, 'info' => '缺卡登记信息提交成功', 'url' => back()->getTargetUrl()]);
             }else{
-                return view('layouts.mobile.message', ['status' => 1, 'info' => '缺卡登记信息提交成功', 'url' => back()->getTargetUrl()]);
+                return view('layouts.crm.message', ['status' => 1, 'info' => '缺卡登记信息提交成功', 'url' => back()->getTargetUrl()]);
             }
         }else{
-            return view('mobile.crm.shop.lackcard.checkin', ['leftcardnum' => $leftcardnum]);
+            return view('crm.shop.lackcard.checkin', ['leftcardnum' => $leftcardnum]);
         }
     }
 
