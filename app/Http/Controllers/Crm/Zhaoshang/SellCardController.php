@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Mobile\Crm\Zhaoshang;
+namespace App\Http\Controllers\Crm\Zhaoshang;
 
 use App\Http\Controllers\Controller;
 
@@ -25,7 +25,7 @@ class SellCardController extends CommonController
             if ($request->ajax()){
                 return response()->json(['status' => 0, 'info' => '您无权卖卡']);
             }else{
-                return view('layouts.mobile.message', ['status' => 0, 'info' => '您无权卖卡']);
+                return view('layouts.crm.message', ['status' => 0, 'info' => '您无权卖卡']);
             }
         }
         if($request->getcode){
@@ -34,14 +34,14 @@ class SellCardController extends CommonController
             $qrcode = Image::make($image);
             return $qrcode->response('png', 90);
         }else{
-            return view('mobile.crm.zhaoshang.sellcard.index');
+            return view('crm.zhaoshang.sellcard.index');
         }
     }
 
     public function order(Request $request)
     {
         $orders = CommonSellcardModel::where('fromuid', auth('crm')->user()->uid)->orderBy('created_at', 'desc')->paginate(20);
-        return view('mobile.crm.zhaoshang.sellcard.order', ['orders' => $orders]);
+        return view('crm.zhaoshang.sellcard.order', ['orders' => $orders]);
     }
 
 }
