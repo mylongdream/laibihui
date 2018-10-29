@@ -24,48 +24,47 @@
                             <div class="weui-panel__bd">
                                 <div class="weui-media-box weui-media-box_small-appmsg">
                                     <div class="weui-cells">
-                                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                                        <a class="weui-cell weui-cell_access" href="{{ route('mobile.crm.zhaoshang.customer.create') }}">
                                             <div class="weui-cell__hd">
                                                 <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
                                             </div>
                                             <div class="weui-cell__bd weui-cell_primary">
-                                                <p class="user-menu-txt">授权卖卡</p>
+                                                <p class="user-menu-txt">新增商户</p>
                                             </div>
                                             <span class="weui-cell__ft"></span>
                                         </a>
-                                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                                        <a class="weui-cell weui-cell_access" href="{{ route('mobile.crm.zhaoshang.customer.index') }}">
                                             <div class="weui-cell__hd">
                                                 <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
                                             </div>
                                             <div class="weui-cell__bd weui-cell_primary">
-                                                <p class="user-menu-txt">卖卡会员</p>
+                                                <p class="user-menu-txt">商户管理</p>
                                             </div>
                                             <span class="weui-cell__ft"></span>
                                         </a>
-                                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                                        <a class="weui-cell weui-cell_access" href="{{ route('mobile.crm.zhaoshang.sellcard.index') }}">
                                             <div class="weui-cell__hd">
                                                 <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
                                             </div>
                                             <div class="weui-cell__bd weui-cell_primary">
-                                                <p class="user-menu-txt">新增客户</p>
+                                                <p class="user-menu-txt">面对面办卡</p>
                                             </div>
                                             <span class="weui-cell__ft"></span>
                                         </a>
-                                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weui-panel">
+                            <div class="weui-panel__bd">
+                                <div class="weui-media-box weui-media-box_small-appmsg">
+                                    <div class="weui-cells">
+                                        <a class="weui-cell weui-cell_access" href="{{ route('mobile.crm.zhaoshang.lackcard.index') }}">
                                             <div class="weui-cell__hd">
                                                 <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
                                             </div>
                                             <div class="weui-cell__bd weui-cell_primary">
-                                                <p class="user-menu-txt">客户管理</p>
-                                            </div>
-                                            <span class="weui-cell__ft"></span>
-                                        </a>
-                                        <a class="weui-cell weui-cell_access" href="javascript:;">
-                                            <div class="weui-cell__hd">
-                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
-                                            </div>
-                                            <div class="weui-cell__bd weui-cell_primary">
-                                                <p class="user-menu-txt">成功客户</p>
+                                                <p class="user-menu-txt">缺卡受理</p>
                                             </div>
                                             <span class="weui-cell__ft"></span>
                                         </a>
@@ -83,16 +82,7 @@
                                                 <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
                                             </div>
                                             <div class="weui-cell__bd weui-cell_primary">
-                                                <p class="user-menu-txt">售后服务</p>
-                                            </div>
-                                            <span class="weui-cell__ft"></span>
-                                        </a>
-                                        <a class="weui-cell weui-cell_access" href="javascript:;">
-                                            <div class="weui-cell__hd">
-                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
-                                            </div>
-                                            <div class="weui-cell__bd weui-cell_primary">
-                                                <p class="user-menu-txt">费用管理</p>
+                                                <p class="user-menu-txt">商户随访</p>
                                             </div>
                                             <span class="weui-cell__ft"></span>
                                         </a>
@@ -104,6 +94,24 @@
                             <div class="weui-panel__bd">
                                 <div class="weui-media-box weui-media-box_small-appmsg">
                                     <div class="weui-cells">
+                                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                                            <div class="weui-cell__hd">
+                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
+                                            </div>
+                                            <div class="weui-cell__bd weui-cell_primary">
+                                                <p class="user-menu-txt">业绩提成</p>
+                                            </div>
+                                            <span class="weui-cell__ft"></span>
+                                        </a>
+                                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                                            <div class="weui-cell__hd">
+                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
+                                            </div>
+                                            <div class="weui-cell__bd weui-cell_primary">
+                                                <p class="user-menu-txt">通讯薄</p>
+                                            </div>
+                                            <span class="weui-cell__ft"></span>
+                                        </a>
                                         <a class="weui-cell weui-cell_access" href="{{ route('mobile.crm.logout') }}">
                                             <div class="weui-cell__hd">
                                                 <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
