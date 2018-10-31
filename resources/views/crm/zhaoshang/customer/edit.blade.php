@@ -36,7 +36,7 @@
                             <td>
                                 <input class="input" type="text" size="15" value="{{ $customer->maplng }}" name="maplng" id="maplng" style="width: 120px"> X <input class="input" type="text" size="15" value="{{ $customer->maplat }}" name="maplat" id="maplat" style="width: 120px">
                                 <a href="javascript:;" class="clickbtn mlm" id="mapmark">点击标注</a>
-                                <a href="{{ route('crm.zhaoshang.shop.nearby') }}" class="clickbtn mlm" id="nearby" title="附近店铺">附近店铺</a>
+                                <a href="{{ route('crm.zhaoshang.customer.nearby') }}" class="clickbtn mlm" id="nearby" title="附近店铺">附近店铺</a>
                             </td>
                         </tr>
                         <tr>

@@ -77,6 +77,7 @@ $(function() {
             $.ajax({
                 type:'GET',
                 url:self.data("url"),
+                data:self.closest("form").serialize(),
                 async:false
             }).success(function(data) {
                 loading.hide();

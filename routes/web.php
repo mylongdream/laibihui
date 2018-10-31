@@ -308,12 +308,12 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
             });
             Route::group(['prefix' => 'zhaoshang', 'as' => 'zhaoshang.'], function () {
                 Route::get('/', ['as' => 'index', 'uses' => 'Mobile\CRM\Zhaoshang\IndexController@index']);
+                Route::get('customer/nearby', ['as' => 'customer.nearby', 'uses' => 'Mobile\CRM\Zhaoshang\CustomerController@nearby']);
                 Route::get('customer/referlist', ['as' => 'customer.referlist', 'uses' => 'Mobile\CRM\Zhaoshang\CustomerController@referlist']);
                 Route::any('customer/{id}/refer', ['as' => 'customer.refer', 'uses' => 'Mobile\CRM\Zhaoshang\CustomerController@refer']);
                 Route::resource('customer', 'Mobile\CRM\Zhaoshang\CustomerController');
                 Route::get('sellcard', ['as' => 'sellcard.index', 'uses' => 'Mobile\CRM\Zhaoshang\SellcardController@index']);
                 Route::get('sellcard/users', ['as' => 'sellcard.users', 'uses' => 'Mobile\CRM\Zhaoshang\SellcardController@users']);
-                Route::get('shop/nearby', ['as' => 'shop.nearby', 'uses' => 'Mobile\CRM\Zhaoshang\ShopController@nearby']);
                 Route::get('sellcard', ['as' => 'sellcard.index', 'uses' => 'Mobile\CRM\Zhaoshang\SellCardController@index']);
                 Route::get('sellcard/order', ['as' => 'sellcard.order', 'uses' => 'Mobile\CRM\Zhaoshang\SellCardController@order']);
                 Route::get('lackcard', ['as' => 'lackcard.index', 'uses' => 'Mobile\CRM\Zhaoshang\LackCardController@index']);
@@ -660,6 +660,7 @@ Route::group(['domain' => 'crm.hztbg.com', 'prefix' => '', 'as' => 'crm.'], func
         });
         Route::group(['prefix' => 'zhaoshang', 'as' => 'zhaoshang.'], function () {
             Route::get('/', ['as' => 'index', 'uses' => 'CRM\Zhaoshang\IndexController@index']);
+            Route::get('customer/nearby', ['as' => 'customer.nearby', 'uses' => 'CRM\Zhaoshang\CustomerController@nearby']);
             Route::get('customer/referlist', ['as' => 'customer.referlist', 'uses' => 'CRM\Zhaoshang\CustomerController@referlist']);
             Route::any('customer/{id}/refer', ['as' => 'customer.refer', 'uses' => 'CRM\Zhaoshang\CustomerController@refer']);
             Route::resource('customer', 'CRM\Zhaoshang\CustomerController');
@@ -672,7 +673,6 @@ Route::group(['domain' => 'crm.hztbg.com', 'prefix' => '', 'as' => 'crm.'], func
             Route::any('shop/{id}/addcard', ['as' => 'shop.addcard', 'uses' => 'CRM\Zhaoshang\ShopController@addcard']);
             Route::get('archive', ['as' => 'archive.index', 'uses' => 'CRM\Zhaoshang\ArchiveController@index']);
             Route::get('archive/{id}', ['as' => 'archive.show', 'uses' => 'CRM\Zhaoshang\ArchiveController@show']);
-            Route::get('shop/nearby', ['as' => 'shop.nearby', 'uses' => 'CRM\Zhaoshang\ShopController@nearby']);
             Route::get('sellcard', ['as' => 'sellcard.index', 'uses' => 'CRM\Zhaoshang\SellCardController@index']);
             Route::get('sellcard/order', ['as' => 'sellcard.order', 'uses' => 'CRM\Zhaoshang\SellCardController@order']);
             Route::get('lackcard', ['as' => 'lackcard.index', 'uses' => 'CRM\Zhaoshang\LackCardController@index']);

@@ -65,6 +65,7 @@ var mMap=function(){
             AddressId: "",
             maplngId: "",
             maplatId: "",
+            mobile: 0,
             width: 800,
             height : 500
         };
@@ -73,7 +74,11 @@ var mMap=function(){
 
         var init = function(){
             var content = '<div class="amap_box"><div id="container"></div><div class="amap_search"><input type="text" placeholder="请输入关键字进行搜索" id="tipinput"></div></div>';
-            $.jBox(content,{title:settings.title,width: settings.width,height: settings.height,buttons: ''});
+            if(settings.mobile){
+                $('<div>').attr('id', 'popup_amap_box').addClass('popup-container').data('remove', 'true').html(content).appendTo('body').fadeIn();
+            }else{
+                $.jBox(content,{title:settings.title,width: settings.width,height: settings.height,buttons: ''});
+            }
             var map = new AMap.Map("container", {
                 resizeEnable: true
             });
@@ -83,7 +88,11 @@ var mMap=function(){
             var clickEventListener = map.on('click', function(e) {
                 $(settings.maplngId).val(e.lnglat.getLng());
                 $(settings.maplatId).val(e.lnglat.getLat());
-                $.jBox.close()
+                if(settings.mobile){
+                    $('#popup_amap_box').remove();
+                }else{
+                    $.jBox.close();
+                }
             });
             var auto = new AMap.Autocomplete({
                 input: "tipinput"

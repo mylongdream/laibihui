@@ -85,9 +85,9 @@ class CustomerController extends CommonController
         $customer->save();
 
         if ($request->ajax()){
-            return response()->json(['status' => '1', 'info' => '新增客户成功', 'url' => route('crm.zhaoshang.customer.index')]);
+            return response()->json(['status' => '1', 'info' => '新增客户成功', 'url' => route('mobile.crm.zhaoshang.customer.index')]);
         }else{
-            return view('layouts.mobile.message', ['status' => '1', 'info' => '新增客户成功', 'url' => route('crm.zhaoshang.customer.index')]);
+            return view('layouts.mobile.message', ['status' => '1', 'info' => '新增客户成功', 'url' => route('mobile.crm.zhaoshang.customer.index')]);
         }
     }
 
@@ -147,9 +147,9 @@ class CustomerController extends CommonController
         $customer->save();
 
         if ($request->ajax()){
-            return response()->json(['status' => 1, 'info' => '修改客户成功', 'url' => route('crm.zhaoshang.customer.index')]);
+            return response()->json(['status' => 1, 'info' => '修改客户成功', 'url' => route('mobile.crm.zhaoshang.customer.index')]);
         }else{
-            return view('layouts.mobile.message', ['status' => 1, 'info' => '修改客户成功', 'url' => route('crm.zhaoshang.customer.index')]);
+            return view('layouts.mobile.message', ['status' => 1, 'info' => '修改客户成功', 'url' => route('mobile.crm.zhaoshang.customer.index')]);
         }
     }
 
@@ -162,6 +162,41 @@ class CustomerController extends CommonController
         }else{
             return view('layouts.mobile.message', ['status' => 1, 'info' => '删除客户成功', 'url' => back()->getTargetUrl()]);
         }
+    }
+
+    public function nearby(Request $request)
+    {
+        $rules = array(
+            'catid' => 'required|numeric|min:1',
+            'maplng' => 'required|numeric|min:0|max:180',
+            'maplat' => 'required|numeric|min:-90|max:90',
+        );
+        $messages = array(
+            'catid.required' => '商家分类不能为空！',
+            'catid.numeric' => '商家分类格式错误！',
+            'catid.min' => '商家分类格式错误！',
+            'maplng.required' => '地图坐标经度不能为空！',
+            'maplng.numeric' => '地图坐标经度格式错误！',
+            'maplng.min' => '地图坐标经度格式错误！',
+            'maplng.max' => '地图坐标经度格式错误！',
+            'maplat.required' => '地图坐标纬度不能为空！',
+            'maplat.numeric' => '地图坐标纬度格式错误！',
+            'maplat.min' => '地图坐标纬度格式错误！',
+            'maplat.max' => '地图坐标纬度格式错误！',
+        );
+        $this->validate($request, $rules, $messages);
+        $maplat = $request->maplat;
+        $maplng = $request->maplng;
+        $shops = BrandShopModel::select('*')->selectRaw('ROUND(2 * 6378.137* ASIN(SQRT(POW(SIN(PI()*('.$maplat.'-maplat)/360),2)+COS(PI()*'.$maplat.'/180)* COS(maplat * PI()/180)*POW(SIN(PI()*('.$maplng.'-maplng)/360),2)))*1000) AS distance')->where('maplat', '>', 0)->where('maplng', '>', 0)->where(function($query) use($request) {
+            if($request->catid){
+                $query->where('catid', $request->catid);
+            }
+        })->where(function($query) use($request) {
+            if($request->id){
+                $query->where('id', '<>', $request->id);
+            }
+        })->orderBy('distance', 'asc')->latest()->get()->take(5);
+        return view('mobile.crm.zhaoshang.customer.nearby', ['shops' => $shops]);
     }
 
     public function refer(Request $request, $id)

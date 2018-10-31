@@ -126,6 +126,7 @@ $(function() {
         $.ajax({
             type: "GET",
             url: self.attr("href"),
+            data:self.closest("form").serialize(),
             async:false
         }).success(function(data) {
             if(data.status == 0){
