@@ -49,7 +49,7 @@
 								</div>
 							</div>
 							<div class="weui-cell__ft">
-								<button class="weui-vcode-btn" id="mapmark">获取坐标</button>
+								<button class="weui-vcode-btn"  type="button" id="mapmark">获取坐标</button>
 							</div>
 						</div>
 						<a href="javascript:void(0);" class="weui-cell weui-cell_link open-popup" data-url="{{ route('mobile.crm.zhaoshang.customer.nearby') }}">

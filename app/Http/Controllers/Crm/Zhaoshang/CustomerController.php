@@ -196,7 +196,11 @@ class CustomerController extends CommonController
                 $query->where('id', '<>', $request->id);
             }
         })->orderBy('distance', 'asc')->latest()->get()->take(5);
-        return view('crm.zhaoshang.customer.nearby', ['shops' => $shops]);
+        if (!$shops && $request->ajax()){
+            return response()->json(['status' => 0, 'info' => '附近暂无商户', 'url' => back()->getTargetUrl()]);
+        }else{
+            return view('crm.zhaoshang.customer.nearby', ['shops' => $shops]);
+        }
     }
 
     public function refer(Request $request, $id)
