@@ -41,9 +41,6 @@
 							</div>
 						</div>
 						<div class="weui-cell weui-cell_vcode">
-							<div class="weui-cell__hd">
-								<label class="weui-label">地址坐标</label>
-							</div>
 							<div class="weui-cell__bd">
 								<div class="weui-flex">
 									<div class="weui-flex__item"><input class="weui-input" type="tel" placeholder="" name="maplng" id="maplng"></div>

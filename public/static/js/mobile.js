@@ -87,7 +87,7 @@ $(function() {
                     $('<div>').attr('id',self.data("target").replace("#","")).addClass('popup-container').data('remove', 'true').html(data).appendTo('body').fadeIn();
                 }
                 $(self.data("target")).find(".back a").addClass("close-popup");
-            }).error(function() {
+            }).error(function(data) {
                 loading.hide();
                 if (!data) {
                     return true;
