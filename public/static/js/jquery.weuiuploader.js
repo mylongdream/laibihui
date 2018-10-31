@@ -15,7 +15,7 @@
             hiddenInputId: ""
         };
         var settings = $.extend(defaults, options);
-        var uploadCount = box_obj.find('.weui-uploader__count').text() || 0;
+        var uploadCount = parseInt(box_obj.find('.weui-uploader__count').text(), 10) || 0;
         weui.uploader(box_obj, {
             url: settings.url,
             auto: settings.auto,
@@ -23,7 +23,7 @@
             fileVal: 'file',
             onBeforeQueued: function(files) {
                 // `this` 是轮询到的文件, `files` 是所有文件
-                settings.limitnum = box_obj.find('.weui-uploader__limitnum').text() || 0;
+                settings.limitnum = parseInt(box_obj.find('.weui-uploader__limitnum').text(), 10) || 1;
                 if(["image/jpg", "image/jpeg", "image/png", "image/gif"].indexOf(this.type) < 0){
                     weui.alert('请上传图片');
                     return false; // 阻止文件添加
@@ -65,7 +65,7 @@
             },
             onProgress: function(procent){
                 var uploadID = this.id;
-                $("#uploaderFiles li").each(function(){
+                box_obj.find(".weui-uploader__files li").each(function(){
                     if ($(this).attr("data-id") == uploadID) {
                         $(this).find('.weui-uploader__file-content').html(procent + '%');
                     }
@@ -75,7 +75,7 @@
             },
             onSuccess: function (ret) {
                 var uploadID = this.id;
-                $("#uploaderFiles li").each(function(){
+                box_obj.find(".weui-uploader__files li").each(function(){
                     if ($(this).attr("data-id") == uploadID) {
                         $(this).css("background-image","url(" + ret.url + ")");
                         $(this).append('<input name="' + settings.hiddenInputId + '" value="' + ret.value + '" type="hidden">');
@@ -98,7 +98,7 @@
                 onDelete: function(){
                     weui.confirm('确定删除该图片？', function(){
                         self.remove();
-                        uploadCount = self.parents('.weui-uploader').find('.weui-uploader__count').text();
+                        uploadCount = parseInt(self.parents('.weui-uploader').find('.weui-uploader__count').text(), 10) || 0;
                         self.parents('.weui-uploader').find('.weui-uploader__count').html(--uploadCount);
                         gallery.hide();
                     }, function(){
