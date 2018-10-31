@@ -15,7 +15,6 @@
             hiddenInputId: ""
         };
         var settings = $.extend(defaults, options);
-        var uploadCount = parseInt(box_obj.find('.weui-uploader__count').text(), 10) || 0;
         weui.uploader(box_obj, {
             url: settings.url,
             auto: settings.auto,
@@ -23,6 +22,7 @@
             fileVal: 'file',
             onBeforeQueued: function(files) {
                 // `this` 是轮询到的文件, `files` 是所有文件
+                var uploadCount = parseInt(box_obj.find('.weui-uploader__count').text(), 10) || 0;
                 settings.limitnum = parseInt(box_obj.find('.weui-uploader__limitnum').text(), 10) || 1;
                 if(["image/jpg", "image/jpeg", "image/png", "image/gif"].indexOf(this.type) < 0){
                     weui.alert('请上传图片');
@@ -98,7 +98,7 @@
                 onDelete: function(){
                     weui.confirm('确定删除该图片？', function(){
                         self.remove();
-                        uploadCount = parseInt(self.parents('.weui-uploader').find('.weui-uploader__count').text(), 10) || 0;
+                        var uploadCount = parseInt(self.parents('.weui-uploader').find('.weui-uploader__count').text(), 10) || 0;
                         self.parents('.weui-uploader').find('.weui-uploader__count').html(--uploadCount);
                         gallery.hide();
                     }, function(){
