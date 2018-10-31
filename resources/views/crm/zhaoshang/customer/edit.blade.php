@@ -29,14 +29,14 @@
                         </tr>
                         <tr>
                             <td align="right">商户地址</td>
-                            <td><input class="input" type="text" size="50" value="{{ $customer->address }}" name="address" placeholder=""></td>
+                            <td><input class="input" type="text" size="50" value="{{ $customer->address }}" name="address" placeholder="" id="address"></td>
                         </tr>
                         <tr>
                             <td align="right">地址坐标</td>
                             <td>
                                 <input class="input" type="text" size="15" value="{{ $customer->maplng }}" name="maplng" id="maplng" style="width: 120px"> X <input class="input" type="text" size="15" value="{{ $customer->maplat }}" name="maplat" id="maplat" style="width: 120px">
                                 <a href="javascript:;" class="clickbtn mlm" id="mapmark">点击标注</a>
-                                <a href="{{ route('crm.zhaoshang.customer.nearby') }}" class="clickbtn mlm" id="nearby" title="附近店铺">附近店铺</a>
+                                <a href="{{ route('crm.zhaoshang.customer.nearby') }}" class="clickbtn mlm openwindow" title="附近店铺">附近店铺</a>
                             </td>
                         </tr>
                         <tr>
@@ -220,36 +220,7 @@
             $("#mapmark").amap({
                 AddressId: '#address',
                 maplngId: '#maplng',
-                maplatId: '#maplat',
-                width: 800,
-                height: 500
-            });
-            $(document).on("click", "#nearby", function(){
-                var self = $(this);
-                $.ajax({
-                    type: "GET",
-                    url: self.attr("href"),
-                    data: {catid: $(" select[name='catid']").val(), maplat: $(" input[name='maplat']").val(), maplng: $(" input[name='maplng']").val()},
-                    async:false
-                }).success(function(data) {
-                    if(data.status == 0){
-                        $.jBox.error(data.info, '提示');
-                    }else{
-                        $.jBox(data,{title:self.attr("title"),width: 800,buttons: ''});
-                    }
-                }).error(function(data) {
-                    if (!data) {
-                        return true;
-                    } else {
-                        message = $.parseJSON(data.responseText);
-                        $.each(message.errors, function (key, value) {
-                            $.jBox.tip(value, 'error');
-                            return false;
-                        });
-                        return false;
-                    }
-                });
-                return false;
+                maplatId: '#maplat'
             });
             $("#pic_hetong").powerWebUpload({
                 server: "{{ route('crm.upload.image') }}",

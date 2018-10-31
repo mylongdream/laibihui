@@ -104,7 +104,7 @@
 					<td align="right">{{ trans('admin.brand.shop.mappoint') }}</td>
 					<td><input class="txt" type="text" size="15" value="{{ $shop->maplng }}" name="maplng" id="maplng"> X <input class="txt" type="text" size="15" value="{{ $shop->maplat }}" name="maplat" id="maplat">
 						<a href="javascript:;" class="clickbtn mlm" id="mapmark">点击标注</a>
-						<a href="{{ route('admin.brand.shop.nearby', ['id' => $shop->id]) }}" class="clickbtn mlm" id="nearby" title="附近店铺">附近店铺</a>
+						<a href="{{ route('admin.brand.shop.nearby', ['id' => $shop->id]) }}" class="clickbtn mlm openwindow" title="附近店铺">附近店铺</a>
 					</td>
 				</tr>
 				<tr>
@@ -248,36 +248,7 @@
             $("#mapmark").amap({
                 AddressId: '#address',
                 maplngId: '#maplng',
-                maplatId: '#maplat',
-                width: 800,
-                height: 500
-            });
-            $(document).on("click", "#nearby", function(){
-                var self = $(this);
-                $.ajax({
-                    type: "GET",
-                    url: self.attr("href"),
-                    data: {catid: $(" select[name='catid']").val(), maplat: $(" input[name='maplat']").val(), maplng: $(" input[name='maplng']").val()},
-                    async:false
-                }).success(function(data) {
-                    if(data.status == 0){
-                        $.jBox.error(data.info, '提示');
-                    }else{
-                        $.jBox(data,{title:self.attr("title"),width: 800,buttons: ''});
-                    }
-                }).error(function(data) {
-                    if (!data) {
-                        return true;
-                    } else {
-                        message = $.parseJSON(data.responseText);
-                        $.each(message.errors, function (key, value) {
-                            $.jBox.tip(value, 'error');
-                            return false;
-                        });
-                        return false;
-                    }
-                });
-                return false;
+                maplatId: '#maplat'
             });
             laydate({
                 elem: '#starttime',

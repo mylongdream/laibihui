@@ -81,12 +81,18 @@ $(function() {
                 async:false
             }).success(function(data) {
                 loading.hide();
-                if($(self.data("target")).length > 0){
-                    $(self.data("target")).html(data).data('remove', 'true').fadeIn();
+                if(data.status == 0) {
+                    weui.alert(data.info, {
+                        isAndroid: false
+                    });
                 }else{
-                    $('<div>').attr('id',self.data("target").replace("#","")).addClass('popup-container').data('remove', 'true').html(data).appendTo('body').fadeIn();
+                    if ($(self.data("target")).length > 0) {
+                        $(self.data("target")).html(data).data('remove', 'true').fadeIn();
+                    } else {
+                        $('<div>').attr('id', self.data("target").replace("#", "")).addClass('popup-container').data('remove', 'true').html(data).appendTo('body').fadeIn();
+                    }
+                    $(self.data("target")).find(".back a").addClass("close-popup");
                 }
-                $(self.data("target")).find(".back a").addClass("close-popup");
             }).error(function(data) {
                 loading.hide();
                 if (!data) {

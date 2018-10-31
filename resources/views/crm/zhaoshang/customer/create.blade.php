@@ -28,7 +28,7 @@
                         </tr>
                         <tr>
                             <td align="right">商户地址</td>
-                            <td><input class="input" type="text" size="50" value="" name="address" placeholder=""></td>
+                            <td><input class="input" type="text" size="50" value="" name="address" placeholder="" id="address"></td>
                         </tr>
                         <tr>
                             <td align="right">地址坐标</td>
@@ -147,9 +147,7 @@
             $("#mapmark").amap({
                 AddressId: '#address',
                 maplngId: '#maplng',
-                maplatId: '#maplat',
-                width: 800,
-                height: 500
+                maplatId: '#maplat'
             });
             $("#pic_hetong").powerWebUpload({
                 server: "{{ route('crm.upload.image') }}",
