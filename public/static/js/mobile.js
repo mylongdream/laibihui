@@ -84,7 +84,7 @@ $(function() {
                 if($(self.data("target")).length > 0){
                     $(self.data("target")).html(data).data('remove', 'true').fadeIn();
                 }else{
-                    $('<div>').attr('id',self.data("target").replace("#","")).addClass('popup-container').data('remove', 'true').html(data).appendTo('body').fadeIn();
+                    $('<div>').addClass('popup-container').data('remove', 'true').html(data).appendTo('body').fadeIn();
                 }
                 $(self.data("target")).find(".back a").addClass("close-popup");
             }).error(function(data) {
