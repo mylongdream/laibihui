@@ -52,7 +52,7 @@
 								<button class="weui-vcode-btn"  type="button" id="mapmark">获取坐标</button>
 							</div>
 						</div>
-						<a href="javascript:void(0);" class="weui-cell weui-cell_link open-popup" data-url="{{ route('mobile.crm.zhaoshang.customer.nearby') }}">
+						<a href="javascript:void(0);" class="weui-cell weui-cell_link open-popup" data-url="{{ route('mobile.crm.zhaoshang.customer.nearby') }}" data-target="#nearbybox">
 							<div class="weui-cell__bd">查询附近店铺</div>
 						</a>
 						<div class="weui-cell">
