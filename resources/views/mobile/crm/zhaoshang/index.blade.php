@@ -75,7 +75,7 @@
                                     </div>
                                     <span class="weui-cell__ft"></span>
                                 </a>
-                                <a class="weui-cell weui-cell_access" href="javascript:;">
+                                <a class="weui-cell weui-cell_access" href="{{ route('mobile.crm.zhaoshang.visit.index') }}">
                                     <div class="weui-cell__hd">
                                         <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
                                     </div>

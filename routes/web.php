@@ -312,6 +312,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
                 Route::get('customer/referlist', ['as' => 'customer.referlist', 'uses' => 'Mobile\CRM\Zhaoshang\CustomerController@referlist']);
                 Route::any('customer/{id}/refer', ['as' => 'customer.refer', 'uses' => 'Mobile\CRM\Zhaoshang\CustomerController@refer']);
                 Route::resource('customer', 'Mobile\CRM\Zhaoshang\CustomerController');
+                Route::resource('visit', 'Mobile\CRM\Zhaoshang\VisitController');
                 Route::get('sellcard', ['as' => 'sellcard.index', 'uses' => 'Mobile\CRM\Zhaoshang\SellcardController@index']);
                 Route::get('sellcard/users', ['as' => 'sellcard.users', 'uses' => 'Mobile\CRM\Zhaoshang\SellcardController@users']);
                 Route::get('sellcard', ['as' => 'sellcard.index', 'uses' => 'Mobile\CRM\Zhaoshang\SellCardController@index']);

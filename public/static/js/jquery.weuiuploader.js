@@ -90,16 +90,16 @@
                 // return true; // 阻止默认行为，不使用默认的失败态
             }
         });
-        $(document).on("click", ".weui-uploader__files li", function(){
+        box_obj.on("click", ".weui-uploader__files li", function(){
             var self = $(this);
             var url = $(this).css("backgroundImage").replace('url(','').replace(')','').replace(/\"/g, "");
+            var uploadCount = parseInt(self.parents('.weui-uploader').find('.weui-uploader__count').text(), 10) || 0;
             var gallery = weui.gallery(url, {
                 className: 'custom-classname',
                 onDelete: function(){
                     weui.confirm('确定删除该图片？', function(){
+                        self.parents('.weui-uploader').find('.weui-uploader__count').text(--uploadCount);
                         self.remove();
-                        var uploadCount = parseInt(self.parents('.weui-uploader').find('.weui-uploader__count').text(), 10) || 0;
-                        self.parents('.weui-uploader').find('.weui-uploader__count').html(--uploadCount);
                         gallery.hide();
                     }, function(){
                         gallery.hide();
