@@ -22,7 +22,7 @@ class CustomerController extends CommonController
     public function index(Request $request)
     {
         $CrmCustomerModel = new CrmCustomerModel;
-        $customers = $CrmCustomerModel->where('uid', auth('crm')->user()->uid)->whereNull('refer_at')->where(function($query) use($request) {
+        $list = $CrmCustomerModel->where('uid', auth('crm')->user()->uid)->whereNull('refer_at')->where(function($query) use($request) {
             if($request->name){
                 $query->where('name', 'like',"%".$request->name."%");
             }
@@ -31,7 +31,7 @@ class CustomerController extends CommonController
                 $query->where('address', 'like',"%".$request->address."%");
             }
         })->latest()->paginate(20);
-        return view('mobile.crm.zhaoshang.customer.index', ['customers' => $customers]);
+        return view('mobile.crm.zhaoshang.customer.index', ['list' => $list]);
     }
 
     public function create(Request $request)
