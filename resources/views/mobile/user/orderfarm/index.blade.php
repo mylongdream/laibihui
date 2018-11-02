@@ -8,6 +8,34 @@
 					<div class="back"><a href="javascript:history.go(-1);"><span></span></a></div>
 					<div class="nav">{{ trans('user.orderfarm') }}</div>
 				</div>
+				<div class="weui-tab" id="tab">
+					<div class="weui-navbar tab_box">
+						<div class="weui-navbar__item weui-bar__item_on">
+							<a href="{{ route('mobile.user.orderfarm.index', ['status' => request('status')]) }}" class="">
+								<div class="title">全部订单</div>
+							</a>
+						</div>
+						<div class="weui-navbar__item">
+							<a href="{{ route('mobile.user.orderfarm.index', ['status' => request('status')]) }}" class="">
+								<div class="title">待付款</div>
+							</a>
+						</div>
+						<div class="weui-navbar__item">
+							<a href="{{ route('mobile.user.orderfarm.index', ['status' => request('status')]) }}" class="">
+								<div class="title">进行中</div>
+							</a>
+						</div>
+						<div class="weui-navbar__item">
+							<a href="{{ route('mobile.user.orderfarm.index', ['status' => request('status')]) }}" class="">
+								<div class="title">已完成</div>
+							</a>
+						</div>
+						<div class="weui-navbar__item">
+							<a href="{{ route('mobile.user.orderfarm.index', ['status' => request('status')]) }}" class="">
+								<div class="title">待评价</div>
+							</a>
+						</div>
+					</div>
 				@foreach ($orders as $value)
 					<div class="weui-panel panel-item">
 						<div class="weui-panel__hd">
@@ -37,6 +65,7 @@
 					</div>
 				@endforeach
 				{!! $orders->links() !!}
+				</div>
 			</div>
 		</div>
 	</div>

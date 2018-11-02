@@ -15,24 +15,24 @@
 						</div>
 						<div class="weui-panel__bd">
 							@foreach ($value->records as $val)
-							<a href="javascript:;" class="weui-media-box weui-media-box_appmsg">
-								<div class="weui-media-box__hd">
-                                    <img class="weui-media-box__thumb" src="{{ uploadImage($val->upimage) }}" alt="">
-								</div>
-                                <div class="weui-media-box__bd">
-                                    <h4 class="weui-media-box__title">{{ $val->name or '/' }}</h4>
-                                    <p class="weui-media-box__desc">价格：{{ $val->price }}</p>
-                                    <p class="weui-media-box__desc">数量：{{ $val->number }}</p>
-                                </div>
-							</a>
+								<a href="javascript:;" class="weui-media-box weui-media-box_appmsg">
+									<div class="weui-media-box__hd">
+										<img class="weui-media-box__thumb" src="{{ uploadImage($val->upimage) }}" alt="">
+									</div>
+									<div class="weui-media-box__bd">
+										<h4 class="weui-media-box__title">{{ $val->name or '/' }}</h4>
+										<p class="weui-media-box__desc">价格：{{ $val->price }}</p>
+										<p class="weui-media-box__desc">数量：{{ $val->number }}</p>
+									</div>
+								</a>
 							@endforeach
 						</div>
-                        <div class="weui-panel__ft">
-                            <div class="z status">状态：{{ trans('user.ordermeal.status_'.$value->order_status.$value->pay_status) }}</div>
-                            <div class="y">
-                                    <a href="{{ route('mobile.crm.shop.ordermeal.show', $value->order_sn) }}" title="订单详情" class="mlm">订单详情</a>
-                            </div>
-                        </div>
+						<div class="weui-panel__ft">
+							<div class="z status">状态：{{ trans('user.ordermeal.status_'.$value->order_status.$value->pay_status) }}</div>
+							<div class="y">
+								<a href="{{ route('mobile.crm.shop.ordermeal.show', $value->order_sn) }}" title="订单详情" class="mlm">订单详情</a>
+							</div>
+						</div>
 					</div>
 				@endforeach
 				{!! $orders->links() !!}

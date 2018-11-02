@@ -322,11 +322,11 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
             });
             Route::group(['prefix' => 'tuiguang', 'as' => 'tuiguang.'], function () {
                 Route::get('/', ['as' => 'index', 'uses' => 'Mobile\CRM\Tuiguang\IndexController@index']);
-                Route::get('sellcard', ['as' => 'sellcard.index', 'uses' => 'Mobile\CRM\Tuiguang\SellcardController@index']);
-                Route::get('sellcard/users', ['as' => 'sellcard.users', 'uses' => 'Mobile\CRM\Tuiguang\SellcardController@users']);
-                Route::get('shop/nearby', ['as' => 'shop.nearby', 'uses' => 'Mobile\CRM\Tuiguang\ShopController@nearby']);
                 Route::get('sellcard', ['as' => 'sellcard.index', 'uses' => 'Mobile\CRM\Tuiguang\SellCardController@index']);
                 Route::get('sellcard/order', ['as' => 'sellcard.order', 'uses' => 'Mobile\CRM\Tuiguang\SellCardController@order']);
+                Route::get('cardreward', ['as' => 'cardreward.index', 'uses' => 'Mobile\CRM\Tuiguang\CardRewardController@index']);
+                Route::any('cardreward/record', ['as' => 'cardreward.record', 'uses' => 'Mobile\CRM\Tuiguang\CardRewardController@record']);
+                Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'Mobile\CRM\Tuiguang\CardRewardController@exchange']);
             });
             Route::group(['prefix' => 'kefu', 'as' => 'kefu.'], function () {
                 Route::get('/', ['as' => 'index', 'uses' => 'Mobile\CRM\Kefu\IndexController@index']);
