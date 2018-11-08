@@ -31,7 +31,7 @@ class AssistController extends Controller
     }
 
     public function order(Request $request){
-        $list = BrandAssistOrderModel::where('uid', auth()->user->uid)->latest()->paginate(15);
+        $list = BrandAssistOrderModel::where('uid', auth()->user()->uid)->latest()->paginate(15);
         return view('mobile.brand.assist.order', ['list'=>$list]);
     }
 

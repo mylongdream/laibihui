@@ -4,17 +4,17 @@
     <style>
         .assist_container{}
         .assist_container .weui-tabbar{}
-        .assist_container .weui-tabbar__item{text-align: center }
-        .assist_container .weui-bar__item_on{color:#ffff00}
-        .assist_container .weui-tabbar__icon{display: inline-block}
-        .assist_container .weui-tabbar__label{display: inline-block}
+        .assist_container .weui-tabbar__item{text-align: center;padding: 14px 0;}
+        .assist_container .weui-bar__item_on .weui-tabbar__label{color:#ffaa29;}
+        .assist_container .weui-tabbar__icon{display: inline-block;margin-right:5px;margin-bottom:-4px;}
+        .assist_container .weui-tabbar__label{display: inline-block;font-size: 16px;line-height:20px;}
         .assist_top{position: relative}
         .assist_top .assist_rule_button{position: absolute;top:0;width:36px;height:32px;right:12px;line-height:32px;border-bottom-left-radius:18px;border-bottom-right-radius:18px;background-color:#e4c017;color:#a17400;font-size:12px;text-align:center;}
         .assist_list_box{position: relative}
         .assist_list_box ul{position: relative}
         .assist_list_box li{position: relative}
-        .assist_list_empty{margin:0 auto;padding:95px;}
-        .assist_list_empty .img{display:block;width:140px;margin:0 auto;}
+        .assist_list_empty{margin:0 auto;padding:95px 10px;text-align: center;}
+        .assist_list_empty .img{margin:0 auto;}
         .assist_list_empty .title{margin-top:18px;line-height:32px;color:#151516;font-size:18px;}
         .assist_list_empty .desc{line-height:24px;color:#9c9c9c;font-size:14px;}
     </style>
@@ -49,7 +49,7 @@
                     </div>
                     @else
                     <div class="assist_list_empty">
-                        <div class="img"><img src="{{ asset('static/image/mobile/assist_empty.png') }}" alt=""></div>
+                        <div class="img"><img src="{{ asset('static/image/mobile/assist_empty.png') }}" width="140" alt=""></div>
                         <div class="title">还没有商品哦～</div>
                         <div class="desc">等一会再来看看吧！！</div>
                     </div>
