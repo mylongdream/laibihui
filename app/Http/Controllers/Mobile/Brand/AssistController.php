@@ -3,18 +3,9 @@
 namespace App\Http\Controllers\Mobile\Brand;
 
 use App\Http\Controllers\Controller;
-use App\Models\BrandAppointModel;
-use App\Models\BrandCategoryModel;
-use App\Models\BrandCollectionModel;
-use App\Models\BrandCommentModel;
-use App\Models\BrandConsumeModel;
-use App\Models\BrandHistoryModel;
-use App\Models\BrandProductModel;
-use App\Models\BrandShopModel;
+use App\Models\BrandAssistModel;
+use App\Models\BrandAssistOrderModel;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Toplan\PhpSms\Facades\Sms;
-use Yansongda\Pay\Pay;
 
 
 class AssistController extends Controller
