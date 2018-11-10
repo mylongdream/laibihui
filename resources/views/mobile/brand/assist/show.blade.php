@@ -8,6 +8,9 @@
     <style>
         .assist_show_slide .swiper-slide a {width: 100%;padding: 50% 0;position: relative;overflow:hidden;display:block;}
         .assist_show_slide .swiper-slide img {width: 100%;height: 100%;display:block;position: absolute;top: 0;left: 0;}
+        .assist_show_intro {background: #fff;}
+        .assist_show_intro .hd {font-size: 16px;padding: 10px 0;margin:0 10px;border-bottom: 1px solid #eee;}
+        .assist_show_intro .bd {padding: 10px;}
     </style>
     <div class="weui-tab">
         <div class="weui-tab__panel">
@@ -43,7 +46,7 @@
             </div>
         </div>
         <div class="weui-tabbar">
-            @if (auth()->check())
+            @if (auth('mobile')->check())
                 <a href="{{ route('mobile.brand.assist.index') }}" class="weui-tabbar__item tabbar-btn">
                     <span>我要领</span>
                 </a>

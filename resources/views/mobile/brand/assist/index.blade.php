@@ -10,13 +10,15 @@
         .assist_top .assist_rule_button{position: absolute;top:0;width:36px;height:32px;right:12px;line-height:32px;border-bottom-left-radius:18px;border-bottom-right-radius:18px;background-color:#e4c017;color:#a17400;font-size:12px;text-align:center;}
         .assist_list_box{background: #fff}
         .assist_list_box ul{position: relative}
-        .assist_list_box li{overflow:hidden;padding:10px;border-bottom: 1px solid #eee;}
+        .assist_list_box li{display: block;overflow:hidden;padding:10px;border-bottom: 1px solid #eee;}
         .assist_list_box li .s-pic{float:left;}
+        .assist_list_box li .s-pic img{display: block;}
         .assist_list_box li .s-info{margin-left:130px;}
         .assist_list_box li .s-name{font-size:16px;height:64px;line-height:32px;}
-        .assist_list_box li .s-desc{font-size:14px;color:#999;overflow:hidden;}
-        .assist_list_box li .s-join{margin-top:5px;overflow:hidden;}
+        .assist_list_box li .s-desc{font-size:14px;color:#999;overflow:hidden;line-height:20px;}
+        .assist_list_box li .s-join{margin-top:4px;overflow:hidden;}
         .assist_list_box li .s-price{font-size:18px;height:32px;line-height:32px;color:#f00;}
+        .assist_list_box li .s-price em{font-size:14px;font-style: normal;}
         .assist_list_box li .s-btn a{display:block;padding:0 10px;font-size:16px;height:32px;line-height:32px;color:#fff;background: #f00;}
         .assist_list_empty{margin:0 auto;padding:95px 10px;text-align: center;}
         .assist_list_empty .img{margin:0 auto;}
@@ -39,7 +41,7 @@
                                     <div class="s-pic"><img src="{{ uploadImage($value->upimage) }}" width="120" height="120"></div>
                                     <div class="s-info">
                                         <div class="s-name">
-                                            <a href="{{ route('mobile.brand.assist.show', $value->id) }}" title="{{ $value->name }}">{{ $value->title }}</a>
+                                            <a href="{{ route('mobile.brand.assist.show', $value->id) }}" title="{{ $value->name }}">{{ $value->name }}</a>
                                         </div>
                                         <div class="s-desc">
                                             <div class="s-help z">需{{ $value->helpnum }}人助力,仅剩{{ $value->leftnum }}份</div>
