@@ -1,23 +1,6 @@
 @extends('layouts.mobile.app')
 
 @section('content')
-    <style>
-        .assist_container{}
-        .assist_container .weui-tabbar{}
-        .assist_container .weui-tabbar__item{text-align: center;padding: 14px 0;}
-        .assist_container .weui-bar__item_on .weui-tabbar__label{color:#ffaa29;}
-        .assist_container .weui-tabbar__icon{display: inline-block;margin-right:5px;margin-bottom:-4px;}
-        .assist_container .weui-tabbar__label{display: inline-block;font-size: 16px;line-height:20px;}
-        .assist_top{position: relative}
-        .assist_top .assist_rule_button{position: absolute;top:0;width:36px;height:32px;right:12px;line-height:32px;border-bottom-left-radius:18px;border-bottom-right-radius:18px;background-color:#e4c017;color:#a17400;font-size:12px;text-align:center;}
-        .assist_list_box{position: relative}
-        .assist_list_box ul{position: relative}
-        .assist_list_box li{position: relative}
-        .assist_list_empty{margin:0 auto;padding:95px 10px;text-align: center;}
-        .assist_list_empty .img{margin:0 auto;}
-        .assist_list_empty .title{margin-top:18px;line-height:32px;color:#151516;font-size:18px;}
-        .assist_list_empty .desc{line-height:24px;color:#9c9c9c;font-size:14px;}
-    </style>
     <div class="weui-tab assist_container">
         <div class="weui-tab__panel">
             <div class="main-body">
@@ -68,4 +51,27 @@
             </a>
         </div>
     </div>
+    <script type="text/html" id="tpl_assist_rule">
+        <div class="assist_rule_container">
+            <p>1· 邀请好友助力，达到助力人数即可享免单权利</p>
+            <p class="mtm">2· 每个新用户仅可助力一次。同一微信公众号内</p>
+            <p class="mtm">3· 若发现用户存在刷单、虚假用户助力等违规行为，平台有权判定助力失败</p>
+            <p class="mtm">4· 邀请到足够好友帮助您助力成功之后，可前往我的免单里查看详情</p>
+            <p class="mtm">5· 公众号可在法律法规允许范围内对本次活动规则解释并做适当修改</p>
+        </div>
+    </script>
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+        $(document).on("click", ".assist_rule_button", function(){
+            weui.alert($("#tpl_assist_rule").html(), {
+                buttons: [{
+                    label: '我知道了'
+                }],
+                title: '活动规则',
+                isAndroid: false
+            });
+        });
+    </script>
 @endsection
