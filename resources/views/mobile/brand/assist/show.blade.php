@@ -13,7 +13,7 @@
         <div class="weui-tab__panel">
             <div class="main-body">
                 <div class="wp">
-                    <div class="assist_show_slide mtm">
+                    <div class="assist_show_slide">
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
                                 @if ($info->upphoto)
