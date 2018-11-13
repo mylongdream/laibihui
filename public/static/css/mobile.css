@@ -62,7 +62,7 @@ pre{ white-space: pre-wrap!important;  word-wrap: break-word!important;  *white-
 
 .popup-container { display:none;top: 0;left: 0;position: fixed; overflow-y: auto;z-index: 600;width:100%;height:100%;background: #ededed  }
 
-.tabbar-btn{height:40px;line-height:40px;font-size:18px;padding: 5px 0;background: #1aad19;color: #fff;box-sizing: content-box;cursor:pointer;border: none}
+.tabbar-btn{height:40px;line-height:40px;font-size:16px;padding: 5px 0;background: #1aad19;color: #fff;box-sizing: content-box;cursor:pointer;border: none}
 .tabbar-btn_disabled{background: #999;color: #fff;}
 
 .panel-item{overflow: hidden}
@@ -508,7 +508,7 @@ pre{ white-space: pre-wrap!important;  word-wrap: break-word!important;  *white-
 .assist_show_intro {background: #fff;}
 .assist_show_intro .hd {font-size: 16px;padding: 10px 0;margin:0 10px;border-bottom: 1px solid #eee;}
 .assist_show_intro .bd {padding: 10px;font-size: 16px;overflow:hidden;}
-.assist_show_bar .tabbar-more{width:40%;height:40px;line-height:40px;font-size:18px;padding: 5px 0;text-align: center}
+.assist_show_bar .tabbar-more{width:40%;height:40px;line-height:40px;font-size:16px;padding: 5px 0;text-align: center}
 .assist_show_bar .tabbar-btn{background: #f00;}
 
 /* amap
