@@ -14,18 +14,20 @@
                             <ul>
                                 @foreach ($list as $value)
                                     <li>
-                                        <a href="{{ route('mobile.brand.assist.show', $value->id) }}" title="{{ $value->name }}">
-                                            <div class="s-pic"><img src="{{ uploadImage($value->upimage) }}"></div>
-                                            <div class="s-info">
-                                                <div class="s-name">{{ $value->name }}</div>
-                                                <div class="s-address">地址：{{ $value->address }}</div>
-                                                <div class="s-discount">
-                                                    <label>尊享标牌价：</label>
-                                                    <span class="s-discount1"><em>￥</em><strong>{{ $value->discount }}</strong>折</span>
-                                                    <span class="s-discount2"><del>原价靠边站</del></span>
-                                                </div>
+                                        <div class="p-pic"><img src="{{ uploadImage($value->upimage) }}" width="120" height="120"></div>
+                                        <div class="p-info">
+                                            <div class="p-name">
+                                                <a href="{{ route('mobile.brand.assist.show', $value->id) }}" title="{{ $value->name }}">{{ $value->name }}</a>
                                             </div>
-                                        </a>
+                                            <div class="p-desc">
+                                                <div class="p-help z">需{{ $value->helpnum }}人助力,仅剩{{ $value->leftnum }}份</div>
+                                                <div class="p-sell y">已领{{ $value->sellnum }}件</div>
+                                            </div>
+                                            <div class="p-join">
+                                                <div class="p-price z"><em>￥</em><strong>{{ $value->price }}</strong></div>
+                                                <div class="p-btn y"><a href="{{ route('mobile.brand.assist.show', $value->id) }}" title="{{ $value->name }}">免费领</a></div>
+                                            </div>
+                                        </div>
                                     </li>
                                 @endforeach
                             </ul>

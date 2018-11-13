@@ -27,9 +27,24 @@
                             <div class="swiper-pagination"></div>
                         </div>
                     </div>
+                    <div class="assist_show_base mtm">
+                        <div class="p-info">
+                            <div class="p-price z"><em>￥</em><strong>{{ $info->price }}</strong></div>
+                            <div class="p-help y">需{{ $info->helpnum }}人助力,已领{{ $info->sellnum }}件,仅剩{{ $info->leftnum }}份</div>
+                        </div>
+                        <div class="p-name">{{ $info->name }}</div>
+                        <div class="p-rule">
+                            <h3>活动规则</h3>
+                            <p>1· 邀请好友助力，达到助力人数即可享免单权利</p>
+                            <p>2· 每个新用户仅可助力一次。同一微信公众号内</p>
+                            <p>3· 若发现用户存在刷单、虚假用户助力等违规行为，平台有权判定助力失败</p>
+                            <p>4· 邀请到足够好友帮助您助力成功之后，可前往我的免单里查看详情</p>
+                            <p>5· 公众号可在法律法规允许范围内对本次活动规则解释并做适当修改</p>
+                        </div>
+                    </div>
                     <div class="assist_show_intro mtm">
                         <div class="hd">
-                            <h3>商品详情</h3>
+                            <p>商品详情</p>
                         </div>
                         <div class="bd">
                             <div class="">{!! $info->message !!}</div>
@@ -38,13 +53,16 @@
                 </div>
             </div>
         </div>
-        <div class="weui-tabbar">
+        <div class="weui-tabbar assist_show_bar">
+            <a href="{{ route('mobile.brand.assist.index') }}" class="weui-tabbar__item">
+                <span>更多免单</span>
+            </a>
             @if (auth()->check())
                 <a href="{{ route('mobile.brand.assist.index') }}" class="weui-tabbar__item tabbar-btn">
                     <span>我要领</span>
                 </a>
             @else
-                <a href="{{ route('mobile.brand.assist.order') }}" class="weui-tabbar__item tabbar-btn">
+                <a href="{{ route('mobile.brand.assist.order') }}" class="weui-tabbar__item tabbar-btn tabbar-btn_disabled">
                     <span>先登录</span>
                 </a>
             @endif
