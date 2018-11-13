@@ -498,7 +498,7 @@ pre{ white-space: pre-wrap!important;  word-wrap: break-word!important;  *white-
 .assist_show_slide .swiper-slide a {width: 100%;padding: 50% 0;position: relative;overflow:hidden;display:block;}
 .assist_show_slide .swiper-slide img {width: 100%;height: 100%;display:block;position: absolute;top: 0;left: 0;}
 .assist_show_base{background: #fff;padding:10px;}
-.assist_show_base .p-info{line-height:32px;font-size:14px;overflow:hidden;}
+.assist_show_base .p-info{line-height:26px;font-size:14px;overflow:hidden;}
 .assist_show_base .p-price{font-size:22px;color:#f00;}
 .assist_show_base .p-price em{font-size:14px;font-style: normal;}
 .assist_show_base .p-help{color:#999;}

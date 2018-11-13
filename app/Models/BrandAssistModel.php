@@ -9,5 +9,6 @@ class BrandAssistModel extends Model
 	protected $table = 'brand_assist';
 	protected $primaryKey = 'id';
 	public $timestamps = true;
+    protected $amountFields = ['price'];
 
 }
