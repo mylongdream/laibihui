@@ -61,7 +61,7 @@
             </a>
             @if (auth()->check())
                 <a href="{{ route('mobile.brand.assist.index') }}" class="weui-tabbar__item tabbar-btn">
-                    <span>我要领</span>
+                    <span>{{ $info->price ? '我要领' : '免费领' }}</span>
                 </a>
             @else
                 <a href="{{ route('mobile.brand.assist.order') }}" class="weui-tabbar__item tabbar-btn tabbar-btn_disabled">

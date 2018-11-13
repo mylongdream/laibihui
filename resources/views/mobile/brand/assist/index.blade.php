@@ -5,6 +5,7 @@
         <div class="weui-tab__panel">
             <div class="main-body">
                 <div class="wp">
+                    <div class="pbw">
                     <div class="assist_top">
                         <div><img width="100%" style="display: block" src="{{ asset('static/image/mobile/assist_top.jpg') }}" alt=""></div>
                         <div class="assist_rule_button">规则</div>
@@ -25,7 +26,7 @@
                                         </div>
                                         <div class="p-join">
                                             <div class="p-price z"><em>￥</em><strong>{{ $value->price }}</strong></div>
-                                            <div class="p-btn y"><a href="{{ route('mobile.brand.assist.show', $value->id) }}" title="{{ $value->name }}">免费领</a></div>
+                                            <div class="p-btn y"><a href="{{ route('mobile.brand.assist.show', $value->id) }}" title="{{ $value->name }}">{{ $value->price ? '我要领' : '免费领' }}</a></div>
                                         </div>
                                     </div>
                                 </li>
@@ -39,6 +40,7 @@
                         <div class="desc">等一会再来看看吧！！</div>
                     </div>
                     @endif
+                </div>
                 </div>
             </div>
         </div>

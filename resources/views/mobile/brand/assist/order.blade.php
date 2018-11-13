@@ -5,6 +5,7 @@
         <div class="weui-tab__panel">
             <div class="main-body">
                 <div class="wp">
+                    <div class="pbw">
                     <div class="assist_top">
                         <div><img width="100%" style="display: block" src="{{ asset('static/image/mobile/assist_top.jpg') }}" alt=""></div>
                         <div class="assist_rule_button">规则</div>
@@ -40,6 +41,7 @@
                         </div>
                     @endif
                 </div>
+            </div>
             </div>
         </div>
         <div class="weui-tabbar">
