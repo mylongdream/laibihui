@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="weui-tabbar assist_show_bar">
-            <a href="{{ route('mobile.brand.assist.index') }}" class="weui-tabbar__item">
+            <a href="{{ route('mobile.brand.assist.index') }}" class="tabbar-more">
                 <span>更多免单</span>
             </a>
             @if (auth()->check())
