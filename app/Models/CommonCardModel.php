@@ -34,7 +34,7 @@ class CommonCardModel extends Model
 
     public function sellcard()
     {
-        return $this->belongsTo('App\Models\CommonUserSellcardModel', 'number', 'number');
+        return $this->belongsTo('App\Models\CommonSellcardModel', 'number', 'number');
     }
 
 }
