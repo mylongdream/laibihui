@@ -133,20 +133,12 @@
                                         </div>
                                         <p class="weui-grid__label">消费账单</p>
                                     </a>
-                                    <a href="{{ route('mobile.user.cardreward.index') }}" class="weui-grid">
+                                    <a href="{{ route('mobile.brand.assist.index') }}" class="weui-grid">
                                         <div class="weui-grid__icon">
-                                            <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-cardreward.png') }}" alt="">
+                                            <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-assist.png') }}" alt="">
                                         </div>
-                                        <p class="weui-grid__label">售卡兑奖</p>
+                                        <p class="weui-grid__label">助力免单</p>
                                     </a>
-                                    @if (auth()->user()->personnel)
-                                    <a href="{{ route('mobile.user.sellcard.index') }}" class="weui-grid">
-                                        <div class="weui-grid__icon">
-                                            <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-sellcard.png') }}" alt="">
-                                        </div>
-                                        <p class="weui-grid__label">面对面办卡</p>
-                                    </a>
-                                    @endif
                                 </div>
                             </div>
                         </div>

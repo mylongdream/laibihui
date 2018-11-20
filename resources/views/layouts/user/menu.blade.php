@@ -38,9 +38,6 @@
         <dd class="{{ isset($curmenu) && $curmenu == 'history' ? 'on' : '' }}">
             <a title="" href="{{ route('user.history.index') }}"><span>浏览历史</span></a>
         </dd>
-        <dd class="{{ isset($curmenu) && $curmenu == 'cardreward' ? 'on' : '' }}">
-            <a title="" href="{{ route('user.cardreward.index') }}"><span>售卡兑奖</span></a>
-        </dd>
     </dl>
     <dl>
         <dt>

@@ -11,6 +11,18 @@
 	<form id="schform" name="schform" class="formsearch" method="get" action="{{ route('admin.user.user.index') }}">
 	<div class="tbsearch">
 		<dl>
+			<dt>分组</dt>
+			<dd>
+				<select class="schselect" name="group_id" onchange='this.form.submit()'>
+					<option value="">全部</option>
+					@foreach ($grouplist as $group)
+						<option value="{{ $group->id }}" {!! request('group_id') == $group->id ? 'selected="selected"' : '' !!}>{{ $group->name }}</option>
+					@endforeach
+				</select>
+			</dd>
+		</dl>
+		<dl>
+			<dt>是否开卡</dt>
 			<dd>
 				<select class="schselect" name="bindcard" onchange='this.form.submit()'>
 					<option value="">全部</option>

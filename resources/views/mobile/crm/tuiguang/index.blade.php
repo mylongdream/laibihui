@@ -22,71 +22,49 @@
                         </div>
                         <div class="weui-panel">
                             <div class="weui-panel__bd">
-                                <div class="weui-media-box weui-media-box_small-appmsg">
-                                    <div class="weui-cells">
-                                        <a class="weui-cell weui-cell_access" href="{{ route('mobile.crm.tuiguang.sellcard.index') }}">
-                                            <div class="weui-cell__hd">
-                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
-                                            </div>
-                                            <div class="weui-cell__bd weui-cell_primary">
-                                                <p class="user-menu-txt">面对面办卡</p>
-                                            </div>
-                                            <span class="weui-cell__ft"></span>
-                                        </a>
-                                        <a class="weui-cell weui-cell_access" href="javascript:;">
-                                            <div class="weui-cell__hd">
-                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
-                                            </div>
-                                            <div class="weui-cell__bd weui-cell_primary">
-                                                <p class="user-menu-txt">业绩提成</p>
-                                            </div>
-                                            <span class="weui-cell__ft"></span>
-                                        </a>
-                                        <a class="weui-cell weui-cell_access" href="{{ route('mobile.crm.tuiguang.cardreward.index') }}">
-                                            <div class="weui-cell__hd">
-                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
-                                            </div>
-                                            <div class="weui-cell__bd weui-cell_primary">
-                                                <p class="user-menu-txt">售卡兑奖</p>
-                                            </div>
-                                            <span class="weui-cell__ft"></span>
-                                        </a>
-                                    </div>
+                                <div class="weui-grids">
+                                    <a href="{{ route('mobile.crm.tuiguang.sellcard.index') }}" class="weui-grid">
+                                        <div class="weui-grid__icon">
+                                            <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-hg.png') }}" alt="">
+                                        </div>
+                                        <p class="weui-grid__label">面对面办卡</p>
+                                    </a>
+                                    <a href="javascript:;" class="weui-grid">
+                                        <div class="weui-grid__icon">
+                                            <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-tg.png') }}" alt="">
+                                        </div>
+                                        <p class="weui-grid__label">授权办卡</p>
+                                    </a>
+                                    <a href="javascript:;" class="weui-grid">
+                                        <div class="weui-grid__icon">
+                                            <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-jindu.png') }}" alt="">
+                                        </div>
+                                        <p class="weui-grid__label">缺卡受理</p>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                         <div class="weui-panel">
                             <div class="weui-panel__bd">
-                                <div class="weui-media-box weui-media-box_small-appmsg">
-                                    <div class="weui-cells">
-                                        <a class="weui-cell weui-cell_access" href="javascript:;">
-                                            <div class="weui-cell__hd">
-                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
-                                            </div>
-                                            <div class="weui-cell__bd weui-cell_primary">
-                                                <p class="user-menu-txt">推荐注册</p>
-                                            </div>
-                                            <span class="weui-cell__ft"></span>
-                                        </a>
-                                        <a class="weui-cell weui-cell_access" href="javascript:;">
-                                            <div class="weui-cell__hd">
-                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
-                                            </div>
-                                            <div class="weui-cell__bd weui-cell_primary">
-                                                <p class="user-menu-txt">通讯薄</p>
-                                            </div>
-                                            <span class="weui-cell__ft"></span>
-                                        </a>
-                                        <a class="weui-cell weui-cell_access" href="{{ route('mobile.crm.logout') }}">
-                                            <div class="weui-cell__hd">
-                                                <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
-                                            </div>
-                                            <div class="weui-cell__bd weui-cell_primary">
-                                                <p class="user-menu-txt">退出登录</p>
-                                            </div>
-                                            <span class="weui-cell__ft"></span>
-                                        </a>
-                                    </div>
+                                <div class="weui-grids">
+                                    <a href="{{ route('mobile.crm.tuiguang.cardreward.index') }}" class="weui-grid">
+                                        <div class="weui-grid__icon">
+                                            <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-hg.png') }}" alt="">
+                                        </div>
+                                        <p class="weui-grid__label">售卡兑奖</p>
+                                    </a>
+                                    <a href="javascript:;" class="weui-grid">
+                                        <div class="weui-grid__icon">
+                                            <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-tg.png') }}" alt="">
+                                        </div>
+                                        <p class="weui-grid__label">通讯簿</p>
+                                    </a>
+                                    <a href="{{ route('mobile.crm.logout') }}" class="weui-grid">
+                                        <div class="weui-grid__icon">
+                                            <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-jindu.png') }}" alt="">
+                                        </div>
+                                        <p class="weui-grid__label">退出登录</p>
+                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -30,6 +30,16 @@ class AssistController extends Controller
         return view('mobile.brand.assist.show', ['info'=>$info]);
     }
 
+    public function receive(Request $request){
+        $info = BrandAssistModel::where('id', $request->id)->firstOrFail();
+        return view('mobile.brand.assist.receive', ['info'=>$info]);
+    }
+
+    public function poster(Request $request){
+        $info = BrandAssistModel::where('id', $request->id)->firstOrFail();
+        return view('mobile.brand.assist.poster', ['info'=>$info]);
+    }
+
     public function order(Request $request){
         $list = BrandAssistOrderModel::where('uid', auth()->user()->uid)->latest()->paginate(15);
         return view('mobile.brand.assist.order', ['list'=>$list]);

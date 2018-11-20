@@ -141,9 +141,9 @@ Route::group(['domain' => 'zhihui.hztbg.com'], function () {
         Route::post('upload/video', ['as' => 'upload.video', 'uses' => 'User\UploadController@video']);
         Route::get('survey', ['as' => 'survey.index', 'uses' => 'User\SurveyController@index']);
         Route::put('survey/store', ['as' => 'survey.store', 'uses' => 'User\SurveyController@store']);
-        Route::get('cardreward', ['as' => 'cardreward.index', 'uses' => 'User\CardRewardController@index']);
-        Route::any('cardreward/myreward', ['as' => 'cardreward.myreward', 'uses' => 'User\CardRewardController@myreward']);
-        Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'User\CardRewardController@exchange']);
+        //Route::get('cardreward', ['as' => 'cardreward.index', 'uses' => 'User\CardRewardController@index']);
+        //Route::any('cardreward/myreward', ['as' => 'cardreward.myreward', 'uses' => 'User\CardRewardController@myreward']);
+        //Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'User\CardRewardController@exchange']);
     });
 });
 
@@ -155,6 +155,8 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
     Route::any('/grantsell/{fromuser}', ['as' => 'grantsell', 'uses' => 'Mobile\IndexController@grantsell'])->middleware('auth.mobile');
     Route::any('assist', ['as' => 'brand.assist.index', 'uses' => 'Mobile\Brand\AssistController@index']);
     Route::any('assist/{id}.html', ['as' => 'brand.assist.show', 'uses' => 'Mobile\Brand\AssistController@show']);
+    Route::any('assist/{id}/receive.html', ['as' => 'brand.assist.receive', 'uses' => 'Mobile\Brand\AssistController@receive']);
+    Route::any('assist/{id}/poster.html', ['as' => 'brand.assist.poster', 'uses' => 'Mobile\Brand\AssistController@poster']);
     Route::any('assist/order', ['as' => 'brand.assist.order', 'uses' => 'Mobile\Brand\AssistController@order'])->middleware('auth.mobile');
     Route::get('faq', ['as' => 'brand.faq.index', 'uses' => 'Mobile\Brand\FaqController@index']);
     Route::get('faq/{id}.html', ['as' => 'brand.faq.show', 'uses' => 'Mobile\Brand\FaqController@show'])->where('id', '[0-9]+');
@@ -263,11 +265,11 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
         Route::resource('address', 'Mobile\User\AddressController', ['except' => 'show']);
         Route::get('feedback', ['as' => 'feedback.index', 'uses' => 'Mobile\User\FeedbackController@index']);
         Route::post('feedback', ['as' => 'feedback.store', 'uses' => 'Mobile\User\FeedbackController@store']);
-        Route::get('cardreward', ['as' => 'cardreward.index', 'uses' => 'Mobile\User\CardRewardController@index']);
-        Route::any('cardreward/record', ['as' => 'cardreward.record', 'uses' => 'Mobile\User\CardRewardController@record']);
-        Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'Mobile\User\CardRewardController@exchange']);
-        Route::get('sellcard', ['as' => 'sellcard.index', 'uses' => 'Mobile\User\SellCardController@index']);
-        Route::get('sellcard/order', ['as' => 'sellcard.order', 'uses' => 'Mobile\User\SellCardController@order']);
+        //Route::get('cardreward', ['as' => 'cardreward.index', 'uses' => 'Mobile\User\CardRewardController@index']);
+        //Route::any('cardreward/record', ['as' => 'cardreward.record', 'uses' => 'Mobile\User\CardRewardController@record']);
+        //Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'Mobile\User\CardRewardController@exchange']);
+        //Route::get('sellcard', ['as' => 'sellcard.index', 'uses' => 'Mobile\User\SellCardController@index']);
+        //Route::get('sellcard/order', ['as' => 'sellcard.order', 'uses' => 'Mobile\User\SellCardController@order']);
     });
     Route::group(['prefix' => 'crm', 'as' => 'crm.'], function () {
         Route::get('login', ['as' => 'login', 'uses' => 'Mobile\CRM\LoginController@showLoginForm']);

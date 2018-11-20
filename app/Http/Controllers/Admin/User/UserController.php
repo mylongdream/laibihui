@@ -22,6 +22,10 @@ class UserController extends Controller
     {
         $CommonUserModel = new CommonUserModel;
         $userlist = $CommonUserModel->where(function($query) use($request) {
+            if($request->group_id){
+                $query->where('group_id', $request->group_id);
+            }
+        })->where(function($query) use($request) {
             if($request->bindcard == 1){
                 $query->doesntHave('card');
             }elseif($request->bindcard == 2){
@@ -32,7 +36,8 @@ class UserController extends Controller
                 $query->where('mobile', 'like',"%".$request->mobile."%");
             }
         })->latest()->paginate(20);
-        return view('admin.user.user.index', ['userlist' => $userlist]);
+        $grouplist = CommonUserGroupModel::orderBy('displayorder', 'asc')->get();
+        return view('admin.user.user.index', ['userlist' => $userlist, 'grouplist' => $grouplist]);
     }
 
     /**

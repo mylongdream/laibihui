@@ -7,7 +7,7 @@
                 <div class="wp">
                     <div class="pbw">
                     <div class="assist_top">
-                        <div><img width="100%" style="display: block" src="{{ asset('static/image/mobile/assist_top.jpg') }}" alt=""></div>
+                        <div><img width="100%" style="display: block" src="{{ asset('static/image/mobile/assist/top.jpg') }}" alt=""></div>
                         <div class="assist_rule_button">规则</div>
                     </div>
                     @if (count($list) > 0)
@@ -35,7 +35,7 @@
                     </div>
                     @else
                     <div class="assist_list_empty">
-                        <div class="img"><img src="{{ asset('static/image/mobile/assist_empty.png') }}" width="140" alt=""></div>
+                        <div class="img"><img src="{{ asset('static/image/mobile/assist/empty.png') }}" width="140" alt=""></div>
                         <div class="title">还没有商品哦～</div>
                         <div class="desc">等一会再来看看吧！！</div>
                     </div>
@@ -46,11 +46,11 @@
         </div>
         <div class="weui-tabbar">
             <a href="{{ route('mobile.brand.assist.index') }}" class="weui-tabbar__item weui-bar__item_on">
-                <img class="weui-tabbar__icon" src="{{ asset('static/image/mobile/assist_tabbar_index_selected.png') }}" alt="">
+                <img class="weui-tabbar__icon" src="{{ asset('static/image/mobile/assist/tabbar_index_selected.png') }}" alt="">
                 <p class="weui-tabbar__label">今日免单</p>
             </a>
             <a href="{{ route('mobile.brand.assist.order') }}" class="weui-tabbar__item">
-                <img class="weui-tabbar__icon" src="{{ asset('static/image/mobile/assist_tabbar_order.png') }}" alt="">
+                <img class="weui-tabbar__icon" src="{{ asset('static/image/mobile/assist/tabbar_order.png') }}" alt="">
                 <p class="weui-tabbar__label">我的免单</p>
             </a>
         </div>
