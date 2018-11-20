@@ -42,7 +42,7 @@
                 $(this).addClass("on").siblings().removeClass("on");
                 var newImg = document.createElement("img");
                 newImg.src =  $(this).attr("data-card");
-                $('#generateimg').appendChild(newImg);
+                $('#generateimg').append(newImg);
                 $('.card_load').hide();
                 $('.card_box').show();
             });
