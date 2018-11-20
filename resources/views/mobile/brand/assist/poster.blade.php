@@ -4,11 +4,20 @@
     <div class="weui-tab assist_card">
         <div class="weui-tab__panel">
             <div class="assist_card_body">
-                <div class="inner">
-
-
+                <div class="card_load">
+                    <div class="wave">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
+                    <div class="tip">正在生成中，请稍候</div>
                 </div>
-                <div class="tip"><span>长按上图保存图片，或发送给朋友</span></div>
+                <div class="card_box">
+                    <div class="pic" id="generateimg"></div>
+                    <div class="tip"><span>长按上图保存图片，或发送给朋友</span></div>
+                </div>
             </div>
         </div>
         <div class="weui-tabbar">
@@ -31,6 +40,11 @@
         $(function() {
             $(document).on("click", ".assist_card_footer li", function(){
                 $(this).addClass("on").siblings().removeClass("on");
+                var newImg = document.createElement("img");
+                newImg.src =  $(this).attr("data-card");
+                $('#generateimg').appendChild(newImg);
+                $('.card_load').hide();
+                $('.card_box').show();
             });
         });
     </script>

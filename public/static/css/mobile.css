@@ -515,13 +515,28 @@ pre{ white-space: pre-wrap!important;  word-wrap: break-word!important;  *white-
 .assist_card .weui-tab__panel{padding-bottom:80px;}
 
 .assist_card_body{position:relative;background: #333;height:100%;}
-.assist_card_body .inner{height:100%;}
-.assist_card_body .tip{position:absolute;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;bottom:10px;left:0;text-align:center;overflow:hidden;font-size:14px;color:#fff;}
-.assist_card_body .tip span{display:inline-block;height:40px;line-height:40px;padding-left:25px;background-image:url(../image/mobile/assist/icon-up-arrow.png);background-repeat: no-repeat;background-position: left center;background-size: 20px auto }
+.assist_card_body .card_load{position: absolute;top:50%;left:0;margin-top:-17px;}
+.assist_card_body .card_load .wave{margin:0 auto;width:50px;height:10px;text-align:center;}
+.assist_card_body .card_load .wave div{background-color:#23b7e5;height:100%;width:6px;display:inline-block;-webkit-animation:waveStretchDelay 1.2s infinite ease-in-out;animation:waveStretchDelay 1.2s infinite ease-in-out;}
+.assist_card_body .card_load .wave .rect1{-webkit-animation-delay:-1.1s;animation-delay:-1.1s;}
+.assist_card_body .card_load .wave .rect2{-webkit-animation-delay:-1.1s;animation-delay:-1.1s;}
+.assist_card_body .card_load .wave .rect3{-webkit-animation-delay:-1s;animation-delay:-1s;}
+.assist_card_body .card_load .wave .rect4{-webkit-animation-delay:-0.9s;animation-delay:-0.9s;}
+.assist_card_body .card_load .wave .rect5{-webkit-animation-delay:-0.8s;animation-delay:-0.8s;}
+@-webkit-keyframes waveStretchDelay{0%,40%,100%{-webkit-transform:scaleY(0.4);transform:scaleY(0.4);}
+    20%{-webkit-transform:scaleY(1);transform:scaleY(1);}}
+@keyframes waveStretchDelay{0%,40%,100%{-webkit-transform:scaleY(0.4);transform:scaleY(0.4);}
+    20%{-webkit-transform:scaleY(1);transform:scaleY(1);}}
+.assist_card_body .card_load .tip{height:24px;line-height:24px;color:#fff;text-align:center;font-size:12px;}
+.assist_card_body .card_box{height:100%;padding-bottom:40px;box-sizing: border-box;display:none;}
+.assist_card_body .card_box .pic{padding:10px;}
+.assist_card_body .card_box .pic img{max-width:100%;max-height:100%;}
+.assist_card_body .card_box .tip{position:absolute;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;bottom:0;left:0;text-align:center;overflow:hidden;font-size:14px;color:#fff;}
+.assist_card_body .card_box .tip span{display:inline-block;height:40px;line-height:40px;padding-left:25px;background-image:url(../image/mobile/assist/icon-up-arrow.png);background-repeat: no-repeat;background-position: left center;background-size: 20px auto }
 
-.assist_card_footer{white-space:nowrap;width:100%;height:80px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;}
-.assist_card_footer ul{padding:10px 10px 10px 0;list-style: none;font-size: 0;letter-spacing: -3px;display:block;}
-.assist_card_footer ul li{position:relative;display:inline-block;margin-left:10px;list-style: none;}
+.assist_card_footer{white-space:nowrap;width:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;}
+.assist_card_footer ul{padding:10px 0;margin:0 5px;list-style: none;font-size: 0;letter-spacing: -3px;display:block;text-align: center}
+.assist_card_footer ul li{position:relative;display:inline-block;margin:0 5px;list-style: none;}
 .assist_card_footer ul li img{width:60px;height:60px;display:block;}
 .assist_card_footer ul li.on:after{content:'';background-image:url(../image/mobile/assist/checkedhaibao.png);background-position:center;-webkit-background-size:contain;background-size:contain;position:absolute;right:2%;bottom:2%;width:20%;height:20%;}
 
