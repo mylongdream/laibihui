@@ -13,7 +13,7 @@
         </div>
         <div class="weui-tabbar">
             <div class="assist_card_footer">
-                <ul class="cl">
+                <ul>
                     <li class="on" data-card="{{ asset('static/image/mobile/assist/cardbg_01.jpg') }}"><img src="{{ asset('static/image/mobile/assist/cardbg_01_small.jpg') }}"/> </li>
                     <li class="" data-card="{{ asset('static/image/mobile/assist/cardbg_02.jpg') }}"><img src="{{ asset('static/image/mobile/assist/cardbg_02_small.jpg') }}"/> </li>
                     <li class="" data-card="{{ asset('static/image/mobile/assist/cardbg_03.jpg') }}"><img src="{{ asset('static/image/mobile/assist/cardbg_03_small.jpg') }}"/> </li>

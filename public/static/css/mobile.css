@@ -512,17 +512,17 @@ pre{ white-space: pre-wrap!important;  word-wrap: break-word!important;  *white-
 .assist_show_bar .tabbar-btn{background: #f00;}
 
 .assist_card{background: #fff;}
-.assist_card .weui-tab__panel{padding-bottom:130px;}
+.assist_card .weui-tab__panel{padding-bottom:80px;}
 
 .assist_card_body{position:relative;background: #333;height:100%;}
 .assist_card_body .inner{height:100%;}
 .assist_card_body .tip{position:absolute;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;bottom:10px;left:0;text-align:center;overflow:hidden;font-size:14px;color:#fff;}
-.assist_card_body .tip span{display:inline-block;height:40px;line-height:40px;padding-left:30px;background:url(../image/mobile/assist/icon-up-arrow.png) no-repeat center/100%;}
+.assist_card_body .tip span{display:inline-block;height:40px;line-height:40px;padding-left:25px;background-image:url(../image/mobile/assist/icon-up-arrow.png);background-repeat: no-repeat;background-position: left center;background-size: 20px auto }
 
-.assist_card_footer{white-space:nowrap;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;}
-.assist_card_footer ul{padding:10px 5px;list-style: none;}
-.assist_card_footer ul li{position:relative;float:left;margin:0 5px;list-style: none}
-.assist_card_footer ul li img{width:120px;height:120px;display:block;}
+.assist_card_footer{white-space:nowrap;width:100%;height:80px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;}
+.assist_card_footer ul{padding:10px 10px 10px 0;list-style: none;}
+.assist_card_footer ul li{position:relative;display:inline-block;margin-left:10px;list-style: none;font-size: 0;letter-spacing: -3px;}
+.assist_card_footer ul li img{width:60px;height:60px;display:block;}
 .assist_card_footer ul li.on:after{content:'';background-image:url(../image/mobile/assist/checkedhaibao.png);background-position:center;-webkit-background-size:contain;background-size:contain;position:absolute;right:2%;bottom:2%;width:20%;height:20%;}
 
 /* amap
