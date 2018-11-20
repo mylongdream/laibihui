@@ -529,7 +529,7 @@ pre{ white-space: pre-wrap!important;  word-wrap: break-word!important;  *white-
     20%{-webkit-transform:scaleY(1);transform:scaleY(1);}}
 .assist_card_body .card_load .tip{height:24px;line-height:24px;color:#fff;text-align:center;font-size:12px;}
 .assist_card_body .card_box{height:100%;padding-bottom:40px;box-sizing: border-box;display:none;}
-.assist_card_body .card_box .pic{padding:10px;}
+.assist_card_body .card_box .pic{padding:10px;height:100%;box-sizing: border-box;text-align:center;}
 .assist_card_body .card_box .pic img{max-width:100%;max-height:100%;}
 .assist_card_body .card_box .tip{position:absolute;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;bottom:0;left:0;text-align:center;overflow:hidden;font-size:14px;color:#fff;}
 .assist_card_body .card_box .tip span{display:inline-block;height:40px;line-height:40px;padding-left:25px;background-image:url(../image/mobile/assist/icon-up-arrow.png);background-repeat: no-repeat;background-position: left center;background-size: 20px auto }
