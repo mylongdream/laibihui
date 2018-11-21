@@ -23,11 +23,11 @@
         <div class="weui-tabbar">
             <div class="assist_card_footer">
                 <ul>
-                    <li class="on" data-card="{{ asset('static/image/mobile/assist/cardbg_01.jpg') }}"><img src="{{ asset('static/image/mobile/assist/cardbg_01_small.jpg') }}"/> </li>
-                    <li class="" data-card="{{ asset('static/image/mobile/assist/cardbg_02.jpg') }}"><img src="{{ asset('static/image/mobile/assist/cardbg_02_small.jpg') }}"/> </li>
-                    <li class="" data-card="{{ asset('static/image/mobile/assist/cardbg_03.jpg') }}"><img src="{{ asset('static/image/mobile/assist/cardbg_03_small.jpg') }}"/> </li>
-                    <li class="" data-card="{{ asset('static/image/mobile/assist/cardbg_04.jpg') }}"><img src="{{ asset('static/image/mobile/assist/cardbg_04_small.jpg') }}"/> </li>
-                    <li class="" data-card="{{ asset('static/image/mobile/assist/cardbg_05.jpg') }}"><img src="{{ asset('static/image/mobile/assist/cardbg_05_small.jpg') }}"/> </li>
+                    <li data-card="{{ asset('static/image/mobile/assist/cardbg_01.jpg') }}"><img src="{{ asset('static/image/mobile/assist/cardbg_01_small.jpg') }}"/> </li>
+                    <li data-card="{{ asset('static/image/mobile/assist/cardbg_02.jpg') }}"><img src="{{ asset('static/image/mobile/assist/cardbg_02_small.jpg') }}"/> </li>
+                    <li data-card="{{ asset('static/image/mobile/assist/cardbg_03.jpg') }}"><img src="{{ asset('static/image/mobile/assist/cardbg_03_small.jpg') }}"/> </li>
+                    <li data-card="{{ asset('static/image/mobile/assist/cardbg_04.jpg') }}"><img src="{{ asset('static/image/mobile/assist/cardbg_04_small.jpg') }}"/> </li>
+                    <li data-card="{{ asset('static/image/mobile/assist/cardbg_05.jpg') }}"><img src="{{ asset('static/image/mobile/assist/cardbg_05_small.jpg') }}"/> </li>
                 </ul>
             </div>
         </div>
@@ -71,6 +71,7 @@
                     $('.assist_card_body .card_box').show();
                 });
             });
+            $(".assist_card_footer li:first").trigger("click");
         });
     </script>
 @endsection
