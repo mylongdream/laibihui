@@ -60,15 +60,15 @@
             $(document).on("click", ".assist_card_footer li", function(){
                 $(this).addClass("on").siblings().removeClass("on");
                 $('#cardbgimg').attr("src",$(this).attr("data-card"));
-                $('.card_load').show();
-                $('.card_box').hide();
+                $('.assist_card_body .card_load').show();
+                $('.assist_card_body .card_box').hide();
                 html2canvas(document.getElementById("card_container"), {scale:2}).then(function(canvas) {
                     var dataUrl = canvas.toDataURL();
                     var newImg = document.createElement("img");
                     newImg.src =  dataUrl;
                     $('#generateimg').empty().append(newImg);
-                    $('.card_load').hide();
-                    $('.card_box').show();
+                    $('.assist_card_body .card_load').hide();
+                    $('.assist_card_body .card_box').show();
                 });
             });
         });
