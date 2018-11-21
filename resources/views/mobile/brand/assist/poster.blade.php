@@ -19,6 +19,25 @@
                     <div class="tip"><span>长按上图保存图片，或发送给朋友</span></div>
                 </div>
             </div>
+            <div class="assist_card_container" id="card_container">
+                <div class="card_bg"><img src="{{ asset('static/image/mobile/assist/cardbg_01.jpg') }}" id="cardbgimg"/></div>
+                <div class="card_body">
+                    <div class="card_box">
+                        <div class="pic"><img src="{{ uploadImage($info->upimage) }}" alt=""></div>
+                        <div class="tit">{{ $info->name }}</div>
+                        <div class="price">
+                            <div class="z">仅剩<span>{{ $info->leftnum }}</span>份</div>
+                            <div class="y">市场价<em>￥</em><strong>{{ $info->price }}</strong></div>
+                        </div>
+                        <div class="copy">— 快来和我一起{{ $info->price ? '领取' : '免费领取' }}吧！ —</div>
+                    </div>
+                    <div class="card_qrcode">
+                        <div class="qrcode z"><img src="{{ asset('static/image/mobile/assist/zhiwen.png') }}" alt=""></div>
+                        <div class="fingp y"><img src="{{ asset('static/image/mobile/assist/zhiwen.png') }}" alt=""> </div>
+                    </div>
+                    <div class="card_tip">长按识别二维码{{ $info->price ? '领取' : '免费领取' }}</div>
+                </div>
+            </div>
         </div>
         <div class="weui-tabbar">
             <div class="assist_card_footer">
@@ -30,25 +49,6 @@
                     <li data-card="{{ asset('static/image/mobile/assist/cardbg_05.jpg') }}"><img src="{{ asset('static/image/mobile/assist/cardbg_05_small.jpg') }}"/> </li>
                 </ul>
             </div>
-        </div>
-    </div>
-    <div class="assist_card_container" id="card_container">
-        <div class="card_bg"><img src="{{ asset('static/image/mobile/assist/cardbg_01.jpg') }}" id="cardbgimg"/></div>
-        <div class="card_body">
-            <div class="card_box">
-                <div class="pic"><img src="{{ uploadImage($info->upimage) }}" alt=""></div>
-                <div class="tit">{{ $info->name }}</div>
-                <div class="price">
-                    <div class="z">仅剩<span>{{ $info->leftnum }}</span>份</div>
-                    <div class="y">市场价<em>￥</em><strong>{{ $info->price }}</strong></div>
-                </div>
-                <div class="copy">— 快来和我一起{{ $info->price ? '领取' : '免费领取' }}吧！ —</div>
-            </div>
-            <div class="card_qrcode">
-                <div class="qrcode z"><img src="{{ asset('static/image/mobile/assist/zhiwen.png') }}" alt=""></div>
-                <div class="fingp y"><img src="{{ asset('static/image/mobile/assist/zhiwen.png') }}" alt=""> </div>
-            </div>
-            <div class="card_tip">长按识别二维码{{ $info->price ? '领取' : '免费领取' }}</div>
         </div>
     </div>
 @endsection

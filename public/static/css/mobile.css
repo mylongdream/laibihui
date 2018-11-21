@@ -510,7 +510,7 @@ pre{ white-space: pre-wrap!important;  word-wrap: break-word!important;  *white-
 .assist_show_intro .bd {padding: 10px;font-size: 16px;overflow:hidden;}
 .assist_show_bar .tabbar-more{width:40%;height:40px;line-height:40px;font-size:16px;padding: 5px 0;text-align: center}
 .assist_show_bar .tabbar-btn{background: #f00;}
-.assist_card{background: #fff;}
+.assist_card{background: #fff;width: 100%;overflow:hidden;}
 .assist_card .weui-tab__panel{padding-bottom:80px;}
 .assist_card_body{position:relative;background: #333;height:100%;}
 .assist_card_body .card_load{position: absolute;top:50%;left:0;width:100%;margin-top:-30px;}
