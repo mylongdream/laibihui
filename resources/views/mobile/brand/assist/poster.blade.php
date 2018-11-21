@@ -32,6 +32,25 @@
             </div>
         </div>
     </div>
+    <div class="assist_card_container">
+        <div class="card_bg"><img src="{{ asset('static/image/mobile/assist/cardbg_01.jpg') }}" id="cardbgimg"/></div>
+        <div class="card_body">
+            <div class="card_box">
+                <div class="pic"><img src="{{ asset('static/image/mobile/assist/zhiwen.png') }}" alt=""></div>
+                <div class="tit">再次抢至尊版-迷你运动耳机，多色可选</div>
+                <div class="price">
+                    <div class="z">仅剩<span>924</span>份</div>
+                    <div class="y">市场价<span>￥0.00</span></div>
+                </div>
+                <div class="copy">— 快来和我一起免费领取吧！ —</div>
+            </div>
+            <div class="card_qrcode">
+                <div class="qrcode z"><img src="{{ asset('static/image/mobile/assist/zhiwen.png') }}" alt=""></div>
+                <div class="fingp y"><img src="{{ asset('static/image/mobile/assist/zhiwen.png') }}" alt=""> </div>
+            </div>
+            <div class="card_tip">长按识别二维码免费领取</div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
