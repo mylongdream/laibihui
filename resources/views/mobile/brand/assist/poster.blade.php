@@ -32,23 +32,23 @@
             </div>
         </div>
     </div>
-    <div class="assist_card_container">
+    <div class="assist_card_container" id="card_container">
         <div class="card_bg"><img src="{{ asset('static/image/mobile/assist/cardbg_01.jpg') }}" id="cardbgimg"/></div>
         <div class="card_body">
             <div class="card_box">
-                <div class="pic"><img src="{{ asset('static/image/mobile/assist/zhiwen.png') }}" alt=""></div>
-                <div class="tit">再次抢至尊版-迷你运动耳机，多色可选</div>
+                <div class="pic"><img src="{{ uploadImage($info->upimage) }}" alt=""></div>
+                <div class="tit">{{ $info->name }}</div>
                 <div class="price">
-                    <div class="z">仅剩<span>924</span>份</div>
-                    <div class="y">市场价<span>￥0.00</span></div>
+                    <div class="z">仅剩<span>{{ $info->leftnum }}</span>份</div>
+                    <div class="y">市场价<em>￥</em><strong>{{ $info->price }}</strong></div>
                 </div>
-                <div class="copy">— 快来和我一起免费领取吧！ —</div>
+                <div class="copy">— 快来和我一起{{ $info->price ? '领取' : '免费领取' }}吧！ —</div>
             </div>
             <div class="card_qrcode">
                 <div class="qrcode z"><img src="{{ asset('static/image/mobile/assist/zhiwen.png') }}" alt=""></div>
                 <div class="fingp y"><img src="{{ asset('static/image/mobile/assist/zhiwen.png') }}" alt=""> </div>
             </div>
-            <div class="card_tip">长按识别二维码免费领取</div>
+            <div class="card_tip">长按识别二维码{{ $info->price ? '领取' : '免费领取' }}</div>
         </div>
     </div>
 @endsection
@@ -59,11 +59,17 @@
         $(function() {
             $(document).on("click", ".assist_card_footer li", function(){
                 $(this).addClass("on").siblings().removeClass("on");
-                var newImg = document.createElement("img");
-                newImg.src =  $(this).attr("data-card");
-                $('#generateimg').append(newImg);
-                $('.card_load').hide();
-                $('.card_box').show();
+                $('#cardbgimg').attr("src",$(this).attr("data-card"));
+                $('.card_load').show();
+                $('.card_box').hide();
+                html2canvas(document.getElementById("card_container"), {scale:2}).then(function(canvas) {
+                    var dataUrl = canvas.toDataURL();
+                    var newImg = document.createElement("img");
+                    newImg.src =  dataUrl;
+                    $('#generateimg').empty().append(newImg);
+                    $('.card_load').hide();
+                    $('.card_box').show();
+                });
             });
         });
     </script>
