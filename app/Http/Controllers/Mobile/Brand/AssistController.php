@@ -50,6 +50,7 @@ class AssistController extends Controller
         $info = BrandAssistModel::where('id', $order->assist_id)->firstOrFail();
         $app = app('wechat.official_account');
         $qrcode = $app->qrcode->temporary('assist_'.$order->id, 6 * 24 * 3600);
+        $qrcode = $app->qrcode->url($qrcode['ticket']);
         return view('mobile.brand.assist.poster', ['info'=>$info, 'qrcode'=>$qrcode]);
     }
 

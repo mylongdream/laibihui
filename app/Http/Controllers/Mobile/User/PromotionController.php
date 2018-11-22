@@ -43,7 +43,7 @@ class PromotionController extends Controller
         //if (strpos(request()->userAgent(), 'MicroMessenger') !== false){
             $app = app('wechat.official_account');
             $qrcode = $app->qrcode->forever(auth()->user()->uid);
-            $qrcode = $qrcode['url'];
+        $qrcode = $app->qrcode->url($qrcode['ticket']);
         //}else{
             //$qrcode = QrCode::format('png')->size(400)->generate($promotion);
         //}

@@ -25,7 +25,7 @@
                         <div class="copy">— 快来和我一起{{ $info->price ? '领取' : '免费领取' }}吧！ —</div>
                     </div>
                     <div class="card_qrcode">
-                        <div class="qrcode z"><img src="{{ $qrcode['url'] }}" alt=""></div>
+                        <div class="qrcode z"><img src="{{ $qrcode }}" alt=""></div>
                         <div class="fingp y"><img src="{{ asset('static/image/mobile/assist/zhiwen.png') }}" alt=""> </div>
                     </div>
                     <div class="card_tip">长按识别二维码{{ $info->price ? '领取' : '免费领取' }}</div>
