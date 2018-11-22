@@ -39,40 +39,16 @@ class PromotionController extends Controller
     public function qrcode(Request $request)
     {
         $promotion = route('mobile.promotion', ['fromuser' => Hashids::connection('promotion')->encode(auth()->user()->uid)]);
-        if($request->getcode){
-            $imgurl = 'qrcode/user/qrcode_'.(strpos(request()->userAgent(), 'MicroMessenger') !== false ? 'wx_' : '').auth()->user()->uid.'.png';
-            if(!Storage::disk('public')->exists($imgurl)) {
-                //获取二维码
-                if (strpos(request()->userAgent(), 'MicroMessenger') !== false){
-                    $app = app('wechat.official_account');
-                    $qrcode = $app->qrcode->forever(auth()->user()->uid);
-                    $qrcode = $app->qrcode->url($qrcode['ticket']);
-                    $qrcode = file_get_contents($qrcode);
-                    $qrcode = Image::make($qrcode)->resize(400, 400);
-                }else{
-                    $image = QrCode::format('png')->size(400)->generate($promotion);
-                    $qrcode = Image::make($image);
-                }
-
-                $img = Image::make(public_path('static/image/mobile/qrcode_bg.jpg'));
-                $headimgurl = auth()->user()->headimgurl && Storage::disk('public')->exists('image/'.auth()->user()->headimgurl) ? storage_path('app/public/image/'.auth()->user()->headimgurl) : public_path('static/image/common/getheadimg.jpg');
-                $headimgurl = Image::make($headimgurl)->resize(50, 50);
-
-                $img->insert($headimgurl, 'top-left', 15, 15);
-                $img->text(auth()->user()->username, 80, 50, function($font) {
-                    $font->file(public_path('/static/font/ch/yahei.ttf'));
-                    $font->size(28);
-                    $font->color('#fff');
-                });
-                $img->insert($qrcode, 'bottom', 0, 0);
-                $img->save(storage_path('app/public/'.$imgurl));
-            }
-            $img = Image::make(Storage::disk('public')->get($imgurl));
-            return $img->response('png', 90);
+        //获取二维码
+        if (strpos(request()->userAgent(), 'MicroMessenger') !== false){
+            $app = app('wechat.official_account');
+            $qrcode = $app->qrcode->forever(auth()->user()->uid);
+            $qrcode = $qrcode['url'];
         }else{
-            $shareData = ['link' => $promotion];
-            return view('mobile.user.promotion.qrcode', ['shareData' => $shareData]);
+            $qrcode = QrCode::format('png')->size(400)->generate($promotion);
         }
+        $shareData = ['link' => $promotion];
+        return view('mobile.user.promotion.qrcode', ['qrcode' => $qrcode, 'shareData' => $shareData]);
     }
 
     public function first(Request $request)

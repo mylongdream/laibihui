@@ -60,11 +60,11 @@
                 <span>更多免单</span>
             </a>
             @if (auth()->check())
-                <a href="{{ route('mobile.brand.assist.index') }}" class="weui-tabbar__item tabbar-btn">
+                <a href="{{ route('mobile.brand.assist.receive', ['id' => $info->id]) }}" class="weui-tabbar__item tabbar-btn ajaxbutton" data-method="post">
                     <span>{{ $info->price ? '我要领' : '免费领' }}</span>
                 </a>
             @else
-                <a href="{{ route('mobile.brand.assist.order') }}" class="weui-tabbar__item tabbar-btn tabbar-btn_disabled">
+                <a href="{{ route('mobile.auth.login') }}" class="weui-tabbar__item tabbar-btn tabbar-btn_disabled">
                     <span>先登录</span>
                 </a>
             @endif

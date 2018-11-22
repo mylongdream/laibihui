@@ -51,6 +51,30 @@
                             </div>
                         </div>
                         <div class="weui-panel">
+                            <div class="weui-panel__bd user-account">
+                                <div class="weui-flex">
+                                    <div class="weui-flex__item">
+                                        <a href="javascript:;" class="">
+                                            <div class="money">0 元</div>
+                                            <div class="name">今日业绩</div>
+                                        </a>
+                                    </div>
+                                    <div class="weui-flex__item">
+                                        <a href="javascript:;" class="">
+                                            <div class="money">0 元</div>
+                                            <div class="name">昨日业绩</div>
+                                        </a>
+                                    </div>
+                                    <div class="weui-flex__item">
+                                        <a href="javascript:;" class="">
+                                            <div class="money">0 元</div>
+                                            <div class="name">本月业绩</div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weui-panel">
                             <div class="weui-panel__bd">
                                 <div class="weui-grids">
                                     <a href="{{ route('mobile.crm.tuiguang.sellcard.index') }}" class="weui-grid">

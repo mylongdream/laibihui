@@ -5,13 +5,6 @@
         <div class="weui-tab__panel">
             <div class="assist_card_body">
                 <div class="card_load">
-                    <div class="wave">
-                        <div class="rect1"></div>
-                        <div class="rect2"></div>
-                        <div class="rect3"></div>
-                        <div class="rect4"></div>
-                        <div class="rect5"></div>
-                    </div>
                     <div class="tip">正在生成中，请稍候</div>
                 </div>
                 <div class="card_box">
@@ -32,7 +25,7 @@
                         <div class="copy">— 快来和我一起{{ $info->price ? '领取' : '免费领取' }}吧！ —</div>
                     </div>
                     <div class="card_qrcode">
-                        <div class="qrcode z"><img src="{{ asset('static/image/mobile/assist/zhiwen.png') }}" alt=""></div>
+                        <div class="qrcode z"><img src="{{ $qrcode['url'] }}" alt=""></div>
                         <div class="fingp y"><img src="{{ asset('static/image/mobile/assist/zhiwen.png') }}" alt=""> </div>
                     </div>
                     <div class="card_tip">长按识别二维码{{ $info->price ? '领取' : '免费领取' }}</div>
@@ -63,10 +56,12 @@
                 $('.assist_card_body .card_load').show();
                 $('.assist_card_body .card_box').hide();
                 html2canvas(document.getElementById("card_container"), {scale:2}).then(function(canvas) {
-                    var dataUrl = canvas.toDataURL();
-                    var newImg = document.createElement("img");
-                    newImg.src =  dataUrl;
-                    $('#generateimg').empty().append(newImg);
+                    try {
+                        var dataUrl = canvas.toDataURL();
+                    }catch(err){
+                        alert(err) // 可执行
+                    }
+                    $('#generateimg').empty().append($('<img/>').attr('src', dataUrl));
                     $('.assist_card_body .card_load').hide();
                     $('.assist_card_body .card_box').show();
                 });

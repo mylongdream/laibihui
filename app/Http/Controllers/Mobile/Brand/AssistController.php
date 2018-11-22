@@ -32,12 +32,25 @@ class AssistController extends Controller
 
     public function receive(Request $request){
         $info = BrandAssistModel::where('id', $request->id)->firstOrFail();
-        return view('mobile.brand.assist.receive', ['info'=>$info]);
+        $order = BrandAssistOrderModel::where('uid', auth()->user()->uid)->where('assist_id', $info->id)->first();
+        if($order){
+            return response()->redirectToRoute('mobile.brand.assist.poster', ['id' => $order->id]);
+        }
+        $order = new BrandAssistOrderModel;
+        $order->uid = auth()->user()->uid;
+        $order->assist_id = $info->id;
+        $order->order_sn = date("YmdHis") . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
+        $order->postip = request()->getClientIp();
+        $order->save();
+        return response()->redirectToRoute('mobile.brand.assist.poster', ['id' => $order->id]);
     }
 
     public function poster(Request $request){
-        $info = BrandAssistModel::where('id', $request->id)->firstOrFail();
-        return view('mobile.brand.assist.poster', ['info'=>$info]);
+        $order = BrandAssistOrderModel::where('uid', auth()->user()->uid)->where('assist_id', $request->id)->firstOrFail();
+        $info = BrandAssistModel::where('id', $order->assist_id)->firstOrFail();
+        $app = app('wechat.official_account');
+        $qrcode = $app->qrcode->temporary('assist_'.$order->id, 6 * 24 * 3600);
+        return view('mobile.brand.assist.poster', ['info'=>$info, 'qrcode'=>$qrcode]);
     }
 
     public function order(Request $request){

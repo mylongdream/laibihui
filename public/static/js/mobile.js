@@ -186,13 +186,18 @@ $(function() {
     });
     $(document).on("click", ".ajaxbutton", function(){
         var self = $(this);
+        var url = self.attr("href");
+        url = url && url.indexOf("javascript") === -1 ? url : self.attr("data-url");
+        if(url.length === 0){
+            return false;
+        }
         var loading = weui.loading('loading');
         if(self.hasClass('confirmbtn')){
             var operation = self.attr("title") || '删除';
             weui.confirm('确定要'+operation+'吗？', function(){
                 $.ajax({
-                    type:'GET',
-                    url:self.attr("href") || self.attr("data-url"),
+                    type:self.attr("data-method") || 'GET',
+                    url:url,
                     async:false
                 }).success(function(data) {
                     loading.hide();
@@ -239,8 +244,8 @@ $(function() {
             },{isAndroid: false});
         }else {
             $.ajax({
-                type:'GET',
-                url:self.attr("href") || self.attr("data-url"),
+                type:self.attr("data-method") || 'GET',
+                url:url,
                 async:false
             }).success(function(data) {
                 loading.hide();

@@ -419,6 +419,8 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::put('mobile.update', ['as' => 'mobile.update', 'uses' => 'Admin\Setting\MobileController@update']);
             Route::get('wechat', ['as' => 'wechat.index', 'uses' => 'Admin\Setting\WechatController@index']);
             Route::put('wechat.update', ['as' => 'wechat.update', 'uses' => 'Admin\Setting\WechatController@update']);
+            Route::get('commission', ['as' => 'commission.index', 'uses' => 'Admin\Setting\CommissionController@index']);
+            Route::put('commission.update', ['as' => 'commission.update', 'uses' => 'Admin\Setting\CommissionController@update']);
             Route::post('nav/batch', ['as' => 'nav.batch', 'uses' => 'Admin\Setting\NavController@batch']);
             Route::resource('nav', 'Admin\Setting\NavController');
         });
