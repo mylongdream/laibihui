@@ -31,6 +31,8 @@
         <div class="weui-tabbar">
             @if (strpos(request()->userAgent(), 'MicroMessenger') !== false)
                 <button class="weui-btn weui-btn_primary open-popup" data-target="#pop-share">马上分享</button>
+            @else
+                <button class="weui-btn weui-btn_primary open-popup" data-target="#pop-share">马上分享</button>
             @endif
         </div>
     </div>

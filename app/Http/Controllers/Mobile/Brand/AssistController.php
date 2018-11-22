@@ -46,7 +46,7 @@ class AssistController extends Controller
     }
 
     public function poster(Request $request){
-        $order = BrandAssistOrderModel::where('uid', auth()->user()->uid)->where('assist_id', $request->id)->firstOrFail();
+        $order = BrandAssistOrderModel::where('uid', auth()->user()->uid)->where('id', $request->id)->firstOrFail();
         $info = BrandAssistModel::where('id', $order->assist_id)->firstOrFail();
         $app = app('wechat.official_account');
         $qrcode = $app->qrcode->temporary('assist_'.$order->id, 6 * 24 * 3600);
