@@ -55,7 +55,7 @@
                 $('#cardbgimg').attr("src",$(this).attr("data-card"));
                 $('.assist_card_body .card_load').show();
                 $('.assist_card_body .card_box').hide();
-                html2canvas(document.getElementById("card_container"), {allowTaint: false, scale:2}).then(function(canvas) {
+                html2canvas(document.getElementById("card_container"), {scale:2}).then(function(canvas) {
                     try {
                         var dataUrl = canvas.toDataURL();
                     }catch(err){

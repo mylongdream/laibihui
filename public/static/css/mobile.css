@@ -454,8 +454,8 @@ pre{ white-space: pre-wrap!important;  word-wrap: break-word!important;  *white-
 .cardreward .btn a.disabled{background:#999;}
 
 .promotion_card{background: #fff;width: 100%;overflow:hidden;}
-.promotion_card .weui-tab__panel{padding-bottom:80px;}
-.promotion_card .weui-tabbar{padding:10px;}
+.promotion_card .weui-tab__panel{padding-bottom:66px;}
+.promotion_card .weui-tabbar{padding:10px;box-sizing: border-box;}
 .promotion_card_body{position:relative;background: #333;height:100%;}
 .promotion_card_body .card_load{position: absolute;top:50%;left:0;width:100%;margin-top:-25px;}
 .promotion_card_body .card_load .tip{padding-top:20px;height:30px;line-height:30px;color:#fff;text-align:center;font-size:14px;background-image:url(../image/mobile/loading.gif);background-repeat: no-repeat;background-position: center top;}
