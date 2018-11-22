@@ -23,7 +23,7 @@
                         <div class="line2">长按图片识别二维码</div>
                     </div>
                     <div class="card_qrcode">
-                        <div class="qrcode"><img src="{{ $qrcode }}" alt="" crossOrigin="anonymous"></div>
+                        <div class="qrcode"><img src="{{ $qrcode }}" alt=""></div>
                     </div>
                 </div>
             </div>
