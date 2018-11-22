@@ -51,7 +51,7 @@ Route::group(['domain' => 'zhihui.hztbg.com'], function () {
     Route::get('util/district', ['as' => 'util.district', 'uses' => 'Util\DistrictController@index']);
     Route::get('upload/image/{month}/{day}/{name}', ['as' => 'upload.image', 'uses' => 'Util\UploadController@image']);
     Route::get('upload/thumb/{month}/{day}/{name}', ['as' => 'upload.thumb', 'uses' => 'Util\UploadController@thumb']);
-    Route::get('upload/qrcode/{url}', ['as' => 'upload.qrcode', 'uses' => 'Util\UploadController@qrcode']);
+    Route::get('upload/qrcode/{one?}/{two?}', ['as' => 'upload.qrcode', 'uses' => 'Util\UploadController@qrcode']);
     Route::get('upload/video/{url}', ['as' => 'upload.video', 'uses' => 'Util\UploadController@video']);
     Route::get('check/username', ['as' => 'check.username', 'uses' => 'Util\CheckController@username']);
     Route::get('check/mobile/register', ['as' => 'check.mobile.register', 'uses' => 'Util\CheckController@mobileRegister']);

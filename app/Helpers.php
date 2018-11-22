@@ -117,7 +117,8 @@ function uploadQrcode($filepath) {
     $route = 1;
     $imagefolder = 'qrcode/';
     if($route) {
-        return route('upload.qrcode', ['url' => $filepath]);
+        list($one, $two) = explode('/', $filepath);
+        return route('upload.qrcode', ['one' => $one, 'two' => $two]);
     }else {
         return asset(Storage::disk('public')->url($imagefolder.$filepath));
     }

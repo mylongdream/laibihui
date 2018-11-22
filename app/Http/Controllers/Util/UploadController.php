@@ -50,7 +50,7 @@ class UploadController extends Controller
     }
 
     public function qrcode(Request $request){
-        $url = $request->month.'/'.$request->day.'/'.$request->name;
+        $url = $request->one.'/'.$request->two;
         $url = 'qrcode/'.$url;
         if(Storage::disk('public')->exists($url)){
             $imgext  = array('jpg', 'jpeg', 'gif', 'png', 'bmp');
