@@ -46,7 +46,7 @@
     <script type="text/javascript">
         $(function() {
             setTimeout(function(){
-                html2canvas(document.getElementById("card_container"), {scale:2}).then(function(canvas) {
+                html2canvas(document.getElementById("card_container"), {allowTaint: false, scale:2}).then(function(canvas) {
                     try {
                         var dataUrl = canvas.toDataURL();
                     }catch(err){

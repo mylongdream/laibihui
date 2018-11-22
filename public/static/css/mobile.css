@@ -469,11 +469,10 @@ pre{ white-space: pre-wrap!important;  word-wrap: break-word!important;  *white-
 .promotion_card_container .card_user .headimg{float:left;margin-right:15px;}
 .promotion_card_container .card_user .headimg img{width: 60px;height: 60px;display:block;border-radius:4px;}
 .promotion_card_container .card_user .name{float:left;line-height:60px;font-size:18px;}
-.promotion_card_container .card_tip .line1{margin-top:15px;font-size:24px;color: #999;overflow: hidden}
+.promotion_card_container .card_tip .line1{margin-top:15px;font-size:24px;color: #f00;text-align: center}
 .promotion_card_container .card_tip .line2{margin-top:15px;font-size:24px;color: #f00;text-align: center}
-.promotion_card_container .card_qrcode{width:280px;margin:20px auto 0;overflow: hidden}
+.promotion_card_container .card_qrcode{width:280px;margin:40px auto 0;overflow: hidden}
 .promotion_card_container .card_qrcode img{width:280px;height:280px;display: block}
-.promotion_card_container .card_tip{margin-top:15px;height:24px;line-height:24px;font-size:14px;color: #fff;text-align: center}
 
 .sellcard-cell {margin:0 15px;}
 .sellcard-cell .weui-label{width:auto;margin-right:10px;}
