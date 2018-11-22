@@ -51,6 +51,9 @@ class AssistController extends Controller
         $app = app('wechat.official_account');
         $qrcode = $app->qrcode->temporary('assist_'.$order->id, 6 * 24 * 3600);
         $qrcode = $app->qrcode->url($qrcode['ticket']);
+        $imgurl = 'assist/qrcode_wx_'.$order->id.'.png';
+        file_put_contents(storage_path('app/public/qrcode/'.$imgurl), $qrcode);
+        $qrcode = uploadQrcode($imgurl);
         return view('mobile.brand.assist.poster', ['info'=>$info, 'qrcode'=>$qrcode]);
     }
 
