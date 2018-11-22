@@ -41,12 +41,17 @@ class PromotionController extends Controller
         $promotion = route('mobile.promotion', ['fromuser' => Hashids::connection('promotion')->encode(auth()->user()->uid)]);
         //获取二维码
         if (strpos(request()->userAgent(), 'MicroMessenger') !== false){
+            $imgurl = 'user/qrcode_wx_'.auth()->user()->uid.'.png';
             $app = app('wechat.official_account');
             $qrcode = $app->qrcode->forever(auth()->user()->uid);
             $qrcode = $app->qrcode->url($qrcode['ticket']);
+            //$qrcode = file_get_contents($qrcode);
+            file_put_contents(storage_path('app/public/qrcode/'.$imgurl), $qrcode);
         }else{
-            $qrcode = QrCode::size(400)->generate($promotion);
+            $imgurl = 'user/qrcode_'.auth()->user()->uid.'.png';
+            QrCode::format('png')->size(400)->generate($promotion, storage_path('app/public/qrcode/'.$imgurl));
         }
+        $qrcode = uploadQrcode($imgurl);
         $shareData = ['link' => $promotion];
         return view('mobile.user.promotion.qrcode', ['qrcode' => $qrcode, 'shareData' => $shareData]);
     }

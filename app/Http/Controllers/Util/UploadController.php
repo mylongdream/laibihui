@@ -49,6 +49,20 @@ class UploadController extends Controller
         return '';
     }
 
+    public function qrcode(Request $request){
+        $url = $request->month.'/'.$request->day.'/'.$request->name;
+        $url = 'qrcode/'.$url;
+        if(Storage::disk('public')->exists($url)){
+            $imgext  = array('jpg', 'jpeg', 'gif', 'png', 'bmp');
+            $thumbext = addslashes(strtolower(substr(strrchr($url, '.'), 1, 10)));
+            if(in_array($thumbext, $imgext)) {
+                $img = Image::make(Storage::disk('public')->get($url));
+                return $img->response($thumbext, 90);
+            }
+        }
+        return '';
+    }
+
     public function video($id, Request $request){
         $id = Hashids::connection('video')->decode($id);
         $video = CommonUploadVideoModel::where('id', $id)->firstOrFail();

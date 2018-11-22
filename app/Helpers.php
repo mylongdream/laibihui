@@ -109,6 +109,20 @@ function uploadImage($filepath, $extra = array()) {
     }
 }
 
+function uploadQrcode($filepath) {
+    $parse = parse_url($filepath);
+    if(isset($parse['host'])) {
+        return $filepath;
+    }
+    $route = 1;
+    $imagefolder = 'qrcode/';
+    if($route) {
+        return route('upload.qrcode', ['url' => $filepath]);
+    }else {
+        return asset(Storage::disk('public')->url($imagefolder.$filepath));
+    }
+}
+
 function uploadVideo($filepath) {
 
 }
