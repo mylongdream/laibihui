@@ -34,7 +34,11 @@ class AssistController extends Controller
         $info = BrandAssistModel::where('id', $request->id)->firstOrFail();
         $order = BrandAssistOrderModel::where('uid', auth()->user()->uid)->where('assist_id', $info->id)->first();
         if($order){
-            return response()->redirectToRoute('mobile.brand.assist.poster', ['id' => $order->id]);
+            if ($request->ajax()){
+                return response()->json(['status' => '1', 'info' => '领取成功', 'url' => route('mobile.brand.assist.poster', ['id' => $order->id])]);
+            }else{
+                return response()->redirectToRoute('mobile.brand.assist.poster', ['id' => $order->id]);
+            }
         }
         $order = new BrandAssistOrderModel;
         $order->uid = auth()->user()->uid;
@@ -42,7 +46,11 @@ class AssistController extends Controller
         $order->order_sn = date("YmdHis") . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
         $order->postip = request()->getClientIp();
         $order->save();
-        return response()->redirectToRoute('mobile.brand.assist.poster', ['id' => $order->id]);
+        if ($request->ajax()){
+            return response()->json(['status' => '1', 'info' => '领取成功', 'url' => route('mobile.brand.assist.poster', ['id' => $order->id])]);
+        }else{
+            return response()->redirectToRoute('mobile.brand.assist.poster', ['id' => $order->id]);
+        }
     }
 
     public function poster(Request $request){
