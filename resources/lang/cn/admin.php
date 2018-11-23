@@ -103,6 +103,13 @@ return [
 	'setting.mobile.bbclosed' => '关闭手机版',
 	'setting.mobile.bbclosed.comment' => '暂时将站点关闭，其他人无法访问',
 
+    'setting.commission' => '提成设置',
+    'setting.commission.investment' => '成功招商奖励',
+    'setting.commission.shopsellcard' => '商户卖卡奖励',
+    'setting.commission.topshopsellcard' => '负责商户卖卡奖励',
+    'setting.commission.usersellcard' => '推广卖卡奖励',
+    'setting.commission.topusersellcard' => '上级推广卖卡奖励',
+
 	'setting.wechat' => '公众号设置',
 	'setting.wechat.name' => '公众号名称',
 	'setting.wechat.id' => '微信号',
