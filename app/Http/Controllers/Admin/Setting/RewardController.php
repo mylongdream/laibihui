@@ -7,7 +7,7 @@ use App\Models\CommonSettingModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
-class CommissionController extends Controller
+class RewardController extends Controller
 {
 
     public function __construct()
@@ -17,7 +17,7 @@ class CommissionController extends Controller
 
     public function index()
     {
-        return view('admin.setting.commission.index');
+        return view('admin.setting.reward.index');
     }
 
     public function update(Request $request)

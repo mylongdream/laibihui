@@ -120,7 +120,7 @@
 	<script type="text/javascript" src="{{ asset('static/js/jquery.cityselect.js') }}"></script>
 	<script type="text/javascript">
         $(function(){
-            $("#workarea_city").citySelect({
+            $("#workarea").citySelect({
                 url:"{{ route('util.district') }}"
             });
         });

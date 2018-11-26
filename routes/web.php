@@ -333,6 +333,8 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
                 Route::get('cardreward', ['as' => 'cardreward.index', 'uses' => 'Mobile\CRM\Tuiguang\CardRewardController@index']);
                 Route::any('cardreward/record', ['as' => 'cardreward.record', 'uses' => 'Mobile\CRM\Tuiguang\CardRewardController@record']);
                 Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'Mobile\CRM\Tuiguang\CardRewardController@exchange']);
+                Route::get('grantsell', ['as' => 'grantsell.index', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@index']);
+                Route::any('grantsell/apply', ['as' => 'grantsell.apply', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@apply']);
             });
             Route::group(['prefix' => 'kefu', 'as' => 'kefu.'], function () {
                 Route::get('/', ['as' => 'index', 'uses' => 'Mobile\CRM\Kefu\IndexController@index']);
@@ -420,8 +422,8 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::put('mobile.update', ['as' => 'mobile.update', 'uses' => 'Admin\Setting\MobileController@update']);
             Route::get('wechat', ['as' => 'wechat.index', 'uses' => 'Admin\Setting\WechatController@index']);
             Route::put('wechat.update', ['as' => 'wechat.update', 'uses' => 'Admin\Setting\WechatController@update']);
-            Route::get('commission', ['as' => 'commission.index', 'uses' => 'Admin\Setting\CommissionController@index']);
-            Route::put('commission.update', ['as' => 'commission.update', 'uses' => 'Admin\Setting\CommissionController@update']);
+            Route::get('reward', ['as' => 'reward.index', 'uses' => 'Admin\Setting\RewardController@index']);
+            Route::put('reward.update', ['as' => 'reward.update', 'uses' => 'Admin\Setting\RewardController@update']);
             Route::post('nav/batch', ['as' => 'nav.batch', 'uses' => 'Admin\Setting\NavController@batch']);
             Route::resource('nav', 'Admin\Setting\NavController');
         });

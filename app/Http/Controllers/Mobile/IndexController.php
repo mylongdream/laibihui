@@ -182,7 +182,7 @@ class IndexController extends Controller
 
             //return view('layouts.mobile.message', ['status' => 0, 'info' => '请用微信或支付宝支付']);
         }else{
-            return view('mobile.sellcard');
+            return view('mobile.sellcard', ['fromuser' => $fromuser]);
         }
     }
 
