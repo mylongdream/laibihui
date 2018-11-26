@@ -27,6 +27,8 @@
                 <span class="pipe">|</span>
                 <a href="{{ route('brand.card.active') }}" title="快速开卡">快速开卡</a>
             @endauth
+                <span class="pipe">|</span>
+                <a href="{{ route('user.promotion.index') }}" title="推荐注册" class="tuijian">推荐注册<i>送钱</i></a>
             <span class="pipe">|</span>
             <span class="tel">咨询热线：{{ $setting['site_tel'] }}</span>
         </div>

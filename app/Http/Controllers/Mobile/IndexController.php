@@ -66,9 +66,12 @@ class IndexController extends Controller
 
     public function grantsell(Request $request)
     {
+        if (!auth()->user()->group->grantsellcard) {
+            return view('layouts.mobile.message', ['status' => 0, 'info' => '你没有开通授权办卡的权限']);
+        }
         if ($request->fromuser && $fromuid = Hashids::connection('promotion')->decode($request->fromuser)){
             $fromuser = CommonUserModel::where('uid', $fromuid)->first();
-            if ($fromuser && $fromuser->group && $fromuser->group->grantsellcard) {
+            if ($fromuser) {
                 if ($request->isMethod('POST')) {
                     if(auth()->user()->personnel){
                         return view('layouts.mobile.message', ['status' => 0, 'info' => '业务员'.$fromuser->username.'已为您开通卖卡']);

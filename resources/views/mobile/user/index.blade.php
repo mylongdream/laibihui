@@ -139,6 +139,12 @@
                                         </div>
                                         <p class="weui-grid__label">助力免单</p>
                                     </a>
+                                    <a href="{{ route('mobile.user.partner.index') }}" class="weui-grid">
+                                        <div class="weui-grid__icon">
+                                            <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-assist.png') }}" alt="">
+                                        </div>
+                                        <p class="weui-grid__label">合伙人计划</p>
+                                    </a>
                                 </div>
                             </div>
                         </div>

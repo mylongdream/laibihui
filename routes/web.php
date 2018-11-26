@@ -334,7 +334,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
                 Route::any('cardreward/record', ['as' => 'cardreward.record', 'uses' => 'Mobile\CRM\Tuiguang\CardRewardController@record']);
                 Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'Mobile\CRM\Tuiguang\CardRewardController@exchange']);
                 Route::get('grantsell', ['as' => 'grantsell.index', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@index']);
-                Route::any('grantsell/apply', ['as' => 'grantsell.apply', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@apply']);
+                Route::any('grantsell/cancel', ['as' => 'grantsell.cancel', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@cancel']);
             });
             Route::group(['prefix' => 'kefu', 'as' => 'kefu.'], function () {
                 Route::get('/', ['as' => 'index', 'uses' => 'Mobile\CRM\Kefu\IndexController@index']);

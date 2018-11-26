@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\CommonSellcardModel;
 use App\Models\CommonUserModel;
+use App\Models\CrmPersonnelModel;
 use Intervention\Image\Facades\Image;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Vinkla\Hashids\Facades\Hashids;
@@ -21,32 +22,18 @@ class GrantsellController extends CommonController
 
     public function index(Request $request)
     {
-        return view('mobile.crm.tuiguang.grantsell.index');
+        $list = CrmPersonnelModel::where('topuid', auth('crm')->user()->uid)->orderBy('created_at', 'desc')->paginate(20);
+        return view('mobile.crm.tuiguang.grantsell.index', ['list' => $list]);
     }
 
-    public function apply(Request $request)
+    public function cancel(Request $request)
     {
-        $fromuid = $request->fromuser ? Hashids::connection('promotion')->decode($request->fromuser) : 0;
-        $fromuid = $fromuid ? $fromuid : 0;
-        $fromuser = CommonUserModel::where('uid', $fromuid)->first();
-        if($request->isMethod('POST')){
-            $rules = array(
-                'amount' => 'required|numeric|min:1',
-            );
-            $messages = array(
-                'amount.required' => '兑换可用余额不允许为空！',
-                'amount.numeric' => '兑换可用余额填写不正确！',
-                'amount.min' => '兑换可用余额不少于1元！',
-            );
-            $request->validate($rules, $messages);
+        $user = CrmPersonnelModel::where('topuid', auth('crm')->user()->uid)->findOrFail($request->id);
 
-            if ($request->ajax()){
-                return response()->json(['status' => 1, 'info' => trans('user.score.exchangesucceed'), 'url' => back()->getTargetUrl()]);
-            }else{
-                return view('layouts.mobile.message', ['status' => 1, 'info' => trans('user.score.exchangesucceed'), 'url' => back()->getTargetUrl()]);
-            }
+        if ($request->ajax()){
+            return response()->json(['status' => 1, 'info' => trans('user.score.exchangesucceed'), 'url' => back()->getTargetUrl()]);
         }else{
-            return view('mobile.crm.tuiguang.grantsell.apply', ['user' => $fromuser]);
+            return view('layouts.mobile.message', ['status' => 1, 'info' => trans('user.score.exchangesucceed'), 'url' => back()->getTargetUrl()]);
         }
     }
 
