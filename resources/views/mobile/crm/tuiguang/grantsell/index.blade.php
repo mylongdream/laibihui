@@ -4,9 +4,9 @@
 <style>
     .grantsell_list{background:#fff;}
     .grantsell_list table{border-spacing:0;border-collapse:collapse;width:100%;font-size:14px;}
-    .grantsell_list table th{height:30px;padding:5px 12px;border:1px solid #e2e2e2;font-weight:bold;text-align: center}
-    .grantsell_list table td{height:30px;padding:5px 12px;border:1px solid #e2e2e2;word-break:break-all;text-align: center;}
-    #cardnum_input{padding: 4px 6px;border: 1px solid #ccc;box-sizing: border-box;}
+    .grantsell_list table th{height:30px;padding:5px 6px;border:1px solid #e2e2e2;font-weight:bold;text-align: center}
+    .grantsell_list table td{height:30px;padding:5px 6px;border:1px solid #e2e2e2;word-break:break-all;text-align: center;}
+    #cardnum_input{padding: 4px 6px;border: 1px solid #ccc;box-sizing: border-box;height: 2em;}
 </style>
 @endsection
 
@@ -26,7 +26,7 @@
                                     <th width="120">姓名</th>
                                     <th width="120">总售卡数</th>
                                     <th width="120">剩余卡数</th>
-                                    <th width="150">操作</th>
+                                    <th width="250">操作</th>
                                 </tr>
                                 @foreach ($list as $value)
                                     <tr>
@@ -35,7 +35,7 @@
                                         <td>{{ $value->allotnum - $value->sellnum }}</td>
                                         <td>
                                             <a href="{{ route('mobile.crm.tuiguang.grantsell.patch', ['id' => $value->id]) }}" class="promptbutton">补卡</a>
-                                            <a href="{{ route('mobile.crm.tuiguang.grantsell.cancel', ['id' => $value->id]) }}" class="ajaxbutton confirmbtn" data-method="post" title="取消授权">取消授权</a>
+                                            <a href="{{ route('mobile.crm.tuiguang.grantsell.cancel', ['id' => $value->id]) }}" class="ajaxbutton confirmbtn mlm" data-method="post" title="取消授权">取消授权</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -60,10 +60,10 @@
             $(document).on("click", ".promptbutton", function(){
                 var self = $(this);
                 var content = '<input type="text" name="cardnum" class="weui-input" id="cardnum_input" />';
-                weui.dialog({
+                var dialogDom = weui.dialog({
                     title: '输入补卡数量',
                     content: content,
-                    className: '',
+                    isAndroid: false,
                     buttons: [{
                         label: '取消',
                         type: 'default',
@@ -119,6 +119,7 @@
                                     return false;
                                 }
                             });
+                            return false;
                         }
                     }]
                 });

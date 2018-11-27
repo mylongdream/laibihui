@@ -191,10 +191,10 @@ $(function() {
         if(url.length === 0){
             return false;
         }
-        var loading = weui.loading('loading');
         if(self.hasClass('confirmbtn')){
             var operation = self.attr("title") || '删除';
             weui.confirm('确定要'+operation+'吗？', function(){
+                var loading = weui.loading('loading');
                 $.ajax({
                     type:self.attr("data-method") || 'GET',
                     url:url,
@@ -243,6 +243,7 @@ $(function() {
                 });
             },{isAndroid: false});
         }else {
+            var loading = weui.loading('loading');
             $.ajax({
                 type:self.attr("data-method") || 'GET',
                 url:url,
