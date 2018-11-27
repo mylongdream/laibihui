@@ -83,11 +83,11 @@
                                         </div>
                                         <p class="weui-grid__label">面对面办卡</p>
                                     </a>
-                                    <a href="javascript:;" class="weui-grid">
+                                    <a href="{{ route('mobile.crm.tuiguang.grantsell.index') }}" class="weui-grid">
                                         <div class="weui-grid__icon">
                                             <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-tg.png') }}" alt="">
                                         </div>
-                                        <p class="weui-grid__label">授权办卡</p>
+                                        <p class="weui-grid__label">授权办卡管理</p>
                                     </a>
                                     <a href="javascript:;" class="weui-grid">
                                         <div class="weui-grid__icon">
