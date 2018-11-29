@@ -117,7 +117,7 @@
 @endsection
 
 @section('script')
-	<script type="text/javascript" src="{{ asset('static/js/jquery.cityselect.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('static/js/weui.cityselect.js') }}"></script>
 	<script type="text/javascript">
         $(function(){
             $("#workarea").citySelect({
