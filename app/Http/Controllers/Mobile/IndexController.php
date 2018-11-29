@@ -135,9 +135,9 @@ class IndexController extends Controller
                         $fromuser->personnel->save();
                     }
                     if ($request->ajax()){
-                        return response()->json(['status' => '1', 'info' => '授权办卡功能开通成功', 'url' => back()->getTargetUrl()]);
+                        return response()->json(['status' => '1', 'info' => '授权办卡功能开通成功', 'url' => route('mobile.crm.tuiguang.grantsell.index')]);
                     }else{
-                        return view('layouts.mobile.message', ['status' => 1, 'info' => '授权办卡功能开通成功']);
+                        return view('layouts.mobile.message', ['status' => 1, 'info' => '授权办卡功能开通成功', 'url' => route('mobile.crm.tuiguang.grantsell.index')]);
                     }
                 }else{
                     return view('mobile.grantsell', ['fromuser' => $fromuser]);
