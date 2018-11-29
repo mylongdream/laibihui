@@ -80,6 +80,30 @@ class IndexController extends Controller
                     if($fromuser->personnel && !$fromuser->personnel->disabled){
                         return view('layouts.mobile.message', ['status' => 0, 'info' => '业务员'.($fromuser->personnel->topuser ? $fromuser->personnel->topuser->username : '').'已为TA开通卖卡']);
                     }
+                    $rules = array(
+                        'realname' => 'required|max:10',
+                        'age' => 'required|numeric|min:16|max:90',
+                        'province' => 'required|numeric|exists:common_district,id',
+                        'city' => 'required|numeric|exists:common_district,id',
+                        'mobile' => 'bail|required|zh_mobile|exists:common_user|confirm_mobile_not_change',
+                        'smscode' => 'required|verify_code',
+                    );
+                    $messages = array(
+                        'realname.required' => '真实姓名不允许为空！',
+                        'realname.max' => '真实姓名填写错误！',
+                        'age.required' => '年龄不允许为空！',
+                        'age.numeric' => '年龄填写错误！',
+                        'age.min' => '年龄填写错误！',
+                        'age.max' => '年龄填写错误！',
+                        'province.required' => '所在省份不允许为空！',
+                        'province.numeric' => '所在省份选择错误！',
+                        'province.exists' => '所在省份不存在！',
+                        'city.required' => '所在城市不允许为空！',
+                        'city.numeric' => '所在城市选择错误！',
+                        'city.exists' => '所在城市不存在！',
+                    );
+                    $request->validate($rules, $messages);
+
                     $grantsell = new CrmGrantsellModel;
                     $grantsell->uid = $fromuser->uid;
                     $grantsell->topuid = auth()->user()->uid;
@@ -110,7 +134,11 @@ class IndexController extends Controller
                         $fromuser->personnel->created_at = time();
                         $fromuser->personnel->save();
                     }
-                    return view('layouts.mobile.message', ['status' => 1, 'info' => '授权办卡功能开通成功']);
+                    if ($request->ajax()){
+                        return response()->json(['status' => '1', 'info' => '授权办卡功能开通成功', 'url' => back()->getTargetUrl()]);
+                    }else{
+                        return view('layouts.mobile.message', ['status' => 1, 'info' => '授权办卡功能开通成功']);
+                    }
                 }else{
                     return view('mobile.grantsell', ['fromuser' => $fromuser]);
                 }

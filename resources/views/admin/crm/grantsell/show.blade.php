@@ -32,11 +32,19 @@
 				</tr>
 				<tr>
 					<td width="150" align="right">{{ trans('admin.crm.grantsell.idcardpic') }}</td>
-					<td>{{ $info->idcardpic }}</td>
+					<td>
+						@if ($info->idcardpic)
+						<img src="{{ uploadImage($info->idcardpic) }}" alt="">
+						@endif
+					</td>
 				</tr>
 				<tr>
 					<td width="150" align="right">{{ trans('admin.crm.grantsell.grantpic') }}</td>
-					<td>{{ $info->grantpic }}</td>
+					<td>
+						@if ($info->grantpic)
+							<img src="{{ uploadImage($info->grantpic) }}" alt="">
+						@endif
+					</td>
 				</tr>
 			</table>
 		</div>
