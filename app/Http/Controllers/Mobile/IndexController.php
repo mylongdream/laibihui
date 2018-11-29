@@ -85,10 +85,10 @@ class IndexController extends Controller
                     $grantsell->topuid = auth()->user()->uid;
                     $grantsell->realname = $request->realname;
                     $grantsell->mobile = $request->mobile;
-                    $grantsell->age = $request->age;
+                    $grantsell->age = intval($request->age);
                     $grantsell->idcard = $request->idcard;
-                    $grantsell->province = $request->province;
-                    $grantsell->city = $request->city;
+                    $grantsell->province = intval($request->province);
+                    $grantsell->city = intval($request->city);
                     $grantsell->idcardpic = $request->idcardpic;
                     $grantsell->grantpic = $request->grantpic;
                     $grantsell->postip = $request->getClientIp();

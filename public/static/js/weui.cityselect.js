@@ -36,6 +36,10 @@
 
         // 赋值省份函数
         var provStart=function(){
+            if(prov_obj.length === 0){
+                box_obj.val('');
+                return false;
+            }
             var prov_id = parseInt(prov_obj.val());
             $.getJSON(settings.url,{type:'province'},function(json){
                 var items = [];
@@ -67,6 +71,11 @@
 
         // 赋值市级函数
         var cityStart=function(){
+            if(city_obj.length === 0){
+                box_obj.val(box_val);
+                prov_obj.val(prov_val);
+                return false;
+            }
             var city_id = parseInt(city_obj.val());
             $.getJSON(settings.url,{type:'city', upid:prov_val},function(json){
                 var items = [];
@@ -98,6 +107,12 @@
 
         // 赋值地区（县）函数
         var distStart=function(){
+            if(dist_obj.length === 0){
+                box_obj.val(box_val);
+                prov_obj.val(prov_val);
+                city_obj.val(city_val);
+                return false;
+            }
             var dist_id = parseInt(dist_obj.val());
             $.getJSON(settings.url,{type:'area', upid:city_val},function(json){
                 var items = [];
@@ -130,6 +145,13 @@
 
         // 赋值街道函数
         var streetStart=function(){
+            if(street_obj.length === 0){
+                box_obj.val(box_val);
+                prov_obj.val(prov_val);
+                city_obj.val(city_val);
+                dist_obj.val(dist_val);
+                return false;
+            }
             var street_id = parseInt(street_obj.val());
             $.getJSON(settings.url,{type:'street', upid:dist_val},function(json){
                 var items = [];
