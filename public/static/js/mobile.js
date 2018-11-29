@@ -166,7 +166,7 @@ $(function() {
                         isAndroid: false
                     });
                 }
-            }).error(function() {
+            }).error(function(data) {
                 loading.hide();
                 if (!data) {
                     return true;
@@ -226,7 +226,7 @@ $(function() {
                             isAndroid: false
                         });
                     }
-                }).error(function() {
+                }).error(function(data) {
                     loading.hide();
                     if (!data) {
                         return true;
@@ -275,7 +275,7 @@ $(function() {
                         isAndroid: false
                     });
                 }
-            }).error(function() {
+            }).error(function(data) {
                 loading.hide();
                 if (!data) {
                     return true;
@@ -423,7 +423,9 @@ $(function() {
                 var $ele = $(error.ele),
                     msg = error.msg,
                     tips = $ele.attr(msg + 'Tips') || $ele.attr('tips') || $ele.attr('placeholder');
-                if (tips) weui.toast(tips, {duration: 3000, className: 'toast-error'});
+                if (tips) {
+                    weui.toast(tips, {duration: 3000, className: 'toast-error'});
+                }
             }
             return true;
         }, regexp);
@@ -488,9 +490,11 @@ $(function() {
                 var $ele = $(error.ele),
                     msg = error.msg,
                     tips = $ele.attr(msg + 'Tips') || $ele.attr('tips') || $ele.attr('placeholder');
-                if (tips) weui.alert(tips, {
-                    isAndroid: false
-                });
+                if (tips){
+                    weui.alert(tips, {
+                        isAndroid: false
+                    });
+                }
             }
             return true;
         }, regexp);

@@ -6,7 +6,7 @@
     .grantsell_list table{border-spacing:0;border-collapse:collapse;width:100%;font-size:14px;}
     .grantsell_list table th{height:30px;padding:5px 6px;border:1px solid #e2e2e2;font-weight:bold;text-align: center}
     .grantsell_list table td{height:30px;padding:5px 6px;border:1px solid #e2e2e2;word-break:break-all;text-align: center;}
-    #cardnum_input{padding: 4px 6px;border: 1px solid #ccc;box-sizing: border-box;height: 2em;}
+    .cardnum_input{padding: 5px 6px;border: 1px solid #ccc;}
 </style>
 @endsection
 
@@ -26,7 +26,7 @@
                                     <th width="120">姓名</th>
                                     <th width="120">总售卡数</th>
                                     <th width="120">剩余卡数</th>
-                                    <th width="250">操作</th>
+                                    <th width="220">操作</th>
                                 </tr>
                                 @foreach ($list as $value)
                                     <tr>
@@ -59,7 +59,7 @@
         $(function(){
             $(document).on("click", ".promptbutton", function(){
                 var self = $(this);
-                var content = '<input type="text" name="cardnum" class="weui-input" id="cardnum_input" />';
+                var content = '<div class="cardnum_input"><input type="text" name="cardnum" class="weui-input" /></div>';
                 var dialogDom = weui.dialog({
                     title: '输入补卡数量',
                     content: content,
@@ -76,10 +76,11 @@
                             $.ajax({
                                 type:'POST',
                                 url:self.attr("href"),
-                                data:{'cardnum': $("#cardnum_input").val()}
+                                data:{'cardnum': $(".cardnum_input input").val()}
                             }).success(function(data) {
                                 loading.hide();
                                 if(data.status == 1){
+                                    dialogDom.hide();
                                     if (data.info) {
                                         weui.toast(data.info, {
                                             duration: 3000,
@@ -100,20 +101,16 @@
                                         }
                                     }
                                 } else {
-                                    weui.alert(data.info, {
-                                        isAndroid: false
-                                    });
+                                    weui.topTips(data.info);
                                 }
-                            }).error(function() {
+                            }).error(function(data) {
                                 loading.hide();
                                 if (!data) {
                                     return true;
                                 } else {
                                     message = $.parseJSON(data.responseText);
                                     $.each(message.errors, function (key, value) {
-                                        weui.alert(value, {
-                                            isAndroid: false
-                                        });
+                                        weui.topTips(value);
                                         return false;
                                     });
                                     return false;

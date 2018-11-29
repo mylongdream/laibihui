@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CommonCardModel;
 use App\Models\CommonSellcardModel;
 use App\Models\CommonUserAccountModel;
+use App\Models\CrmGrantsellModel;
 use App\Models\CrmPersonnelModel;
 use Illuminate\Http\Request;
 use App\Models\BrandCategoryModel;
@@ -72,16 +73,44 @@ class IndexController extends Controller
         if ($request->fromuser && $fromuid = Hashids::connection('promotion')->decode($request->fromuser)){
             $fromuser = CommonUserModel::where('uid', $fromuid)->first();
             if ($fromuser) {
+                if (!$fromuser->card) {
+                    //return view('layouts.mobile.message', ['status' => 0, 'info' => '对方尚未绑卡，不能授权办卡']);
+                }
                 if ($request->isMethod('POST')) {
-                    if(auth()->user()->personnel){
-                        return view('layouts.mobile.message', ['status' => 0, 'info' => '业务员'.$fromuser->username.'已为您开通卖卡']);
+                    if($fromuser->personnel && !$fromuser->personnel->disabled){
+                        return view('layouts.mobile.message', ['status' => 0, 'info' => '业务员'.($fromuser->personnel->topuser ? $fromuser->personnel->topuser->username : '').'已为TA开通卖卡']);
                     }
-                    $user = new CrmPersonnelModel;
-                    $user->topuid = $fromuser->uid;
-                    $user->uid = auth()->user()->uid;
-                    $user->postip = $request->getClientIp();
-                    $user->save();
-                    return view('layouts.mobile.message', ['status' => 1, 'info' => '开通卖卡成功']);
+                    $grantsell = new CrmGrantsellModel;
+                    $grantsell->uid = $fromuser->uid;
+                    $grantsell->topuid = auth()->user()->uid;
+                    $grantsell->realname = $request->realname;
+                    $grantsell->mobile = $request->mobile;
+                    $grantsell->age = $request->age;
+                    $grantsell->idcard = $request->idcard;
+                    $grantsell->province = $request->province;
+                    $grantsell->city = $request->city;
+                    $grantsell->idcardpic = $request->idcardpic;
+                    $grantsell->grantpic = $request->grantpic;
+                    $grantsell->postip = $request->getClientIp();
+                    $grantsell->save();
+                    if(!$fromuser->personnel){
+                        $personnel = new CrmPersonnelModel;
+                        $personnel->uid = $fromuser->uid;
+                        $personnel->topuid = auth()->user()->uid;
+                        $personnel->realname = $request->realname;
+                        $personnel->mobile = $request->mobile;
+                        $personnel->postip = $request->getClientIp();
+                        $personnel->save();
+                    }else{
+                        $fromuser->personnel->disabled = 0;
+                        $fromuser->personnel->topuid = auth()->user()->uid;
+                        $fromuser->personnel->realname = $request->realname;
+                        $fromuser->personnel->mobile = $request->mobile;
+                        $fromuser->personnel->postip = $request->getClientIp();
+                        $fromuser->personnel->created_at = time();
+                        $fromuser->personnel->save();
+                    }
+                    return view('layouts.mobile.message', ['status' => 1, 'info' => '授权办卡功能开通成功']);
                 }else{
                     return view('mobile.grantsell', ['fromuser' => $fromuser]);
                 }

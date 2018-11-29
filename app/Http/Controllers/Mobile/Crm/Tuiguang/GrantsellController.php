@@ -22,7 +22,7 @@ class GrantsellController extends CommonController
 
     public function index(Request $request)
     {
-        $list = CrmPersonnelModel::where('topuid', auth('crm')->user()->uid)->orderBy('created_at', 'desc')->paginate(20);
+        $list = CrmPersonnelModel::where('topuid', auth('crm')->user()->uid)->where('disabled', 0)->orderBy('created_at', 'desc')->paginate(20);
         return view('mobile.crm.tuiguang.grantsell.index', ['list' => $list]);
     }
 
@@ -51,14 +51,23 @@ class GrantsellController extends CommonController
     public function cancel(Request $request)
     {
         $personnel = CrmPersonnelModel::where('topuid', auth('crm')->user()->uid)->findOrFail($request->id);
+        if($personnel->disabled == 1){
+            if ($request->ajax()){
+                return response()->json(['status' => 0, 'info' => '已取消授权', 'url' => back()->getTargetUrl()]);
+            }else{
+                return view('layouts.mobile.message', ['status' => 0, 'info' => '已取消授权', 'url' => back()->getTargetUrl()]);
+            }
+        }
         //剩余卡数退回
         auth('crm')->user()->personnel->increment('allotnum', $personnel->allotnum - $personnel->sellnum);
+        $personnel->allotnum = $personnel->sellnum;
+        $personnel->disabled = 1;
+        $personnel->save();
 
 
 
         //变回普通会员
         $personnel->user->update(['group' => 1]);
-        $personnel->delete();
 
         if ($request->ajax()){
             return response()->json(['status' => 1, 'info' => '成功取消授权', 'url' => back()->getTargetUrl()]);
