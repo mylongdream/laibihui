@@ -10,10 +10,10 @@
                 </div>
                 <div class="weui-article">
                     <p style="text-align: center"><img src="{{ $qrcode }}" alt=""></p>
-                    <p>你尚未开通推广售卡服务，请按以下方式操作</p>
+                    <p><strong>你尚未开通推广售卡服务，请按以下方式操作</strong></p>
                     <p>立即在线申请推广售卡服务</p>
                     <p>立即拨打客服电话申请推广售卡服务</p>
-                    <h2>奖励说明</h2>
+                    <h1><strong>奖励说明：</strong></h1>
                     <p>开通办卡功能后，每成功为一位普通会员面对面办卡，你将获得5元提成</p>
                 </div>
             </div>
