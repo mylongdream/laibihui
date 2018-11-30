@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\CommonUserModel;
 use App\Models\CrmAllocationModel;
 use App\Models\CrmPersonnelModel;
+use App\Models\WechatMenuModel;
+use App\Models\WechatUserModel;
 use Illuminate\Http\Request;
 
 
@@ -18,7 +20,9 @@ class PersonnelController extends Controller
      */
     public function index(Request $request)
     {
-        $list = CrmPersonnelModel::has('user')->orderBy('created_at', 'desc')->paginate(20);
+        $list = CrmPersonnelModel::whereHas('user', function ($query) {
+            $query->where('group_id', '6');
+        })->orderBy('created_at', 'desc')->paginate(20);
         return view('admin.crm.personnel.index', ['list' => $list]);
     }
 
@@ -75,8 +79,8 @@ class PersonnelController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $user = CrmPersonnelModel::findOrFail($id);
-        $user->delete();
+        $personnel = CrmPersonnelModel::findOrFail($id);
+        $this->_destroy($personnel);
         if ($request->ajax()){
             return response()->json(['status' => '1', 'info' => trans('admin.crm.personnel.deletesucceed'), 'url' => back()->getTargetUrl()]);
         }else{
@@ -91,10 +95,14 @@ class PersonnelController extends Controller
                 'ids' => 'required',
             );
             $messages = array(
-                'ids.required' => '请选择要删除的记录！',
+                'ids.required' => '请选择要取消授权的记录！',
             );
             $this->validate($request, $rules, $messages);
             CrmPersonnelModel::destroy($request->ids);
+            $personnels = CrmPersonnelModel::whereIn('id', $request->ids)->get();
+            foreach ($personnels as $key => $value){
+                $this->_destroy($value);
+            }
             if ($request->ajax()) {
                 return response()->json(['status' => '1', 'info' => trans('admin.crm.personnel.deletesucceed'), 'url' => back()->getTargetUrl()]);
             }else{
@@ -139,6 +147,35 @@ class PersonnelController extends Controller
         $personnel = CrmPersonnelModel::findOrFail($id);
         $list = CrmAllocationModel::where('personnel_id', $personnel->id)->orderBy('created_at', 'desc')->paginate(20);
         return view('admin.crm.personnel.allocation', ['list' => $list]);
+    }
+
+    private function _destroy($personnel)
+    {
+        //变回普通会员并更新微信菜单
+        $fromuser = $personnel->user;
+        $fromuser->update(['group' => 1]);
+        $wx_info = WechatUserModel::where('user_id', $fromuser->uid)->first();
+        if ($wx_info){
+            $app = app('wechat.official_account');
+            if ($wx_info->tagid_list){
+                foreach (unserialize($wx_info->tagid_list) as $value) {
+                    $app->user_tag->untagUsers([$wx_info->openid], $value);
+                }
+            }
+            if ($fromuser->group->tag_id){
+                $app->user_tag->tagUsers([$wx_info->openid], $fromuser->group->tag_id);
+                $wx_info->tagid_list = serialize([$fromuser->group->tag_id]);
+                $wx_info->save();
+            }else{
+                $wx_info->tagid_list = '';
+                $wx_info->save();
+            }
+            $WechatMenuModel = new WechatMenuModel;
+            $result = $WechatMenuModel->publish($fromuser->group->tag_id);
+        }
+
+        $personnel->delete();
+
     }
 
 }

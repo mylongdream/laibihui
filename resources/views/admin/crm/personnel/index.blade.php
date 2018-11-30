@@ -10,7 +10,6 @@
 	<div class="tblist">
 		<div class="tbhead cl">
 			<div class="z"><h3>{{ trans('admin.crm.personnel.list') }}</h3></div>
-			<div class="y"><a href="{{ route('admin.crm.personnel.create') }}" class="btn openwindow" title="{{ trans('admin.crm.personnel.create') }}">+ {{ trans('admin.crm.personnel.create') }}</a></div>
 		</div>
 		<table>
 			<tr>
