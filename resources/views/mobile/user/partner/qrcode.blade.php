@@ -11,6 +11,11 @@
                             <h2 class="weui-msg__title">恭喜恭喜</h2>
                             <p class="weui-msg__desc">你已开通授权办卡功能</p>
                         </div>
+                        <div class="weui-msg__opr-area">
+                            <p class="weui-btn-area">
+                                <a href="{{ route('mobile.user.partner.cancel') }}" class="weui-btn weui-btn_primary ajaxbutton" data-method="post">申请取消授权</a>
+                            </p>
+                        </div>
                     </div>
                 @else
                     <div class="topheader">

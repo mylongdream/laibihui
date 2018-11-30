@@ -146,6 +146,8 @@ class IndexController extends Controller
                         $fromuser->personnel->created_at = time();
                         $fromuser->personnel->save();
                     }
+                    //变为普通推广员
+                    $fromuser->update(['group' => 6]);
                     if ($request->ajax()){
                         return response()->json(['status' => '1', 'info' => '授权办卡功能开通成功', 'url' => route('mobile.crm.tuiguang.grantsell.index')]);
                     }else{

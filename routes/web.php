@@ -268,6 +268,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
         Route::post('feedback', ['as' => 'feedback.store', 'uses' => 'Mobile\User\FeedbackController@store']);
         Route::get('partner', ['as' => 'partner.index', 'uses' => 'Mobile\User\PartnerController@index']);
         Route::any('partner/qrcode', ['as' => 'partner.qrcode', 'uses' => 'Mobile\User\PartnerController@qrcode']);
+        Route::any('partner/cancel', ['as' => 'partner.cancel', 'uses' => 'Mobile\User\PartnerController@cancel']);
         //Route::get('cardreward', ['as' => 'cardreward.index', 'uses' => 'Mobile\User\CardRewardController@index']);
         //Route::any('cardreward/record', ['as' => 'cardreward.record', 'uses' => 'Mobile\User\CardRewardController@record']);
         //Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'Mobile\User\CardRewardController@exchange']);
@@ -597,6 +598,8 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::resource('personnel', 'Admin\CRM\PersonnelController');
             Route::post('grantsell/batch', ['as' => 'grantsell.batch', 'uses' => 'Admin\CRM\GrantsellController@batch']);
             Route::resource('grantsell', 'Admin\CRM\GrantsellController');
+            Route::post('grantcancel/batch', ['as' => 'grantcancel.batch', 'uses' => 'Admin\CRM\GrantcancelController@batch']);
+            Route::resource('grantcancel', 'Admin\CRM\GrantcancelController');
         });
     });
 });

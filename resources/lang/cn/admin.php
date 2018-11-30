@@ -1284,4 +1284,15 @@ return [
     'crm.grantsell.postip' => 'IP',
     'crm.grantsell.created_at' => '提交时间',
     'crm.grantsell.deletesucceed' => '授权办卡信息删除成功',
+
+    'crm.grantcancel' => '取消办卡',
+    'crm.grantcancel.tips' => '您可以在此处对取消办卡信息进行管理',
+    'crm.grantcancel.list' => '取消办卡列表',
+    'crm.grantcancel.destroy' => '删除取消办卡',
+    'crm.grantcancel.show' => '查看取消办卡',
+    'crm.grantcancel.user' => '申请用户',
+    'crm.grantcancel.topuser' => '上级用户',
+    'crm.grantcancel.postip' => 'IP',
+    'crm.grantcancel.created_at' => '提交时间',
+    'crm.grantcancel.deletesucceed' => '取消办卡信息删除成功',
 ];
