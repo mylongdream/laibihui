@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\CommonSellcardModel;
 use App\Models\CommonUserModel;
 use App\Models\CrmPersonnelModel;
+use App\Models\WechatMenuModel;
+use App\Models\WechatUserModel;
 use Intervention\Image\Facades\Image;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Vinkla\Hashids\Facades\Hashids;
@@ -66,8 +68,28 @@ class GrantsellController extends CommonController
 
 
 
-        //变回普通会员
-        $personnel->user->update(['group' => 1]);
+        //变回普通会员并更新微信菜单
+        $fromuser = $personnel->user;
+        $fromuser->update(['group' => 1]);
+        $wx_info = WechatUserModel::where('user_id', $fromuser->uid)->first();
+        if ($wx_info){
+            $app = app('wechat.official_account');
+            if ($wx_info->tagid_list){
+                foreach (unserialize($wx_info->tagid_list) as $value) {
+                    $app->user_tag->untagUsers([$wx_info->openid], $value);
+                }
+            }
+            if ($fromuser->group->tag_id){
+                $app->user_tag->tagUsers([$wx_info->openid], $fromuser->group->tag_id);
+                $wx_info->tagid_list = serialize([$fromuser->group->tag_id]);
+                $wx_info->save();
+            }else{
+                $wx_info->tagid_list = '';
+                $wx_info->save();
+            }
+            $WechatMenuModel = new WechatMenuModel;
+            $result = $WechatMenuModel->publish($fromuser->group->tag_id);
+        }
 
         if ($request->ajax()){
             return response()->json(['status' => 1, 'info' => '成功取消授权', 'url' => back()->getTargetUrl()]);

@@ -9,6 +9,8 @@ use App\Models\CommonSellcardModel;
 use App\Models\CommonUserAccountModel;
 use App\Models\CrmGrantsellModel;
 use App\Models\CrmPersonnelModel;
+use App\Models\WechatMenuModel;
+use App\Models\WechatUserModel;
 use Illuminate\Http\Request;
 use App\Models\BrandCategoryModel;
 use App\Models\BrandShopModel;
@@ -146,8 +148,29 @@ class IndexController extends Controller
                         $fromuser->personnel->created_at = time();
                         $fromuser->personnel->save();
                     }
-                    //变为普通推广员
+
+                    //变为普通推广员并更新微信菜单
                     $fromuser->update(['group' => 6]);
+                    $wx_info = WechatUserModel::where('user_id', $fromuser->uid)->first();
+                    if ($wx_info){
+                        $app = app('wechat.official_account');
+                        if ($wx_info->tagid_list){
+                            foreach (unserialize($wx_info->tagid_list) as $value) {
+                                $app->user_tag->untagUsers([$wx_info->openid], $value);
+                            }
+                        }
+                        if ($fromuser->group->tag_id){
+                            $app->user_tag->tagUsers([$wx_info->openid], $fromuser->group->tag_id);
+                            $wx_info->tagid_list = serialize([$fromuser->group->tag_id]);
+                            $wx_info->save();
+                        }else{
+                            $wx_info->tagid_list = '';
+                            $wx_info->save();
+                        }
+                        $WechatMenuModel = new WechatMenuModel;
+                        $result = $WechatMenuModel->publish($fromuser->group->tag_id);
+                    }
+
                     if ($request->ajax()){
                         return response()->json(['status' => '1', 'info' => '授权办卡功能开通成功', 'url' => route('mobile.crm.tuiguang.grantsell.index')]);
                     }else{
