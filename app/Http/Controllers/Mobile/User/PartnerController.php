@@ -20,11 +20,17 @@ class PartnerController extends Controller
 
     public function index(Request $request)
     {
+        if(auth()->user()->group->type != 'user'){
+            return view('layouts.mobile.message', ['status' => 0, 'info' => '你已不是普通会员', 'url' => back()->getTargetUrl()]);
+        }
         return view('mobile.user.partner.index');
     }
 
     public function qrcode(Request $request)
     {
+        if(auth()->user()->group->type != 'user'){
+            return view('layouts.mobile.message', ['status' => 0, 'info' => '你已不是普通会员', 'url' => back()->getTargetUrl()]);
+        }
         $url = route('mobile.grantsell', ['fromuser' => Hashids::connection('promotion')->encode(auth()->user()->uid)]);
         $imgurl = 'grantsell/qrcode_'.auth()->user()->uid.'.png';
         QrCode::format('png')->size(400)->generate($url, storage_path('app/public/qrcode/'.$imgurl));

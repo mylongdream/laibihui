@@ -67,18 +67,30 @@ class IndexController extends Controller
 
     public function grantsell(Request $request)
     {
-        if (!auth()->user()->group->grantsellcard) {
-            return view('layouts.mobile.message', ['status' => 0, 'info' => '你没有开通授权办卡的权限']);
-        }
         if ($request->fromuser && $fromuid = Hashids::connection('promotion')->decode($request->fromuser)){
             $fromuser = CommonUserModel::where('uid', $fromuid)->first();
-            if ($fromuser) {
-                if (!$fromuser->card) {
-                    //return view('layouts.mobile.message', ['status' => 0, 'info' => '对方尚未绑卡，不能授权办卡']);
-                }
+            if ($fromuser && $fromuser->group->type == 'user') {
                 if ($request->isMethod('POST')) {
+                    if (!auth()->user()->group->grantsellcard) {
+                        if ($request->ajax()){
+                            return response()->json(['status' => 0, 'info' => '你没有开通授权办卡的权限', 'url' => back()->getTargetUrl()]);
+                        }else{
+                            return view('layouts.mobile.message', ['status' => 0, 'info' => '你没有开通授权办卡的权限', 'url' => back()->getTargetUrl()]);
+                        }
+                    }
+                    if (!$fromuser->card) {
+                        if ($request->ajax()){
+                            return response()->json(['status' => 0, 'info' => '对方尚未绑卡，不能授权办卡', 'url' => back()->getTargetUrl()]);
+                        }else{
+                            return view('layouts.mobile.message', ['status' => 0, 'info' => '对方尚未绑卡，不能授权办卡', 'url' => back()->getTargetUrl()]);
+                        }
+                    }
                     if($fromuser->personnel && !$fromuser->personnel->disabled){
-                        return view('layouts.mobile.message', ['status' => 0, 'info' => '业务员'.($fromuser->personnel->topuser ? $fromuser->personnel->topuser->username : '').'已为TA开通卖卡']);
+                        if ($request->ajax()){
+                            return response()->json(['status' => 0, 'info' => '业务员'.($fromuser->personnel->topuser ? $fromuser->personnel->topuser->username : '').'已为TA开通卖卡', 'url' => back()->getTargetUrl()]);
+                        }else{
+                            return view('layouts.mobile.message', ['status' => 0, 'info' => '业务员'.($fromuser->personnel->topuser ? $fromuser->personnel->topuser->username : '').'已为TA开通卖卡', 'url' => back()->getTargetUrl()]);
+                        }
                     }
                     $rules = array(
                         'realname' => 'required|max:10',
