@@ -43,9 +43,10 @@ $(function() {
 	});
 	$(document).on("click", ".submitbtn", function(){ 
 		var self = $(this);
+        var operation = self.attr("title") || '删除';
 		if($('#operate').val() != 'delsubmit' && $(this).attr('name') == 'delsubmit'){
 			if($('.ids:checked').size() == 0) {
-				$.jBox.error('请先选中所要删除的记录', '提示');
+				$.jBox.error('请先选中所要'+operation+'的记录', '提示');
 				return false;
 			}
 			var submit = function (v, h, f) {
@@ -55,7 +56,7 @@ $(function() {
 				}
 				return true; //close
 			};
-			$.jBox.confirm("确定要删除吗？", "提示", submit);
+			$.jBox.confirm("确定要"+operation+"吗？", "提示", submit);
 			return false;
 		}
 		$('#operate').val($(this).attr('name'));
@@ -96,6 +97,7 @@ $(function() {
     });
 	$(document).on("click", ".delbtn", function(){ 
 		var self = $(this);
+        var operation = self.attr("title") || '删除';
         if(self.hasClass('confirmpwd')){
             var html = "<div style='padding:10px;'>输入密码：<input class='txt' type='password' id='confirmpwd' name='confirmpwd' /></div>";
             var submit = function (v, h, f) {
@@ -104,7 +106,7 @@ $(function() {
                     return false;
                 }
                 if (f.confirmpwd === 'zhihui') {
-                    $.jBox.confirm("确定要删除吗？", "提示", function (v, h, f) {
+                    $.jBox.confirm("确定要"+operation+"吗？", "提示", function (v, h, f) {
                         if (v == 'ok') {
                             $.ajax({
                                 type: "POST",
@@ -125,7 +127,7 @@ $(function() {
             };
             $.jBox(html, { title: "输入密码", submit: submit });
         }else {
-            $.jBox.confirm("确定要删除吗？", "提示", function (v, h, f) {
+            $.jBox.confirm("确定要"+operation+"吗？", "提示", function (v, h, f) {
                 if (v == 'ok') {
                     $.ajax({
                         type: "POST",

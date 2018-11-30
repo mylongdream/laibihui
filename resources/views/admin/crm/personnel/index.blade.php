@@ -44,7 +44,7 @@
 				<td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
 				<td>
 					<a href="{{ route('admin.crm.personnel.allocate',$value->id) }}" class="openwindow" title="{{ trans('admin.crm.personnel.allocate') }}">{{ trans('admin.crm.personnel.allocate') }}</a>
-					<a href="{{ route('admin.crm.personnel.destroy',$value->id) }}" class="mlm delbtn">{{ trans('admin.destroy') }}</a>
+					<a href="{{ route('admin.crm.personnel.destroy',$value->id) }}" class="mlm delbtn" title="取消授权">取消授权</a>
 				</td>
 			</tr>
 			@endforeach
@@ -53,7 +53,7 @@
 	@if (count($list) > 0)
 	<div class="pgs cl">
 		<div class="fixsel z">
-			<button class="submitbtn" name="delsubmit" value="yes" type="submit">{{ trans('admin.destroy') }}</button>
+			<button class="submitbtn" name="delsubmit" value="yes" type="submit">取消授权</button>
 		</div>
 		<div class="page y">
 			{!! $list->links() !!}

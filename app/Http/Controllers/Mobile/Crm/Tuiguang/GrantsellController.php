@@ -24,7 +24,7 @@ class GrantsellController extends CommonController
 
     public function index(Request $request)
     {
-        $list = CrmPersonnelModel::where('topuid', auth('crm')->user()->uid)->where('disabled', 0)->orderBy('created_at', 'desc')->paginate(20);
+        $list = CrmPersonnelModel::where('topuid', auth('crm')->user()->uid)->orderBy('created_at', 'desc')->paginate(20);
         return view('mobile.crm.tuiguang.grantsell.index', ['list' => $list]);
     }
 
@@ -63,10 +63,7 @@ class GrantsellController extends CommonController
         //剩余卡数退回
         auth('crm')->user()->personnel->increment('allotnum', $personnel->allotnum - $personnel->sellnum);
         $personnel->allotnum = $personnel->sellnum;
-        $personnel->disabled = 1;
         $personnel->save();
-
-
 
         //变回普通会员并更新微信菜单
         $fromuser = $personnel->user;
@@ -91,6 +88,7 @@ class GrantsellController extends CommonController
             $result = $WechatMenuModel->publish($fromuser->group->tag_id);
         }
 
+        $personnel->delete();
         if ($request->ajax()){
             return response()->json(['status' => 1, 'info' => '成功取消授权', 'url' => back()->getTargetUrl()]);
         }else{

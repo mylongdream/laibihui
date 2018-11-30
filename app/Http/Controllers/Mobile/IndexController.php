@@ -87,7 +87,7 @@ class IndexController extends Controller
                             return view('layouts.mobile.message', ['status' => 0, 'info' => '对方尚未绑卡，不能授权办卡', 'url' => back()->getTargetUrl()]);
                         }
                     }
-                    if($fromuser->personnel && !$fromuser->personnel->disabled){
+                    if($fromuser->personnel){
                         if ($request->ajax()){
                             return response()->json(['status' => 0, 'info' => '业务员'.($fromuser->personnel->topuser ? $fromuser->personnel->topuser->username : '').'已为TA开通卖卡', 'url' => back()->getTargetUrl()]);
                         }else{
@@ -131,23 +131,18 @@ class IndexController extends Controller
                     $grantsell->grantpic = $request->grantpic;
                     $grantsell->postip = $request->getClientIp();
                     $grantsell->save();
-                    if(!$fromuser->personnel){
+                    $personnel = CrmPersonnelModel::onlyTrashed()->where('uid', $fromuser->uid)->get();
+                    if($personnel) {
+                        $personnel->restore();
+                    }else {
                         $personnel = new CrmPersonnelModel;
-                        $personnel->uid = $fromuser->uid;
-                        $personnel->topuid = auth()->user()->uid;
-                        $personnel->realname = $request->realname;
-                        $personnel->mobile = $request->mobile;
-                        $personnel->postip = $request->getClientIp();
-                        $personnel->save();
-                    }else{
-                        $fromuser->personnel->disabled = 0;
-                        $fromuser->personnel->topuid = auth()->user()->uid;
-                        $fromuser->personnel->realname = $request->realname;
-                        $fromuser->personnel->mobile = $request->mobile;
-                        $fromuser->personnel->postip = $request->getClientIp();
-                        $fromuser->personnel->created_at = time();
-                        $fromuser->personnel->save();
                     }
+                    $personnel->topuid = auth()->user()->uid;
+                    $personnel->realname = $request->realname;
+                    $personnel->mobile = $request->mobile;
+                    $personnel->postip = $request->getClientIp();
+                    $personnel->created_at = time();
+                    $personnel->save();
 
                     //变为普通推广员并更新微信菜单
                     $fromuser->update(['group' => 6]);

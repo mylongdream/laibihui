@@ -6,7 +6,7 @@
             <div class="pbw">
                 @if (auth()->user()->group->grantsellcard)
                     @if ($fromuser->card)
-                        @if ($fromuser->personnel && !$fromuser->personnel->disabled)
+                        @if ($fromuser->personnel)
                             <div class="weui-msg">
                                 <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
                                 <div class="weui-msg__text-area">
