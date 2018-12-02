@@ -338,6 +338,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
                 Route::get('grantsell', ['as' => 'grantsell.index', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@index']);
                 Route::any('grantsell/apply', ['as' => 'grantsell.apply', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@apply']);
                 Route::any('grantsell/subapply', ['as' => 'grantsell.subapply', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@subapply']);
+                Route::any('grantsell/subhandle', ['as' => 'grantsell.subhandle', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@subhandle']);
                 Route::get('grantsell/manage', ['as' => 'grantsell.manage', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@manage']);
                 Route::any('grantsell/patch', ['as' => 'grantsell.patch', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@patch']);
                 Route::any('grantsell/cancel', ['as' => 'grantsell.cancel', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@cancel']);
