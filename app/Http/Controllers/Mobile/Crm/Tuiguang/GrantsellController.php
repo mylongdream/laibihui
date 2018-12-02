@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\CommonSellcardModel;
 use App\Models\CommonUserModel;
+use App\Models\CrmGrantcancelModel;
 use App\Models\CrmPersonnelModel;
 use App\Models\WechatMenuModel;
 use App\Models\WechatUserModel;
@@ -24,8 +25,32 @@ class GrantsellController extends CommonController
 
     public function index(Request $request)
     {
+        return view('mobile.crm.tuiguang.grantsell.index');
+    }
+
+    public function apply(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            $cancel = new CrmGrantcancelModel;
+            $cancel->uid = auth()->user()->uid;
+            $cancel->topuid = auth()->user()->personnel->topuid;
+            $cancel->postip = $request->getClientIp();
+            $cancel->save();
+        }
+        $status = CrmGrantcancelModel::where('uid', auth('crm')->user()->uid)->orderBy('created_at', 'desc')->first();
+        return view('mobile.crm.tuiguang.grantsell.apply', ['status' => $status]);
+    }
+
+    public function subapply(Request $request)
+    {
+        $list = CrmGrantcancelModel::where('topuid', auth('crm')->user()->uid)->orderBy('created_at', 'desc')->paginate(20);
+        return view('mobile.crm.tuiguang.grantsell.subapply', ['list' => $list]);
+    }
+
+    public function manage(Request $request)
+    {
         $list = CrmPersonnelModel::where('topuid', auth('crm')->user()->uid)->orderBy('created_at', 'desc')->paginate(20);
-        return view('mobile.crm.tuiguang.grantsell.index', ['list' => $list]);
+        return view('mobile.crm.tuiguang.grantsell.manage', ['list' => $list]);
     }
 
     public function patch(Request $request)

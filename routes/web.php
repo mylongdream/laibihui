@@ -268,7 +268,6 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
         Route::post('feedback', ['as' => 'feedback.store', 'uses' => 'Mobile\User\FeedbackController@store']);
         Route::get('partner', ['as' => 'partner.index', 'uses' => 'Mobile\User\PartnerController@index']);
         Route::any('partner/qrcode', ['as' => 'partner.qrcode', 'uses' => 'Mobile\User\PartnerController@qrcode']);
-        Route::any('partner/cancel', ['as' => 'partner.cancel', 'uses' => 'Mobile\User\PartnerController@cancel']);
         //Route::get('cardreward', ['as' => 'cardreward.index', 'uses' => 'Mobile\User\CardRewardController@index']);
         //Route::any('cardreward/record', ['as' => 'cardreward.record', 'uses' => 'Mobile\User\CardRewardController@record']);
         //Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'Mobile\User\CardRewardController@exchange']);
@@ -337,6 +336,9 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
                 Route::any('cardreward/record', ['as' => 'cardreward.record', 'uses' => 'Mobile\CRM\Tuiguang\CardRewardController@record']);
                 Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'Mobile\CRM\Tuiguang\CardRewardController@exchange']);
                 Route::get('grantsell', ['as' => 'grantsell.index', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@index']);
+                Route::any('grantsell/apply', ['as' => 'grantsell.apply', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@apply']);
+                Route::any('grantsell/subapply', ['as' => 'grantsell.subapply', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@subapply']);
+                Route::get('grantsell/manage', ['as' => 'grantsell.manage', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@manage']);
                 Route::any('grantsell/patch', ['as' => 'grantsell.patch', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@patch']);
                 Route::any('grantsell/cancel', ['as' => 'grantsell.cancel', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@cancel']);
             });

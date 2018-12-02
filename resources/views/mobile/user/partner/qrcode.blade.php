@@ -4,7 +4,7 @@
     <div class="weui-tab">
         <div class="wp">
             <div class="pbw">
-                @if (auth()->user()->personnel && !auth()->user()->personnel->disabled)
+                @if (auth()->user()->personnel)
                     <div class="weui-msg">
                         <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
                         <div class="weui-msg__text-area">
@@ -13,7 +13,7 @@
                         </div>
                         <div class="weui-msg__opr-area">
                             <p class="weui-btn-area">
-                                <a href="{{ route('mobile.user.partner.cancel') }}" class="weui-btn weui-btn_primary ajaxbutton" data-method="post">申请取消授权</a>
+                                <a href="javascript:;" class="weui-btn weui-btn_primary">确定</a>
                             </p>
                         </div>
                     </div>
