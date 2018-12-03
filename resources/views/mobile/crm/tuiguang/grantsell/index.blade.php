@@ -26,10 +26,16 @@
                                         <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
                                     </div>
                                     <div class="weui-cell__bd weui-cell_primary">
-                                        <p class="user-menu-txt">下级撤销授权办卡申请</p>
+                                        <p class="user-menu-txt">
+                                            下级撤销授权办卡申请
+                                            @if ($count)
+                                            <span class="weui-badge" style="margin-left: 5px;">{{ $count }}</span>
+                                            @endif
+                                        </p>
                                     </div>
                                     <span class="weui-cell__ft"></span>
                                 </a>
+                                @if (auth('crm')->user()->personnel->topuid)
                                 <a class="weui-cell weui-cell_access" href="{{ route('mobile.crm.tuiguang.grantsell.apply') }}">
                                     <div class="weui-cell__hd">
                                         <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-geren.png') }}" alt="">
@@ -39,6 +45,7 @@
                                     </div>
                                     <span class="weui-cell__ft"></span>
                                 </a>
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -25,15 +25,16 @@ class GrantsellController extends CommonController
 
     public function index(Request $request)
     {
-        return view('mobile.crm.tuiguang.grantsell.index');
+        $count = CrmGrantcancelModel::where('topuid', auth('crm')->user()->uid)->where('status', 0)->orderBy('created_at', 'desc')->count();
+        return view('mobile.crm.tuiguang.grantsell.index', ['count' => $count]);
     }
 
     public function apply(Request $request)
     {
         if ($request->isMethod('POST')) {
             $cancel = new CrmGrantcancelModel;
-            $cancel->uid = auth()->user()->uid;
-            $cancel->topuid = auth()->user()->personnel->topuid;
+            $cancel->uid = auth('crm')->user()->uid;
+            $cancel->topuid = auth('crm')->user()->personnel->topuid;
             $cancel->postip = $request->getClientIp();
             $cancel->save();
         }

@@ -114,6 +114,11 @@
                                 <p class="weui-msg__desc">对方尚未绑卡，不能授权办卡</p>
                                 <p class="weui-msg__desc">请先给对方面对面办卡</p>
                             </div>
+                            <div class="weui-msg__opr-area">
+                                <p class="weui-btn-area">
+                                    <a href="{{ route('mobile.crm.tuiguang.sellcard.index') }}" class="weui-btn weui-btn_primary">立即开始办卡</a>
+                                </p>
+                            </div>
                         </div>
                     @endif
                 @else
@@ -123,6 +128,11 @@
                             <h2 class="weui-msg__title">感谢你的支持</h2>
                             <p class="weui-msg__desc">请联系来必惠客户服务电话申请开通相关业务</p>
                             <p class="weui-msg__desc">24小时服务电话：<a href="tel:4006878917">400-6878-917</a></p>
+                        </div>
+                        <div class="weui-msg__opr-area">
+                            <p class="weui-btn-area">
+                                <a href="{{ route('mobile.user.index') }}" class="weui-btn weui-btn_default">返回个人中心</a>
+                            </p>
                         </div>
                     </div>
                 @endif
