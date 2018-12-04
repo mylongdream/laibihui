@@ -11,40 +11,16 @@
 			</div>
 			<table>
 				<tr>
-					<td width="150" align="right">{{ trans('admin.crm.grantcancel.realname') }}</td>
-					<td>{{ $info->realname }}</td>
+					<td width="150" align="right">{{ trans('admin.crm.grantcancel.user') }}</td>
+					<td>{{ $info->user ? $info->user->username : '' }}</td>
 				</tr>
 				<tr>
-					<td width="150" align="right">{{ trans('admin.crm.grantcancel.mobile') }}</td>
-					<td>{{ $info->mobile }}</td>
+					<td width="150" align="right">{{ trans('admin.crm.grantcancel.topuser') }}</td>
+					<td>{{ $info->topuser ? $info->topuser->username : '' }}</td>
 				</tr>
 				<tr>
-					<td width="150" align="right">{{ trans('admin.crm.grantcancel.age') }}</td>
-					<td>{{ $info->age }}</td>
-				</tr>
-				<tr>
-					<td width="150" align="right">{{ trans('admin.crm.grantcancel.idcard') }}</td>
-					<td>{{ $info->idcard }}</td>
-				</tr>
-				<tr>
-					<td width="150" align="right">{{ trans('admin.crm.grantcancel.location') }}</td>
-					<td>{{ $info->getprovince ? $info->getprovince->name : '' }}{{ $info->getcity ? $info->getcity->name : '' }}</td>
-				</tr>
-				<tr>
-					<td width="150" align="right">{{ trans('admin.crm.grantcancel.idcardpic') }}</td>
-					<td>
-						@if ($info->idcardpic)
-						<img src="{{ uploadImage($info->idcardpic) }}" alt="">
-						@endif
-					</td>
-				</tr>
-				<tr>
-					<td width="150" align="right">{{ trans('admin.crm.grantcancel.grantpic') }}</td>
-					<td>
-						@if ($info->grantpic)
-							<img src="{{ uploadImage($info->grantpic) }}" alt="">
-						@endif
-					</td>
+					<td width="150" align="right">{{ trans('admin.crm.grantcancel.created_at') }}</td>
+					<td>{{ $info->created_at ? $info->created_at->format('Y-m-d H:i') : '/' }}</td>
 				</tr>
 			</table>
 		</div>

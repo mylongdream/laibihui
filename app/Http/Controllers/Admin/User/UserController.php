@@ -183,35 +183,39 @@ class UserController extends Controller
                 'group_id.required' => '用户组不允许为空！',
             );
             $this->validate($request, $rules, $messages);
+
+            if ($user->group_id != $request->group_id){
+                $group = CommonUserGroupModel::find($request->group_id);
+                //授权卖卡业务员
+                if ($group->grantsellcard){
+                    CrmPersonnelModel::firstOrCreate(['uid' => $user->uid]);
+                }else{
+                    CrmPersonnelModel::where('uid', $user->uid)->delete();
+                }
+
+                // 授权微信账号给微信分组
+                $wx_info = WechatUserModel::where('user_id', $user->uid)->first();
+                if ($wx_info){
+                    $app = app('wechat.official_account');
+                    if ($wx_info->tagid_list){
+                        foreach (unserialize($wx_info->tagid_list) as $value) {
+                            $app->user_tag->untagUsers([$wx_info->openid], $value);
+                        }
+                    }
+                    if ($group->tag_id){
+                        $app->user_tag->tagUsers([$wx_info->openid], $group->tag_id);
+                        $wx_info->tagid_list = serialize([$group->tag_id]);
+                        $wx_info->save();
+                    }else{
+                        $wx_info->tagid_list = '';
+                        $wx_info->save();
+                    }
+                    $WechatMenuModel = new WechatMenuModel;
+                    $result = $WechatMenuModel->publish($group->tag_id);
+                }
+            }
             $user->group_id = $request->group_id;
             $user->save();
-
-            //授权卖卡业务员
-            if ($user->group->grantsellcard){
-                CrmPersonnelModel::firstOrCreate(['uid' => $user->uid]);
-            }
-
-            // 授权微信账号给微信分组
-            $group = CommonUserGroupModel::find($request->group_id);
-            $wx_info = WechatUserModel::where('user_id', $user->uid)->first();
-            if ($wx_info){
-                $app = app('wechat.official_account');
-                if ($wx_info->tagid_list){
-                    foreach (unserialize($wx_info->tagid_list) as $value) {
-                        $app->user_tag->untagUsers([$wx_info->openid], $value);
-                    }
-                }
-                if ($group->tag_id){
-                    $app->user_tag->tagUsers([$wx_info->openid], $group->tag_id);
-                    $wx_info->tagid_list = serialize([$group->tag_id]);
-                    $wx_info->save();
-                }else{
-                    $wx_info->tagid_list = '';
-                    $wx_info->save();
-                }
-                $WechatMenuModel = new WechatMenuModel;
-                $result = $WechatMenuModel->publish($group->tag_id);
-            }
 
             if ($request->ajax()){
                 return response()->json(['status' => '1', 'info' => trans('admin.user.user.editsucceed'), 'url' => route('admin.user.user.index')]);

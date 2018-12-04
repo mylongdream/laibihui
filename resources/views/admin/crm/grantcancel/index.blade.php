@@ -23,8 +23,8 @@
 			@foreach ($list as $value)
 			<tr>
 				<td><input class="ids" type="checkbox" value="{{ $value->id }}" name="ids[]"></td>
-				<td>{{ $value->user->username }}</td>
-				<td>{{ $value->topuser->username }}</td>
+				<td>{{ $value->user ? $value->user->username : '' }}</td>
+				<td>{{ $value->topuser ? $value->topuser->username : '' }}</td>
 				<td>{{ $value->postip }}</td>
 				<td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
 				<td>
