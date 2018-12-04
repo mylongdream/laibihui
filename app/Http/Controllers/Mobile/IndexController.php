@@ -146,7 +146,7 @@ class IndexController extends Controller
                     $personnel->save();
 
                     //变为普通推广员并更新微信菜单
-                    $fromuser->group = 6;
+                    $fromuser->group_id = 6;
                     $fromuser->save();
                     $wx_info = WechatUserModel::where('user_id', $fromuser->uid)->first();
                     if ($wx_info){
