@@ -188,7 +188,12 @@ class UserController extends Controller
                 $group = CommonUserGroupModel::find($request->group_id);
                 //授权卖卡业务员
                 if ($group->grantsellcard){
-                    CrmPersonnelModel::firstOrCreate(['uid' => $user->uid]);
+                    $personnel = CrmPersonnelModel::onlyTrashed()->where('uid', $user->uid)->first();
+                    if($personnel) {
+                        $personnel->restore();
+                    }else {
+                        CrmPersonnelModel::firstOrCreate(['uid' => $user->uid]);
+                    }
                 }else{
                     CrmPersonnelModel::where('uid', $user->uid)->delete();
                 }
