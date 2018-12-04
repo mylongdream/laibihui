@@ -153,7 +153,8 @@ class PersonnelController extends Controller
     {
         //变回普通会员并更新微信菜单
         $fromuser = $personnel->user;
-        $fromuser->update(['group' => 1]);
+        $fromuser->group = 1;
+        $fromuser->save();
         $wx_info = WechatUserModel::where('user_id', $fromuser->uid)->first();
         if ($wx_info){
             $app = app('wechat.official_account');

@@ -132,7 +132,7 @@ class IndexController extends Controller
                     $grantsell->grantpic = $request->grantpic;
                     $grantsell->postip = $request->getClientIp();
                     $grantsell->save();
-                    $personnel = CrmPersonnelModel::onlyTrashed()->where('uid', $fromuser->uid)->get();
+                    $personnel = CrmPersonnelModel::onlyTrashed()->where('uid', $fromuser->uid)->first();
                     if($personnel) {
                         $personnel->restore();
                     }else {
@@ -146,7 +146,8 @@ class IndexController extends Controller
                     $personnel->save();
 
                     //变为普通推广员并更新微信菜单
-                    $fromuser->update(['group' => 6]);
+                    $fromuser->group = 6;
+                    $fromuser->save();
                     $wx_info = WechatUserModel::where('user_id', $fromuser->uid)->first();
                     if ($wx_info){
                         $app = app('wechat.official_account');
