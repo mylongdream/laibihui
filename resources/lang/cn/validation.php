@@ -153,4 +153,5 @@ return [
 
     'recaptcha' => '验证码不正确。',
     'zh_mobile' => '手机号码不正确。',
+    'identitycards' => '身份证号错误！',
 ];

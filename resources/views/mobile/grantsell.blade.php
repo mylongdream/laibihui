@@ -58,7 +58,6 @@
                                         </div>
                                         <div class="weui-cell__bd">
                                             <input class="weui-input" placeholder="请输入验证码" type="text" name="smscode">
-                                            <input type="hidden" name="mobilerule" value="forgotpwd">
                                         </div>
                                         <div class="weui-cell__ft">
                                             <button id="getsmscode" class="weui-vcode-btn" type="button">获取验证码</button>

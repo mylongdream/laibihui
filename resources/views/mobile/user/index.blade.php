@@ -13,7 +13,7 @@
                                 </div>
                                 <div class="weui-media-box__bd">
                                     <h4 class="weui-media-box__title">{{ auth()->user()->username }}</h4>
-                                    <p class="weui-media-box__desc">手机号码：{{ auth()->user()->mobile ? auth()->user()->mobile : '暂无' }}</p>
+                                    <p class="weui-media-box__desc">用户身份：{{ auth()->user()->group ? auth()->user()->group->name : '暂无' }}</p>
                                     <p class="weui-media-box__desc">账户积分：{{ auth()->user()->score }} 个</p>
                                 </div>
                                 <div class="weui-media-box__ft">

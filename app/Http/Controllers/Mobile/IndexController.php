@@ -97,9 +97,10 @@ class IndexController extends Controller
                     $rules = array(
                         'realname' => 'required|max:10',
                         'age' => 'required|numeric|min:16|max:90',
+                        'idcard' => 'required|identitycards',
                         'province' => 'required|numeric|exists:common_district,id',
                         'city' => 'required|numeric|exists:common_district,id',
-                        'mobile' => 'bail|required|zh_mobile|exists:common_user|confirm_mobile_not_change',
+                        'mobile' => 'bail|required|zh_mobile|confirm_mobile_not_change',
                         'smscode' => 'required|verify_code',
                     );
                     $messages = array(
