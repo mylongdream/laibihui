@@ -37,13 +37,13 @@
                                     </div>
                                     <div class="weui-flex__item">
                                         <a href="javascript:;" class="">
-                                            <div class="money">0 张</div>
+                                            <div class="money">{{ auth('crm')->user()->personnel->allotnum - auth('crm')->user()->personnel->sellnum }} 张</div>
                                             <div class="name">库存卡数</div>
                                         </a>
                                     </div>
                                     <div class="weui-flex__item">
                                         <a href="javascript:;" class="">
-                                            <div class="money">0 张</div>
+                                            <div class="money">{{ auth('crm')->user()->personnel->sellnum }} 张</div>
                                             <div class="name">总发行卡数</div>
                                         </a>
                                     </div>
