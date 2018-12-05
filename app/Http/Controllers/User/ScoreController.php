@@ -35,7 +35,8 @@ class ScoreController extends Controller
             $request->validate($rules, $messages);
 
             $amount = intval($request->amount);
-            $needscore = $amount * $this->setting['score_exchange'];
+            $setting = cache('setting');
+            $needscore = $amount * $setting['score_exchange'];
             if($needscore > auth()->user()->score){
                 if ($request->ajax()){
                     return response()->json(['status' => 0, 'info' => '兑换所需积分不足', 'url' => back()->getTargetUrl()]);

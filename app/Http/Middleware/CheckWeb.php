@@ -25,7 +25,6 @@ class CheckWeb
             cache(['setting'=>$setting], 300);
         }
         view()->share('setting', $setting);
-        $this->setting = $setting;
 
         if (cache('navs')) {
             $navs = cache('navs');
