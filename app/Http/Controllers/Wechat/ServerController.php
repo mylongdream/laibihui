@@ -7,6 +7,7 @@ use App\Models\CommonSettingModel;
 use App\Models\CommonUploadImageModel;
 use App\Models\CommonUserModel;
 use App\Models\CommonUserScoreModel;
+use App\Models\WechatMenuModel;
 use App\Models\WechatUserModel;
 use EasyWeChat\Kernel\Messages\Text;
 use GuzzleHttp\Client;
@@ -142,6 +143,15 @@ class ServerController extends Controller
                     $wxuser->unionid = isset($getuser['unionid']) ? $getuser['unionid'] : '';
                 }
                 $wxuser->save();
+            }
+        }else{
+            //更新微信菜单
+            if($wxuser->user && $wxuser->user->group->tag_id){
+                $app->user_tag->tagUsers([$wxuser->openid], $wxuser->user->group->tag_id);
+                $wxuser->tagid_list = serialize([$wxuser->user->group->tag_id]);
+                $wxuser->save();
+                $WechatMenuModel = new WechatMenuModel;
+                $result = $WechatMenuModel->publish($wxuser->user->group->tag_id);
             }
         }
         if(!$wxuser->has_subscribe){

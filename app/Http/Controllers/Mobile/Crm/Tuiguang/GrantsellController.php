@@ -65,6 +65,13 @@ class GrantsellController extends CommonController
             'cardnum.min' => '补卡数量最少1张',
         );
         $this->validate($request, $rules, $messages);
+        if(auth('crm')->user()->personnel->allotnum < $request->cardnum){
+            if ($request->ajax()){
+                return response()->json(['status' => 0, 'info' => '当前余卡数量不足', 'url' => back()->getTargetUrl()]);
+            }else{
+                return view('layouts.mobile.message', ['status' => 0, 'info' => '当前余卡数量不足', 'url' => back()->getTargetUrl()]);
+            }
+        }
 
         $personnel = CrmPersonnelModel::where('topuid', auth('crm')->user()->uid)->findOrFail($request->id);
         $personnel->increment('allotnum', $request->cardnum);
