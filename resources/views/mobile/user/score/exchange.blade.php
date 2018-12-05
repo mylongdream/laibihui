@@ -10,6 +10,7 @@
                 </div>
                 <form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('mobile.user.score.exchange') }}">
                     {!! csrf_field() !!}
+                    <input id="score_exchange" value="{{ $setting['score_exchange'] }}" type="hidden" />
                     <div class="weui-panel" style="margin: 0">
                         <div class="weui-msg">
                             <div class="weui-msg__text-area">
@@ -21,24 +22,24 @@
                         <div class="weui-cell">
                             <div class="weui-cell__hd"><label class="weui-label">兑换可用余额</label></div>
                             <div class="weui-cell__bd">
-                                <input class="weui-input numeric" type="number" name="amount" value="1" id="amount-input" data-max="{{ auth()->user()->score >= 1000 ? floor(auth()->user()->score / 1000) : 1 }}">
+                                <input class="weui-input numeric" type="number" name="amount" value="1" id="amount-input" data-max="{{ auth()->user()->score >= $setting['score_exchange'] ? floor(auth()->user()->score / $setting['score_exchange']) : 1 }}">
                             </div>
                             <div class="weui-cell__ft">元</div>
                         </div>
                     </div>
                     <div class="weui-cells order-submit">
                         <div class="order-account">
-                            所需积分<span id="needscore">1000</span> 个
+                            所需积分<span id="needscore">{{ $setting['score_exchange'] }}</span> 个
                         </div>
                         <div class="order-btn">
-                            @if (auth()->user()->score >= 1000)
+                            @if (auth()->user()->score >= $setting['score_exchange'])
                                 <button name="applybtn" type="button" class="weui-btn weui-btn_primary ajaxsubmit">兑 换</button>
                             @else
                                 <button name="applybtn" type="button" class="weui-btn weui-btn_default">无法兑换</button>
                             @endif
                         </div>
                         <div class="order-remark">
-                            注：<span>1000个积分可兑换1元可用余额</span>
+                            注：<span>{{ $setting['score_exchange'] }}个积分可兑换1元可用余额</span>
                         </div>
                     </div>
                 </form>
@@ -52,7 +53,8 @@
         $(function() {
             $(document).on("change", "#amount-input", function(){
                 var value = $(this).val();
-                $("#needscore").text(value * 1000);
+                var score_exchange = $('#score_exchange').val();
+                $("#needscore").text(value * score_exchange);
             })
         });
     </script>

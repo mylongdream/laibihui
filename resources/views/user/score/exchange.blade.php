@@ -12,6 +12,7 @@
 	<div class="tbedit mtw">
 		<form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('user.score.exchange') }}">
 			{!! csrf_field() !!}
+			<input id="score_exchange" value="{{ $setting['score_exchange'] }}" type="hidden" />
 			<table>
 				<tr>
 					<td width="150" align="right">当前积分</td>
@@ -22,7 +23,7 @@
 					<td>
 						<div class="choose-amount">
 							<span class="cut_num"></span>
-							<input class="key_num" type="text" value="1" name="amount" size="6" maxlength="6" data-max="{{ auth()->user()->score >= 1000 ? floor(auth()->user()->score / 1000) : 1 }}">
+							<input class="key_num" type="text" value="1" name="amount" size="6" maxlength="6" data-max="{{ auth()->user()->score >= $setting['score_exchange'] ? floor(auth()->user()->score / $setting['score_exchange']) : 1 }}">
 							<span class="add_num"></span>
 						</div>
 						<div class="choose-tip">元</div>
@@ -30,12 +31,14 @@
 				</tr>
 				<tr>
 					<td align="right">所需积分</td>
-					<td class="text-red"><span id="needscore">1000</span> 个</td>
+					<td class="text-red">
+						所需积分<span id="needscore">{{ $setting['score_exchange'] }}</span> 个
+					</td>
 				</tr>
 				<tr>
 					<td align="right"></td>
 					<td>
-                        @if (auth()->user()->score >= 1000)
+                        @if (auth()->user()->score >= $setting['score_exchange'])
                             <button value="true" name="savesubmit" type="submit" class="button">兑 换</button>
                         @else
                             <button value="false" name="savesubmit" type="button" class="button disabled">无法兑换</button>
@@ -44,7 +47,7 @@
 				</tr>
 				<tr>
 					<td align="right"></td>
-					<td>注：<span>1000个积分可兑换1元可用余额</span></td>
+					<td>注：<span>{{ $setting['score_exchange'] }}个积分可兑换1元可用余额</span></td>
 				</tr>
 			</table>
 		</form>
@@ -56,7 +59,8 @@
         $(function() {
             $(document).on("change", ".choose-amount .key_num", function(){
                 var value = $(this).val();
-                $("#needscore").text(value * 1000);
+                var score_exchange = $('#score_exchange').val();
+                $("#needscore").text(value * score_exchange);
             })
         });
     </script>
