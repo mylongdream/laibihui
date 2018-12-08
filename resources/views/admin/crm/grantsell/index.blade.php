@@ -29,7 +29,7 @@
 				<td>{{ $value->mobile }}</td>
 				<td>{{ $value->age }}</td>
 				<td>{{ $value->idcard }}</td>
-				<td>{{ $value->getprovince ? $value->getprovince->name : '' }}{{ $value->getcity ? $value->getcity->name : '' }}</td>
+				<td>{{ $value->getprovince ? $value->getprovince->name : '' }}{{ $value->getcity ? $value->getcity->name : '' }}{{ $value->getarea ? $value->getarea->name : '' }}</td>
 				<td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
 				<td>
 					<a href="{{ route('admin.crm.grantsell.show',$value->id) }}" class="" title="{{ trans('admin.crm.grantsell.show') }}">{{ trans('admin.view') }}</a>

@@ -100,6 +100,7 @@ class IndexController extends Controller
                         'idcard' => 'required|identitycards',
                         'province' => 'required|numeric|exists:common_district,id',
                         'city' => 'required|numeric|exists:common_district,id',
+                        'area' => 'required|numeric|exists:common_district,id',
                         'mobile' => 'bail|required|zh_mobile|confirm_mobile_not_change',
                         'smscode' => 'required|verify_code',
                     );
@@ -116,6 +117,9 @@ class IndexController extends Controller
                         'city.required' => '所在城市不允许为空！',
                         'city.numeric' => '所在城市选择错误！',
                         'city.exists' => '所在城市不存在！',
+                        'area.required' => '所在地区不允许为空！',
+                        'area.numeric' => '所在地区选择错误！',
+                        'area.exists' => '所在地区不存在！',
                     );
                     $request->validate($rules, $messages);
 
@@ -128,6 +132,7 @@ class IndexController extends Controller
                     $grantsell->idcard = $request->idcard;
                     $grantsell->province = intval($request->province);
                     $grantsell->city = intval($request->city);
+                    $grantsell->area = intval($request->area);
                     $grantsell->idcardpic = $request->idcardpic;
                     $grantsell->grantpic = $request->grantpic;
                     $grantsell->postip = $request->getClientIp();

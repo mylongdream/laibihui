@@ -31,4 +31,9 @@ class CrmGrantsellModel extends Model
         return $this->belongsTo('App\Models\CommonDistrictModel', 'city', 'id');
     }
 
+    public function getarea()
+    {
+        return $this->belongsTo('App\Models\CommonDistrictModel', 'area', 'id');
+    }
+
 }
