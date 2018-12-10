@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mobile\Crm\Shop;
 
 use App\Http\Controllers\Controller;
 use App\Models\BrandConsumeModel;
+use App\Models\BrandGiftcardModel;
 use App\Models\BrandShopCardModel;
 use App\Models\BrandShopModel;
 use App\Models\CrmCustomerModel;
@@ -39,6 +40,12 @@ class IndexController extends CommonController
         $count->ordercard_sellcard = BrandShopCardModel::where('shop_id', $this->shop->id)->has('card')->count();
         $count->ordercard_remaincard = BrandShopCardModel::where('shop_id', $this->shop->id)->doesntHave('card')->count();
         $count->ordercard_account = $count->ordercard_sellcard * 5;
+
+        $count->giftcard_all = BrandGiftcardModel::where('shop_id', $this->shop->id)->sum('cardnum');
+        $count->giftcard_today = BrandGiftcardModel::where('shop_id', $this->shop->id)
+            ->whereDate('created_at', '>=', $today->format('Y-m-d'))->sum('cardnum');
+        $count->giftcard_month = BrandGiftcardModel::where('shop_id', $this->shop->id)
+            ->whereDate('created_at', '>=', $today->format('Y-m'))->sum('cardnum');
 
         $rewards = CrmRewardModel::where('onsale', 1)->get();
         return view('mobile.crm.shop.index', ['count' => $count, 'rewards' => $rewards]);

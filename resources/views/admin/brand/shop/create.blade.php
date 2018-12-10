@@ -157,6 +157,17 @@
 						</label>
 					</td>
 				</tr>
+				<tr>
+					<td align="right">{{ trans('admin.brand.shop.giftcard') }}</td>
+					<td>
+						<label class="radio" for="giftcard_1">
+							<input id="giftcard_1" type="radio" name="giftcard" value="1"> {{ trans('admin.brand.shop.giftcard_1') }}
+						</label>
+						<label class="radio" for="giftcard_0">
+							<input id="giftcard_0" type="radio" name="giftcard" value="0" checked> {{ trans('admin.brand.shop.giftcard_0') }}
+						</label>
+					</td>
+				</tr>
 				</tbody>
 				<tbody class="tb-body hidden">
 				<tr>

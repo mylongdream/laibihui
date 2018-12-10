@@ -106,6 +106,7 @@ class ShopController extends Controller
         $shop->ordermeal = intval($request->ordermeal) ? 1 : 0;
         $shop->appoint = intval($request->appoint) ? 1 : 0;
         $shop->sellcard = intval($request->sellcard) ? 1 : 0;
+        $shop->giftcard = intval($request->giftcard) ? 1 : 0;
         $shop->started_at = $request->started_at ? strtotime($request->started_at) : $request->started_at;
         $shop->ended_at = $request->ended_at ? strtotime($request->ended_at) : $request->ended_at;
         $shop->viewnum = $request->viewnum;
@@ -210,6 +211,7 @@ class ShopController extends Controller
         $shop->ordermeal = intval($request->ordermeal) ? 1 : 0;
         $shop->appoint = intval($request->appoint) ? 1 : 0;
         $shop->sellcard = intval($request->sellcard) ? 1 : 0;
+        $shop->giftcard = intval($request->giftcard) ? 1 : 0;
         $shop->started_at = $request->started_at ? strtotime($request->started_at) : $request->started_at;
         $shop->ended_at = $request->ended_at ? strtotime($request->ended_at) : $request->ended_at;
         $shop->viewnum = $request->viewnum;

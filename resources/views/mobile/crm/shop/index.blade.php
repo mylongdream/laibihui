@@ -38,6 +38,30 @@
                     </div>
                 </div>
                 <div class="weui-panel">
+                    <div class="weui-panel__bd user-account">
+                        <div class="weui-flex">
+                            <div class="weui-flex__item">
+                                <a href="javascript:;" class="">
+                                    <div class="money">{{ $count->giftcard_all }} 张</div>
+                                    <div class="name">当前领卡总数</div>
+                                </a>
+                            </div>
+                            <div class="weui-flex__item">
+                                <a href="javascript:;" class="">
+                                    <div class="money">{{ $count->giftcard_today }} 张</div>
+                                    <div class="name">今日奖励</div>
+                                </a>
+                            </div>
+                            <div class="weui-flex__item">
+                                <a href="javascript:;" class="">
+                                    <div class="money">{{ $count->giftcard_month }} 张</div>
+                                    <div class="name">本月奖励</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-panel">
                     <div class="weui-panel__bd">
                         <div class="weui-grids">
                             <a href="{{ route('mobile.crm.shop.appoint.index') }}" class="weui-grid">
