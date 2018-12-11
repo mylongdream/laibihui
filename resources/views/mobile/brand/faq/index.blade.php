@@ -12,9 +12,9 @@
                     <div class="">
                         <div class="weui-cells__title">{{ $value->name }}</div>
                         <div class="weui-cells">
-                            @foreach ($value->faqs as $faq)
-                                <a class="weui-cell weui-cell_access" href="{{ route('mobile.brand.faq.show', ['id' => $faq->id]) }}">
-                                    <div class="weui-cell__bd">{{ $faq->title }}</div>
+                            @foreach ($value->faqs as $val)
+                                <a class="weui-cell weui-cell_access" href="{{ route('mobile.brand.faq.show', ['id' => $val->id]) }}">
+                                    <div class="weui-cell__bd">{{ $val->title }}</div>
                                     <div class="weui-cell__ft"></div>
                                 </a>
                             @endforeach

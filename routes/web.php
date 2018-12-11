@@ -268,6 +268,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
         Route::post('feedback', ['as' => 'feedback.store', 'uses' => 'Mobile\User\FeedbackController@store']);
         Route::get('partner', ['as' => 'partner.index', 'uses' => 'Mobile\User\PartnerController@index']);
         Route::any('partner/qrcode', ['as' => 'partner.qrcode', 'uses' => 'Mobile\User\PartnerController@qrcode']);
+        Route::any('partner/apply', ['as' => 'partner.apply', 'uses' => 'Mobile\User\PartnerController@apply']);
         //Route::get('cardreward', ['as' => 'cardreward.index', 'uses' => 'Mobile\User\CardRewardController@index']);
         //Route::any('cardreward/record', ['as' => 'cardreward.record', 'uses' => 'Mobile\User\CardRewardController@record']);
         //Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'Mobile\User\CardRewardController@exchange']);

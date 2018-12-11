@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CommonAppointModel;
 use App\Models\CommonCardModel;
 use App\Models\CommonCardOrderModel;
+use App\Models\CommonFaqModel;
 use App\Models\CommonUserAccountModel;
 use App\Models\CommonUserCardModel;
 use Illuminate\Http\Request;
@@ -128,7 +129,8 @@ class BindCardController extends Controller
             }
         }else{
             $card = auth()->user()->card;
-            return view('mobile.user.bindcard.index', ['card' => $card]);
+            $faqs = CommonFaqModel::where('catid', 1)->orderBy('displayorder', 'asc')->get();
+            return view('mobile.user.bindcard.index', ['card' => $card, 'faqs' => $faqs]);
         }
     }
 }

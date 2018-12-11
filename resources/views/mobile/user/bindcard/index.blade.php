@@ -80,6 +80,14 @@
                 <div class="quick-nav">
                     <div class=""><a href="{{ route('mobile.brand.card.index') }}" class="text-red">我还没有卡，立即前去办卡</a></div>
                 </div>
+                    <div class="weui-cells">
+                        @foreach ($faqs as $value)
+                            <a class="weui-cell weui-cell_access" href="{{ route('mobile.brand.faq.show', ['id' => $value->id]) }}">
+                                <div class="weui-cell__bd">{{ $value->title }}</div>
+                                <div class="weui-cell__ft"></div>
+                            </a>
+                        @endforeach
+                    </div>
                 @endif
             </div>
         </div>
