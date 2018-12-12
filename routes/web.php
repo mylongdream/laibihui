@@ -491,6 +491,8 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::resource('withdraw', 'Admin\Brand\WithdrawController');
             Route::post('appoint/batch', ['as' => 'appoint.batch', 'uses' => 'Admin\Brand\AppointController@batch']);
             Route::resource('appoint', 'Admin\Brand\AppointController');
+            Route::post('giftcard/batch', ['as' => 'giftcard.batch', 'uses' => 'Admin\Brand\GiftcardController@batch']);
+            Route::resource('giftcard', 'Admin\Brand\GiftcardController');
         });
         Route::group(['prefix' => 'payment', 'as' => 'payment.'], function () {
             // Route::post('shop/batch', ['as' => 'shop.batch', 'uses' => 'Admin\Brand\ShopController@batch']);
@@ -604,6 +606,8 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::resource('grantsell', 'Admin\CRM\GrantsellController');
             Route::post('grantcancel/batch', ['as' => 'grantcancel.batch', 'uses' => 'Admin\CRM\GrantcancelController@batch']);
             Route::resource('grantcancel', 'Admin\CRM\GrantcancelController');
+            Route::post('applysell/batch', ['as' => 'applysell.batch', 'uses' => 'Admin\CRM\ApplysellController@batch']);
+            Route::resource('applysell', 'Admin\CRM\ApplysellController');
         });
     });
 });
