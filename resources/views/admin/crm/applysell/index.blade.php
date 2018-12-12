@@ -32,7 +32,6 @@
 				<td>{{ $value->remark }}</td>
 				<td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
 				<td>
-					<a href="{{ route('admin.crm.applysell.show',$value->id) }}" class="" title="{{ trans('admin.crm.applysell.show') }}">{{ trans('admin.view') }}</a>
 					<a href="{{ route('admin.crm.applysell.destroy',$value->id) }}" class="mlm delbtn">{{ trans('admin.destroy') }}</a>
 				</td>
 			</tr>

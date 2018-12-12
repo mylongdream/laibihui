@@ -1322,6 +1322,7 @@ return [
     'crm.applysell.mobile' => '手机号码',
     'crm.applysell.wechatid' => '微信号',
     'crm.applysell.address' => '联系地址',
+    'crm.applysell.remark' => '其他要求',
     'crm.applysell.postip' => 'IP',
     'crm.applysell.created_at' => '提交时间',
     'crm.applysell.deletesucceed' => '申请卖卡信息删除成功',
