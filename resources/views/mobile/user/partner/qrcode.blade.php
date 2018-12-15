@@ -23,8 +23,8 @@
                         <div class="nav">申请售卡推广员</div>
                     </div>
                     <div class="weui-article">
-                        @if (!auth()->user()->personnel && !$order)
                         <p style="text-align: center"><img src="{{ $qrcode }}" alt=""></p>
+                        @if (!auth()->user()->personnel && !$order)
                         <p style="font-size:18px;color:#f00;">你尚未开通推广售卡服务，请按以下方法操作：</p>
                         <p><a href="{{ route('mobile.user.partner.apply') }}" style="color: blue">立即在线申请推广售卡服务</a></p>
                         <p>立即拨打客服电话<a href="tel:057188253203" style="color: blue">0571-88253203</a>申请推广售卡服务</p>

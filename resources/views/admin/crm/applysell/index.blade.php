@@ -46,7 +46,7 @@
 				<td>{{ $value->wechatid }}</td>
 				<td>{{ $value->address }}</td>
 				<td>{{ $value->remark }}</td>
-				<td>{{ trans('admin.crm.applysell.status_'.$order->status) }}</td>
+				<td>{{ trans('admin.crm.applysell.status_'.$value->status) }}</td>
 				<td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
 				<td>
 					<a href="{{ route('admin.crm.applysell.destroy',$value->id) }}" class="mlm delbtn">{{ trans('admin.destroy') }}</a>
