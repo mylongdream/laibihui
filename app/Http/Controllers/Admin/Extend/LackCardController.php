@@ -71,9 +71,9 @@ class LackCardController extends Controller
             $personnel = CrmPersonnelModel::where('uid', $order->uid)->first();
             if(!$personnel){
                 if ($request->ajax()){
-                    return response()->json(['status' => '1', 'info' => '处理失败，对方不能卖卡', 'url' => back()->getTargetUrl()]);
+                    return response()->json(['status' => 0, 'info' => '处理失败，对方不能卖卡', 'url' => back()->getTargetUrl()]);
                 }else{
-                    return view('admin.layouts.message', ['status' => '1', 'info' => '处理失败，对方不能卖卡', 'url' => back()->getTargetUrl()]);
+                    return view('admin.layouts.message', ['status' => 0, 'info' => '处理失败，对方不能卖卡', 'url' => back()->getTargetUrl()]);
                 }
             }
             $allocation = new CrmAllocationModel;
