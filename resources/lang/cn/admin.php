@@ -1331,6 +1331,7 @@ return [
     'crm.applysell.list' => '申请卖卡列表',
     'crm.applysell.destroy' => '删除申请卖卡',
     'crm.applysell.show' => '查看申请卖卡',
+    'crm.applysell.user' => '申请用户',
     'crm.applysell.realname' => '用户姓名',
     'crm.applysell.mobile' => '手机号码',
     'crm.applysell.wechatid' => '微信号',
