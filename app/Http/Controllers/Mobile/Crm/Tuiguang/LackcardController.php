@@ -24,7 +24,7 @@ class LackcardController extends CommonController
 
     public function checkin(Request $request)
     {
-        if(!$this->shop->sellcard || !auth('crm')->user()->personnel){
+        if(!auth('crm')->user()->personnel){
             if ($request->ajax()){
                 return response()->json(['status' => 0, 'info' => '您无权卖卡']);
             }else{
