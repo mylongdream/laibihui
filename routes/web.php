@@ -344,6 +344,8 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
                 Route::get('grantsell/manage', ['as' => 'grantsell.manage', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@manage']);
                 Route::any('grantsell/patch', ['as' => 'grantsell.patch', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@patch']);
                 Route::any('grantsell/cancel', ['as' => 'grantsell.cancel', 'uses' => 'Mobile\CRM\Tuiguang\GrantsellController@cancel']);
+                Route::get('lackcard', ['as' => 'lackcard.index', 'uses' => 'Mobile\CRM\Tuiguang\LackCardController@index']);
+                Route::any('lackcard/checkin', ['as' => 'lackcard.checkin', 'uses' => 'Mobile\CRM\Tuiguang\LackCardController@checkin']);
             });
             Route::group(['prefix' => 'kefu', 'as' => 'kefu.'], function () {
                 Route::get('/', ['as' => 'index', 'uses' => 'Mobile\CRM\Kefu\IndexController@index']);

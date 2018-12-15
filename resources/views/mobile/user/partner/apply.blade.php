@@ -36,7 +36,7 @@
                     <div class="weui-cells weui-cells_form">
                         <div class="weui-cell">
                             <div class="weui-cell__bd">
-                                <textarea name="message" class="weui-textarea" placeholder="请填写相关要求以便我们提供更好的帮助（选填）" rows="3"></textarea>
+                                <textarea name="remark" class="weui-textarea" placeholder="请填写相关要求以便我们提供更好的帮助（选填）" rows="3"></textarea>
                                 <div class="weui-textarea-counter"><span>0</span>/200</div>
                             </div>
                         </div>
