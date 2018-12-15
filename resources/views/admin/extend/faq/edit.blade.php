@@ -3,6 +3,10 @@
 @section('content')
 	<div class="itemnav">
 		<div class="title"><h3>{{ trans('admin.extend.faq') }}</h3></div>
+		<ul class="tab">
+			<li class="current"><a href="{{ route('admin.extend.faq.index') }}"><span>{{ trans('admin.extend.faq.list') }}</span></a></li>
+			<li><a href="{{ route('admin.extend.faqcate.index') }}"><span>{{ trans('admin.extend.faqcate.list') }}</span></a></li>
+		</ul>
 	</div>
 	<form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('admin.extend.faq.update', $faq->id) }}">
     	<input type="hidden" name="_method" value="PUT">

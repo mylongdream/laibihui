@@ -37,13 +37,18 @@ class PartnerController extends Controller
         $imgurl = 'grantsell/qrcode_'.auth()->user()->uid.'.png';
         QrCode::format('png')->size(400)->generate($url, storage_path('app/public/qrcode/'.$imgurl));
         $qrcode = uploadQrcode($imgurl);
-        return view('mobile.user.partner.qrcode', ['qrcode' => $qrcode]);
+        $order = CrmApplysellModel::where('uid', auth()->user()->uid)->where('status', 0)->first();
+        return view('mobile.user.partner.qrcode', ['qrcode' => $qrcode, 'order' => $order]);
     }
 
     public function apply(Request $request)
     {
         if(auth()->user()->group->type != 'user'){
             return view('layouts.mobile.message', ['status' => 0, 'info' => '你已不是普通会员', 'url' => back()->getTargetUrl()]);
+        }
+        $order = CrmApplysellModel::where('uid', auth()->user()->uid)->where('status', 0)->first();
+        if($order){
+            return view('layouts.mobile.message', ['status' => 0, 'info' => '你已申请，正等待受理', 'url' => back()->getTargetUrl()]);
         }
         if ($request->isMethod('POST')) {
             $rules = array(
@@ -78,6 +83,12 @@ class PartnerController extends Controller
         }else{
             return view('mobile.user.partner.apply');
         }
+    }
+
+    public function order(Request $request)
+    {
+        $orders = CrmApplysellModel::where('uid', auth()->user()->uid)->orderBy('created_at', 'desc')->paginate(20);
+        return view('mobile.user.partner.order', ['orders' => $orders]);
     }
 
 }

@@ -267,8 +267,9 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
         Route::get('feedback', ['as' => 'feedback.index', 'uses' => 'Mobile\User\FeedbackController@index']);
         Route::post('feedback', ['as' => 'feedback.store', 'uses' => 'Mobile\User\FeedbackController@store']);
         Route::get('partner', ['as' => 'partner.index', 'uses' => 'Mobile\User\PartnerController@index']);
-        Route::any('partner/qrcode', ['as' => 'partner.qrcode', 'uses' => 'Mobile\User\PartnerController@qrcode']);
+        Route::get('partner/qrcode', ['as' => 'partner.qrcode', 'uses' => 'Mobile\User\PartnerController@qrcode']);
         Route::any('partner/apply', ['as' => 'partner.apply', 'uses' => 'Mobile\User\PartnerController@apply']);
+        Route::get('partner/order', ['as' => 'partner.order', 'uses' => 'Mobile\User\PartnerController@order']);
         //Route::get('cardreward', ['as' => 'cardreward.index', 'uses' => 'Mobile\User\CardRewardController@index']);
         //Route::any('cardreward/record', ['as' => 'cardreward.record', 'uses' => 'Mobile\User\CardRewardController@record']);
         //Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'Mobile\User\CardRewardController@exchange']);
@@ -382,6 +383,8 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::resource('friendlink', 'Admin\Extend\FriendlinkController');
             Route::post('faq/batch', ['as' => 'faq.batch', 'uses' => 'Admin\Extend\FaqController@batch']);
             Route::resource('faq', 'Admin\Extend\FaqController');
+            Route::post('faqcate/batch', ['as' => 'faqcate.batch', 'uses' => 'Admin\Extend\FaqCategoryController@batch']);
+            Route::resource('faqcate', 'Admin\Extend\FaqCategoryController');
             Route::post('feedback/batch', ['as' => 'feedback.batch', 'uses' => 'Admin\Extend\FeedbackController@batch']);
             Route::resource('feedback', 'Admin\Extend\FeedbackController');
             Route::post('announce/batch', ['as' => 'announce.batch', 'uses' => 'Admin\Extend\AnnounceController@batch']);

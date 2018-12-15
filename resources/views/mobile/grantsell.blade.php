@@ -42,7 +42,7 @@
                                             <input class="weui-input hidekeyboard" id="location_input" placeholder="请输入所在区域" type="text" value="" readonly>
                                             <input class="prov" type="hidden" name="province" value="">
                                             <input class="city" type="hidden" name="city" value="">
-                                            <input class="area" type="hidden" name="area" value="">
+                                            <input class="dist" type="hidden" name="area" value="">
                                         </div>
                                     </div>
                                 </div>

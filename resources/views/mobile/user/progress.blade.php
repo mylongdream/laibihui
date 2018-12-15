@@ -39,6 +39,15 @@
                                     </div>
                                     <span class="weui-cell__ft"></span>
                                 </a>
+                                <a class="weui-cell weui-cell_access" href="{{ route('mobile.user.partner.order') }}">
+                                    <div class="weui-cell__hd">
+                                        <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-banka.png') }}" alt="">
+                                    </div>
+                                    <div class="weui-cell__bd weui-cell_primary">
+                                        <p class="user-menu-txt">加入授权办卡员进度查询</p>
+                                    </div>
+                                    <span class="weui-cell__ft"></span>
+                                </a>
                             </div>
                         </div>
                     </div>

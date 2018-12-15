@@ -18,7 +18,14 @@ class ApplysellController extends Controller
      */
     public function index(Request $request)
     {
-        $list = CrmApplysellModel::has('user')->orderBy('created_at', 'desc')->paginate(20);
+        $list = CrmApplysellModel::where(function($query) use($request) {
+            $request->status = $request->status ? $request->status : 0;
+            if($request->status > 0){
+                $query->where('status', $request->status);
+            }else if($request->status == 0){
+                $query->where('status', 0);
+            }
+        })->orderBy('created_at', 'desc')->paginate(20);
         return view('admin.crm.applysell.index', ['list' => $list]);
     }
 
@@ -31,6 +38,35 @@ class ApplysellController extends Controller
     {
         $info = CrmApplysellModel::findOrFail($id);
         return view('admin.crm.applysell.show', ['info' => $info]);
+    }
+
+    public function edit($id)
+    {
+        $order = CrmApplysellModel::findOrFail($id);
+        return view('admin.crm.applysell.edit', ['order' => $order]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $order = CrmApplysellModel::findOrFail($id);
+        $rules = array(
+            'status' => 'required|numeric',
+        );
+        $messages = array(
+            'status.required' => '处理状态不允许为空！',
+            'status.numeric' => '处理状态选择错误',
+        );
+        $this->validate($request, $rules, $messages);
+
+
+        $order->status = $request->status;
+        $order->save();
+
+        if ($request->ajax()){
+            return response()->json(['status' => '1', 'info' => trans('admin.crm.applysell.editsucceed'), 'url' => back()->getTargetUrl()]);
+        }else{
+            return view('layouts.admin.message', ['status' => '1', 'info' => trans('admin.crm.applysell.editsucceed'), 'url' => back()->getTargetUrl()]);
+        }
     }
 
     /**

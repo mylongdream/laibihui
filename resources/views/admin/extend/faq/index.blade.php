@@ -3,6 +3,10 @@
 @section('content')
 	<div class="itemnav">
 		<div class="title"><h3>{{ trans('admin.extend.faq') }}</h3></div>
+		<ul class="tab">
+			<li class="current"><a href="{{ route('admin.extend.faq.index') }}"><span>{{ trans('admin.extend.faq.list') }}</span></a></li>
+			<li><a href="{{ route('admin.extend.faqcate.index') }}"><span>{{ trans('admin.extend.faqcate.list') }}</span></a></li>
+		</ul>
 	</div>
 	<form id="schform" name="schform" class="formsearch" method="get" action="{{ route('admin.extend.faq.index') }}">
 	<div class="tbsearch">
@@ -33,7 +37,7 @@
 			@foreach ($faqs as $faq)
 			<tr>
 				<td><input class="ids" type="checkbox" value="{{ $faq->id }}" name="ids[]"></td>
-				<td><input type="text" class="txt" name="displayorder[{{ $faq->photo_id }}]" value="{{ $faq->displayorder }}" size="2"></td>
+				<td><input type="text" class="txt" name="displayorder[{{ $faq->id }}]" value="{{ $faq->displayorder }}" size="2"></td>
 				<td>{{ $faq->title or '/' }}</td>
 				<td>{{ $faq->category ? $faq->category->name : '/' }}</td>
 				<td>{{ $faq->created_at->format('Y-m-d H:i') }}</td>
