@@ -35,16 +35,16 @@
 				<th width="120">{{ trans('admin.created_at') }}</th>
 				<th width="80">{{ trans('admin.operation') }}</th>
 			</tr>
-			@foreach ($orders as $order)
+			@foreach ($orders as $value)
 			<tr>
-				<td><input class="ids" type="checkbox" value="{{ $order->id }}" name="ids[]"></td>
-				<td>{{ $order->user ? $order->user->username : '/' }}</td>
-				<td>{{ $order->cardnum }}</td>
-				<td>{{ trans('admin.extend.lackcard.status_'.$order->status) }}</td>
-				<td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
+				<td><input class="ids" type="checkbox" value="{{ $value->id }}" name="ids[]"></td>
+				<td>{{ $value->user ? $value->user->username : '/' }}</td>
+				<td>{{ $value->cardnum }}</td>
+				<td>{{ trans('admin.extend.lackcard.status_'.$value->status) }}</td>
+				<td>{{ $value->created_at->format('Y-m-d H:i') }}</td>
 				<td>
-					<a href="{{ route('admin.extend.lackcard.edit',$order->id) }}" class="openwindow" title="{{ trans('admin.handle') }}">{{ trans('admin.handle') }}</a>
-					<a href="{{ route('admin.extend.lackcard.destroy',$order->id) }}" class="mlm delbtn">{{ trans('admin.destroy') }}</a>
+					<a href="{{ route('admin.extend.lackcard.edit',$value->id) }}" class="openwindow" title="{{ trans('admin.handle') }}">{{ trans('admin.handle') }}</a>
+					<a href="{{ route('admin.extend.lackcard.destroy',$value->id) }}" class="mlm delbtn">{{ trans('admin.destroy') }}</a>
 				</td>
 			</tr>
 			@endforeach

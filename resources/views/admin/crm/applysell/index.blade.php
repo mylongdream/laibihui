@@ -36,7 +36,7 @@
 				<th width="">{{ trans('admin.crm.applysell.remark') }}</th>
 				<th width="60">{{ trans('admin.crm.applysell.status') }}</th>
 				<th width="150">{{ trans('admin.crm.applysell.created_at') }}</th>
-				<th width="150">{{ trans('admin.operation') }}</th>
+				<th width="120">{{ trans('admin.operation') }}</th>
 			</tr>
 			@foreach ($list as $value)
 			<tr>
@@ -49,6 +49,7 @@
 				<td>{{ trans('admin.crm.applysell.status_'.$value->status) }}</td>
 				<td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
 				<td>
+					<a href="{{ route('admin.crm.applysell.edit',$value->id) }}" class="openwindow" title="{{ trans('admin.handle') }}">{{ trans('admin.handle') }}</a>
 					<a href="{{ route('admin.crm.applysell.destroy',$value->id) }}" class="mlm delbtn">{{ trans('admin.destroy') }}</a>
 				</td>
 			</tr>
