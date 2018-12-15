@@ -17,7 +17,7 @@ class FaqCategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $faqcates = CommonFaqCategoryModel::where('title', 'like', '%'.$request->title.'%')->orderBy('displayorder', 'asc')->paginate(10);
+        $faqcates = CommonFaqCategoryModel::orderBy('displayorder', 'asc')->paginate(10);
         return view('admin.extend.faqcate.index', ['faqcates' => $faqcates]);
     }
 
