@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CommonCardBookingModel;
 use App\Models\CommonUserModel;
 use App\Models\CrmAllocationModel;
+use App\Models\CrmPersonnelModel;
 use Illuminate\Http\Request;
 
 
@@ -66,9 +67,15 @@ class LackCardController extends Controller
         $this->validate($request, $rules, $messages);
 
         $order->status = $request->status;
-        $order->save();
         if($order->status == 1){
-            $personnel = $order->user->personnel;
+            $personnel = CrmPersonnelModel::where('uid', $order->uid)->first();
+            if(!$personnel){
+                if ($request->ajax()){
+                    return response()->json(['status' => '1', 'info' => '处理失败，对方不能卖卡', 'url' => back()->getTargetUrl()]);
+                }else{
+                    return view('admin.layouts.message', ['status' => '1', 'info' => '处理失败，对方不能卖卡', 'url' => back()->getTargetUrl()]);
+                }
+            }
             $allocation = new CrmAllocationModel;
             $allocation->personnel_id = $personnel->id;
             $allocation->uid = $personnel->uid;
@@ -77,6 +84,7 @@ class LackCardController extends Controller
             $allocation->save();
             $personnel->increment('allotnum', $allocation->cardnum);
         }
+        $order->save();
 
         if ($request->ajax()){
             return response()->json(['status' => '1', 'info' => trans('admin.extend.lackcard.editsucceed'), 'url' => back()->getTargetUrl()]);
