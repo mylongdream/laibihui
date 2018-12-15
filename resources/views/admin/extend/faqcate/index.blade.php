@@ -8,15 +8,6 @@
 			<li class="current"><a href="{{ route('admin.extend.faqcate.index') }}"><span>{{ trans('admin.extend.faqcate.list') }}</span></a></li>
 		</ul>
 	</div>
-	<form id="schform" name="schform" class="formsearch" method="get" action="{{ route('admin.extend.faqcate.index') }}">
-	<div class="tbsearch">
-		<dl>
-			<dt>{{ trans('admin.extend.faqcate.title') }}</dt>
-			<dd><input type="text" name="title" class="schtxt" value="{{ request('title') }}"></dd>
-		</dl>
-		<div class="schbtn"><button name="" type="submit">{{ trans('admin.search') }}</button></div>
-	</div>
-	</form>
 	<form id="cpform" name="cpform" class="ajaxform" method="post" action="{{ route('admin.extend.faqcate.batch') }}">
 	{!! csrf_field() !!}
 	<input type="hidden" id="operate" name="operate" value="" />
@@ -29,7 +20,7 @@
 			<tr>
 				<th width="24"><input class="checkall" type="checkbox"></th>
 				<th width="50">{{ trans('admin.displayorder') }}</th>
-				<th>{{ trans('admin.extend.faqcate.title') }}</th>
+				<th>{{ trans('admin.extend.faqcate.name') }}</th>
 				<th width="80">{{ trans('admin.operation') }}</th>
 			</tr>
 			@foreach ($faqcates as $faqcate)
