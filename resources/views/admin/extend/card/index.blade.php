@@ -4,6 +4,7 @@
 	<div class="itemnav">
 		<div class="title"><h3>{{ trans('admin.extend.card') }}</h3></div>
 	</div>
+	<div style="padding:5px 10px;margin-top:15px;border: 1px solid #cbcbcb;font-size:16px;">总卡数：{{ $count->allnum }}张，已分配：{{ $count->allotnum }}张</div>
 	<form id="schform" name="schform" class="formsearch" method="get" action="{{ route('admin.extend.card.index') }}">
 	<div class="tbsearch">
 		<dl>
@@ -11,7 +12,6 @@
 				<select class="schselect" name="bind" onchange='this.form.submit()'>
 					<option value="0">未绑定</option>
                     <option value="1" {!! request('bind') == 1 ? 'selected="selected"' : '' !!}>已绑定</option>
-					<option value="2" {!! request('bind') == 2 ? 'selected="selected"' : '' !!}>被分配</option>
                 </select>
 			</dd>
 		</dl>

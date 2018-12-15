@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Extend;
 
 use App\Http\Controllers\Controller;
 use App\Models\CommonCardModel;
+use App\Models\CrmAllocationModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
@@ -18,21 +19,21 @@ class CardController extends Controller
      */
     public function index(Request $request)
     {
-        $CommonCardModel = new CommonCardModel;
-        $cards = $CommonCardModel->where(function($query) use($request) {
+        $count = collect();
+        $count->allnum = CommonCardModel::count();
+        $count->allotnum = CrmAllocationModel::sum('cardnum');
+        $cards = CommonCardModel::where(function($query) use($request) {
             if($request->bind == 1){
                 $query->has('user');
-            }elseif($request->bind == 2){
-                $query->has('allot');
             }else{
-                $query->doesntHave('user')->doesntHave('allot');
+                $query->doesntHave('user');
 			}
         })->where(function($query) use($request) {
             if($request->prefix){
                 $query->where('number', 'like',$request->prefix."%");
             }
         })->latest()->orderBy('number', 'desc')->paginate(20);
-        return view('admin.extend.card.index', ['cards' => $cards]);
+        return view('admin.extend.card.index', ['cards' => $cards, 'count' => $count]);
     }
 
 

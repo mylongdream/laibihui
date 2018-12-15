@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Extend;
 use App\Http\Controllers\Controller;
 use App\Models\CommonCardBookingModel;
 use App\Models\CommonUserModel;
+use App\Models\CrmAllocationModel;
 use Illuminate\Http\Request;
 
 
@@ -64,9 +65,18 @@ class LackCardController extends Controller
         );
         $this->validate($request, $rules, $messages);
 
-
         $order->status = $request->status;
         $order->save();
+        if($order->status == 1){
+            $personnel = $order->user->personnel;
+            $allocation = new CrmAllocationModel;
+            $allocation->personnel_id = $personnel->id;
+            $allocation->uid = $personnel->uid;
+            $allocation->cardnum = $order->cardnum;
+            $allocation->postip = $request->getClientIp();
+            $allocation->save();
+            $personnel->increment('allotnum', $allocation->cardnum);
+        }
 
         if ($request->ajax()){
             return response()->json(['status' => '1', 'info' => trans('admin.extend.lackcard.editsucceed'), 'url' => back()->getTargetUrl()]);
