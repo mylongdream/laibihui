@@ -89,11 +89,11 @@
                                         </div>
                                         <p class="weui-grid__label">授权办卡管理</p>
                                     </a>
-                                    <a href="{{ route('mobile.crm.tuiguang.lackcard.index') }}" class="weui-grid">
+                                    <a href="{{ route('mobile.crm.tuiguang.lackcard.checkin') }}" class="weui-grid">
                                         <div class="weui-grid__icon">
                                             <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-jindu.png') }}" alt="">
                                         </div>
-                                        <p class="weui-grid__label">缺卡受理</p>
+                                        <p class="weui-grid__label">缺卡登记</p>
                                     </a>
                                 </div>
                             </div>
