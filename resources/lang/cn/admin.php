@@ -1293,6 +1293,7 @@ return [
     'crm.allocation.user' => '所属卖卡人员',
     'crm.allocation.username' => '所属卖卡人员用户名',
     'crm.allocation.cardnum' => '分配卡数',
+    'crm.allocation.remark' => '备注信息',
     'crm.allocation.postip' => 'IP',
     'crm.allocation.created_at' => '提交时间',
     'crm.allocation.addsucceed' => '分配卡数信息添加成功',

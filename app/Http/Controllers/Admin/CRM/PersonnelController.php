@@ -129,6 +129,7 @@ class PersonnelController extends Controller
             $allocation->personnel_id = $personnel->id;
             $allocation->uid = $personnel->uid;
             $allocation->cardnum = $request->cardnum;
+            $allocation->remark = '系统后台分配';
             $allocation->postip = $request->getClientIp();
             $allocation->save();
             $personnel->increment('allotnum', $allocation->cardnum);

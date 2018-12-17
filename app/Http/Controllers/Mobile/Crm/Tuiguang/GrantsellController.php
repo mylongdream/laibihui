@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\CommonSellcardModel;
 use App\Models\CommonUserModel;
+use App\Models\CrmAllocationModel;
 use App\Models\CrmGrantcancelModel;
 use App\Models\CrmPersonnelModel;
 use App\Models\WechatMenuModel;
@@ -74,7 +75,22 @@ class GrantsellController extends CommonController
         }
 
         $personnel = CrmPersonnelModel::where('topuid', auth('crm')->user()->uid)->findOrFail($request->id);
+        $allocation = new CrmAllocationModel;
+        $allocation->personnel_id = $personnel->id;
+        $allocation->uid = $personnel->uid;
+        $allocation->cardnum = $request->cardnum;
+        $allocation->remark = '上级补卡分配';
+        $allocation->postip = $request->getClientIp();
+        $allocation->save();
         $personnel->increment('allotnum', $request->cardnum);
+
+        $allocation = new CrmAllocationModel;
+        $allocation->personnel_id = auth('crm')->user()->personnel->id;
+        $allocation->uid = auth('crm')->user()->uid;
+        $allocation->cardnum = -$request->cardnum;
+        $allocation->remark = '下架补卡分配';
+        $allocation->postip = $request->getClientIp();
+        $allocation->save();
         auth('crm')->user()->personnel->decrement('allotnum', $request->cardnum);
         if ($request->ajax()){
             return response()->json(['status' => 1, 'info' => '成功补卡', 'url' => back()->getTargetUrl()]);
@@ -94,7 +110,22 @@ class GrantsellController extends CommonController
             }
         }
         //剩余卡数退回
+        $allocation = new CrmAllocationModel;
+        $allocation->personnel_id = auth('crm')->user()->personnel->id;
+        $allocation->uid = auth('crm')->user()->uid;
+        $allocation->cardnum = $personnel->allotnum - $personnel->sellnum;
+        $allocation->remark = '下级剩余卡数退回';
+        $allocation->postip = $request->getClientIp();
+        $allocation->save();
         auth('crm')->user()->personnel->increment('allotnum', $personnel->allotnum - $personnel->sellnum);
+
+        $allocation = new CrmAllocationModel;
+        $allocation->personnel_id = $personnel->id;
+        $allocation->uid = $personnel->uid;
+        $allocation->cardnum = $personnel->sellnum - $personnel->allotnum;
+        $allocation->remark = '剩余卡数退回上级';
+        $allocation->postip = $request->getClientIp();
+        $allocation->save();
         $personnel->allotnum = $personnel->sellnum;
         $personnel->save();
 

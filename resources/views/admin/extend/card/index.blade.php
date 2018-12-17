@@ -4,7 +4,7 @@
 	<div class="itemnav">
 		<div class="title"><h3>{{ trans('admin.extend.card') }}</h3></div>
 	</div>
-	<div style="padding:10px 20px;margin-top:15px;border: 1px solid #cbcbcb;font-size:18px;background:#eee">总卡数：{{ $count->allnum }}张，已分配：{{ $count->allotnum }}张</div>
+	<div style="padding:10px 20px;margin-top:15px;border: 1px solid #cbcbcb;font-size:18px;background:#eee">总卡数：<span style="color: #f00">{{ $count->allnum }}</span>张，已分配：<span style="color: #f00">{{ $count->allotnum }}</span>张，未分配：<span style="color: #f00">{{ $count->allnum - $count->allotnum }}</span>张</div>
 	<form id="schform" name="schform" class="formsearch" method="get" action="{{ route('admin.extend.card.index') }}">
 	<div class="tbsearch">
 		<dl>

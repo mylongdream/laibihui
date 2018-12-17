@@ -17,6 +17,7 @@
 				<th width="24"><input class="checkall" type="checkbox"></th>
 				<th>{{ trans('admin.crm.allocation.user') }}</th>
 				<th>{{ trans('admin.crm.allocation.cardnum') }}</th>
+				<th>{{ trans('admin.crm.allocation.remark') }}</th>
 				<th width="150">{{ trans('admin.crm.allocation.created_at') }}</th>
 			</tr>
 			@foreach ($list as $value)
@@ -24,6 +25,7 @@
 				<td><input class="ids" type="checkbox" value="{{ $value->id }}" name="ids[]"></td>
 				<td>{{ $value->user ? $value->user->username : '/' }}</td>
 				<td>{{ $value->cardnum }}</td>
+				<td>{{ $value->remark ? $value->remark : '/' }}</td>
 				<td>{{ $value->created_at ? $value->created_at->format('Y-m-d H:i') : '/' }}</td>
 			</tr>
 			@endforeach

@@ -80,6 +80,7 @@ class LackCardController extends Controller
             $allocation->personnel_id = $personnel->id;
             $allocation->uid = $personnel->uid;
             $allocation->cardnum = $order->cardnum;
+            $allocation->remark = '缺卡登记受理';
             $allocation->postip = $request->getClientIp();
             $allocation->save();
             $personnel->increment('allotnum', $allocation->cardnum);
