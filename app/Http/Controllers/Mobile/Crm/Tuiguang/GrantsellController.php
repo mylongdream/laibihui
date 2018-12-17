@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mobile\Crm\Tuiguang;
 use App\Http\Controllers\Controller;
 
 use App\Models\CommonSellcardModel;
+use App\Models\CommonUserGroupModel;
 use App\Models\CommonUserModel;
 use App\Models\CrmAllocationModel;
 use App\Models\CrmGrantcancelModel;
@@ -131,25 +132,27 @@ class GrantsellController extends CommonController
 
         //变回普通会员并更新微信菜单
         $fromuser = $personnel->user;
-        $fromuser->update(['group' => 1]);
+        $fromuser->group_id = 1;
+        $fromuser->save();
         $wx_info = WechatUserModel::where('user_id', $fromuser->uid)->first();
         if ($wx_info){
+            $group = CommonUserGroupModel::where('id', $fromuser->group_id)->first();
             $app = app('wechat.official_account');
             if ($wx_info->tagid_list){
                 foreach (unserialize($wx_info->tagid_list) as $value) {
                     $app->user_tag->untagUsers([$wx_info->openid], $value);
                 }
             }
-            if ($fromuser->group->tag_id){
-                $app->user_tag->tagUsers([$wx_info->openid], $fromuser->group->tag_id);
-                $wx_info->tagid_list = serialize([$fromuser->group->tag_id]);
+            if ($group->tag_id){
+                $app->user_tag->tagUsers([$wx_info->openid], $group->tag_id);
+                $wx_info->tagid_list = serialize([$group->tag_id]);
                 $wx_info->save();
             }else{
                 $wx_info->tagid_list = '';
                 $wx_info->save();
             }
             $WechatMenuModel = new WechatMenuModel;
-            $result = $WechatMenuModel->publish($fromuser->group->tag_id);
+            $result = $WechatMenuModel->publish($group->tag_id);
         }
 
         $personnel->delete();

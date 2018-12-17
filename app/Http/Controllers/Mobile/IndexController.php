@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CommonCardModel;
 use App\Models\CommonSellcardModel;
 use App\Models\CommonUserAccountModel;
+use App\Models\CommonUserGroupModel;
 use App\Models\CrmGrantsellModel;
 use App\Models\CrmPersonnelModel;
 use App\Models\WechatMenuModel;
@@ -155,22 +156,23 @@ class IndexController extends Controller
                     $fromuser->save();
                     $wx_info = WechatUserModel::where('user_id', $fromuser->uid)->first();
                     if ($wx_info){
+                        $group = CommonUserGroupModel::where('id', $fromuser->group_id)->first();
                         $app = app('wechat.official_account');
                         if ($wx_info->tagid_list){
                             foreach (unserialize($wx_info->tagid_list) as $value) {
                                 $app->user_tag->untagUsers([$wx_info->openid], $value);
                             }
                         }
-                        if ($fromuser->group->tag_id){
-                            $app->user_tag->tagUsers([$wx_info->openid], $fromuser->group->tag_id);
-                            $wx_info->tagid_list = serialize([$fromuser->group->tag_id]);
+                        if ($group->tag_id){
+                            $app->user_tag->tagUsers([$wx_info->openid], $group->tag_id);
+                            $wx_info->tagid_list = serialize([$group->tag_id]);
                             $wx_info->save();
                         }else{
                             $wx_info->tagid_list = '';
                             $wx_info->save();
                         }
                         $WechatMenuModel = new WechatMenuModel;
-                        $result = $WechatMenuModel->publish($fromuser->group->tag_id);
+                        $result = $WechatMenuModel->publish($group->tag_id);
                     }
 
                     if ($request->ajax()){
