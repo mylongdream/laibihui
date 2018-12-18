@@ -196,11 +196,25 @@ class IndexController extends Controller
         $fromuid = $request->fromuser ? Hashids::connection('promotion')->decode($request->fromuser) : 0;
         $fromuid = $fromuid ? $fromuid : 0;
         $fromuser = CommonUserModel::where('uid', $fromuid)->first();
-        if(!$fromuser || !$fromuser->personnel){
+        if(!$fromuser){
             if ($request->ajax()) {
                 return response()->json(['status' => 0, 'info' => '地址错误', 'url' => back()->getTargetUrl()]);
             }else{
                 return view('layouts.mobile.message', ['status' => 0, 'info' => '地址错误']);
+            }
+        }
+        if(!$fromuser->personnel){
+            if ($request->ajax()) {
+                return response()->json(['status' => 0, 'info' => '对方无办卡权限', 'url' => back()->getTargetUrl()]);
+            }else{
+                return view('layouts.mobile.message', ['status' => 0, 'info' => '对方无办卡权限']);
+            }
+        }
+        if($fromuser->personnel->allotnum - $fromuser->personnel->sellnum <= 0){
+            if ($request->ajax()) {
+                return response()->json(['status' => 0, 'info' => '对方余卡数量不足', 'url' => back()->getTargetUrl()]);
+            }else{
+                return view('layouts.mobile.message', ['status' => 0, 'info' => '对方余卡数量不足']);
             }
         }
         if ($request->isMethod('POST')) {

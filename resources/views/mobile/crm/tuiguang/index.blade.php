@@ -37,7 +37,7 @@
                                     </div>
                                     <div class="weui-flex__item">
                                         <a href="javascript:;" class="">
-                                            <div class="money">{{ $count->card_allotnum }} 张</div>
+                                            <div class="money">{{ $count->card_leftnum }} 张</div>
                                             <div class="name">库存卡数</div>
                                         </a>
                                     </div>

@@ -28,7 +28,7 @@ class IndexController extends CommonController
         $count->card_today = CommonSellcardModel::where('fromuid', auth('crm')->user()->uid)->whereDate('pay_at', '>=', $today->format('Y-m-d'))->count();
         $count->card_yesterday = CommonSellcardModel::where('fromuid', auth('crm')->user()->uid)->whereDate('pay_at', '>=', $yesterday->format('Y-m-d'))
             ->whereDate('pay_at', '<', $today->format('Y-m-d'))->count();
-        $count->card_allotnum = auth('crm')->user()->personnel->allotnum - auth('crm')->user()->personnel->sellnum;
+        $count->card_leftnum = auth('crm')->user()->personnel->allotnum - auth('crm')->user()->personnel->sellnum;
         $count->card_sellnum = auth('crm')->user()->personnel->sellnum;
         return view('mobile.crm.tuiguang.index', ['count' => $count]);
     }
