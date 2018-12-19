@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 ;
 use App\Models\BrandConsumeModel;
 use App\Models\CommonAnnounceModel;
+use App\Models\CommonFaqCategoryModel;
 use App\Models\CommonFaqModel;
 use App\Models\CommonUserSignModel;
 
@@ -23,7 +24,7 @@ class IndexController extends Controller
         $index = collect();
         $index->announces = CommonAnnounceModel::orderBy('created_at', 'desc')->get()->take(8);
         $index->consumes = BrandConsumeModel::where('uid', auth()->user()->uid)->orderBy('created_at', 'desc')->get()->take(10);
-        $index->faqs = CommonFaqModel::orderBy('displayorder', 'asc')->get()->take(10);
+        $index->faqcategory = CommonFaqCategoryModel::orderBy('displayorder', 'asc')->get();
         return view('user.index', ['index' => $index, 'todaysign' => $todaysign]);
     }
 }

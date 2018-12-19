@@ -45,22 +45,24 @@
         <a href="{{ route('user.profile.index') }}">首次进入修改个人资料，补充完整送您20积分哦</a>
     </div>
     @endif
-    @if (count($index->announces))
-        <div class="announce-list mtw">
+    @if (count($index->faqs))
+        <div class="user-faq mtw">
             <div class="hd">
-                <div class="z"><h3>系统公告</h3></div>
-                <div class="y"><a href="{{ route('announce.index') }}" target="_blank">查看更多</a></div>
-            </div>
-            <div class="bd">
+                <h3>常见问题</h3>
                 <ul>
-                    @foreach ($index->announces as $value)
-                        <li>
-                            <a href="{{ route('announce.show', ['id'=>$value->id]) }}" target="_blank">
-                                <strong>{{ $value->title }}</strong><span>{{ $value->created_at->format('Y-m-d H:i') }}</span>
-                            </a>
-                        </li>
+                    @foreach ($index->faqcategory as $value)
+                        <li><a href="#faq_{{ $value->id }}">{{ $value->name }}</a></li>
                     @endforeach
                 </ul>
+            </div>
+            <div class="bd">
+                @foreach ($index->faqcategory as $value)
+                <ul>
+                    @foreach ($value->faqs as $val)
+                        <li><a href="{{ route('about.faq') }}#faq_{{ $val->catid }}_{{ $val->id }}" target="_blank">{{ $val->title }}</a></li>
+                    @endforeach
+                </ul>
+                @endforeach
             </div>
         </div>
     @endif
@@ -130,20 +132,6 @@
             </table>
         </div>
     </div>
-    @if (count($index->faqs))
-    <div class="user-faq mtw">
-        <div class="hd">
-            <h3>常见问题</h3>
-        </div>
-        <div class="bd">
-            <ul>
-                @foreach ($index->faqs as $value)
-                    <li><a href="{{ route('about.faq') }}#faq_{{ $value->catid }}_{{ $value->id }}" target="_blank">{{ $value->title }}</a></li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
-    @endif
 @endsection
 
 @section('script')
@@ -156,6 +144,13 @@
                 formData: {
                     _token : $('meta[name="csrf-token"]').attr('content')
                 }
+            });
+            $(".user-faq .hd li:first").addClass("on");
+            $(".user-faq .bd ul:first").show();
+            $(".user-faq .hd li").click(function(){
+                var i = $(this).index();
+                $(this).addClass("on").siblings().removeClass("on");
+                $(".user-faq .bd ul").eq(i).show().siblings().hide();
             });
         });
     </script>
