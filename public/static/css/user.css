@@ -54,9 +54,10 @@
 .member-body .user-faq{overflow:hidden;}
 .member-body .user-faq .hd{font-size:14px;height:42px;line-height:42px;border: 1px solid #efefef;padding:0 15px;background:#f2f2f2;overflow:hidden;}
 .member-body .user-faq .hd h3 {font-size: 14px;font-style: normal;font-weight: 700;float:left;display: block}
-.member-body .user-faq .hd ul{float:left;margin-left:30px;padding:5px 0;}
-.member-body .user-faq .hd ul li{float:left;height:32px;line-height:32px;padding:0 15px;margin-right:10px;color:#fff;background: #999;}
-.member-body .user-faq .hd ul li.on{background: #f00;}
+.member-body .user-faq .hd ul{float:left;margin-left:30px;padding:8px 0;}
+.member-body .user-faq .hd ul li{float:left;margin-right:10px;}
+.member-body .user-faq .hd ul li a{color:#fff;background: #999;height:26px;line-height:26px;padding:0 15px;border-radius: 5px;font-size:12px;display: block;}
+.member-body .user-faq .hd ul li.on a{background: #2f9833;}
 .member-body .user-faq .bd{margin-top:-1px;font-size:14px;overflow:hidden;border: 1px solid #efefef;padding:10px 20px;}
 .member-body .user-faq .bd ul{width:100%;overflow:hidden;display: none}
 .member-body .user-faq .bd ul li{float:left;width:50%;margin:10px 0;}
