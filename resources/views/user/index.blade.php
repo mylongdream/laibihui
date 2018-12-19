@@ -45,7 +45,7 @@
         <a href="{{ route('user.profile.index') }}">首次进入修改个人资料，补充完整送您20积分哦</a>
     </div>
     @endif
-    @if (count($index->faqs))
+    @if (count($index->faqcategory))
         <div class="user-faq mtw">
             <div class="hd">
                 <h3>常见问题</h3>
