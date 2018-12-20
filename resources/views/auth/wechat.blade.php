@@ -11,8 +11,8 @@
         $(function(){
             function loadwechatLogin(){
                 var url = '{{ $checkurl }}';
-                $.getJSON(url,function(data){
-                    if(status === 1){
+                $.post(url,function(data){
+                    if(data.status === 1){
                         window.location.href = '{{ request('ReturnUrl') ? request('ReturnUrl') : route('index') }}';
                     }else{
                         window.setTimeout(function(){loadwechatLogin();},100);
