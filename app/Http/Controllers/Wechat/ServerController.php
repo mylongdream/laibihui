@@ -188,8 +188,10 @@ class ServerController extends Controller
         if($wxuser->user && !empty($SceneId) && strpos($SceneId, 'login_')!==false){
             $token = str_replace("login_","",$SceneId);
             $wechatLogin = WechatLoginModel::where('token', $token)->first();
-            $wechatLogin->wechat_id = $wxuser->id;
-            $wechatLogin->save();
+            if($wechatLogin){
+                $wechatLogin->wechat_id = $wxuser->uid;
+                $wechatLogin->save();
+            }
         }
 
     }
