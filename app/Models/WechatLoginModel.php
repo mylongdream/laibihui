@@ -8,7 +8,7 @@ class WechatLoginModel extends Model
 {
 
 	protected $table = 'wechat_login';
-	protected $primaryKey = 'id';
+	protected $primaryKey = 'token';
 	public $timestamps = true;
 
     public function user()
