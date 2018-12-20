@@ -11,6 +11,7 @@
     <link href="{{ asset('static/css/module.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('static/js/jbox/skin/default/jbox.css') }}" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="{{ asset('static/js/jquery-1.11.1.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('static/js/jquery.SuperSlide.2.1.2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('static/js/jbox/jquery.jBox-2.3.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('static/js/common.js') }}"></script>
     <style type="text/css">
