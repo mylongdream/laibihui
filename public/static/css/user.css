@@ -67,14 +67,14 @@
 .member-body .itemnav{border-bottom:1px solid #e2e2e2;padding-bottom: 10px;height:48px;overflow:hidden;}
 .member-body .itemnav .title{float:left;margin-right:20px;height:48px;line-height:48px;}
 .member-body .itemnav .title h3{font-size: 24px;color:#666;font-weight: normal;}
-.member-body .itemnav .tab{float:left;padding:10px 0px;}
+.member-body .itemnav .tab{float:left;padding:10px 0;}
 .member-body .itemnav .tab li{float:left;margin-right:10px;}
-.member-body .itemnav .tab li a{float:left;height:28px;line-height:28px;padding:0px 10px;display:block;background:#ddd;font-size: 14px;}
+.member-body .itemnav .tab li a{float:left;height:28px;line-height:28px;padding:0 10px;display:block;background:#ddd;font-size: 14px;}
 .member-body .itemnav .tab li a:hover{text-decoration:none;}
 .member-body .itemnav .tab li.on a{background:#999;color:#fff;}
 .member-body .tbsearch{overflow:hidden;font-size:14px;}
 .member-body .tbsearch dl{float:left;border:1px solid #ccc;margin-top:15px;margin-right:15px;}
-.member-body .tbsearch dl dt{background:#e0e0e0;float:left;display:block;padding:0px 6px;height:32px;line-height:32px;text-align:center;font-weight:normal;}
+.member-body .tbsearch dl dt{background:#e0e0e0;float:left;display:block;padding:0 6px;height:32px;line-height:32px;text-align:center;font-weight:normal;}
 .member-body .tbsearch dl dd{float:left;border-left:1px solid #ccc;}
 .member-body .tbsearch dl dd .schtxt{float:left;background:#fff;border:0;padding:6px 8px;height:20px;line-height:20px;font-size:14px;width:160px;color:#666;}
 .member-body .tbsearch dl dd .schselect{float:left;background:#fff;border:0;height:32px;line-height:32px;font-size:14px;color:#666;}
@@ -82,7 +82,7 @@
 .member-body .tbsearch .schbtn button{width:68px;background:#2f9833;border:none;cursor:pointer;height:34px;line-height:34px;color:#fff;font-size:14px;-moz-border-radius: 3px;-khtml-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;}
 .member-body .tbhead{border:1px solid #ddd;background:#f2f2f2;overflow:hidden;margin-bottom:-1px;}
 .member-body .tbhead h3{font-size: 18px;line-height: 42px;height: 42px;overflow:hidden;margin-left: 15px;font-weight: normal;}
-.member-body .tbhead .btn{margin: 6px 15px 6px 0px;background: #44b549;color: #fff;height: 30px;line-height: 30px;text-align: center;font-size: 14px;display: inline-block; padding: 0 22px;}
+.member-body .tbhead .btn{margin: 6px 15px 6px 0;background: #44b549;color: #fff;height: 30px;line-height: 30px;text-align: center;font-size: 14px;display: inline-block; padding: 0 22px;}
 .member-body .tbhead .btn:hover{text-decoration:none;background: #952100;}
 .member-body .tbhead ul{overflow:hidden;}
 .member-body .tbhead ul li{float:left;padding:6px 30px;line-height: 30px;overflow:hidden;border-right:1px solid #ddd;cursor:pointer;}
@@ -189,7 +189,7 @@
 .order-cancel .cancel-tip li a{border:1px solid #e2e2e2;color:#666;height:36px;line-height:36px;text-align:center;display: block}
 .order-cancel .cancel-tip li.on a{border:1px solid #ac2600;color:#ac2600;}
 .order-cancel .cancel-btn{margin-top:10px;text-align:center;}
-.order-cancel .cancel-btn button {background:#2f9833;color: #fff; padding: 0px 40px; border:none;cursor: pointer; text-align: center;display: inline-block;vertical-align: middle;border-radius: 3px;font-size:16px;height:38px;line-height:38px;}
+.order-cancel .cancel-btn button {background:#2f9833;color: #fff; padding: 0 40px; border:none;cursor: pointer; text-align: center;display: inline-block;vertical-align: middle;border-radius: 3px;font-size:16px;height:38px;line-height:38px;}
 
 .cardreward{overflow:hidden;}
 .cardreward ul{margin:-10px 0 0 -18px;}

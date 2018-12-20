@@ -88,7 +88,7 @@
                 </div>
                 <div class="login-partner cl">
                     <div class="partner-title">其它方式登录</div>
-                    <a href="{{ route('auth.wxweb.index') }}">
+                    <a href="{{ route('auth.wechat.index') }}">
                         <div id="weixin" class="partner-box partner-weixin">
                             <img src="{{ asset('static/image/common/weixinv2.png') }}">
                             <span>微信</span>

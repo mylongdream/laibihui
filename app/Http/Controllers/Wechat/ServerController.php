@@ -7,6 +7,7 @@ use App\Models\CommonSettingModel;
 use App\Models\CommonUploadImageModel;
 use App\Models\CommonUserModel;
 use App\Models\CommonUserScoreModel;
+use App\Models\WechatLoginModel;
 use App\Models\WechatMenuModel;
 use App\Models\WechatUserModel;
 use EasyWeChat\Kernel\Messages\Text;
@@ -50,6 +51,7 @@ class ServerController extends Controller
         $app = app('wechat.official_account');
         $setting = CommonSettingModel::pluck('svalue', 'skey');
         $wxuser = WechatUserModel::where('openid', $message['FromUserName'])->first();
+        $SceneId = str_replace("qrscene_","",$message['EventKey']);
         if(!$wxuser || (!$wxuser->user_id && !$wxuser->has_subscribe)){
             $wxuser = WechatUserModel::firstOrCreate(['openid' => $message['FromUserName']]);
             $seek=mt_rand(0,9999).mt_rand(0,9999).mt_rand(0,9999); //12位
@@ -76,8 +78,7 @@ class ServerController extends Controller
                 ],
             ]);
             //推广注册
-            $fromuid = str_replace("qrscene_","",$message['EventKey']);
-            if ($fromuid && $fromuid != $user->uid){
+            if (is_numeric($fromuid = $SceneId) && $fromuid != $user->uid){
                 $fromuser = CommonUserModel::where('uid', $fromuid)->first();
                 if ($fromuser) {
                     $user->fromuid = $fromuser->uid;
@@ -158,6 +159,13 @@ class ServerController extends Controller
             $wxuser->has_subscribe = 1;
             $wxuser->save();
         }
+        //网页登录授权
+        if($wxuser->user && !empty($SceneId) && strpos($SceneId, 'login_')!==false){
+            $token = str_replace("login_","",$SceneId);
+            $wechatLogin = WechatLoginModel::where('token', $token)->first();
+            $wechatLogin->wechat_id = $wxuser->id;
+            $wechatLogin->save();
+        }
         $text = new Text('您好！欢迎关注我们。');
         return $text;
     }
@@ -174,8 +182,15 @@ class ServerController extends Controller
     private function receiveEventscan($message) {
         $setting = CommonSettingModel::pluck('svalue', 'skey');
         $wxuser = WechatUserModel::firstOrCreate(['openid' => $message['FromUserName']]);
+        $SceneId = $message['EventKey'];
 
-
+        //网页登录授权
+        if($wxuser->user && !empty($SceneId) && strpos($SceneId, 'login_')!==false){
+            $token = str_replace("login_","",$SceneId);
+            $wechatLogin = WechatLoginModel::where('token', $token)->first();
+            $wechatLogin->wechat_id = $wxuser->id;
+            $wechatLogin->save();
+        }
 
     }
 

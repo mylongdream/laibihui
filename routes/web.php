@@ -86,6 +86,8 @@ Route::group(['domain' => 'zhihui.hztbg.com'], function () {
             Route::get('qq/callback', ['as' => 'qq.callback', 'uses' => 'Auth\QqController@callback']);
             Route::post('qq/login', ['as' => 'qq.login', 'uses' => 'Auth\QqController@login']);
             Route::post('qq/register', ['as' => 'qq.register', 'uses' => 'Auth\QqController@register']);
+            Route::get('wechat', ['as' => 'wechat.index', 'uses' => 'Auth\WechatController@index']);
+            Route::post('wechat/check/{token}', ['as' => 'wechat.check', 'uses' => 'Auth\WechatController@check']);
             Route::get('wxweb', ['as' => 'wxweb.index', 'uses' => 'Auth\WeixinWebController@index']);
             Route::get('wxweb/callback', ['as' => 'wxweb.callback', 'uses' => 'Auth\WeixinWebController@callback']);
             Route::post('wxweb/login', ['as' => 'wxweb.login', 'uses' => 'Auth\WeixinWebController@login']);
