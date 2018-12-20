@@ -23,7 +23,7 @@ class WechatController extends Controller
         //创建token
         $hashKey = $this->hashKey();
         $app = app('wechat.official_account');
-        $result = $app->qrcode->temporary('login_'.$hashKey, 10 * 3600);//设定10分钟过期
+        $result = $app->qrcode->temporary('login_'.$hashKey, 10 * 60);//设定10分钟过期
         $qrcode = $app->qrcode->url($result['ticket']);
         $wechatLogin = new WechatLoginModel();
         $wechatLogin->token = $hashKey;
@@ -35,8 +35,21 @@ class WechatController extends Controller
 
     public function check(Request $request)
     {
+        $datetime = Carbon::now();
         $wechatLogin = WechatLoginModel::where('token', $request->token)->first();
-        if($wxuser = $wechatLogin->user){
+        if($wechatLogin->expire_at < $datetime){
+            $wechatLogin->delete();
+            $hashKey = $this->hashKey();
+            $app = app('wechat.official_account');
+            $result = $app->qrcode->temporary('login_'.$hashKey, 10 * 60);//设定10分钟过期
+            $qrcode = $app->qrcode->url($result['ticket']);
+            $wechatLogin = new WechatLoginModel();
+            $wechatLogin->token = $hashKey;
+            $wechatLogin->postip = request()->getClientIp();
+            $wechatLogin->expire_at = $datetime->addSeconds($result['expire_seconds']);
+            $wechatLogin->save();
+            return response()->json(['status' => 2, 'qrcode' => $qrcode, 'checkurl' => route('auth.wechat.check', ['token' => $hashKey])]);
+        }elseif($wxuser = $wechatLogin->user){
             $wxuser->user->lastlogin = Carbon::now();
             $wxuser->user->save();
             auth()->login($wxuser->user, true);
