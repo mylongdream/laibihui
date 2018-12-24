@@ -135,8 +135,8 @@ $(function() {
     $(document).on("click", ".delbtn", function(){
         var self = $(this);
         var operation = self.attr("title") || '删除';
-        var loading = weui.loading('loading');
         weui.confirm('确定要'+operation+'吗？', function(){
+            var loading = weui.loading('loading');
             $.ajax({
                 type: "POST",
                 url: self.attr("href") || self.attr("data-url"),
