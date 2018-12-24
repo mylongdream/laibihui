@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="weui-tabbar">
-            <a href="{{ route('mobile.user.address.create') }}" class="weui-tabbar__item tabbar-btn open-popup" data-target="#address_add">
+            <a href="{{ route('mobile.user.address.getadd') }}" class="weui-tabbar__item tabbar-btn open-popup" data-target="#address_add">
                 <span>新建收货地址</span>
             </a>
         </div>
@@ -52,9 +52,9 @@
 
 @section('script')
     <script type="text/javascript">
-        $(document).on("click", "#address_list .weui-cell", function(){
+        $(document).on("click", "#address_list .weui-cell__hd, #address_list .weui-cell__bd", function(){
             var self = $(this);
-            $(".order-address").load(self.data("geturl"));
+            $(".order-address").load(self.parent().data("geturl"));
             $('.popup-container').remove();
             return false;
         });
