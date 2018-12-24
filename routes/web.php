@@ -165,8 +165,6 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
     Route::get('faq/{id}.html', ['as' => 'brand.faq.show', 'uses' => 'Mobile\Brand\FaqController@show'])->where('id', '[0-9]+');
     Route::get('card', ['as' => 'brand.card.index', 'uses' => 'Mobile\Brand\CardController@index']);
     Route::any('card/order.html', ['as' => 'brand.card.order', 'uses' => 'Mobile\Brand\CardController@order'])->middleware('auth.mobile');
-    Route::any('card/address/info.html', ['as' => 'brand.card.addressinfo', 'uses' => 'Mobile\Brand\CardController@addressinfo'])->middleware('auth.mobile');
-    Route::any('card/address/list.html', ['as' => 'brand.card.addresslist', 'uses' => 'Mobile\Brand\CardController@addresslist'])->middleware('auth.mobile');
     Route::any('card/pay/{id}.html', ['as' => 'brand.card.pay', 'uses' => 'Mobile\Brand\CardController@pay'])->middleware('auth.mobile');
     Route::any('card/active.html', ['as' => 'brand.card.active', 'uses' => 'Mobile\Brand\CardController@active']);
     Route::get('category', ['as' => 'brand.category.index', 'uses' => 'Mobile\Brand\CategoryController@index']);
@@ -265,6 +263,10 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
         Route::get('password', ['as' => 'password.index', 'uses' => 'Mobile\User\PasswordController@index']);
         Route::put('password.update', ['as' => 'password.update', 'uses' => 'Mobile\User\PasswordController@update']);
         Route::get('binding', ['as' => 'binding.index', 'uses' => 'Mobile\User\BindingController@index']);
+        Route::get('address/getlist', ['as' => 'address.getlist', 'uses' => 'Mobile\User\AddressController@getlist']);
+        Route::get('address/{id}/getitem', ['as' => 'address.getitem', 'uses' => 'Mobile\User\AddressController@getitem']);
+        Route::get('address/getadd', ['as' => 'address.getadd', 'uses' => 'Mobile\User\AddressController@getadd']);
+        Route::get('address/{id}/getedit', ['as' => 'address.getedit', 'uses' => 'Mobile\User\AddressController@getedit']);
         Route::resource('address', 'Mobile\User\AddressController', ['except' => 'show']);
         Route::get('feedback', ['as' => 'feedback.index', 'uses' => 'Mobile\User\FeedbackController@index']);
         Route::post('feedback', ['as' => 'feedback.store', 'uses' => 'Mobile\User\FeedbackController@store']);

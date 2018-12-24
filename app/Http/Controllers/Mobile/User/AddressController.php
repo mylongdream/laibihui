@@ -92,7 +92,7 @@ class AddressController extends Controller
         }
 
         if ($request->ajax()){
-            return response()->json(['status' => '1', 'info' => trans('user.address.addsucceed'), 'url' => route('mobile.user.address.index')]);
+            return response()->json(['status' => '1', 'info' => trans('user.address.addsucceed'), 'url' => route('mobile.user.address.index'), 'geturl' => route('mobile.user.address.getitem', ['id' => $address->id])]);
         }else{
             return view('layouts.mobile.message', ['status' => '1', 'info' => trans('user.address.addsucceed'), 'url' => route('mobile.user.address.index')]);
         }
@@ -154,7 +154,7 @@ class AddressController extends Controller
         }
 
         if ($request->ajax()){
-            return response()->json(['status' => '1', 'info' => trans('user.address.editsucceed'), 'url' => route('mobile.user.address.index')]);
+            return response()->json(['status' => '1', 'info' => trans('user.address.editsucceed'), 'url' => route('mobile.user.address.index'), 'geturl' => route('mobile.user.address.getitem', ['id' => $address->id])]);
         }else{
             return view('layouts.mobile.message', ['status' => '1', 'info' => trans('user.address.editsucceed'), 'url' => route('mobile.user.address.index')]);
         }
@@ -169,6 +169,36 @@ class AddressController extends Controller
         }else{
             return view('layouts.mobile.message', ['status' => '1', 'info' => trans('user.address.deletesucceed'), 'url' => back()->getTargetUrl()]);
         }
+    }
+
+    public function getlist(Request $request)
+    {
+        $addresses = CommonUserAddressModel::where('uid', auth()->user()->uid)->orderBy('created_at', 'desc')->get();
+        return view('mobile.user.address.getlist', ['addresses' => $addresses]);
+    }
+
+    public function getitem($id)
+    {
+        $address = CommonUserAddressModel::where('uid', auth()->user()->uid)->findOrFail($id);
+        return view('mobile.user.address.getitem', ['address' => $address]);
+    }
+
+    public function getadd(Request $request)
+    {
+        if (auth()->user()->addresses->count() >= $this->address_maxnum){
+            if ($request->ajax()){
+                return response()->json(['status' => 0, 'info' => trans('user.address.limited'), 'url' => route('mobile.user.address.index')]);
+            }else{
+                return view('layouts.mobile.message', ['status' => 0, 'info' => trans('user.address.limited'), 'url' => route('mobile.user.address.index')]);
+            }
+        }
+        return view('mobile.user.address.getadd');
+    }
+
+    public function getedit($id)
+    {
+        $address = CommonUserAddressModel::where('uid', auth()->user()->uid)->findOrFail($id);
+        return view('mobile.user.address.getedit', ['address' => $address]);
     }
 
 }

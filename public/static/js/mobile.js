@@ -91,7 +91,7 @@ $(function() {
                     } else {
                         $('<div>').attr('id', self.data("target").replace("#", "")).addClass('popup-container').data('remove', 'true').html(data).appendTo('body').fadeIn();
                     }
-                    $(self.data("target")).find(".back a").addClass("close-popup");
+                    $(self.data("target")).find(".back a").addClass("close-popup").data("target", self.data("target")).data('remove', 'true');
                 }
             }).error(function(data) {
                 loading.hide();

@@ -105,31 +105,6 @@ class CardController extends Controller
         }
     }
 
-    public function addressinfo(Request $request){
-        $rules = array(
-            'id' => 'required|numeric|exists:common_user_address,id,uid,'.auth()->user()->uid,
-        );
-        $messages = array(
-            'id.required' => '收货地址不允许为空！',
-            'id.numeric' => '收货地址填写错误！',
-            'id.exists' => '收货地址不存在！',
-        );
-        $this->validate($request, $rules, $messages);
-
-        $address = CommonUserAddressModel::where('uid', auth()->user()->uid)->findOrFail($request->id);
-        if(in_array($address->province,$this->district) || in_array($address->city,$this->district) || in_array($address->area,$this->district) || in_array($address->street,$this->district)){
-            $forbid = 0;
-        }else{
-            $forbid = 1;
-        }
-
-        return response()->json(['status' => 1, 'forbid' => $forbid, 'address' => $address]);
-    }
-
-    public function addresslist(Request $request){
-        return view('mobile.brand.card.address');
-    }
-
     public function pay(Request $request, $id){
         $setting = cache('setting');
         $order = CommonCardOrderModel::where('uid', auth()->user()->uid)->where('order_sn', $id)->firstOrFail();

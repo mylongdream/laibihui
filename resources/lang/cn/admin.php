@@ -398,6 +398,7 @@ return [
     'extend.ordercard.order_type_0' => '上门办卡',
     'extend.ordercard.order_type_1' => '邮寄办卡',
     'extend.ordercard.order_sn' => '订单编号',
+    'extend.ordercard.order_amount' => '付款金额',
     'extend.ordercard.status' => '状态',
     /*
      * order_status  	    订单状态：0未确认,1已关闭,2已成功

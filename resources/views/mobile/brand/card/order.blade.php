@@ -9,28 +9,26 @@
             </div>
             <form class="ajaxform" name="myform" method="post" action="{{ route('mobile.brand.card.order') }}">
                 {!! csrf_field() !!}
-                @if ($address)
-                    <div class="weui-cells order-address open-popup" data-target="#address_list" data-url="{{ route('mobile.brand.card.addresslist') }}">
-                        <div class="weui-cell weui-cell_access">
+                <div class="weui-cells order-address">
+                    @if ($address)
+                        <div class="weui-cell weui-cell_access open-popup" data-target="#address_list" data-url="{{ route('mobile.user.address.getlist', ['id' => $address->id]) }}">
                             <div class="weui-cell__bd">
                                 <p style="margin-bottom: 5px;">{{ $address->realname }}<span class="mlm">{{ $address->mobile }}</span> </p>
                                 <p style="font-size: 13px;color: #888888;">
                                     @if (auth()->user()->address_id == $address->id)
                                         <span class="weui-badge" style="margin-right: 5px;">默认</span>
                                     @endif
-                                        {{ $address->getprovince ? $address->getprovince->name : '' }} {{ $address->getcity ? $address->getcity->name : '' }} {{ $address->getarea ? $address->getarea->name : '' }} {{ $address->getstreet ? $address->getstreet->name : '' }}</p>
+                                    {{ $address->getprovince ? $address->getprovince->name : '' }} {{ $address->getcity ? $address->getcity->name : '' }} {{ $address->getarea ? $address->getarea->name : '' }} {{ $address->getstreet ? $address->getstreet->name : '' }}</p>
                                 <p style="font-size: 13px;color: #888888;">{{ $address->address }}</p>
                             </div>
                             <div class="weui-cell__ft"><input type="hidden" name="addressid" value="{{ $address->id }}"></div>
                         </div>
-                    </div>
-                @else
-                    <div class="weui-cells order-address">
-                        <div class="address_add open-popup" data-target="#address_add" data-url="{{ route('mobile.user.address.create') }}">
+                    @else
+                        <div class="address_add open-popup" data-target="#address_add" data-url="{{ route('mobile.user.address.getadd') }}">
                             <a href="javascript:;"><span>添加新地址</span></a>
                         </div>
-                    </div>
-                @endif
+                    @endif
+                </div>
                 <div class="weui-cells__title">办卡方式</div>
                 <div class="weui-cells weui-cells_radio order-shipment">
                     <label class="weui-cell weui-check__label" for="ordertype0" data-freight="0">
@@ -109,10 +107,48 @@
                 $(".order-submit span").html(account.toFixed(2));
             }
         });
-        $(document).on("click", ".address-list .weui-cell", function(){
+        $(document).on("click", "#address_list .panel-item", function(){
             var self = $(this);
             $('.order-address').html(self.prop("outerHTML"));
             $('.popup-container').remove();
+            return false;
+        });
+        $(document).on("click", "#address_list .tabbar-btn", function(){
+            var self = $(this);
+            var loading = weui.loading('loading');
+            $.ajax({
+                type:'GET',
+                url:self.attr("href"),
+                async:false
+            }).success(function(data) {
+                loading.hide();
+                if(data.status == 0) {
+                    weui.alert(data.info, {
+                        isAndroid: false
+                    });
+                }else{
+                    if ($("#address_add").length > 0) {
+                        $("#address_add").html(data).data('remove', 'true').fadeIn();
+                    } else {
+                        $('<div>').attr('id', "address_add").addClass('popup-container').data('remove', 'true').html(data).appendTo('body').fadeIn();
+                    }
+                    $(self.data("target")).find(".back a").addClass("close-popup");
+                }
+            }).error(function(data) {
+                loading.hide();
+                if (!data) {
+                    return true;
+                } else {
+                    message = $.parseJSON(data.responseText);
+                    $.each(message.errors, function (key, value) {
+                        weui.alert(value, {
+                            isAndroid: false
+                        });
+                        return false;
+                    });
+                    return false;
+                }
+            });
             return false;
         });
     </script>

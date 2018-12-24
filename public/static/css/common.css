@@ -21,7 +21,7 @@ pre{ white-space: pre-wrap!important;  word-wrap: break-word!important;  *white-
 .cl{zoom:1;}
 .hidefocus{outline:none;}
 .hidden{display: none;}
-.clear{clear:both} 
+.clear{clear:both}
 .pipe {color: #ccc;margin: 0 5px;}
 .block{display: block!important;}
 .fixed{position: fixed!important;}
