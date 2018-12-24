@@ -97,7 +97,7 @@
                 dist:"{{ $address->area }}",
                 street:"{{ $address->street }}"
             });
-            $(document).on("click", "#address_edit .address_submit", function(){
+            $("#address_edit").find(".address_submit").off("click").on("click",function(){
                 var self = $(this.form);
                 var loading = weui.loading('loading');
                 $.ajax({

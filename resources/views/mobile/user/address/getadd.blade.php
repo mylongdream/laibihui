@@ -92,7 +92,7 @@
                 url:"{{ route('util.district') }}",
                 required:false
             });
-            $(document).on("click", "#address_add .address_submit", function(){
+            $("#address_add").find(".address_submit").off("click").on("click",function(){
                 var self = $(this.form);
                 var loading = weui.loading('loading');
                 $.ajax({
