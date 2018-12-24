@@ -113,6 +113,7 @@ $(function() {
                 }
             });
         }
+        return false;
     }).on("click", ".close-popup", function(){
         var self = $(this);
         if(self.attr("data-target")){
