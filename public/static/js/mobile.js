@@ -72,11 +72,11 @@ $(function() {
     //覆盖式的弹出层
     $(document).on("click", ".open-popup", function(){
         var self = $(this);
-        if(self.data("url")){
+        if(self.attr("data-url")){
             var loading = weui.loading('loading');
             $.ajax({
                 type:'GET',
-                url:self.data("url"),
+                url:self.attr("data-url"),
                 data:self.closest("form").serialize(),
                 async:false
             }).success(function(data) {
@@ -86,12 +86,12 @@ $(function() {
                         isAndroid: false
                     });
                 }else{
-                    if ($(self.data("target")).length > 0) {
-                        $(self.data("target")).html(data).data('remove', 'true').fadeIn();
+                    if ($(self.attr("data-target")).length > 0) {
+                        $(self.attr("data-target")).html(data).attr('data-remove', 'true').fadeIn();
                     } else {
-                        $('<div>').attr('id', self.data("target").replace("#", "")).addClass('popup-container').data('remove', 'true').html(data).appendTo('body').fadeIn();
+                        $('<div>').attr('id', self.attr("data-target").replace("#", "")).addClass('popup-container').attr('data-remove', 'true').html(data).appendTo('body').fadeIn();
                     }
-                    $(self.data("target")).find(".back a").addClass("close-popup").data("target", self.data("target")).data('remove', 'true');
+                    $(self.attr("data-target")).find(".back a").addClass("close-popup").attr("data-target", self.attr("data-target")).attr('data-remove', 'true');
                 }
             }).error(function(data) {
                 loading.hide();
@@ -109,19 +109,19 @@ $(function() {
                 }
             });
         }else{
-            $(self.data("target")).show();
+            $(self.attr("data-target")).show();
         }
     }).on("click", ".close-popup", function(){
         var self = $(this);
-        if(self.data("target")){
-            $(self.data("target")).fadeOut();
-            if($(self.data("target")).data("remove")){
-                $(self.data("target")).remove();
+        if(self.attr("data-target")){
+            $(self.attr("data-target")).fadeOut();
+            if($(self.attr("data-target")).attr("data-remove")){
+                $(self.attr("data-target")).remove();
             }
         }else{
             $('.popup-container').each(function() {
                 $(this).fadeOut();
-                if($(this).data("remove")){
+                if($(this).attr("data-remove")){
                     $(this).remove();
                 }
             });
