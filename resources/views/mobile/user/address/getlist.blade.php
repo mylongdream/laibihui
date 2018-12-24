@@ -29,7 +29,7 @@
                                                 {{ $value->getprovince ? $value->getprovince->name : '' }} {{ $value->getcity ? $value->getcity->name : '' }} {{ $value->getarea ? $value->getarea->name : '' }} {{ $value->getstreet ? $value->getstreet->name : '' }}</p>
                                             <p style="font-size: 13px;color: #888888;">{{ $value->address }}</p>
                                         </div>
-                                        <div class="weui-cell__ft" style="margin-left:5px;font-size: 14px;"><a href="{{ route('mobile.user.address.edit',$value->id) }}" class="open-popup" data-target="#address_edit">编辑</a></div>
+                                        <div class="weui-cell__ft" style="margin-left:5px;font-size: 14px;"><a href="{{ route('mobile.user.address.getedit',$value->id) }}" class="open-popup" data-target="#address_edit">编辑</a></div>
                                     </div>
                                 @endforeach
                             </div>

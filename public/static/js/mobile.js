@@ -72,11 +72,15 @@ $(function() {
     //覆盖式的弹出层
     $(document).on("click", ".open-popup", function(){
         var self = $(this);
-        if(self.attr("data-url")){
+        var url = self.attr("href");
+        url = url && url.indexOf("javascript") === -1 ? url : self.attr("data-url");
+        if(url.length === 0){
+            $(self.attr("data-target")).show();
+        }else{
             var loading = weui.loading('loading');
             $.ajax({
                 type:'GET',
-                url:self.attr("data-url"),
+                url:url,
                 data:self.closest("form").serialize(),
                 async:false
             }).success(function(data) {
@@ -108,8 +112,6 @@ $(function() {
                     return false;
                 }
             });
-        }else{
-            $(self.attr("data-target")).show();
         }
     }).on("click", ".close-popup", function(){
         var self = $(this);
