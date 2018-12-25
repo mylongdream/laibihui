@@ -502,6 +502,76 @@ $(function() {
             return true;
         }, regexp);
     });
+    //收货地址
+    $(document).on("click", ".address_submit", function(){
+        var self = $(this.form);
+        var loading = weui.loading('loading');
+        weui.form.validate(self, function (error) {
+            if (!error) {
+                $.ajax({
+                    type:self.attr("method"),
+                    url:self.attr('action'),
+                    data:self.serialize(),
+                    success: function(data) {
+                        loading.hide();
+                        if(data.status == 1){
+                            if(self.find(".ajaxtip-success__content").length > 0) data.info = self.find(".ajaxtip-success__content").html();
+                            if (data.info) {
+                                weui.toast(data.info, {
+                                    duration: 3000,
+                                    className: 'toast-success',
+                                    callback: function(){
+                                        $(".order-address").load(data.geturl);
+                                        $(".popup-container").remove();
+                                    }
+                                });
+                            } else {
+                                $(".order-address").load(data.geturl);
+                                $(".popup-container").remove();
+                            }
+                        } else {
+                            if(self.find(".ajaxtip-error__content").length > 0) data.info = self.find(".ajaxtip-error__content").html();
+                            weui.alert(data.info, {
+                                isAndroid: false
+                            });
+                        }
+                    },
+                    error: function(data) {
+                        loading.hide();
+                        if (!data) {
+                            return true;
+                        } else {
+                            message = $.parseJSON(data.responseText);
+                            $.each(message.errors, function (key, value) {
+                                weui.alert(value, {
+                                    isAndroid: false
+                                });
+                                $(".verify-img").trigger("click");
+                                return false;
+                            });
+                            return false;
+                        }
+                    }
+                });
+            }else{
+                var $ele = $(error.ele),
+                    msg = error.msg,
+                    tips = $ele.attr(msg + 'Tips') || $ele.attr('tips') || $ele.attr('placeholder');
+                if (tips){
+                    weui.alert(tips, {
+                        isAndroid: false
+                    });
+                }
+            }
+            return true;
+        }, regexp);
+    });
+    $(document).on("click", "#address_list .weui-cell__hd, #address_list .weui-cell__bd", function(){
+        var self = $(this);
+        $(".order-address").load(self.parent().data("geturl"));
+        $('.popup-container').remove();
+        return false;
+    });
     $(document).on("click", ".selectBox button", function(){
         var self = $(this);
         var pickerlist = [];

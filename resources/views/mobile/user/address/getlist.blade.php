@@ -49,14 +49,3 @@
         </div>
     </div>
 @endsection
-
-@section('script')
-    <script type="text/javascript">
-        $(document).on("click", "#address_list .weui-cell__hd, #address_list .weui-cell__bd", function(){
-            var self = $(this);
-            $(".order-address").load(self.parent().data("geturl"));
-            $('.popup-container').remove();
-            return false;
-        });
-    </script>
-@endsection

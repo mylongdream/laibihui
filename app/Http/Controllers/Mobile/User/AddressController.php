@@ -179,7 +179,7 @@ class AddressController extends Controller
 
     public function getitem($id)
     {
-        $address = CommonUserAddressModel::where('uid', auth()->user()->uid)->findOrFail($id);
+        $address = CommonUserAddressModel::where('uid', auth()->user()->uid)->find($id);
         return view('mobile.user.address.getitem', ['address' => $address]);
     }
 
