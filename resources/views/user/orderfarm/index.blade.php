@@ -27,7 +27,30 @@
 							</td>
 						</tr>
 						<tr class="tr-bd">
-							<td width="52%">{{ $value->farm ? $value->farm->name : '/' }}</td>
+							<td width="52%" valign="top">
+								@if ($value->farm)
+									<div class="s-item">
+										<div class="s-pic">
+											<a href="{{ route('brand.farm.show', $value->farm->id) }}" target="_blank" title="{{ $value->farm->name }}">
+												<img src="{{ uploadImage($value->farm->upimage) }}" width="150" height="150">
+											</a>
+										</div>
+										<div class="s-info">
+											<div class="s-name">
+												<a href="{{ route('brand.farm.show', $value->farm->id) }}" target="_blank" title="{{ $value->farm->name }}">{{ $value->farm->name }}</a>
+											</div>
+											<div class="s-extra">
+												电话：{{ $value->farm->phone }}
+											</div>
+											<div class="s-extra">
+												地址：{{ $value->farm->address }}
+											</div>
+										</div>
+									</div>
+								@else
+									/
+								@endif
+							</td>
                             <td width="10%" align="center">{{ $value->package_name }}</td>
 							<td width="14%" align="center">
 								<p><strong>￥{{ sprintf("%.2f",$value->order_amount) }}</strong></p>

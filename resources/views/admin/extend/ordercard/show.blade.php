@@ -117,7 +117,7 @@
 						@if ($order->pay_status == 1)
 							<a href="{{ route('admin.extend.ordercard.send',$order->id) }}" class="subtn openwindow" title="发货">发货</a>
 						@else
-							<a href="{{ route('admin.extend.ordercard.pay',$order->id) }}" class="ajaxbtn" title="完成付款">完成付款</a>
+							<a href="{{ route('admin.extend.ordercard.pay',$order->id) }}" class="subtn ajaxbtn" title="完成付款">完成付款</a>
 						@endif
                     @else
                         {{ trans('admin.extend.ordercard.status_'.$order->order_status.$order->shipping_status.$order->pay_status) }}
