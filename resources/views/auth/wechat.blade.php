@@ -35,7 +35,8 @@
     </div>
 </div>
 @else
-    <div class="qrcode"><img id="wechatQrcode" border="0" alt="" src="{{ $qrcode }}"></div>
+    <div class="qr-title">扫码登录，更快，更安全</div>
+    <div class="qr-content"><img id="wechatQrcode" border="0" alt="" src="{{ $qrcode }}"></div>
 @endif
 
 <script type="text/javascript">
