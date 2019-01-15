@@ -91,6 +91,14 @@
                             }
                         }
                     },
+                    password: {
+                        required: true,
+                        rangelength:[6,14]
+                    },
+                    password_confirmation: {
+                        required: true,
+                        equalTo: "#form-password"
+                    },
                     mobile: {
                         required: true,
                         mobile: true,
@@ -125,6 +133,14 @@
                         required: "用户名不能为空",
                         rangelength: '用户名至少3-16位',
                         remote: '用户名不正确'
+                    },
+                    password: {
+                        required: "密码不能为空",
+                        rangelength: '密码长度至少6-14位'
+                    },
+                    password_confirmation: {
+                        required: "确认密码不能为空",
+                        equalTo: "两次输入的密码不一致"
                     },
                     mobile: {
                         required: "手机号码不能为空",

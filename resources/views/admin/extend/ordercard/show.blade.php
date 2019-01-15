@@ -113,11 +113,12 @@
 			<tr>
 				<td width="150" align="right">{{ trans('admin.extend.ordercard.handle') }}</td>
 				<td>
-                    @if ($order->order_status == 0 && $order->shipping_status == 0 && $order->pay_status == 1)
-
-
-                        <a href="{{ route('admin.extend.ordercard.send',$order->id) }}" class="subtn openwindow" title="发货">发货</a>
-
+                    @if ($order->order_status == 0 && $order->shipping_status == 0)
+						@if ($order->pay_status == 1)
+							<a href="{{ route('admin.extend.ordercard.send',$order->id) }}" class="subtn openwindow" title="发货">发货</a>
+						@else
+							<a href="{{ route('admin.extend.ordercard.pay',$order->id) }}" class="ajaxbtn" title="完成付款">完成付款</a>
+						@endif
                     @else
                         {{ trans('admin.extend.ordercard.status_'.$order->order_status.$order->shipping_status.$order->pay_status) }}
                     @endif

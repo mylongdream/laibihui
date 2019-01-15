@@ -116,7 +116,8 @@ return [
 
     'orderfarm' => '农家乐管理',
     'orderfarm.tips' => '您可以在此处对农家乐记录进行管理',
-    'orderfarm.meal' => '农家乐',
+    'orderfarm.farm_name' => '农家乐名称',
+    'orderfarm.package_name' => '套餐名称',
     'orderfarm.order_amount' => '实付款',
     'orderfarm.remark' => '备注',
     'orderfarm.order_sn' => '订单编号',

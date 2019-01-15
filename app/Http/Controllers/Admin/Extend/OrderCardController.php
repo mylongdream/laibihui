@@ -215,6 +215,22 @@ class OrderCardController extends Controller
             return view('admin.extend.ordercard.send', ['order' => $order, 'shippings' => $shippings]);
         }
     }
+//完成付款
+    public function pay(Request $request, $id)
+    {
+        $order = CommonCardOrderModel::findOrFail($id);
+
+        $order->pay_at = time();
+        $order->pay_status = 1;
+        $order->save();
+
+        if ($request->ajax()){
+            return response()->json(['status' => '1', 'info' => trans('admin.extend.ordercard.paysucceed'), 'url' => back()->getTargetUrl()]);
+        }else{
+            return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.extend.ordercard.paysucceed'), 'url' => back()->getTargetUrl()]);
+        }
+
+    }
 //退款
     public function refund(Request $request, $id)
     {
@@ -222,11 +238,13 @@ class OrderCardController extends Controller
 
         if($request->isMethod('POST')){
 
+            $order->pay_status = 3;
+            $order->save();
 
             if ($request->ajax()){
-                return response()->json(['status' => '1', 'info' => trans('admin.extend.ordercard.deletesucceed'), 'url' => back()->getTargetUrl()]);
+                return response()->json(['status' => '1', 'info' => trans('admin.extend.ordercard.refundsucceed'), 'url' => back()->getTargetUrl()]);
             }else{
-                return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.extend.ordercard.deletesucceed'), 'url' => back()->getTargetUrl()]);
+                return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.extend.ordercard.refundsucceed'), 'url' => back()->getTargetUrl()]);
             }
         }else{
             return view('admin.extend.ordercard.refund', ['order' => $order]);
@@ -239,11 +257,13 @@ class OrderCardController extends Controller
 
         if($request->isMethod('POST')){
 
+            $order->order_status = 1;
+            $order->save();
 
             if ($request->ajax()){
-                return response()->json(['status' => '1', 'info' => trans('admin.extend.ordercard.deletesucceed'), 'url' => back()->getTargetUrl()]);
+                return response()->json(['status' => '1', 'info' => trans('admin.extend.ordercard.closesucceed'), 'url' => back()->getTargetUrl()]);
             }else{
-                return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.extend.ordercard.deletesucceed'), 'url' => back()->getTargetUrl()]);
+                return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.extend.ordercard.closesucceed'), 'url' => back()->getTargetUrl()]);
             }
         }else{
             return view('admin.extend.ordercard.close', ['order' => $order]);

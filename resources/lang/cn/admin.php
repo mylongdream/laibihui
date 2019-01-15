@@ -432,6 +432,9 @@ return [
     'extend.ordercard.addsucceed' => '订单信息添加成功',
     'extend.ordercard.updatesucceed' => '订单信息更新成功',
     'extend.ordercard.deletesucceed' => '订单信息删除成功',
+    'extend.ordercard.paysucceed' => '订单付款成功',
+    'extend.ordercard.refundsucceed' => '订单退款成功',
+    'extend.ordercard.closesucceed' => '订单关闭成功',
 
     'extend.card' => '卡密管理',
     'extend.card.tips' => '您可以在此处对卡密信息进行管理查看。',

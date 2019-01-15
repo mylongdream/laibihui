@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['domain' => 'zhihui.hztbg.com'], function () {
+Route::group(['domain' => 'lbh.qzkdd.com'], function () {
 
     Route::get('/', ['as' => 'index', 'uses' => 'Brand\IndexController@index']);
     Route::get('/promotion/{fromuser}', ['as' => 'promotion', 'uses' => 'Brand\IndexController@promotion']);
@@ -150,7 +150,7 @@ Route::group(['domain' => 'zhihui.hztbg.com'], function () {
     });
 });
 
-Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mobile.'], function () {
+Route::group(['domain' => 'lbh.qzkdd.com', 'prefix' => 'mobile', 'as' => 'mobile.'], function () {
     Route::get('/', ['as' => 'index', 'uses' => 'Mobile\IndexController@index']);
     Route::get('/search', ['as' => 'search', 'uses' => 'Mobile\IndexController@search']);
     Route::get('/promotion/{fromuser}', ['as' => 'promotion', 'uses' => 'Mobile\IndexController@promotion']);
@@ -361,7 +361,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'mobile', 'as' => 'mob
     });
 });
 
-Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['domain' => 'lbh.qzkdd.com', 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/', function () {
         return redirect()->route('admin.index');
     });
@@ -398,6 +398,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
             Route::post('appoint/batch', ['as' => 'appoint.batch', 'uses' => 'Admin\Extend\AppointController@batch']);
             Route::resource('appoint', 'Admin\Extend\AppointController');
             Route::post('ordercard/batch', ['as' => 'ordercard.batch', 'uses' => 'Admin\Extend\OrderCardController@batch']);
+            Route::any('ordercard/pay/{id}', ['as' => 'ordercard.pay', 'uses' => 'Admin\Extend\OrderCardController@pay']);
             Route::any('ordercard/send/{id}', ['as' => 'ordercard.send', 'uses' => 'Admin\Extend\OrderCardController@send']);
             Route::any('ordercard/refund/{id}', ['as' => 'ordercard.refund', 'uses' => 'Admin\Extend\OrderCardController@refund']);
             Route::any('ordercard/close/{id}', ['as' => 'ordercard.close', 'uses' => 'Admin\Extend\OrderCardController@close']);
@@ -621,7 +622,7 @@ Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'admin', 'as' => 'admi
     });
 });
 
-Route::group(['domain' => '{domain}.zhihui.hztbg.com','middleware' => ['subweb'], 'as' => 'subweb.'], function () {
+Route::group(['domain' => '{domain}.lbh.qzkdd.com','middleware' => ['subweb'], 'as' => 'subweb.'], function () {
 
     Route::get('/', ['as' => 'index', 'uses' => 'Subweb\IndexController@index']);
     Route::get('case', ['as' => 'case.index', 'uses' => 'Subweb\CaseController@index']);
@@ -661,7 +662,7 @@ Route::group(['domain' => '{domain}.zhihui.hztbg.com','middleware' => ['subweb']
     });
 });
 
-Route::group(['domain' => 'crm.hztbg.com', 'prefix' => '', 'as' => 'crm.'], function () {
+Route::group(['domain' => 'crm.qzkdd.com', 'prefix' => '', 'as' => 'crm.'], function () {
     Route::get('login', ['as' => 'login', 'uses' => 'CRM\LoginController@showLoginForm']);
     Route::post('login', ['as' => 'login', 'uses' => 'CRM\LoginController@login']);
     Route::get('logout', ['as' => 'logout', 'uses' => 'CRM\LoginController@logout']);
@@ -730,7 +731,7 @@ Route::group(['domain' => 'crm.hztbg.com', 'prefix' => '', 'as' => 'crm.'], func
     Route::post('upload/video', ['as' => 'upload.video', 'uses' => 'CRM\UploadController@video']);
 });
 
-Route::group(['domain' => 'zhihui.hztbg.com', 'prefix' => 'wechat', 'as' => 'wechat.'], function () {
+Route::group(['domain' => 'lbh.qzkdd.com', 'prefix' => 'wechat', 'as' => 'wechat.'], function () {
     Route::get('/', function () {
         //return redirect()->route('wechat.index');
     });

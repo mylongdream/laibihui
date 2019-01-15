@@ -9,8 +9,8 @@
 			<div class="hd">
 				<table width="100%">
 					<tr>
-						<th width="52%" align="center">{{ trans('user.orderfarm.consignee') }}</th>
-                        <th width="10%" align="center">{{ trans('user.orderfarm.order_type') }}</th>
+						<th width="52%" align="center">{{ trans('user.orderfarm.farm_name') }}</th>
+                        <th width="10%" align="center">{{ trans('user.orderfarm.package_name') }}</th>
 						<th width="14%" align="center">{{ trans('user.orderfarm.order_amount') }}</th>
 						<th width="12%" align="center">{{ trans('user.orderfarm.status') }}</th>
 						<th width="12%" align="center">{{ trans('user.operation') }}</th>
@@ -27,22 +27,8 @@
 							</td>
 						</tr>
 						<tr class="tr-bd">
-							<td width="52%" valign="top">
-                                <div class="s-item">
-                                    <div class="s-pic">
-                                            <img src="{{ asset('static/image/mobile/card.jpg') }}" width="150" height="150">
-                                    </div>
-                                    <div class="s-info">
-                                        <div class="s-name">
-											知惠网联名卡
-                                        </div>
-                                        <div class="s-extra">
-											办卡方式：{{ trans('user.orderfarm.order_type_'.$value->order_type) }}
-                                        </div>
-                                    </div>
-                                </div>
-							</td>
-                            <td width="10%" align="center">{{ trans('user.orderfarm.order_type_'.$value->order_type) }}</td>
+							<td width="52%">{{ $value->farm ? $value->farm->name : '/' }}</td>
+                            <td width="10%" align="center">{{ $value->package_name }}</td>
 							<td width="14%" align="center">
 								<p><strong>￥{{ sprintf("%.2f",$value->order_amount) }}</strong></p>
                             </td>

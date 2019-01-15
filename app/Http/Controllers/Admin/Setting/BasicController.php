@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
 use App\Models\CommonFaqModel;
+use App\Models\WechatMenuModel;
 use App\Models\CommonSettingModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -32,6 +33,14 @@ class BasicController extends Controller
                 foreach($faqs as $k => $v) {
                     $v->title = str_replace($setting->svalue, $value, $v->title);
                     $v->message = str_replace($setting->svalue, $value, $v->message);
+                    $v->save();
+                }
+            }
+            //更新微信菜单中的链接地址
+            if($setting->skey == 'siteurl' && 1){
+                $menus = WechatMenuModel::orderBy('displayorder', 'asc')->get();
+                foreach($menus as $k => $v) {
+                    $v->url = str_replace('http://zhihui.hztbg.com/', 'http://lbh.qzkdd.com/', $v->url);
                     $v->save();
                 }
             }
