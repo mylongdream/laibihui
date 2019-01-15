@@ -12,8 +12,8 @@
                 <td>{{ $consume->shop ? $consume->shop->name : '/' }}</td>
             </tr>
             <tr>
-                <th align="right">{{ trans('user.consume.money') }}</th>
-                <td>{{ $consume->money or '0' }} 元</td>
+                <th align="right">{{ trans('user.consume.order_amount') }}</th>
+                <td>{{ $consume->order_amount ? $consume->order_amount : 0 }} 元</td>
             </tr>
             <tr>
                 <th align="right">{{ trans('user.consume.status') }}</th>
@@ -29,12 +29,12 @@
                 <td>{{ $consume->shop ? $consume->shop->name : '/' }}</td>
             </tr>
             <tr>
-                <th align="right">{{ trans('user.consume.money') }}</th>
-                <td>{{ $consume->money or '0' }} 元</td>
+                <th align="right">{{ trans('user.consume.order_amount') }}</th>
+                <td>{{ $consume->order_amount ? $consume->order_amount : 0 }} 元</td>
             </tr>
             <tr>
                 <th align="right">{{ trans('user.consume.status') }}</th>
-                <td>{{ trans('user.consume.status_'.$consume->pay_status) }}</td>
+                <td>{{ trans('user.consume.status_'.$consume->ifpay) }}</td>
             </tr>
         </table>
     </div>
