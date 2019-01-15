@@ -144,7 +144,9 @@
 .login-box form .safe .checkbox span{vertical-align: middle;}
 .login-box form .btn{}
 .login-box form .btn button{width: 100%;}
-.login-extra{margin:15px auto 0;overflow:hidden;font-size: 14px}
+.login-qrcode{margin:15px auto 0;overflow:hidden;text-align: center;height:220px;}
+.login-qrcode img{width:220px;height:220px;}
+.login-extra{margin:15px auto 0;overflow:hidden;font-size: 14px;padding: 0 30px;}
 .login-partner { list-style: none; padding: 21px 0 14px 29px; text-align: center; margin-top: 30px; position: relative; border-top: solid 1px #efefef;  }
 .login-partner .partner-title { position: absolute; top: -10px; left: 154px; font-size: 14px; color: #999; }
 .login-partner .partner-box { position: relative; cursor: pointer; background-size: auto 100%; background-repeat: no-repeat; font-size: 14px; color: #666; line-height: 14px; text-align: left; padding: 5px 7px 5px 35px; display:inline-block; }

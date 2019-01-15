@@ -16,7 +16,7 @@
                     <div class="error">{{ $errors->first() }}</div>
                 @endif
                 <div class="tb-body">
-                    <div id="qr-login"></div>
+                    <div id="qr-login" class="login-qrcode"></div>
                 </div>
                 <div class="tb-body hidden">
                     <form id="loginNormal" class="ajaxform" name="myform" method="post" action="{{ route('login') }}">
