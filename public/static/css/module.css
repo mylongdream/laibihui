@@ -121,8 +121,8 @@
 .login-wrap{height: 560px;background-image: url("../image/common/login_bg.jpg");background-repeat: no-repeat;  background-position: top center;margin: 0 auto;}
 .login-main{height: 560px;margin: 0 auto;position: relative;}
 .login-box{position: absolute;top: 60px;right: 40px;z-index: 10;width: 400px;box-shadow: 0 1px 4px rgba(51,51,51,.2);background-color: #fff;}
-.login-box .login-tab{border-bottom: 2px solid #eee;height: 48px;}
-.login-box .login-tab li{float: left;width:50%;text-align:center;font-size: 18px;line-height: 48px;white-space: nowrap;}
+.login-box .login-tab{border-bottom: 2px solid #eee;height: 56px;}
+.login-box .login-tab li{float: left;width:50%;text-align:center;font-size: 18px;line-height: 56px;white-space: nowrap;}
 .login-box .login-tab li span{color: #666;}
 .login-box .login-tab li.on{border-bottom: 2px solid #ff6600;color: #ff6600;}
 .login-box .login-tab li.on span{color: #ff6600;}
@@ -144,7 +144,7 @@
 .login-box form .safe .checkbox span{vertical-align: middle;}
 .login-box form .btn{}
 .login-box form .btn button{width: 100%;}
-.login-extra{margin:15px auto 0;text-align: center;font-size: 14px}
+.login-extra{margin:15px auto 0;overflow:hidden;font-size: 14px}
 .login-partner { list-style: none; padding: 21px 0 14px 29px; text-align: center; margin-top: 30px; position: relative; border-top: solid 1px #efefef;  }
 .login-partner .partner-title { position: absolute; top: -10px; left: 154px; font-size: 14px; color: #999; }
 .login-partner .partner-box { position: relative; cursor: pointer; background-size: auto 100%; background-repeat: no-repeat; font-size: 14px; color: #666; line-height: 14px; text-align: left; padding: 5px 7px 5px 35px; display:inline-block; }

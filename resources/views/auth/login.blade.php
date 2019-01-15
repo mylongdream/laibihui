@@ -8,15 +8,18 @@
             <div class="login-box">
                 <div class="login-tab tb-tab">
                     <ul class="cl">
-                        <li class="on"><a href="javascript:;"><span>常规登录</span></a></li>
-                        <li><a href="javascript:;"><span>快速登录</span></a></li>
+                        <li class="on"><a href="javascript:;"><span>扫码登录</span></a></li>
+                        <li><a href="javascript:;"><span>账户登录</span></a></li>
                     </ul>
                 </div>
                 @if (count($errors) > 0)
                     <div class="error">{{ $errors->first() }}</div>
                 @endif
                 <div class="tb-body">
-                    <form class="ajaxform" name="myform" method="post" action="{{ route('login') }}">
+                    <div id="qr-login"></div>
+                </div>
+                <div class="tb-body hidden">
+                    <form id="loginNormal" class="ajaxform" name="myform" method="post" action="{{ route('login') }}">
                         {!! csrf_field() !!}
                         <input name="ReturnUrl" value="{{ request('ReturnUrl') }}" type="hidden" />
                         <input name="login_type" id="login_type" value="normal" type="hidden" />
@@ -40,15 +43,13 @@
                                     <span>自动登录</span>
                                 </label>
                             </div>
-                            <div class="y"><a href="{{ route('forgotpwd.reset') }}">忘记密码?</a></div>
+                            <div class="y"><a href="javascript:void(0)" onclick="$('#loginNormal').hide();$('#loginTel').show();">手机动态密码登录</a></div>
                         </div>
                         <div class="btn">
                             <button name="applybtn" type="submit" class="button">登 录</button>
                         </div>
                     </form>
-                </div>
-                <div class="tb-body hidden">
-                    <form class="ajaxform" name="myform" method="post" action="{{ route('login') }}">
+                    <form id="loginTel" class="ajaxform hidden" name="myform" method="post" action="{{ route('login') }}">
                         {!! csrf_field() !!}
                         <input name="ReturnUrl" value="{{ request('ReturnUrl') }}" type="hidden" />
                         <input name="login_type" id="login_type" value="fast" type="hidden" />
@@ -76,7 +77,7 @@
                                     <span>自动登录</span>
                                 </label>
                             </div>
-                            <div class="y"><a href="{{ route('forgotpwd.reset') }}">忘记密码?</a></div>
+                            <div class="y"><a href="javascript:void(0)" onclick="$('#loginTel').hide();$('#loginNormal').show();">账号登录</a></div>
                         </div>
                         <div class="btn">
                             <button name="applybtn" type="submit" class="button">登 录</button>
@@ -84,7 +85,8 @@
                     </form>
                 </div>
                 <div class="login-extra">
-                    <span class="txt">还没有账号？<a href="{{ route('register') }}" style="color: #ff6600">立即注册</a></span>
+                    <div class="z"><a href="{{ route('forgotpwd.reset') }}">忘记密码?</a></div>
+                    <div class="y"><span class="txt">还没有账号？<a href="{{ route('register') }}" style="color: #ff6600">立即注册</a></span></div>
                 </div>
                 <div class="login-partner cl">
                     <div class="partner-title">其它方式登录</div>
@@ -116,6 +118,7 @@
     <script type="text/javascript" src="{{ asset('static/js/jquery.smscode.js') }}"></script>
     <script type="text/javascript">
         $(function(){
+            $("#qr-login").load("{{ route('auth.wechat.index') }}");
             $("#getsmscode").sms({
                 requestUrl:"{{ route('util.smscode') }}",
                 callerror: function (data) {

@@ -17,7 +17,7 @@
             </tr>
             <tr>
                 <th align="right">{{ trans('user.consume.status') }}</th>
-                <td>{{ trans('user.consume.status_'.$consume->ifpay) }}</td>
+                <td>{{ trans('user.consume.status_'.$consume->pay_status) }}</td>
             </tr>
         </table>
     </div>
@@ -34,7 +34,7 @@
             </tr>
             <tr>
                 <th align="right">{{ trans('user.consume.status') }}</th>
-                <td>{{ trans('user.consume.status_'.$consume->ifpay) }}</td>
+                <td>{{ trans('user.consume.status_'.$consume->pay_status) }}</td>
             </tr>
         </table>
     </div>

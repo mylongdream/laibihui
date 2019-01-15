@@ -1,4 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+@if (!request()->ajax())
+        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:ds="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -19,6 +20,8 @@
     </style>
 </head>
 <body>
+@endif
+@if (!request()->ajax())
 <div class="wechat-login">
     <div class="hd">微信登录</div>
     <div class="bd">
@@ -31,6 +34,9 @@
         </div>
     </div>
 </div>
+@else
+    <div class="qrcode"><img id="wechatQrcode" border="0" alt="" src="{{ $qrcode }}"></div>
+@endif
 
 <script type="text/javascript">
     $(function(){
@@ -49,5 +55,7 @@
         loadwechatLogin('{{ $checkurl }}');
     });
 </script>
+@if (!request()->ajax())
 </body>
 </html>
+@endif
