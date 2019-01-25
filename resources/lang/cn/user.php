@@ -184,6 +184,17 @@ return [
     'cardreward.list' => '奖品列表',
     'cardreward.myreward' => '我的兑奖',
 
+    'redpack' => '红包管理',
+    'redpack.tips' => '您可以在此处对红包进行管理',
+    'redpack.list' => '红包列表',
+    'redpack.name' => '红包名称',
+    'redpack.amount' => '红包金额',
+    'redpack.fullamount' => '红包满额',
+    'redpack.use_time' => '使用时间',
+    'redpack.use_start' => '使用开始时间',
+    'redpack.use_end' => '使用结束时间',
+    'redpack.remark' => '备注信息',
+
     'sign' => '签到记录',
     'sign.tips' => '您可以在此处对签到记录进行管理',
     'sign.remark' => '备注信息',

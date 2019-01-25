@@ -17,7 +17,7 @@ class RedpackController extends Controller
      */
     public function index(Request $request)
     {
-        $redpacks = CommonRedpackModel::where('title', 'like', '%'.$request->title.'%')->orderBy('created_at', 'desc')->paginate(10);
+        $redpacks = CommonRedpackModel::where('name', 'like', '%'.$request->name.'%')->orderBy('created_at', 'desc')->paginate(10);
         return view('admin.extend.redpack.index', ['redpacks' => $redpacks]);
     }
 
@@ -40,24 +40,27 @@ class RedpackController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'title' => 'required|max:60',
-            'message' => 'required|max:25500',
-            'jumpurl' => 'nullable|url',
+            'name' => 'required|max:60',
+            'amount' => 'required|max:25500',
+            'fullamount' => 'required|max:25500',
         );
         $messages = array(
-            'title.required' => '公告主题不允许为空！',
-            'title.max' => '公告主题必须小于 :max 个字符。',
-            'message.required' => '公告内容不允许为空！',
-            'message.max' => '公告内容必须小于 :max 个字符。',
-            'jumpurl.url' => '跳转链接必须是有效的 URL。',
+            'name.required' => '红包名称不允许为空！',
+            'name.max' => '红包名称必须小于 :max 个字符。',
+            'amount.required' => '红包金额不允许为空！',
+            'amount.max' => '红包金额必须小于 :max 。',
+            'fullamount.required' => '红包满额不允许为空！',
+            'fullamount.max' => '红包满额必须小于 :max 。',
         );
         $this->validate($request, $rules, $messages);
 
         $redpack = new CommonRedpackModel;
-        $redpack->title = $request->title;
-        $redpack->message = $request->message;
-        $redpack->jumpurl = $request->jumpurl;
-        $redpack->displayorder = intval($request->displayorder);
+        $redpack->name = $request->name;
+        $redpack->amount = $request->amount;
+        $redpack->fullamount = $request->fullamount;
+        $redpack->use_start = $request->use_start;
+        $redpack->use_end = $request->use_end;
+        $redpack->remark = $request->remark;
         $redpack->save();
 
         if ($request->ajax()){
@@ -102,23 +105,26 @@ class RedpackController extends Controller
     {
         $redpack = CommonRedpackModel::findOrFail($id);
         $rules = array(
-            'title' => 'required|max:60',
-            'message' => 'required|max:25500',
-            'jumpurl' => 'nullable|url',
+            'name' => 'required|max:60',
+            'amount' => 'required|max:25500',
+            'fullamount' => 'required|max:25500',
         );
         $messages = array(
-            'title.required' => '公告主题不允许为空！',
-            'title.max' => '公告主题必须小于 :max 个字符。',
-            'message.required' => '公告内容不允许为空！',
-            'message.max' => '公告内容必须小于 :max 个字符。',
-            'jumpurl.url' => '跳转链接必须是有效的 URL。',
+            'name.required' => '红包名称不允许为空！',
+            'name.max' => '红包名称必须小于 :max 个字符。',
+            'amount.required' => '红包金额不允许为空！',
+            'amount.max' => '红包金额必须小于 :max 。',
+            'fullamount.required' => '红包满额不允许为空！',
+            'fullamount.max' => '红包满额必须小于 :max 。',
         );
         $this->validate($request, $rules, $messages);
 
-        $redpack->title = $request->title;
-        $redpack->message = $request->message;
-        $redpack->jumpurl = $request->jumpurl;
-        $redpack->displayorder = intval($request->displayorder);
+        $redpack->name = $request->name;
+        $redpack->amount = $request->amount;
+        $redpack->fullamount = $request->fullamount;
+        $redpack->use_start = $request->use_start;
+        $redpack->use_end = $request->use_end;
+        $redpack->remark = $request->remark;
         $redpack->save();
 
         if ($request->ajax()){
@@ -160,17 +166,6 @@ class RedpackController extends Controller
                 return response()->json(['status' => '1', 'info' => trans('admin.extend.redpack.deletesucceed'), 'url' => back()->getTargetUrl()]);
             }else{
                 return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.extend.redpack.deletesucceed'), 'url' => back()->getTargetUrl()]);
-            }
-        }elseif ($request->operate == 'updatesubmit'){
-            if(is_array($request->displayorder)) {
-                foreach($request->displayorder as $id => $order) {
-                    CommonRedpackModel::where('id', $id)->update(['displayorder' => intval($order)]);
-                }
-            }
-            if ($request->ajax()) {
-                return response()->json(['status' => '1', 'info' => trans('admin.extend.redpack.updatesucceed'), 'url' => back()->getTargetUrl()]);
-            }else{
-                return view('admin.layouts.message', ['status' => '1', 'info' => trans('admin.extend.redpack.updatesucceed'), 'url' => back()->getTargetUrl()]);
             }
         }else{
             return view('admin.layouts.message', ['status' => '0', 'info' => trans('admin.undefined.operation')]);

@@ -2,32 +2,36 @@
 
 @section('content')
 	<div class="itemnav">
-		<div class="title"><h3>{{ trans('admin.extend.announce') }}</h3></div>
+		<div class="title"><h3>{{ trans('admin.extend.redpack') }}</h3></div>
 	</div>
-	<form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('admin.extend.announce.update', $announce->id) }}">
+	<form class="ajaxform" enctype="multipart/form-data" method="post" action="{{ route('admin.extend.redpack.update', $redpack->id) }}">
     	<input type="hidden" name="_method" value="PUT">
 		{!! csrf_field() !!}
 		<div class="tbedit">
 			<div class="tbhead cl">
-				<div class="z"><h3>{{ trans('admin.extend.announce.list') }}</h3></div>
-				<div class="y"><a href="{{ route('admin.extend.announce.index') }}" class="btn">< {{ trans('admin.extend.announce.list') }}</a></div>
+				<div class="z"><h3>{{ trans('admin.extend.redpack.list') }}</h3></div>
+				<div class="y"><a href="{{ route('admin.extend.redpack.index') }}" class="btn">< {{ trans('admin.extend.redpack.list') }}</a></div>
 			</div>
 			<table>
 				<tr>
-					<td width="150" align="right">{{ trans('admin.extend.announce.title') }}</td>
-					<td><input class="txt" type="text" size="50" value="{{ $announce->title }}" name="title"></td>
+					<td width="150" align="right">{{ trans('admin.extend.redpack.name') }}</td>
+					<td><input class="txt" type="text" size="50" value="{{ $redpack->name }}" name="name"></td>
 				</tr>
 				<tr>
-					<td width="150" align="right">{{ trans('admin.extend.announce.message') }}</td>
-					<td><textarea class="textarea" name="message" cols="60" rows="5" id="message" style="width:100%;height:400px">{{ $announce->message }}</textarea></td>
+					<td width="150" align="right">{{ trans('admin.extend.redpack.amount') }}</td>
+					<td><input class="txt" type="text" size="50" value="{{ $redpack->amount }}" name="amount"></td>
 				</tr>
 				<tr>
-					<td width="150" align="right">{{ trans('admin.extend.announce.jumpurl') }}</td>
-					<td><input class="txt" type="text" size="50" value="{{ $announce->jumpurl }}" name="jumpurl"><span class="tdtip">填写此处将会直接跳转至该链接</span> </td>
+					<td width="150" align="right">{{ trans('admin.extend.redpack.fullamount') }}</td>
+					<td><input class="txt" type="text" size="50" value="{{ $redpack->fullamount }}" name="fullamount"></td>
 				</tr>
 				<tr>
-					<td width="150" align="right">{{ trans('admin.displayorder') }}</td>
-					<td><input class="txt" type="text" size="30" value="{{ $announce->displayorder }}" name="displayorder"></td>
+					<td align="right">{{ trans('admin.extend.redpack.use_time') }}</td>
+					<td><input id="starttime" class="txt" type="text" size="20" value="{{ $redpack->use_start }}" name="use_start"> 至 <input id="endtime" class="txt" type="text" size="20" value="{{ $redpack->use_end }}" name="use_end"></td>
+				</tr>
+				<tr>
+					<td width="150" align="right">{{ trans('admin.extend.redpack.remark') }}</td>
+					<td><input class="txt" type="text" size="50" value="{{ $redpack->remark }}" name="remark"></td>
 				</tr>
 				<tr>
 					<td align="right"></td>
@@ -36,15 +40,18 @@
 			</table>
 		</div>
 	</form>
-	<script type="text/javascript" src="{{ asset('static/js/kindeditor/kindeditor.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('static/js/laydate/laydate.js') }}"></script>
 	<script type="text/javascript">
-        KindEditor.ready(function(K) {
-            var ItemEditor = K.create("#message", {
-                uploadJson : "{{ route('admin.upload.editor') }}",
-                extraFileUploadParams : {
-                    _token : $('meta[name="csrf-token"]').attr('content')
-                },
-                afterBlur: function () { this.sync(); }
+        $(function(){
+            laydate({
+                elem: '#starttime',
+                istime: true,
+                format:'YYYY-MM-DD hh:mm'
+            });
+            laydate({
+                elem: '#endtime',
+                istime: true,
+                format:'YYYY-MM-DD hh:mm'
             });
         });
 	</script>
