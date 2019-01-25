@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class RedpackController users Controller
+class RedpackController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class RedpackController users Controller
      */
     public function index(Request $request)
     {
-        $redpacks = CommonUserRedpackModel::where('title', 'like', '%'.$request->title.'%')->orderBy('created_at', 'desc')->paginate(10);
+        $redpacks = CommonUserRedpackModel::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.user.redpack.index', ['redpacks' => $redpacks]);
     }
 

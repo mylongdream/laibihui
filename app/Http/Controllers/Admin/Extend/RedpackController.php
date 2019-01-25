@@ -58,8 +58,8 @@ class RedpackController extends Controller
         $redpack->name = $request->name;
         $redpack->amount = $request->amount;
         $redpack->fullamount = $request->fullamount;
-        $redpack->use_start = $request->use_start;
-        $redpack->use_end = $request->use_end;
+        $redpack->use_start = $request->use_start ? strtotime($request->use_start) : $request->use_start;
+        $redpack->use_end = $request->use_end ? strtotime($request->use_end) : $request->use_end;
         $redpack->remark = $request->remark;
         $redpack->save();
 
@@ -122,8 +122,8 @@ class RedpackController extends Controller
         $redpack->name = $request->name;
         $redpack->amount = $request->amount;
         $redpack->fullamount = $request->fullamount;
-        $redpack->use_start = $request->use_start;
-        $redpack->use_end = $request->use_end;
+        $redpack->use_start = $request->use_start ? strtotime($request->use_start) : $request->use_start;
+        $redpack->use_end = $request->use_end ? strtotime($request->use_end) : $request->use_end;
         $redpack->remark = $request->remark;
         $redpack->save();
 
