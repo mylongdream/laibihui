@@ -24,10 +24,10 @@
 		<table>
 			<tr>
 				<th width="24"><input class="checkall" type="checkbox"></th>
-				<th>{{ trans('admin.extend.redpack.name') }}</th>
+				<th width="120">{{ trans('admin.extend.redpack.name') }}</th>
 				<th width="120">{{ trans('admin.extend.redpack.amount') }}</th>
 				<th width="120">{{ trans('admin.extend.redpack.fullamount') }}</th>
-				<th width="120">{{ trans('admin.extend.redpack.use_time') }}</th>
+				<th>{{ trans('admin.extend.redpack.use_time') }}</th>
 				<th width="80">{{ trans('admin.operation') }}</th>
 			</tr>
 			@foreach ($redpacks as $redpack)
