@@ -147,6 +147,12 @@
                                         <p class="weui-grid__label">合伙人计划</p>
                                     </a>
                                     @endif
+                                    <a href="{{ route('mobile.user.redpack.index') }}" class="weui-grid">
+                                        <div class="weui-grid__icon">
+                                            <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-redpack.png') }}" alt="">
+                                        </div>
+                                        <p class="weui-grid__label">红包</p>
+                                    </a>
                                 </div>
                             </div>
                         </div>

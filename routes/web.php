@@ -274,6 +274,7 @@ Route::group(['domain' => 'lbh.qzkdd.com', 'prefix' => 'mobile', 'as' => 'mobile
         Route::get('partner/qrcode', ['as' => 'partner.qrcode', 'uses' => 'Mobile\User\PartnerController@qrcode']);
         Route::any('partner/apply', ['as' => 'partner.apply', 'uses' => 'Mobile\User\PartnerController@apply']);
         Route::get('partner/order', ['as' => 'partner.order', 'uses' => 'Mobile\User\PartnerController@order']);
+        Route::get('redpack', ['as' => 'redpack.index', 'uses' => 'Mobile\User\RedpackController@index']);
         //Route::get('cardreward', ['as' => 'cardreward.index', 'uses' => 'Mobile\User\CardRewardController@index']);
         //Route::any('cardreward/record', ['as' => 'cardreward.record', 'uses' => 'Mobile\User\CardRewardController@record']);
         //Route::any('cardreward/exchange', ['as' => 'cardreward.exchange', 'uses' => 'Mobile\User\CardRewardController@exchange']);
@@ -414,6 +415,8 @@ Route::group(['domain' => 'lbh.qzkdd.com', 'prefix' => 'admin', 'as' => 'admin.'
             Route::resource('sellcard', 'Admin\Extend\SellCardController');
             Route::post('lackcard/batch', ['as' => 'lackcard.batch', 'uses' => 'Admin\Extend\LackCardController@batch']);
             Route::resource('lackcard', 'Admin\Extend\LackCardController');
+            Route::post('redpack/batch', ['as' => 'redpack.batch', 'uses' => 'Admin\Extend\RedpackController@batch']);
+            Route::resource('redpack', 'Admin\Extend\RedpackController');
         });
         Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::post('menu/batch', ['as' => 'menu.batch', 'uses' => 'Admin\Admin\MenuController@batch']);
@@ -466,6 +469,8 @@ Route::group(['domain' => 'lbh.qzkdd.com', 'prefix' => 'admin', 'as' => 'admin.'
             Route::resource('account', 'Admin\User\AccountController');
             Route::post('sign/batch', ['as' => 'sign.batch', 'uses' => 'Admin\User\SignController@batch']);
             Route::get('sign', ['as' => 'sign.index', 'uses' => 'Admin\User\SignController@index']);
+            Route::post('redpack/batch', ['as' => 'redpack.batch', 'uses' => 'Admin\User\RedpackController@batch']);
+            Route::resource('redpack', 'Admin\User\RedpackController');
         });
         Route::group(['prefix' => 'brand', 'as' => 'brand.'], function () {
             Route::post('shop/batch', ['as' => 'shop.batch', 'uses' => 'Admin\Brand\ShopController@batch']);
