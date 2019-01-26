@@ -1,4 +1,4 @@
-@users('layouts.admin.app')
+@extends('layouts.admin.app')
 
 @section('content')
 	<div class="itemnav">
@@ -24,21 +24,32 @@
 		<table>
 			<tr>
 				<th width="24"><input class="checkall" type="checkbox"></th>
-				<th width="50">{{ trans('admin.displayorder') }}</th>
-				<th>{{ trans('admin.user.redpack.title') }}</th>
-				<th width="120">{{ trans('admin.user.redpack.viewnum') }}</th>
+				<th width="240">{{ trans('admin.user.redpack.name') }}</th>
+				<th width="120">{{ trans('admin.user.redpack.redpack_amount') }}</th>
+				<th width="120">{{ trans('admin.user.redpack.redpack_fullamount') }}</th>
+				<th>{{ trans('admin.user.redpack.use_time') }}</th>
 				<th width="120">{{ trans('admin.created_at') }}</th>
 				<th width="80">{{ trans('admin.operation') }}</th>
 			</tr>
 			@foreach ($redpacks as $redpack)
 			<tr>
 				<td><input class="ids" type="checkbox" value="{{ $redpack->id }}" name="ids[]"></td>
-				<td><input type="text" class="txt" name="displayorder[{{ $redpack->photo_id }}]" value="{{ $redpack->displayorder }}" size="2"></td>
-				<td>{{ $redpack->title or '/' }}</td>
-				<td>{{ $redpack->viewnum or '0' }}</td>
+				<td>{{ $redpack->name or '/' }}</td>
+				<td>{{ $redpack->redpack_amount or '0' }} 元</td>
+				<td>{{ $redpack->redpack_fullamount ? $redpack->redpack_fullamount.' 元' : trans('admin.unlimit')}}</td>
+				<td>
+					@if ($redpack->use_start && $redpack->use_end)
+					{{ $redpack->use_start->format('Y-m-d H:i') }} - {{ $redpack->use_end->format('Y-m-d H:i') }}
+					@elseif ($redpack->use_start)
+						{{ $redpack->use_start->format('Y-m-d H:i') }} - {{ trans('admin.unlimit') }}
+					@elseif ($redpack->use_end)
+						{{ trans('admin.unlimit') }} - {{ $redpack->use_end->format('Y-m-d H:i') }}
+					@else
+						{{ trans('admin.unlimit') }}
+					@endif
+				</td>
 				<td>{{ $redpack->created_at->format('Y-m-d H:i') }}</td>
 				<td>
-					<a href="{{ route('admin.user.redpack.edit',$redpack->id) }}" class="" title="{{ trans('admin.user.redpack.edit') }}">{{ trans('admin.edit') }}</a>
 					<a href="{{ route('admin.user.redpack.destroy',$redpack->id) }}" class="mlm delbtn">{{ trans('admin.destroy') }}</a>
 				</td>
 			</tr>
@@ -49,7 +60,6 @@
 	<div class="pgs cl">
 		<div class="fixsel z">
 			<button class="submitbtn" name="delsubmit" value="yes" type="submit">{{ trans('admin.destroy') }}</button>
-			<button class="submitbtn" name="updatesubmit" value="yes" type="submit">{{ trans('admin.update') }}</button>
 		</div>
 		<div class="page y">
 			{!! $redpacks->appends(['title' => request('title')])->links() !!}

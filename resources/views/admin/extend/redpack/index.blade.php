@@ -24,7 +24,7 @@
 		<table>
 			<tr>
 				<th width="24"><input class="checkall" type="checkbox"></th>
-				<th width="120">{{ trans('admin.extend.redpack.name') }}</th>
+				<th width="240">{{ trans('admin.extend.redpack.name') }}</th>
 				<th width="120">{{ trans('admin.extend.redpack.amount') }}</th>
 				<th width="120">{{ trans('admin.extend.redpack.fullamount') }}</th>
 				<th>{{ trans('admin.extend.redpack.use_time') }}</th>
@@ -35,8 +35,18 @@
 				<td><input class="ids" type="checkbox" value="{{ $redpack->id }}" name="ids[]"></td>
 				<td>{{ $redpack->name or '/' }}</td>
 				<td>{{ $redpack->amount }} 元</td>
-				<td>{{ $redpack->fullamount }} 元</td>
-				<td>{{ $redpack->use_start->format('Y-m-d H:i') }} - {{ $redpack->use_end->format('Y-m-d H:i') }}</td>
+				<td>{{ $redpack->redpack_fullamount ? $redpack->redpack_fullamount.' 元' : trans('admin.unlimit')}}</td>
+				<td>
+					@if ($redpack->use_start && $redpack->use_end)
+						{{ $redpack->use_start->format('Y-m-d H:i') }} - {{ $redpack->use_end->format('Y-m-d H:i') }}
+					@elseif ($redpack->use_start)
+						{{ $redpack->use_start->format('Y-m-d H:i') }} - {{ trans('admin.unlimit') }}
+					@elseif ($redpack->use_end)
+						{{ trans('admin.unlimit') }} - {{ $redpack->use_end->format('Y-m-d H:i') }}
+					@else
+						{{ trans('admin.unlimit') }}
+					@endif
+				</td>
 				<td>
 					<a href="{{ route('admin.extend.redpack.edit',$redpack->id) }}" class="" title="{{ trans('admin.extend.redpack.edit') }}">{{ trans('admin.edit') }}</a>
 					<a href="{{ route('admin.extend.redpack.destroy',$redpack->id) }}" class="mlm delbtn">{{ trans('admin.destroy') }}</a>

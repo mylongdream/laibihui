@@ -19,6 +19,7 @@ return [
 	'search' => '搜索',
 	'recycle' => '回收站',
 	'restore' => '恢复',
+    'unlimit' => '无限制',
 	'created_at' => '添加时间',
 	'updated_at' => '最后修改',
 	'deleted_at' => '删除时间',
