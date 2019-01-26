@@ -7,8 +7,12 @@
 	<form id="schform" name="schform" class="formsearch" method="get" action="{{ route('admin.user.redpack.index') }}">
 	<div class="tbsearch">
 		<dl>
-			<dt>{{ trans('admin.user.redpack.title') }}</dt>
-			<dd><input type="text" name="title" class="schtxt" value="{{ request('title') }}"></dd>
+			<dt>{{ trans('admin.user.redpack.redpack_name') }}</dt>
+			<dd><input type="text" name="redpack_name" class="schtxt" value="{{ request('redpack_name') }}"></dd>
+		</dl>
+		<dl>
+			<dt>{{ trans('admin.user.redpack.username') }}</dt>
+			<dd><input type="text" name="username" class="schtxt" value="{{ request('username') }}"></dd>
 		</dl>
 		<div class="schbtn"><button name="" type="submit">{{ trans('admin.search') }}</button></div>
 	</div>
@@ -19,12 +23,12 @@
 	<div class="tblist">
 		<div class="tbhead cl">
 			<div class="z"><h3>{{ trans('admin.user.redpack.list') }}</h3></div>
-			<div class="y"><a href="{{ route('admin.user.redpack.create') }}" class="btn" title="{{ trans('admin.user.redpack.create') }}">+ {{ trans('admin.user.redpack.create') }}</a></div>
 		</div>
 		<table>
 			<tr>
 				<th width="24"><input class="checkall" type="checkbox"></th>
-				<th width="240">{{ trans('admin.user.redpack.name') }}</th>
+				<th width="240">{{ trans('admin.user.redpack.username') }}</th>
+				<th width="240">{{ trans('admin.user.redpack.redpack_name') }}</th>
 				<th width="120">{{ trans('admin.user.redpack.redpack_amount') }}</th>
 				<th width="120">{{ trans('admin.user.redpack.redpack_fullamount') }}</th>
 				<th>{{ trans('admin.user.redpack.use_time') }}</th>
@@ -34,7 +38,8 @@
 			@foreach ($redpacks as $redpack)
 			<tr>
 				<td><input class="ids" type="checkbox" value="{{ $redpack->id }}" name="ids[]"></td>
-				<td>{{ $redpack->name or '/' }}</td>
+				<td>{{ $redpack->user ? $redpack->user->username : '/' }}</td>
+				<td>{{ $redpack->redpack_name or '/' }}</td>
 				<td>{{ $redpack->redpack_amount or '0' }} 元</td>
 				<td>{{ $redpack->redpack_fullamount ? $redpack->redpack_fullamount.' 元' : trans('admin.unlimit')}}</td>
 				<td>
@@ -62,7 +67,7 @@
 			<button class="submitbtn" name="delsubmit" value="yes" type="submit">{{ trans('admin.destroy') }}</button>
 		</div>
 		<div class="page y">
-			{!! $redpacks->appends(['title' => request('title')])->links() !!}
+			{!! $redpacks->appends(['redpack_name' => request('redpack_name')])->appends(['username' => request('username')])->links() !!}
 		</div>
     </div>
 	@endif

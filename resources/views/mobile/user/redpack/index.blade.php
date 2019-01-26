@@ -12,7 +12,7 @@
 				@foreach ($redpacks as $value)
 					<div class="redpack_item">
 						<div class="redpack_item__hd">
-							<p class="price"><i>¥</i><strong>{{ $value->amount }}</strong></p>
+							<p class="price"><i>¥</i><strong>{{ $value->redpack_amount }}</strong></p>
 							<p class="desc">{{ $value->redpack_fullamount ? '满'.$value->redpack_fullamount.'元可用' : trans('user.unlimit')}}</p>
 						</div>
                         <div class="redpack_item__bd">

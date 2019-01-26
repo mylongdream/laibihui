@@ -35,7 +35,7 @@
 				<td><input class="ids" type="checkbox" value="{{ $redpack->id }}" name="ids[]"></td>
 				<td>{{ $redpack->name or '/' }}</td>
 				<td>{{ $redpack->amount }} 元</td>
-				<td>{{ $redpack->redpack_fullamount ? $redpack->redpack_fullamount.' 元' : trans('admin.unlimit')}}</td>
+				<td>{{ $redpack->fullamount ? $redpack->fullamount.' 元' : trans('admin.unlimit')}}</td>
 				<td>
 					@if ($redpack->use_start && $redpack->use_end)
 						{{ $redpack->use_start->format('Y-m-d H:i') }} - {{ $redpack->use_end->format('Y-m-d H:i') }}

@@ -454,7 +454,7 @@ pre{ white-space: pre-wrap!important;  word-wrap: break-word!important;  *white-
 .cardreward .btn a.disabled{background:#999;}
 
 .redpack_list{overflow:hidden;}
-.redpack_item{padding: 10px 10px;background-color: #fff;margin: 15px 10px;border-radius: 6px;color: #53c7ca;}
+.redpack_item{padding: 10px 10px;background-color: #fff;margin: 15px 10px;border-radius: 6px;color: #53c7ca;overflow:hidden;}
 .redpack_item__hd{width: 120px;float:left;text-align: center;position: relative;}
 .redpack_item__hd .price strong{font-size: 36px;font-weight: normal;position: relative;top: 1px;}
 .redpack_item__hd .price i{font-size: 14px;display: inline-block;vertical-align: baseline;padding-left: 3px;margin: 6px 4px 0 0;}

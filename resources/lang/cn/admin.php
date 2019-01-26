@@ -692,6 +692,7 @@ return [
     'user.redpack.edit' => '编辑红包',
     'user.redpack.destroy' => '删除红包',
     'user.redpack.show' => '查看红包',
+    'user.redpack.username' => '用户名',
     'user.redpack.redpack_name' => '红包名称',
     'user.redpack.redpack_amount' => '红包金额',
     'user.redpack.redpack_fullamount' => '满额可用',
