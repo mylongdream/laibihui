@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CommonSettingModel;
 use App\Models\CommonUploadImageModel;
 use App\Models\CommonUserModel;
+use App\Models\CommonUserRedpackModel;
 use App\Models\CommonUserScoreModel;
 use App\Models\WechatLoginModel;
 use App\Models\WechatMenuModel;

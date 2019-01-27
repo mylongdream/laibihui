@@ -18,11 +18,11 @@
 				</tr>
 				<tr>
 					<td width="150" align="right">{{ trans('admin.extend.redpack.amount') }}</td>
-					<td><input class="txt" type="text" size="50" value="" name="amount"></td>
+					<td><input class="txt" type="text" size="30" value="" name="amount"> 元</td>
 				</tr>
 				<tr>
 					<td width="150" align="right">{{ trans('admin.extend.redpack.fullamount') }}</td>
-					<td><input class="txt" type="text" size="50" value="" name="fullamount"></td>
+					<td><input class="txt" type="text" size="30" value="" name="fullamount"> 元</td>
 				</tr>
 				<tr>
 					<td align="right">{{ trans('admin.extend.redpack.use_time') }}</td>

@@ -196,6 +196,17 @@ return [
     'redpack.use_end' => '使用结束时间',
     'redpack.remark' => '备注信息',
 
+    'coupon' => '优惠券管理',
+    'coupon.tips' => '您可以在此处对优惠券进行管理',
+    'coupon.list' => '优惠券列表',
+    'coupon.name' => '优惠券名称',
+    'coupon.amount' => '优惠券金额',
+    'coupon.fullamount' => '优惠券满额',
+    'coupon.use_time' => '使用时间',
+    'coupon.use_start' => '使用开始时间',
+    'coupon.use_end' => '使用结束时间',
+    'coupon.remark' => '备注信息',
+
     'sign' => '签到记录',
     'sign.tips' => '您可以在此处对签到记录进行管理',
     'sign.remark' => '备注信息',
