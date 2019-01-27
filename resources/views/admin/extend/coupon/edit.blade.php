@@ -42,7 +42,7 @@
 				</tr>
 				<tr class="use_limit_body {{ $coupon->use_limit == 1 ? '' : 'hidden' }}">
 					<td width="150" align="right">{{ trans('admin.extend.coupon.use_days') }}</td>
-					<td><input class="txt" type="text" size="30" value="" name="use_days"> 天</td>
+					<td><input class="txt" type="text" size="30" value="{{ $coupon->use_days }}" name="use_days"> 天</td>
 				</tr>
 				<tr>
 					<td align="right">{{ trans('admin.extend.coupon.getway') }}</td>
