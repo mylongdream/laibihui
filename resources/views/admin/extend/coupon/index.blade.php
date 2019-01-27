@@ -28,6 +28,7 @@
 				<th width="120">{{ trans('admin.extend.coupon.amount') }}</th>
 				<th width="120">{{ trans('admin.extend.coupon.fullamount') }}</th>
 				<th>{{ trans('admin.extend.coupon.use_time') }}</th>
+				<th width="120">{{ trans('admin.extend.coupon.getway') }}</th>
 				<th width="80">{{ trans('admin.operation') }}</th>
 			</tr>
 			@foreach ($coupons as $coupon)
@@ -47,6 +48,7 @@
 						{{ trans('admin.unlimit') }}
 					@endif
 				</td>
+				<td>{{ trans('admin.extend.coupon.getway_'.$coupon->getway) }}</td>
 				<td>
 					<a href="{{ route('admin.extend.coupon.edit',$coupon->id) }}" class="" title="{{ trans('admin.extend.coupon.edit') }}">{{ trans('admin.edit') }}</a>
 					<a href="{{ route('admin.extend.coupon.destroy',$coupon->id) }}" class="mlm delbtn">{{ trans('admin.destroy') }}</a>

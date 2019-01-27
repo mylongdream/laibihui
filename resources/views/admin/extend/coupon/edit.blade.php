@@ -29,10 +29,10 @@
 					<td align="right">{{ trans('admin.extend.coupon.use_limit') }}</td>
 					<td>
 						<label class="radio use_limit_tab" for="use_limit_0">
-							<input id="use_limit_0" type="radio" name="getway" value="0" {{ $coupon->use_limit == 0 ? 'checked' : '' }}> {{ trans('admin.extend.coupon.use_limit_0') }}
+							<input id="use_limit_0" type="radio" name="use_limit" value="0" {{ $coupon->use_limit == 0 ? 'checked' : '' }}> {{ trans('admin.extend.coupon.use_limit_0') }}
 						</label>
 						<label class="radio use_limit_tab" for="use_limit_1">
-							<input id="use_limit_1" type="radio" name="getway" value="1" {{ $coupon->use_limit == 1 ? 'checked' : '' }}> {{ trans('admin.extend.coupon.use_limit_1') }}
+							<input id="use_limit_1" type="radio" name="use_limit" value="1" {{ $coupon->use_limit == 1 ? 'checked' : '' }}> {{ trans('admin.extend.coupon.use_limit_1') }}
 						</label>
 					</td>
 				</tr>
