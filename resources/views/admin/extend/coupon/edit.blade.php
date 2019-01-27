@@ -69,6 +69,9 @@
 	<script type="text/javascript" src="{{ asset('static/js/laydate/laydate.js') }}"></script>
 	<script type="text/javascript">
         $(function(){
+            $(document).on("click", ".use_limit_tab", function(){
+                $(".use_limit_body").hide().eq($(this).index()).show();
+            });
             laydate({
                 elem: '#starttime',
                 istime: true,
