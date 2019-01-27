@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use HaoLi\LaravelAmount\Traits\AmountTrait;
@@ -82,5 +83,38 @@ class CommonUserModel extends Authenticatable
     public function personnel()
     {
         return $this->hasOne('App\Models\CrmPersonnelModel', 'uid', 'uid');
+    }
+
+    //自动注册
+    public function register($data)
+    {
+        $user = new CommonUserModel();
+        $user->username = $data['username'];
+        $user->password = bcrypt($data['password']);
+        $user->mobile = $data['mobile'];
+        $user->frozen_money = 100;
+        $user->regip = request()->getClientIp();
+        $user->save();
+        //注册赠送优惠券
+        $coupons = CommonCouponModel::where('getway', 'register')->get();
+        foreach($coupons as $key => $value) {
+            $user_coupon = new CommonUserCouponModel();
+            $user_coupon->uid = $user->uid;
+            $user_coupon->coupon_id = $value->id;
+            $user_coupon->coupon_name = $value->name;
+            $user_coupon->coupon_amount = $value->amount;
+            $user_coupon->coupon_fullamount = $value->fullamount;
+            if($value->use_limit == 1){
+                $user_coupon->use_start = Carbon::now();
+                $user_coupon->use_end = Carbon::now()->addDays($value->use_days);
+            }else{
+                $user_coupon->use_start = $value->use_start;
+                $user_coupon->use_end = $value->use_end;
+            }
+            $user_coupon->remark = $value->remark;
+            $user_coupon->postip = request()->getClientIp();
+            $user_coupon->save();
+        }
+        return $user;
     }
 }

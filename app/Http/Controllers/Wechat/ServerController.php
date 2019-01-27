@@ -60,10 +60,11 @@ class ServerController extends Controller
             $password=strtoupper(substr(md5($seek),$start,8));
             $password=str_replace("0",chr(mt_rand(65,78)),$password);
             $user = new CommonUserModel();
-            $user->username = uniqid();
-            $user->password = bcrypt($password);
-            $user->frozen_money = 100;
-            $user->save();
+            $data = array(
+                'username' => uniqid(),
+                'password' => $password,
+            );
+            $user = $user->register($data);
             $user->username = 100000000 + $user->uid;
             $user->save();
             //发送注册成功模板消息

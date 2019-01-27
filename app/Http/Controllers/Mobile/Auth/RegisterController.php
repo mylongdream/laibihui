@@ -110,12 +110,7 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        return CommonUserModel::create([
-            'username' => $data['username'],
-            'password' => bcrypt($data['password']),
-            'mobile' => $data['mobile'],
-            'frozen_money' => 100,
-            'regip' => request()->getClientIp(),
-        ]);
+        $user = new CommonUserModel();
+        return $user->register($data);
     }
 }

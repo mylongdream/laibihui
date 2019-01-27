@@ -113,12 +113,7 @@ class RegisterController extends Controller
         if($register_type == 'fast'){
             $data['username'] = $data['mobile'];
         }
-        return CommonUserModel::create([
-            'username' => $data['username'],
-            'password' => bcrypt($data['password']),
-            'mobile' => $data['mobile'],
-            'frozen_money' => 100,
-            'regip' => request()->getClientIp(),
-        ]);
+        $user = new CommonUserModel();
+        return $user->register($data);
     }
 }

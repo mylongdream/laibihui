@@ -27,12 +27,12 @@
 		<table>
 			<tr>
 				<th width="24"><input class="checkall" type="checkbox"></th>
-				<th width="240">{{ trans('admin.user.coupon.username') }}</th>
+				<th width="140">{{ trans('admin.user.coupon.username') }}</th>
 				<th width="240">{{ trans('admin.user.coupon.coupon_name') }}</th>
 				<th width="120">{{ trans('admin.user.coupon.coupon_amount') }}</th>
 				<th width="120">{{ trans('admin.user.coupon.coupon_fullamount') }}</th>
 				<th>{{ trans('admin.user.coupon.use_time') }}</th>
-				<th width="120">{{ trans('admin.created_at') }}</th>
+				<th width="120">{{ trans('admin.user.coupon.created_at') }}</th>
 				<th width="80">{{ trans('admin.operation') }}</th>
 			</tr>
 			@foreach ($coupons as $coupon)
