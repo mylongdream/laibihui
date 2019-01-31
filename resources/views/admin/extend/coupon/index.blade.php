@@ -28,6 +28,7 @@
 					<th width="120">{{ trans('admin.extend.coupon.amount') }}</th>
 					<th width="120">{{ trans('admin.extend.coupon.fullamount') }}</th>
 					<th>{{ trans('admin.extend.coupon.use_time') }}</th>
+					<th width="120">{{ trans('admin.extend.coupon.discount') }}</th>
 					<th width="120">{{ trans('admin.extend.coupon.getway') }}</th>
 					<th width="80">{{ trans('admin.operation') }}</th>
 				</tr>
@@ -52,6 +53,7 @@
 								@endif
 							@endif
 						</td>
+						<td>{{ round(($coupon->fullamount - $coupon->amount) / $coupon->fullamount, 2) }} 折</td>
 						<td>{{ trans('admin.extend.coupon.getway_'.$coupon->getway) }}</td>
 						<td>
 							<a href="{{ route('admin.extend.coupon.edit',$coupon->id) }}" class="" title="{{ trans('admin.extend.coupon.edit') }}">{{ trans('admin.edit') }}</a>

@@ -581,6 +581,7 @@ return [
     'extend.coupon.use_start' => '使用开始时间',
     'extend.coupon.use_end' => '使用结束时间',
     'extend.coupon.use_days' => '限制使用天数',
+    'extend.coupon.discount' => '折扣',
     'extend.coupon.getway' => '获取方式',
     'extend.coupon.getway_oneself' => '用户自行领取',
     'extend.coupon.getway_register' => '注册自动发放',
