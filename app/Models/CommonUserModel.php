@@ -111,6 +111,7 @@ class CommonUserModel extends Authenticatable
                 $user_coupon->use_start = $value->use_start;
                 $user_coupon->use_end = $value->use_end;
             }
+            $user_coupon->getway = $value->getway;
             $user_coupon->remark = $value->remark;
             $user_coupon->postip = request()->getClientIp();
             $user_coupon->save();

@@ -110,7 +110,7 @@ pre{ white-space: pre-wrap!important;  word-wrap: break-word!important;  *white-
 .weui-tabbar .weui-bar__item_on .weui-tabbar__label {color: #1aad19;}
 .weui-tabbar .weui-tabbar__label{font-size:12px;}
 
-.tab_box{background-color: #ffffff;text-align:center;font-size:14px;border-bottom: 1px solid #d7d7d7;}
+.tab_box{background-color: #ffffff;text-align:center;font-size:14px;border-bottom: 1px solid #d7d7d7;position: static;}
 .tab_box .weui-navbar__item a{display:block;width:100%;}
 .tab_box .weui-bar__item_on {border-bottom: 1px solid #ff6600;color:#ff6600;background-color: #ffffff;}
 .tab_box .weui-bar__item_on a {color:#ff6600;}

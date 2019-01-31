@@ -283,15 +283,9 @@ class CardController extends Controller
             ])));
             auth()->guard()->login($user);
 
+            //记录绑卡信息
             $usercard = new CommonUserCardModel();
-            $usercard->uid = auth()->user()->uid;
-            $usercard->number = $card->number;
-            $usercard->money = $card->money * 0.9;
-            $usercard->postip = request()->getClientIp();
-            $usercard->save();
-
-            auth()->user()->increment('tiyan_money', $card->money * 0.1);
-            auth()->user()->increment('frozen_money', $card->money * 0.9);
+            $usercard->bindcard(auth()->user(), $card);
 
             $setting = cache('setting');
             //推广注册
