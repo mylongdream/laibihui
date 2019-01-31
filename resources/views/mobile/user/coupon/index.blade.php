@@ -26,7 +26,7 @@
 							</a>
 						</div>
 					</div>
-					<div class="coupon_list">
+					<div class="weui-tab__panel coupon_list">
 						@foreach ($coupons as $value)
 							<div class="coupon_item">
 								<div class="coupon_item__hd">
