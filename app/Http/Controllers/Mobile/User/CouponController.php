@@ -28,6 +28,7 @@ class CouponController extends Controller
             }else{
                 $query->whereNull('used_at')->whereDate('use_end', '<', Carbon::now());
             }
+            $request->offsetSet('status', $status);
         })->orderBy('created_at', 'desc')->paginate(20);
         return view('mobile.user.coupon.index', ['coupons' => $coupons]);
     }

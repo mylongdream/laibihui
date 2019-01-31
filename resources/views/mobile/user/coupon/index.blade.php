@@ -10,17 +10,17 @@
 				</div>
 				<div class="weui-tab" id="tab">
 					<div class="weui-navbar tab_box">
-						<div class="weui-navbar__item weui-bar__item_on">
+						<div class="weui-navbar__item{{ request('status') == 0 ? ' weui-bar__item_on' : '' }}">
 							<a href="{{ route('mobile.user.coupon.index', ['status' => 0]) }}" class="">
 								<div class="title">未使用</div>
 							</a>
 						</div>
-						<div class="weui-navbar__item">
+						<div class="weui-navbar__item{{ request('status') == 1 ? ' weui-bar__item_on' : '' }}">
 							<a href="{{ route('mobile.user.coupon.index', ['status' => 1]) }}" class="">
 								<div class="title">已使用</div>
 							</a>
 						</div>
-						<div class="weui-navbar__item">
+						<div class="weui-navbar__item{{ request('status') == 2 ? ' weui-bar__item_on' : '' }}">
 							<a href="{{ route('mobile.user.coupon.index', ['status' => 2]) }}" class="">
 								<div class="title">已失效</div>
 							</a>
