@@ -31,7 +31,7 @@
 							<div class="coupon_item">
 								<div class="coupon_item__hd">
 									<p class="price"><i>¥</i><strong>{{ $value->coupon_amount }}</strong></p>
-									<p class="desc">{{ $value->coupon_fullamount ? '满'.$value->coupon_fullamount.'元可用' : trans('user.unlimit')}}</p>
+									<p class="limit">{{ $value->coupon_fullamount ? '满'.$value->coupon_fullamount.'元可用' : trans('user.unlimit')}}</p>
 								</div>
 								<div class="coupon_item__bd">
 									<p class="name">{{ $value->coupon_name }}</p>
