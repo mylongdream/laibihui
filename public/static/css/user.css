@@ -182,13 +182,13 @@
 .order-show table th{height:30px;padding:9px 12px;border:1px solid #e2e2e2;background:#f5f5f5;}
 .order-show table td{height:30px;padding:9px 12px;border:1px solid #e2e2e2;}
 
-.coupon-list{overflow:hidden;}
-.coupon-item{width: 244px;background-color: #53c7ca;margin: 15px 0 0 10px;border-radius: 6px;overflow:hidden;}
-.coupon-item .price{color: #fff;text-align: center;}
+.coupon-list{margin: 0 0 0 -10px;overflow:hidden;}
+.coupon-item{width: 244px;height: 130px;background-color: #53c7ca;margin: 15px 0 0 10px;border-radius: 6px;overflow:hidden;}
+.coupon-item .price{color: #fff;text-align: center;margin: 0 0 5px;padding: 30px 0 0;}
 .coupon-item .price strong{font-size: 36px;font-weight: normal;}
 .coupon-item .price i{font-size: 14px;display: inline-block;vertical-align: baseline;padding-left: 3px;margin: 6px 4px 0 0;font-style: normal}
-.coupon-item .limit{font-size: 14px;margin-top: 5px;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;color: #fff;text-align: center;}
-.coupon-item .time{font-size: 12px;color: #999;text-align: center;}
+.coupon-item .limit{font-size: 14px;height: 44px;line-height: 22px;overflow: hidden;margin: 0 5px 5px;color: #fff;text-align: center;}
+.coupon-item .time{font-size: 12px;color: #197f81;text-align: center;}
 
 .order-cancel{padding:10px;}
 .order-cancel .cancel-tip{width:440px;overflow:hidden;margin:0 auto;}
