@@ -28,7 +28,7 @@
 					</div>
 					<div class="weui-tab__panel coupon_list">
 						@foreach ($coupons as $value)
-							<div class="coupon_item">
+							<div class="coupon_item{{ request('status') == 0 ? '' : ' coupon-item-dgray' }}">
 								<div class="coupon_item__hd">
 									<p class="price"><i>¥</i><strong>{{ $value->coupon_amount }}</strong></p>
 									<p class="limit">{{ $value->coupon_fullamount ? '满'.$value->coupon_fullamount.'元可用' : trans('user.unlimit')}}</p>

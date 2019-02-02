@@ -464,7 +464,7 @@ pre{ white-space: pre-wrap!important;  word-wrap: break-word!important;  *white-
 .redpack_item__bd .time{font-size: 12px;color: #999;}
 
 .coupon_list{overflow:hidden;}
-.coupon_item{padding: 10px 10px;background-color: #fff;margin: 15px 10px;border-radius: 6px;color: #53c7ca;overflow:hidden;}
+.coupon_item{padding: 10px 10px;background-color: #fff;margin: 15px 10px;border-radius: 6px;color: #53c7ca;overflow:hidden;border-top: 6px solid currentColor;}
 .coupon_item__hd{width: 120px;float:left;text-align: center;position: relative;}
 .coupon_item__hd .price strong{font-size: 36px;font-weight: normal;position: relative;top: 1px;}
 .coupon_item__hd .price i{font-size: 14px;display: inline-block;vertical-align: baseline;padding-left: 3px;margin: 6px 4px 0 0;font-style: normal}
@@ -472,6 +472,7 @@ pre{ white-space: pre-wrap!important;  word-wrap: break-word!important;  *white-
 .coupon_item__bd{margin-left:140px;}
 .coupon_item__bd .name{font-size: 14px;color: #666;height: 3em;line-height: 1.5em;overflow: hidden;text-overflow: ellipsis;margin-bottom: 10px;}
 .coupon_item__bd .time{font-size: 12px;color: #999;}
+.coupon-item-dgray{color: #c3c3c3;}
 
 .promotion_card{background: #fff;width: 100%;overflow:hidden;}
 .promotion_card .weui-tab__panel{padding-bottom:66px;}

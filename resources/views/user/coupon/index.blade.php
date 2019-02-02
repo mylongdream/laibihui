@@ -13,7 +13,7 @@
 		@if (count($coupons))
 			<div class="coupon-list">
 				@foreach ($coupons as $value)
-					<div class="coupon-item">
+					<div class="coupon-item{{ request('status') == 0 ? '' : ' coupon-item-dgray' }}">
 						<div class="price"><em>¥</em><strong>{{ $value->coupon_amount }}</strong></div>
 						<div class="limit">{{ $value->coupon_fullamount ? '满'.$value->coupon_fullamount.'元可用' : trans('user.unlimit')}}</div>
 						<div class="time">
