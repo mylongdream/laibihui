@@ -29,6 +29,9 @@
         <dd class="{{ isset($curmenu) && $curmenu == 'consume' ? 'on' : '' }}">
             <a title="" href="{{ route('user.consume.index') }}"><span>消费账单</span></a>
         </dd>
+        <dd class="{{ isset($curmenu) && $curmenu == 'coupon' ? 'on' : '' }}">
+            <a title="" href="{{ route('user.coupon.index') }}"><span>我的现金券</span></a>
+        </dd>
         <dd class="{{ isset($curmenu) && $curmenu == 'score' ? 'on' : '' }}">
             <a title="" href="{{ route('user.score.index') }}"><span>我的积分</span></a>
         </dd>

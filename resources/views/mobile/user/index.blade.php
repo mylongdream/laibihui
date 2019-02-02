@@ -151,7 +151,7 @@
                                         <div class="weui-grid__icon">
                                             <img class="user-menu-pic" src="{{ asset('static/image/mobile/center-icon-coupon.png') }}" alt="">
                                         </div>
-                                        <p class="weui-grid__label">优惠券</p>
+                                        <p class="weui-grid__label">现金券</p>
                                     </a>
                                 </div>
                             </div>
